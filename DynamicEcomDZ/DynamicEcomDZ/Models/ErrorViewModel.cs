@@ -1,4 +1,4 @@
-namespace DynamicEcomDZ.Models
+﻿namespace DynamicEcomDZ.Models
 {
     public class ErrorViewModel
     {

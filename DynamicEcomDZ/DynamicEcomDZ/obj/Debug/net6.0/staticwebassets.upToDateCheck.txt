@@ -1,0 +1,117 @@
+wwwroot\css\site.css
+wwwroot\favicon.ico
+wwwroot\Images\1.jpg
+wwwroot\Images\2.jpg
+wwwroot\Images\3.jpg
+wwwroot\Images\4.jpg
+wwwroot\Images\5.jpg
+wwwroot\Images\BBQ.jpg
+wwwroot\Images\Beef Burger.jpg
+wwwroot\Images\Beef Seekh Kabab.jpg
+wwwroot\Images\Beef Shawarma Roll.jpg
+wwwroot\Images\Category\BBQ.jpg
+wwwroot\Images\Category\Biryani.jpg
+wwwroot\Images\Category\Roll.jpg
+wwwroot\Images\Category\Zinger.jpg
+wwwroot\Images\Chicken Roll.jpg
+wwwroot\Images\Chicken Shawarma Roll.jpg
+wwwroot\Images\Chicken Wrap.jpg
+wwwroot\Images\Club Sandwich.jpg
+wwwroot\Images\Coffee.png
+wwwroot\Images\Cold Drink.jpg
+wwwroot\Images\CustomerLogo\FastFoodlogo.jpg
+wwwroot\Images\CustomerLogo\Pizzalogo.jpg
+wwwroot\Images\Department\Fruits.jpg
+wwwroot\Images\Department\Furniture.jpg
+wwwroot\Images\Department\restaurant.jpg
+wwwroot\Images\Department\Vape Cigarette.jpg
+wwwroot\Images\French Fries.jpg
+wwwroot\Images\Fresh Juice.jpg
+wwwroot\Images\Grilled Chicken (Half).jpg
+wwwroot\Images\Malai Boti.jpg
+wwwroot\Images\Milkshake.jpg
+wwwroot\Images\premium_photo-1661883237884-263e8de8869b.jpg
+wwwroot\Images\Product\BBQ Chicken Pizza.jpg
+wwwroot\Images\Product\Beef Burger.jpg
+wwwroot\Images\Product\Cheese Lovers Pizza.jpg
+wwwroot\Images\Product\Chicken Burger.jpg
+wwwroot\Images\Product\Chicken Fajita Pizza.jpg
+wwwroot\Images\Product\Chicken Tikka Pizza.jpg
+wwwroot\Images\Product\Double Cheese Burger.jpg
+wwwroot\Images\Product\French Fries.jpg
+wwwroot\Images\Product\Hot & Spicy Pizza.jpg
+wwwroot\Images\Product\Jalapeno Passion Pizza.jpg
+wwwroot\Images\Product\Loaded Fries.jpg
+wwwroot\Images\Product\Margherita Pizza.jpg
+wwwroot\Images\Product\Onion Rings.jpg
+wwwroot\Images\Product\Pepperoni Pizza.jpg
+wwwroot\Images\Product\peri peri chicken pizza.jpg
+wwwroot\Images\Product\Supreme Pizza.jpg
+wwwroot\Images\Product\Zinger Burger.jpg
+wwwroot\Images\RestaurantsSlider1.jpg
+wwwroot\Images\RestaurantsSlider2.jpg
+wwwroot\Images\RestaurantsSlider3.jpg
+wwwroot\Images\Roll.jpg
+wwwroot\Images\Slider\FastFoodSlider.jpg
+wwwroot\Images\Slider\Slider1_PizzaShop.jpg
+wwwroot\Images\Water.jpg
+wwwroot\Images\Zinger Burger.jpg
+wwwroot\Images\Zinger Roll.jpg
+wwwroot\js\site.js
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+wwwroot\lib\bootstrap\LICENSE
+wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
+wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
+wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\lib\jquery-validation\dist\additional-methods.js
+wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+wwwroot\lib\jquery-validation\LICENSE.md
+wwwroot\lib\jquery\dist\jquery.js
+wwwroot\lib\jquery\dist\jquery.min.js
+wwwroot\lib\jquery\dist\jquery.min.map
+wwwroot\lib\jquery\LICENSE.txt
