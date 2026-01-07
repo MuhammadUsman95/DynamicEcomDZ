@@ -21,19 +21,6 @@ namespace DynamicEcomDZ.Controllers
             return View(data);
             //return View();
         }
-
-        public async Task<IActionResult> AshrafForm()
-        {
-            return View();
-        }
-        public async Task<IActionResult> ShakeelForm()
-        {
-            return View();
-        }
-        public async Task<IActionResult> KhanForm()
-        {
-            return View();  
-        }
     }
 }
 
