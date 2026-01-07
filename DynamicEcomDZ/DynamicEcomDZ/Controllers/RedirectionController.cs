@@ -21,6 +21,10 @@ namespace DynamicEcomDZ.Controllers
             return View(data);
             //return View();
         }
+        public IActionResult ComingSoonPage()
+        {
+            return View();
+        }
     }
 }
 
