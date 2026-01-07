@@ -40,3 +40,45 @@ C:\Users\Usman Vayani\Documents\GitHub\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ
 C:\Users\Usman Vayani\Documents\GitHub\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.pdb
 C:\Users\Usman Vayani\Documents\GitHub\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.genruntimeconfig.cache
 C:\Users\Usman Vayani\Documents\GitHub\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\ref\DynamicEcomDZ.dll
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\appsettings.Development.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\appsettings.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\DynamicEcomDZ.staticwebassets.runtime.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\DynamicEcomDZ.staticwebassets.endpoints.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\DynamicEcomDZ.exe
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\DynamicEcomDZ.deps.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\DynamicEcomDZ.runtimeconfig.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\DynamicEcomDZ.dll
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\DynamicEcomDZ.pdb
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\System.Data.SqlClient.dll
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Data.SqlClient.dll
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Data.SqlClient.dll
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.csproj.AssemblyReference.cache
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\rpswa.dswa.cache.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.AssemblyInfoInputs.cache
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.AssemblyInfo.cs
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.csproj.CoreCompileInputs.cache
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.MvcApplicationPartsAssemblyInfo.cache
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.RazorAssemblyInfo.cache
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.RazorAssemblyInfo.cs
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.sourcelink.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\rjimswa.dswa.cache.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\rjsmrazor.dswa.cache.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\rjsmcshtml.dswa.cache.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\scopedcss\bundle\DynamicEcomDZ.styles.css
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\scopedcss\projectbundle\DynamicEcomDZ.bundle.scp.css
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\staticwebassets.build.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\staticwebassets.build.json.cache
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\staticwebassets.development.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\staticwebassets.build.endpoints.json
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicE.14951F9F.Up2Date
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.dll
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\refint\DynamicEcomDZ.dll
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.pdb
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\DynamicEcomDZ.genruntimeconfig.cache
+D:\Project\DynamicEcomDZ\DynamicEcomDZ\DynamicEcomDZ\obj\Debug\net6.0\ref\DynamicEcomDZ.dll

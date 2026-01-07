@@ -172,23 +172,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usman Vayani\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Usman\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ.csproj",
+      "projectUniqueName": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ.csproj",
       "projectName": "DynamicEcomDZ",
-      "projectPath": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ.csproj",
-      "packagesPath": "C:\\Users\\Usman Vayani\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\obj\\",
+      "projectPath": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ.csproj",
+      "packagesPath": "C:\\Users\\Usman\\.nuget\\packages\\",
+      "outputPath": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Usman Vayani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Usman\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

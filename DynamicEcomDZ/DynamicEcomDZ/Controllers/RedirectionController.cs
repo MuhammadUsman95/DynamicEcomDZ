@@ -17,9 +17,9 @@ namespace DynamicEcomDZ.Controllers
         }
         public async Task<IActionResult> RedirectionView()
         {
-            //var data = await _service.GetActiveTabs();
-            //return View(data);
-            return View();
+            var data = await _service.GetActiveTabs();
+            return View(data);
+            //return View();
         }
 
         public async Task<IActionResult> AshrafForm()
@@ -32,7 +32,7 @@ namespace DynamicEcomDZ.Controllers
         }
         public async Task<IActionResult> KhanForm()
         {
-            return View();
+            return View();  
         }
     }
 }

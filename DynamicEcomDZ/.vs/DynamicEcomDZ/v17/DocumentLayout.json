@@ -1,46 +1,50 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\",
+  "WorkspaceRootPath": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\redirection\\redirectionview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\redirection\\redirectionview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\restaurant\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\restaurant\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\restaurant\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\controllers\\slidermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\controllers\\slidermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\restaurantdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\restaurantdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\controllers\\redirectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\controllers\\redirectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\services\\redirectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\services\\redirectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\services\\redirectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\models\\redirection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\models\\slidermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\models\\slidermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\models\\redirection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\models\\redirection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\models\\detailmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\models\\detailmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\models\\customermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\models\\customermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\controllers\\restaurantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\controllers\\restaurantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\controllers\\redirectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\controllers\\redirectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,136 +54,153 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 10,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml",
-              "RelativeToolTip": "DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml",
-              "ViewState": "AgIAAMYAAAAAAAAAAAAawOkAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-06T21:37:59.34Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\appsettings.json",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\appsettings.json",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\appsettings.json",
-              "RelativeToolTip": "DynamicEcomDZ\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-06T21:36:44.225Z",
+              "DocumentIndex": 2,
+              "Title": "RedirectionService.cs",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Services\\RedirectionService.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Services\\RedirectionService.cs",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Services\\RedirectionService.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Services\\RedirectionService.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowBgAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T09:38:01.853Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\_ViewStart.cshtml",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "DynamicEcomDZ\\Views\\_ViewStart.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-06T21:36:41.357Z",
+              "Title": "SliderModel.cs",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\SliderModel.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Models\\SliderModel.cs",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\SliderModel.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Models\\SliderModel.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T09:37:56.464Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\_ViewImports.cshtml",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "DynamicEcomDZ\\Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-06T21:36:40.28Z",
+              "Title": "Redirection.cs",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\Redirection.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Models\\Redirection.cs",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\Redirection.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Models\\Redirection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T09:37:53.709Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Models\\ErrorViewModel.cs",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T09:37:49.654Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Program.cs",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Program.cs",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Program.cs",
-              "RelativeToolTip": "DynamicEcomDZ\\Program.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAawB4AAAAXAAAAAAAAAA==",
+              "Title": "DetailModel.cs",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\DetailModel.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Models\\DetailModel.cs",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\DetailModel.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Models\\DetailModel.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAA9wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T21:29:25.689Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RedirectionView.cshtml",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\Redirection\\RedirectionView.cshtml",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\Redirection\\RedirectionView.cshtml",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\Redirection\\RedirectionView.cshtml",
-              "RelativeToolTip": "DynamicEcomDZ\\Views\\Redirection\\RedirectionView.cshtml",
-              "ViewState": "AgIAAHcAAAAAAAAAAAAawIEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-06T21:31:09.442Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SliderModel.cs",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\SliderModel.cs",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Controllers\\SliderModel.cs",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\SliderModel.cs",
-              "RelativeToolTip": "DynamicEcomDZ\\Controllers\\SliderModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T21:38:35.408Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Redirection.cs",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\Redirection.cs",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Models\\Redirection.cs",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\Redirection.cs",
-              "RelativeToolTip": "DynamicEcomDZ\\Models\\Redirection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T21:31:04.926Z",
+              "WhenOpened": "2026-01-07T09:37:44.301Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "RedirectionController.cs",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\RedirectionController.cs",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Controllers\\RedirectionController.cs",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\RedirectionController.cs",
-              "RelativeToolTip": "DynamicEcomDZ\\Controllers\\RedirectionController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAABUAAAAaAAAAAAAAAA==",
+              "Title": "CustomerModel.cs",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\CustomerModel.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Models\\CustomerModel.cs",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Models\\CustomerModel.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Models\\CustomerModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T21:28:48.053Z",
+              "WhenOpened": "2026-01-07T09:37:42.021Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "RedirectionService.cs",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Services\\RedirectionService.cs",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Services\\RedirectionService.cs",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Services\\RedirectionService.cs",
-              "RelativeToolTip": "DynamicEcomDZ\\Services\\RedirectionService.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAuwBcAAAANAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Program.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Program.cs",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Program.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAmwB0AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T21:27:42.3Z",
+              "WhenOpened": "2026-01-07T09:37:25.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RestaurantController.cs",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\RestaurantController.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Controllers\\RestaurantController.cs",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\RestaurantController.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Controllers\\RestaurantController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T09:37:12.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
+              "RelativeToolTip": "DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABMAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-07T09:36:34.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml*",
+              "RelativeToolTip": "DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml*",
+              "ViewState": "AgIAAMcAAAAAAAAAAAAUwNEAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-07T09:21:02.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RedirectionController.cs",
+              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\RedirectionController.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Controllers\\RedirectionController.cs",
+              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\RedirectionController.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Controllers\\RedirectionController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwCIAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T09:24:31.257Z",
               "EditorCaption": ""
             }
           ]
