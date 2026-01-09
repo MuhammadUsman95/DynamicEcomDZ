@@ -462,9 +462,144 @@
 
     </style>
 
+    <style>
+        /* Initial state (hidden) */
+        #orderSuccessModal .modal-dialog {
+            transform: scale(0.6);
+            transition: transform 0.3s ease-out;
+        }
+
+        /* When modal is shown */
+        #orderSuccessModal.show .modal-dialog {
+            transform: scale(1);
+        }
+
+        .success-gif {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .modal-content {
+            border-radius: 12px;
+        }
+
+        .input-group-text {
+            background-color: #f8f9fa;
+        }
+
+        .modal-header {
+            background: #f1f5f9;
+        }
+
+    </style>
+
+
 
 </head>
+
+
+<div class="modal fade" id="checkoutModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-person-lines-fill me-2"></i>
+                    Customer Details
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label">Contact # *</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                            <input type="text" id="ContactNo" class="form-control next-input" maxlength="15">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Name *</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <input type="text" id="CustomerName" class="form-control next-input">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Street *</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-signpost"></i></span>
+                            <input type="text" id="Street" class="form-control next-input">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Floor *</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-layers"></i></span>
+                            <input type="text" id="Floor" class="form-control next-input">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Address *</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-house"></i></span>
+                            <input type="text" id="CustomerAddress" class="form-control next-input">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Description</label>
+                        <textarea id="Description" class="form-control next-input" rows="2"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle me-1"></i> Cancel
+                </button>
+                <button class="btn btn-success" onclick="placeOrder()">
+                    <i class="bi bi-check-circle me-1"></i> Place Order
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 <body>
+
+    <div class="modal fade" id="orderSuccessModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-4">
+                <div class="modal-body">
+                    <img src="/Images/GIF/OrderSuccess.gif"
+                         class="success-gif mb-3"
+                         alt="Order Success" />
+                    <div id="orderSuccessMessage" class="mt-2"></div>
+                </div>
+
+                <div class="modal-footer justify-content-center" style="padding: 0;border: none;">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                        OK, Thank You
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <!-- ================= HEADER ================= -->
     <header class="main-header shadow-sm">
         <div class="container d-flex justify-content-between align-items-center">
@@ -618,57 +753,7 @@
     </footer>
 
 
-    @* Custmer Detail Card modal *@
-    <div class="modal fade" id="checkoutModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
 
-                <div class="modal-header">
-                    <h5 class="modal-title">Customer Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="mb-2">
-                        <label>Contact No *</label>
-                        <input type="text" id="ContactNo" class="form-control" maxlength="15">
-                    </div>
-
-                    <div class="mb-2">
-                        <label>Customer Name *</label>
-                        <input type="text" id="CustomerName" class="form-control">
-                    </div>
-
-                    <div class="mb-2">
-                        <label>Customer Address *</label>
-                        <input type="text" id="CustomerAddress" class="form-control">
-                    </div>
-
-                    <div class="mb-2">
-                        <label>Street *</label>
-                        <input type="text" id="Street" class="form-control">
-                    </div>
-
-                    <div class="mb-2">
-                        <label>Floor *</label>
-                        <input type="text" id="Floor" class="form-control">
-                    </div>
-
-                    <div class="mb-2">
-                        <label>Description (Optional)</label>
-                        <textarea id="Description" class="form-control"></textarea>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button class="btn btn-success" onclick="placeOrder()">Place Order</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    @* Custmer Detail Card modal *@
 
 
 
@@ -688,13 +773,6 @@
         }
 
 
-
-
-        function toggleCart() {
-            document.getElementById('cartDrawer').classList.toggle('open');
-            document.getElementById('cartBackdrop').classList.toggle('show');
-        }
-    
         // Cart data structure { productName: { qty, price } }
         let cart = {};
 
@@ -857,9 +935,9 @@
             const floor = document.getElementById("Floor").value.trim();
             const description = document.getElementById("Description").value.trim();
 
-            // ✅ Validation
+            // 🔹 Validation
             if (!contactNo || contactNo.length < 9) {
-                Swal.fire("Validation Error", "Contact number must be at least 9 digits.", "error");
+                Swal.fire("Validation Error", "Contact No must be at least 9 digits.", "error");
                 return;
             }
 
@@ -868,44 +946,121 @@
                 return;
             }
 
-            const orderData = {
-                ContactNo: contactNo,
-                CustomerName: customerName,
-                CustomerAddress: customerAddress,
-                Street: street,
-                Floor: floor,
-                Description: description,
-                Items: Object.values(cart),
-                RestaurantId: @Model.RestaurantId
-            };
+            // 🔹 Confirmation Alert
+            Swal.fire({
+                title: "Confirm Order",
+                text: "Are you sure you want to place this order?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Yes, Place Order",
+                cancelButtonText: "No",
+                reverseButtons: true,
+                focusCancel: true // ✅ Default focus on "No"
+            }).then((result) => {
 
-            $.ajax({
-                url: "/RestaurantDetail/PlaceOrder",   // 🔹 Controller URL
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(orderData),
-                success: function (res) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: `${res.message}`,
-                        confirmButtonText: 'OK'
-                    });
+                if (!result.isConfirmed) return;
 
-                    cart = {};
-                    renderCart();
+                // 🔹 Loading Alert
+                Swal.fire({
+                    title: "Please wait...",
+                    html: `
+                        <div style="text-align:center">
+                            <img src="/Images/GIF/OrderPlaced.gif"
+                                 class="success-gif mb-3"
+                                 alt="Order Success" />
+                            <div style="font-weight: 600;">Placing your order...</div>
+                        </div>
+                    `,
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                    stopKeydownPropagation: true, // ✅ MOST IMPORTANT
+                    showConfirmButton: false,
+                    backdrop: true,
+                    didOpen: () => {
+                        // ✅ Force focus inside Swal
+                        Swal.getPopup().setAttribute('tabindex', '-1');
+                        Swal.getPopup().focus();
 
-                    bootstrap.Modal.getInstance(
-                        document.getElementById('checkoutModal')
-                    ).hide();
-                },
-                error: function () {
-                    Swal.fire("Error", "Something went wrong while placing order.", "error");
-                }
+                        // ✅ Remove focus from any background element
+                        document.activeElement.blur();
+                    }
+                });
+
+
+
+                const orderData = {
+                    ContactNo: contactNo,
+                    CustomerName: customerName,
+                    CustomerAddress: customerAddress,
+                    Street: street,
+                    Floor: floor,
+                    Description: description,
+                    Items: Object.values(cart),
+                    RestaurantId: @Model.RestaurantId
+                };
+
+                $.ajax({
+                    url: "/RestaurantDetail/PlaceOrder",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(orderData),
+                    success: function (res) {
+
+                        Swal.close(); // 🔹 Close loading
+
+                        toggleCart();
+                        bootstrap.Modal.getInstance(
+                            document.getElementById('checkoutModal')
+                        ).hide();
+
+                        document.getElementById("orderSuccessMessage").innerHTML = res.message;
+
+                        new bootstrap.Modal(
+                            document.getElementById('orderSuccessModal')
+                        ).show();
+
+                        cart = {};
+                        renderCart();
+                        resetAllProductQuantities();
+                    },
+                    error: function () {
+                        Swal.close(); // 🔹 Close loading
+
+                        Swal.fire(
+                            "Error",
+                            "Something went wrong while placing order.",
+                            "error"
+                        );
+                    }
+                });
             });
         }
+
         // Custmer Detail Card modal
 
+        function resetAllProductQuantities() {
+            document.querySelectorAll('[id^="qty-"]').forEach(span => {
+                span.textContent = 0;
+            });
+        }
 
+        const checkoutModal = document.getElementById("checkoutModal");
+        checkoutModal.addEventListener("hidden.bs.modal", function () {
+            clearCheckoutModalFields();
+        });
+
+        function clearCheckoutModalFields() {
+            document.getElementById("ContactNo").value = "";
+            document.getElementById("CustomerName").value = "";
+            document.getElementById("CustomerAddress").value = "";
+            document.getElementById("Street").value = "";
+            document.getElementById("Floor").value = "";
+            document.getElementById("Description").value = "";
+        }
+        document.getElementById("ContactNo").addEventListener("input", function () {
+            this.value = this.value.replace(/\D/g, '');
+        });
 
 
     </script>
@@ -926,6 +1081,29 @@
             originalRenderCart();
             updateCartCount();
         }
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputs = document.querySelectorAll(".next-input");
+
+            inputs.forEach((input, index) => {
+                input.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter") {
+                        e.preventDefault();
+                        const next = inputs[index + 1];
+                        if (next) {
+                            next.focus();
+                        } else {
+                            placeOrder(); // last field par Enter
+                        }
+                    }
+                });
+            });
+        });
+
+
+
     </script>
 
 
