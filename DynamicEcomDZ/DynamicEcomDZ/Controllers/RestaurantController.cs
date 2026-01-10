@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using DynamicEcomDZ.Models;
 
 namespace DynamicEcomDZ.Controllers
 {
@@ -32,19 +31,17 @@ namespace DynamicEcomDZ.Controllers
                     cmdSlider.Parameters.AddWithValue("@nType", 0);
                     cmdSlider.Parameters.AddWithValue("@nsType", 1);
 
-                    using (SqlDataReader drSlider = await cmdSlider.ExecuteReaderAsync())
+                    using (SqlDataReader dr = await cmdSlider.ExecuteReaderAsync())
                     {
-                        while (await drSlider.ReadAsync())
+                        while (await dr.ReadAsync())
                         {
                             model.Sliders.Add(new SliderModel
                             {
-                                SilderId = drSlider["SilderId"] == DBNull.Value ? 0 : Convert.ToInt32(drSlider["SilderId"]),
-                                SilderName = drSlider["SilderName"]?.ToString(),
-                                SliderMovingTimer = drSlider["SliderMovingTimer"] == DBNull.Value ? 5 : Convert.ToInt32(drSlider["SliderMovingTimer"]),
-
-                                // ✅ HEADING & DESCRIPTION FROM DB
-                                HeadingSlider = drSlider["HeadingSlider"]?.ToString(),
-                                DescriptionSlider = drSlider["DescriptionSlider"]?.ToString()
+                                SilderId = Convert.ToInt32(dr["SilderId"]),
+                                SilderName = dr["SilderName"]?.ToString(),
+                                SliderMovingTimer = dr["SliderMovingTimer"] == DBNull.Value ? 5 : Convert.ToInt32(dr["SliderMovingTimer"]),
+                                HeadingSlider = dr["HeadingSlider"]?.ToString(),
+                                DescriptionSlider = dr["DescriptionSlider"]?.ToString()
                             });
                         }
                     }
@@ -57,22 +54,22 @@ namespace DynamicEcomDZ.Controllers
                     cmdCustomer.Parameters.AddWithValue("@nType", 0);
                     cmdCustomer.Parameters.AddWithValue("@nsType", 2);
 
-                    using (SqlDataReader drCustomer = await cmdCustomer.ExecuteReaderAsync())
+                    using (SqlDataReader dr = await cmdCustomer.ExecuteReaderAsync())
                     {
-                        while (await drCustomer.ReadAsync())
+                        while (await dr.ReadAsync())
                         {
                             model.Customers.Add(new CustomerModel
                             {
-                                CustomerId = drCustomer["CustomerId"] == DBNull.Value ? 0 : Convert.ToInt32(drCustomer["CustomerId"]),
-                                Customer = drCustomer["Customer"]?.ToString(),
-                                ImagePath = drCustomer["ImagePath"]?.ToString(),
-                                Rating = drCustomer["Rating"] == DBNull.Value ? 0 : Convert.ToInt32(drCustomer["Rating"])
+                                CustomerId = Convert.ToInt32(dr["CustomerId"]),
+                                Customer = dr["Customer"]?.ToString(),
+                                ImagePath = dr["ImagePath"]?.ToString(),
+                                Rating = Convert.ToInt32(dr["Rating"]),
+                                Timing = dr["Timing"]?.ToString(),
+                                Type = dr["Type"]?.ToString()
                             });
                         }
                     }
                 }
-
-                await con.CloseAsync();
             }
 
             return View(model);

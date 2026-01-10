@@ -1,5 +1,4 @@
 ﻿@model SliderViewModel
-
 @{
     Layout = null;
 }
@@ -8,129 +7,33 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Single Page Website</title>
+    <title>Restaurants</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
         body {
             background: #f6f7fb;
         }
 
-        /* ================= SLIDER ================= */
-        #mainSlider {
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,.25);
+        /* SLIDER */
+        #mainSlider img {
+            height: 420px;
+            object-fit: cover;
+            filter: brightness(75%);
         }
 
-        .carousel-item {
-            position: relative;
-        }
-
-            .carousel-item img {
-                height: 420px;
-                object-fit: cover;
-                filter: brightness(75%);
-            }
-
-        .slider-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, rgba(0,0,0,.65), rgba(0,0,0,.15));
-        }
-
-        .carousel-caption {
-            bottom: 30%;
-            text-align: left;
-            animation: fadeUp .8s ease-in-out;
-        }
-
-            .carousel-caption h2 {
-                font-size: 38px;
-                font-weight: 700;
-                color: #fff;
-            }
-
-            .carousel-caption p {
-                font-size: 16px;
-                max-width: 500px;
-                color: #eee;
-            }
-
-
-
-        {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        }
-
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            width: 45px;
-            height: 45px;
-            background-color: rgba(0,0,0,.5);
-            border-radius: 50%;
-        }
-
-        .carousel-indicators [data-bs-target] {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #fff;
-            opacity: .6;
-        }
-
-        .carousel-indicators .active {
-            opacity: 1;
-        }
-
-        /* ================= CUSTOMER CARDS ================= */
+        /* CUSTOMER CARD */
         .customer-card {
-            border: none;
             border-radius: 14px;
-            overflow: hidden;
-            background: #fff;
-            transition: all .25s ease;
+            transition: .3s;
         }
-
-            .customer-card img {
-                height: 170px;
-                object-fit: cover;
-            }
 
             .customer-card:hover {
-                transform: translateY(-6px) scale(1.02);
-                box-shadow: 0 12px 30px rgba(0,0,0,.18);
-            }
-
-            .customer-card .card-body {
-                padding: 12px;
-            }
-
-            .customer-card h6 {
-                font-size: 15px;
-                margin-bottom: 6px;
-            }
-
-        /* ================= RATING ================= */
-        .rating-stars {
-            display: flex;
-            justify-content: center;
-        }
-
-            .rating-stars span {
-                font-size: 20px;
-                margin: 0 2px;
+                transform: translateY(-6px);
+                box-shadow: 0 10px 25px rgba(0,0,0,.2);
             }
 
         .star-filled {
@@ -138,47 +41,26 @@
         }
 
         .star-empty {
-            color: #d1d1d1;
+            color: #ddd;
         }
     </style>
 </head>
 <body>
 
+    <!-- ================= SLIDER START ================= -->
     <div class="container mt-4">
-
-        <!-- ================= SLIDER START ================= -->
         <div id="mainSlider" class="carousel slide" data-bs-ride="carousel">
-
-            <div class="carousel-indicators">
-                @for (int i = 0; i < Model.Sliders.Count; i++)
-                {
-                    <button type="button"
-                            data-bs-target="#mainSlider"
-                            data-bs-slide-to="@i"
-                            class="@(i == 0 ? "active" : "")">
-                    </button>
-                }
-            </div>
 
             <div class="carousel-inner">
                 @for (int i = 0; i < Model.Sliders.Count; i++)
                 {
-                    var item = Model.Sliders[i];
-                    var interval = (item.SliderMovingTimer == 0 ? 5 : item.SliderMovingTimer) * 1000;
-
+                    var s = Model.Sliders[i];
                     <div class="carousel-item @(i == 0 ? "active" : "")"
-                         data-bs-interval="@interval">
-
-                        <img src="@("/images/Slider/" + item.SilderName)"
-                             class="d-block w-100"
-                             alt="@item.SilderId">
-
-                        <div class="slider-overlay"></div>
-
-                        <!-- ✅ DYNAMIC HEADING & DESCRIPTION -->
-                        <div class="carousel-caption">
-                            <h2>@(string.IsNullOrEmpty(item.HeadingSlider) ? "" : item.HeadingSlider)</h2>
-                            <p>@(string.IsNullOrEmpty(item.DescriptionSlider) ? "" : item.DescriptionSlider)</p>
+                         data-bs-interval="@(s.SliderMovingTimer * 1000)">
+                        <img src="@("/images/Slider/" + s.SilderName)" class="w-100">
+                        <div class="carousel-caption text-start">
+                            <h2>@s.HeadingSlider</h2>
+                            <p>@s.DescriptionSlider</p>
                         </div>
                     </div>
                 }
@@ -193,47 +75,85 @@
                     data-bs-target="#mainSlider" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </button>
-
         </div>
-        <!-- ================= SLIDER END ================= -->
-
     </div>
-
-    <!-- ================= CUSTOMERS START ================= -->
+    <!-- ================= SLIDER END ================= -->
+    <!-- ================= CUSTOMERS ================= -->
     <div class="container mt-5">
-        <h3 class="text-center mb-4">Our Customers</h3>
+        <h3 class="text-center mb-4">Our Restaurants</h3>
 
         <div class="row justify-content-center">
-            @foreach (var cust in Model.Customers)
+            @foreach (var c in Model.Customers)
             {
                 <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
-                    <a href="@Url.Action("Index", "RestaurantDetail", new { id = cust.CustomerId })"
-                       class="text-decoration-none text-dark">
+                    <a href="@Url.Action("Index", "RestaurantDetail", new { id = c.CustomerId })"
+                       class="text-decoration-none restaurant-link">
 
-                        <div class="card customer-card h-100">
-                            <img src="@("/images/CustomerLogo/" + cust.ImagePath)"
-                                 class="card-img-top"
-                                 alt="@cust.Customer">
+                        <div class="card customer-card h-100"
+                             data-timing="@c.Timing">
+
+                            <img src="@("/images/CustomerLogo/" + c.ImagePath)"
+                                 class="card-img-top">
 
                             <div class="card-body text-center">
-                                <h6 class="fw-bold">@cust.Customer</h6>
+                                <h6 class="fw-bold">@c.Customer</h6>
 
-                                <div class="rating-stars">
+                                <span class="badge bg-primary">@c.Type</span>
+
+                                <div class="small text-muted mt-1">
+                                    <i class="bi bi-clock"></i> @c.Timing
+                                </div>
+
+                                <div class="mt-2">
                                     @for (int i = 1; i <= 5; i++)
                                     {
-                                        <span class="@(i <= cust.Rating ? "star-filled" : "star-empty")">★</span>
+                                        <span class="@(i <= c.Rating ? "star-filled" : "star-empty")">★</span>
                                     }
                                 </div>
                             </div>
                         </div>
-
                     </a>
                 </div>
             }
         </div>
     </div>
-    <!-- ================= CUSTOMERS END ================= -->
+
+    <!-- CLOSED MODAL -->
+    <div class="modal fade" id="closedModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Restaurant Closed</h5>
+                </div>
+                <div class="modal-body">
+                    This restaurant is currently closed.
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.querySelectorAll('.restaurant-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+
+                let timing = this.querySelector('.customer-card').dataset.timing;
+                let end = timing.split('-')[1].trim();
+
+                let now = new Date();
+                let closeTime = new Date(now.toDateString() + ' ' + end);
+
+                if (now > closeTime) {
+                    e.preventDefault();
+                    new bootstrap.Modal(document.getElementById('closedModal')).show();
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
