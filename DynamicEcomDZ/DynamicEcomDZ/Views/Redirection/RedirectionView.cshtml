@@ -105,7 +105,8 @@
             background: rgba(0, 0, 0, 0.9);
         }
 
-
+        @@keyframes slideUp {
+            from
 
         {
             opacity: 0;
@@ -119,6 +120,9 @@
 
         }
 
+        @@keyframes fadeIn {
+            from
+
         {
             opacity: 0;
         }
@@ -129,15 +133,65 @@
 
         }
 
-    
+        /* Mobile Responsive Styles */
+        @@media (max-width: 768px) {
+            .modal-dialog-advanced
 
         {
+            width: 90vw;
+            max-height: 85vh;
+            border-radius: 12px;
+        }
+
+        .modal-body-advanced {
+            padding: 15px;
+        }
+
+        .card-tile {
             height: 160px;
+            margin-bottom: 12px;
         }
 
         .card-badge {
             font-size: 14px;
             padding: 8px 18px;
+            bottom: 15px;
+        }
+
+        .row.g-4 {
+            --bs-gutter-y: 0.75rem;
+            --bs-gutter-x: 0.75rem;
+        }
+
+        }
+
+        @@media (max-width: 576px) {
+            .modal-dialog-advanced
+
+        {
+            width: 95vw;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+
+        .modal-body-advanced {
+            padding: 10px;
+        }
+
+        .card-tile {
+            height: 130px;
+            margin-bottom: 10px;
+        }
+
+        .card-badge {
+            font-size: 12px;
+            padding: 6px 15px;
+            bottom: 12px;
+        }
+
+        .row.g-4 {
+            --bs-gutter-y: 0.5rem;
+            --bs-gutter-x: 0.5rem;
         }
 
         }
@@ -154,7 +208,7 @@
                 <div class="row g-4">
                     @foreach (var item in Model)
                     {
-                        <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="col-6">
                             <a href="@(item.FormUrl == "ComingSoon" ? Url.Action("ComingSoonPage", "Redirection") : "/" + item.FormUrl)" class="card-tile" title="@item.Name">
                                 @if (!string.IsNullOrEmpty(item.TabIcon))
                                 {

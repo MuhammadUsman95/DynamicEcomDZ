@@ -43,6 +43,36 @@
         .star-empty {
             color: #ddd;
         }
+
+        /* Mobile responsive styles */
+        @@media (max-width: 768px) {
+            #mainSlider
+
+        {
+            height: auto;
+        }
+
+        #mainSlider img {
+            height: auto;
+            min-height: 250px;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .carousel-caption {
+            padding-bottom: 1rem;
+        }
+
+            .carousel-caption h2 {
+                font-size: 1.5rem;
+            }
+
+            .carousel-caption p {
+                font-size: 0.9rem;
+                margin-bottom: 0;
+            }
+
+        }
     </style>
 </head>
 <body>
@@ -85,12 +115,12 @@
         <div class="row justify-content-center">
             @foreach (var c in Model.Customers)
             {
-                <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
-                    <a href="@Url.Action("Index", "RestaurantDetail", new { id = c.CustomerId })"
-                       class="text-decoration-none restaurant-link">
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-4">
+                    <a href="javascript:void(0)"
+                       class="text-decoration-none restaurant-link"
+                       data-id="@c.CustomerId">
 
-                        <div class="card customer-card h-100"
-                             data-timing="@c.Timing">
+                        <div class="card customer-card h-100">
 
                             <img src="@("/images/CustomerLogo/" + c.ImagePath)"
                                  class="card-img-top">
@@ -140,17 +170,41 @@
     <script>
         document.querySelectorAll('.restaurant-link').forEach(link => {
             link.addEventListener('click', function (e) {
+                e.preventDefault();
 
-                let timing = this.querySelector('.customer-card').dataset.timing;
-                let end = timing.split('-')[1].trim();
+                const restaurantId = this.dataset.id;
 
-                let now = new Date();
-                let closeTime = new Date(now.toDateString() + ' ' + end);
+                // 🔁 Server-side validation only
+                fetch('/Restaurant/CheckRestaurantValidation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        RestaurantId: restaurantId,
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
 
-                if (now > closeTime) {
-                    e.preventDefault();
-                    new bootstrap.Modal(document.getElementById('closedModal')).show();
-                }
+                    if (data.statusId === 0) {
+                        // ❌ Not allowed (closed / blocked / any server rule)
+                        document.querySelector('#closedModal .modal-title').innerText = 'Restaurant Not Available';
+                        document.querySelector('#closedModal .modal-body').innerHTML = data.message;
+
+                        new bootstrap.Modal(
+                            document.getElementById('closedModal')
+                        ).show();
+                    }
+                    else {
+                        // ✅ Allowed → redirect
+                        window.location.href = `/RestaurantDetail/Index/${restaurantId}`;
+                    }
+
+                })
+                .catch(() => {
+                    alert('Server error. Please try again.');
+                });
             });
         });
     </script>

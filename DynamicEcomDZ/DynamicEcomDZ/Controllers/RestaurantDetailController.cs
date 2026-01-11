@@ -98,130 +98,87 @@ namespace DynamicEcomDZ.Controllers
             return View(viewModel);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> PlaceOrder([FromBody] OrderRequest model)
         {
+            // 1. Initial Validation
             if (model == null || model.Items == null || !model.Items.Any())
-                return BadRequest("Invalid order data.");
+                return BadRequest(new MessageResponse { StatusId = 0, Message = "Invalid order data." });
+
+            // Optional: Remove this delay in production
+            await Task.Delay(5000); 
 
             string conStr = _config.GetConnectionString("Connection1");
-
             string MasterXML = string.Empty;
             string DetailXML = string.Empty;
 
-            // ================= MASTER XML =================
-            string[] MasterXMLParameters =
-            {
-                "ContactNo",
-                "CustomerName",
-                "CustomerAddress",
-                "Street",
-                "Floor",
-                "Description"
-            };
-
-            string[] MasterXMLValues =
-            {
-                model.ContactNo ?? "",
-                model.CustomerName ?? "",
-                model.CustomerAddress ?? "",
-                model.Street ?? "",
-                model.Floor ?? "",
-                model.Description ?? ""
-            };
-
+            // 2. Build XML (This logic remains the same)
+            string[] MasterXMLParameters = { "ContactNo", "CustomerName", "CustomerAddress", "Street", "Floor", "Description" };
+            string[] MasterXMLValues = { model.ContactNo ?? "", model.CustomerName ?? "", model.CustomerAddress ?? "", model.Street ?? "", model.Floor ?? "", model.Description ?? "" };
             MasterXML = CreateXML(MasterXMLParameters, MasterXMLValues, "MasterXML");
             MasterXML = $"<Insert1>{MasterXML}</Insert1>";
 
-            // ================= DETAIL XML =================
             foreach (var i in model.Items)
             {
-                string[] DetailXMLParameters =
-                {
-                    "ProductCode",
-                    "Quantity",
-                    "Rate",
-                    "DiscountAmount"
-                };
-
-                string[] DetailXMLValues =
-                {
-                    i.ProductCode ?? "",
-                    i.Quantity.ToString(),
-                    i.Rate.ToString(),
-                    i.DiscountAmount.ToString()
-                };
-
+                string[] DetailXMLParameters = { "ProductCode", "Quantity", "Rate", "DiscountAmount" };
+                string[] DetailXMLValues = { i.ProductCode ?? "", i.Quantity.ToString(), i.Rate.ToString(), i.DiscountAmount.ToString() };
                 DetailXML += CreateXML(DetailXMLParameters, DetailXMLValues, "DetailXML");
             }
-
             DetailXML = $"<Insert1>{DetailXML}</Insert1>";
 
-            int executionResult = 0;
-            string? Message = null;
+            // 3. Create an instance of the response class
+            var response = new MessageResponse();
 
+            // 4. Execute Database Command
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 await con.OpenAsync();
-
-                string DebugModeExecutionLine = string.Empty;
-
                 using (SqlCommand cmd = new SqlCommand("EcomOrder_SP", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-
                     cmd.Parameters.Add("@nType", SqlDbType.Int).Value = 0;
                     cmd.Parameters.Add("@nsType", SqlDbType.Int).Value = 0;
                     cmd.Parameters.Add("@MasterXML", SqlDbType.Xml).Value = MasterXML;
                     cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = DetailXML;
                     cmd.Parameters.Add("@RestaurantId", SqlDbType.Int).Value = model.RestaurantId;
 
-                    // ✅ DEBUG EXECUTION LINE
-                    DebugModeExecutionLine = CreateDebugExecutionLine(cmd);
-
-                    // ✅ ORDER NO RETURN
-                    object result = await cmd.ExecuteScalarAsync();
-
-                    if (result != null && result != DBNull.Value)
+                    // Use ExecuteReader to get the result set
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                     {
-                        Message = result.ToString();
-                    }
+                        // Check if the SP returned a row
+                        if (reader.Read())
+                        {
+                            // Populate the response object from the database
+                            if (reader["StatusId"] != DBNull.Value)
+                            {
+                                response.StatusId = Convert.ToInt32(reader["StatusId"]);
+                            }
 
-                    executionResult = Message != null ? 1 : 0;
+                            if (reader["Message"] != DBNull.Value)
+                            {
+                                response.Message = reader["Message"].ToString();
+                            }
+                        }
+                        else
+                        {
+                            // Handle case where SP returns no rows
+                            response.StatusId = 0;
+                            response.Message = "Order could not be placed. No response from server.";
+                        }
+                    }
                 }
             }
 
-            return Ok(new
-            {
-                Success = true,
-                RowsAffected = executionResult,
-                Message = Message
-            });
+            // 5. Return the MessageResponse object
+            // The HTTP 200 OK status indicates the request was processed.
+            // The StatusId inside the payload indicates the business logic outcome.
+            return Ok(response);
         }
 
 
 
 
-        public class OrderRequest
-        {
-            public string? ContactNo { get; set; }
-            public string? CustomerName { get; set; }
-            public string? CustomerAddress { get; set; }
-            public string? Street { get; set; }
-            public string? Floor { get; set; }
-            public string? Description { get; set; }
-            public List<Products> Items { get; set; }
-            public int RestaurantId { get; set; }
-        }
-        public class Products
-        {
-            public string? ProductCode { get; set; }
-            public string? ProductName { get; set; }
-            public decimal? Quantity { get; set; } = 0;
-            public decimal? Rate { get; set; } = 0;
-            public decimal? DiscountAmount { get; set; } = 0;
-            public string? image { get; set; }
-        }
         string CreateXML(string[] Parameters, string[] Values, string XmlTAG)
         {
             try

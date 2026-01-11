@@ -28,7 +28,7 @@
             overflow: hidden;
             box-shadow: 0 12px 40px rgba(0,0,0,0.35);
             max-width: 1290px;
-            margin: 40px auto 60px;
+            margin: 20px auto 40px;
             position: relative;
         }
 
@@ -93,20 +93,84 @@
                 background-size: 100% 100%;
             }
 
+        /* Mobile responsive slider */
+        @@media (max-width: 768px) {
+            #detailSlider {
+                margin: 15px auto 30px;
+                border-radius: 12px;
+            }
 
+                #detailSlider .carousel-inner img {
+                    height: 250px;
+                }
+
+                #detailSlider .carousel-caption {
+                    left: 5%;
+                    max-width: 90%;
+                    padding: 15px 20px;
+                }
+
+                    #detailSlider .carousel-caption h2 {
+                        font-size: 24px;
+                        margin-bottom: 10px;
+                    }
+
+                    #detailSlider .carousel-caption p {
+                        font-size: 14px;
+                    }
+
+                #detailSlider .carousel-indicators {
+                    bottom: 10px;
+                }
+
+                    #detailSlider .carousel-indicators button {
+                        width: 10px;
+                        height: 10px;
+                    }
+        }
+
+        @@media (max-width: 576px) {
+            #detailSlider .carousel-inner img {
+                height: 200px;
+            }
+
+            #detailSlider .carousel-caption {
+                top: auto;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+                padding: 10px 15px;
+                width: 90%;
+                max-width: none;
+                box-sizing: border-box;
+            }
+
+                #detailSlider .carousel-caption h2 {
+                    font-size: 18px;
+                    margin-bottom: 8px;
+                }
+
+                #detailSlider .carousel-caption p {
+                    font-size: 12px;
+                    line-height: 1.4;
+                }
+        }
     </style>
     <style>
         .main-header {
             position: sticky;
             top: 0;
             background: #ffffff;
-            z-index: 1200;
+            z-index: 1000;
             padding: 14px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
             .main-header h3 {
                 font-weight: 800;
                 color: #0d6efd;
+                font-size: 1.5rem;
             }
 
         .cart-icon {
@@ -237,7 +301,6 @@
             border-radius: 8px;
         }
 
-
         .cart-items-scroll::-webkit-scrollbar {
             width: 6px;
         }
@@ -247,7 +310,21 @@
             border-radius: 10px;
         }
 
+        /* Mobile responsive cart drawer */
+        @@media (max-width: 576px) {
+            .cart-drawer {
+                width: 100%;
+                right: -100%;
+            }
 
+            .main-header h3 {
+                font-size: 1.2rem;
+            }
+
+            .cart-icon {
+                font-size: 22px;
+            }
+        }
     </style>
 
     <style>
@@ -375,10 +452,17 @@
             font-weight: 700;
             cursor: pointer;
             transition: transform .2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
             .qty-btn:hover {
                 transform: scale(1.1);
+            }
+
+            .qty-btn:active {
+                transform: scale(0.95);
             }
 
         .qty-value {
@@ -388,23 +472,61 @@
             text-align: center;
         }
 
-        /* ===== MOBILE OPTIMIZATION ===== */
+        /* Mobile responsive product cards */
+        @@media (max-width: 768px) {
+            .product-img {
+                height: 130px;
+            }
+
+            .product-name {
+                font-size: .95rem;
+            }
+
+            .qty-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 1.1rem;
+            }
+
+            .qty-value {
+                font-size: 1rem;
+            }
+        }
+
         @@media (max-width: 576px) {
-            .product-img
+            .product-img {
+                height: 120px;
+            }
 
-        {
-            height: 130px;
-        }
+            .product-name {
+                font-size: .9rem;
+            }
 
-        .product-name {
-            font-size: .95rem;
-        }
+            .product-code {
+                font-size: .75rem;
+            }
 
-        .qty-btn {
-            width: 30px;
-            height: 30px;
-        }
+            .current-price {
+                font-size: 1rem;
+            }
 
+            .old-price {
+                font-size: .85rem;
+            }
+
+            .qty-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+
+            .qty-value {
+                font-size: .95rem;
+            }
+
+            .qty-box {
+                gap: 10px;
+            }
         }
 
         .cart-item {
@@ -422,16 +544,16 @@
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,.45);
-            z-index: 1200;
+            z-index: 900;
             opacity: 0;
             visibility: hidden;
             transition: .3s ease;
         }
 
-        .cart-backdrop.show {
-            opacity: 1;
-            visibility: visible;
-        }
+            .cart-backdrop.show {
+                opacity: 1;
+                visibility: visible;
+            }
 
         .product-img {
             background: #f1f1f1;
@@ -460,6 +582,40 @@
             font-weight: 600;
         }
 
+        /* Mobile responsive header */
+        @@media (max-width: 768px) {
+            .main-header .container {
+                padding: 0 15px;
+            }
+
+            .product-search-input {
+                max-width: 200px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .main-header {
+                padding: 10px 0;
+            }
+
+                .main-header .container {
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                }
+
+                .main-header h3 {
+                    width: 100%;
+                    text-align: center;
+                    margin-bottom: 10px;
+                    font-size: 1.3rem;
+                }
+
+            .product-search-input {
+                max-width: 100%;
+                margin-bottom: 5px;
+            }
+        }
     </style>
 
     <style>
@@ -493,12 +649,67 @@
             background: #f1f5f9;
         }
 
+        /* Add this to your <style> section */
+        .loading-swal-container {
+            z-index: 99999 !important;
+        }
+
+        .loading-swal-popup {
+            z-index: 99999 !important;
+        }
+
+        /* Ensure modal backdrop is below SweetAlert */
+        .modal-backdrop {
+            z-index: 1040 !important;
+        }
+
+        /* Ensure modal is below SweetAlert */
+        .modal {
+            z-index: 1050 !important;
+        }
+
+        .flying-img {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            transition: all 0.8s ease-in-out;
+            border-radius: 8px;
+        }
+
+        /* Mobile responsive modals */
+        @@media (max-width: 576px) {
+            .modal-dialog {
+                margin: 10px;
+            }
+
+            .modal-body {
+                padding: 15px;
+            }
+
+            .success-gif {
+                width: 100px;
+                height: 100px;
+            }
+        }
     </style>
-
-
-
 </head>
 
+<!-- CLOSED MODAL -->
+<div class="modal fade" id="closedModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Restaurant Closed</h5>
+            </div>
+            <div class="modal-body">
+                This restaurant is currently closed.
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="checkoutModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -514,8 +725,7 @@
 
             <div class="modal-body">
                 <div class="row g-3">
-
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <label class="form-label">Contact # *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-telephone"></i></span>
@@ -523,7 +733,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <label class="form-label">Name *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
@@ -531,7 +741,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <label class="form-label">Street *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-signpost"></i></span>
@@ -539,7 +749,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <label class="form-label">Floor *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-layers"></i></span>
@@ -547,7 +757,8 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <!-- 🔹 Full Width -->
+                    <div class="col-12">
                         <label class="form-label">Address *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-house"></i></span>
@@ -555,7 +766,8 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <!-- 🔹 Description Full Width -->
+                    <div class="col-12">
                         <label class="form-label">Description</label>
                         <textarea id="Description" class="form-control next-input" rows="2"></textarea>
                     </div>
@@ -583,9 +795,10 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content text-center p-4">
                 <div class="modal-body">
-                    <img src="/Images/GIF/OrderSuccess.gif"
+                    <img id="orderStatusGif"
+                         src="/Images/GIF/OrderSuccess.gif"
                          class="success-gif mb-3"
-                         alt="Order Success" />
+                         alt="Order Status" />
                     <div id="orderSuccessMessage" class="mt-2"></div>
                 </div>
 
@@ -617,10 +830,11 @@
             </div>
             <!-- ================= PRODUCT SEARCH ================= -->
 
-            <div class="cart-icon" onclick="toggleCart()">
+            <div class="cart-icon" id="cartIcon" onclick="toggleCart()">
                 <span class="cart-count" id="cartCount">0</span>
                 <i class="bi bi-cart3"></i>
             </div>
+
         </div>
     </header>
 
@@ -666,11 +880,11 @@
         {
             <h3 class="product-category-title">
                 <spn style="
-                    background-color: #414040;
-                    color: white;
-                    padding: 7px;
-                    border-radius: 7px;
-                    ">@category.Key</spn>
+                            background-color: #414040;
+                            color: white;
+                            padding: 7px;
+                            border-radius: 7px;
+                            ">@category.Key</spn>
             </h3>
 
             <div class="row g-4">
@@ -682,7 +896,8 @@
                         <div class="product-item">
                             <div class="product-img">
                                 <img src="@("/images/Product/" + product.ProductImage)"
-                                     alt="@product.ProductName" />
+                                     alt="@product.ProductName"
+                                     id="img-@product.ProductCode" />
                             </div>
 
                             <div class="product-info">
@@ -741,6 +956,9 @@
 
     </div>
 
+    <!-- Cart Backdrop for Mobile -->
+    <div id="cartBackdrop" class="cart-backdrop" onclick="toggleCart()"></div>
+
 
 
 
@@ -762,10 +980,10 @@
 
     <script>
         const productMaster = @Html.Raw(
-            System.Text.Json.JsonSerializer.Serialize(
-                    Model.Products.SelectMany(x => x.Value)
-            )
-        );
+                        System.Text.Json.JsonSerializer.Serialize(
+                                Model.Products.SelectMany(x => x.Value)
+                        )
+                );
 
 
         function getProductByCode(productCode) {
@@ -779,15 +997,18 @@
         function changeQuantity(productCode, productName, delta) {
 
             const qtySpan = document.getElementById('qty-' + productCode);
-
             let currentQty = parseInt(qtySpan.textContent) || 0;
             let newQty = currentQty + delta;
-            if (newQty < 0) newQty = 0;
 
+            if (newQty < 0) newQty = 0;
             qtySpan.textContent = newQty;
 
             const product = getProductByCode(productCode);
             if (!product) return;
+
+            if (delta > 0) {
+                flyToCart(productCode);
+            }
 
             if (newQty === 0) {
                 delete cart[productCode];
@@ -803,6 +1024,39 @@
             }
 
             renderCart();
+        }
+
+        function flyToCart(productCode) {
+
+            const img = document.getElementById('img-' + productCode);
+            const cartIcon = document.getElementById('cartIcon');
+
+            if (!img || !cartIcon) return;
+
+            const imgRect = img.getBoundingClientRect();
+            const cartRect = cartIcon.getBoundingClientRect();
+
+            const flyingImg = img.cloneNode(true);
+            flyingImg.classList.add("flying-img");
+
+            document.body.appendChild(flyingImg);
+
+            flyingImg.style.left = imgRect.left + "px";
+            flyingImg.style.top = imgRect.top + "px";
+            flyingImg.style.width = imgRect.width + "px";
+            flyingImg.style.height = imgRect.height + "px";
+
+            requestAnimationFrame(() => {
+                flyingImg.style.left = cartRect.left + "px";
+                flyingImg.style.top = cartRect.top + "px";
+                flyingImg.style.width = "20px";
+                flyingImg.style.height = "20px";
+                flyingImg.style.opacity = "0.2";
+            });
+
+            flyingImg.addEventListener("transitionend", () => {
+                flyingImg.remove();
+            });
         }
 
 
@@ -914,6 +1168,7 @@
         function openCheckoutModal() {
 
             const items = Object.values(cart);
+
             if (items.length === 0) {
                 Swal.fire({
                     icon: 'warning',
@@ -923,11 +1178,52 @@
                 return;
             }
 
-            const modal = new bootstrap.Modal(document.getElementById('checkoutModal'));
-            modal.show();
-        }
-        function placeOrder() {
+            // Close cart drawer first
+            const cartDrawer = document.getElementById('cartDrawer');
+            const cartBackdrop = document.getElementById('cartBackdrop');
+            if (cartDrawer.classList.contains('open')) {
+                cartDrawer.classList.remove('open');
+                cartBackdrop.classList.remove('show');
+            }
 
+            // 🔁 Server-side restaurant validation
+            fetch('/Restaurant/CheckRestaurantValidation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    RestaurantId: @Model.RestaurantId // ensure this is globally available
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+
+                if (data.statusId === 0) {
+                    // ❌ Not allowed
+                    document.querySelector('#closedModal .modal-title').innerText = 'Order Not Allowed';
+                    document.querySelector('#closedModal .modal-body').innerHTML = data.message;
+
+                    new bootstrap.Modal(
+                        document.getElementById('closedModal')
+                    ).show();
+
+                    return;
+                }
+
+                // ✅ Allowed → open checkout modal
+                const modal = new bootstrap.Modal(
+                    document.getElementById('checkoutModal')
+                );
+                modal.show();
+
+            })
+            .catch(() => {
+                Swal.fire('Error', 'Server validation failed. Please try again.', 'error');
+            });
+        }
+
+        function placeOrder() {
             const contactNo = document.getElementById("ContactNo").value.trim();
             const customerName = document.getElementById("CustomerName").value.trim();
             const customerAddress = document.getElementById("CustomerAddress").value.trim();
@@ -935,7 +1231,7 @@
             const floor = document.getElementById("Floor").value.trim();
             const description = document.getElementById("Description").value.trim();
 
-            // 🔹 Validation
+            // Validation code remains the same...
             if (!contactNo || contactNo.length < 9) {
                 Swal.fire("Validation Error", "Contact No must be at least 9 digits.", "error");
                 return;
@@ -946,7 +1242,7 @@
                 return;
             }
 
-            // 🔹 Confirmation Alert
+            // Confirmation alert code remains the same...
             Swal.fire({
                 title: "Confirm Order",
                 text: "Are you sure you want to place this order?",
@@ -955,85 +1251,104 @@
                 confirmButtonText: "Yes, Place Order",
                 cancelButtonText: "No",
                 reverseButtons: true,
-                focusCancel: true // ✅ Default focus on "No"
+                focusCancel: true
             }).then((result) => {
-
                 if (!result.isConfirmed) return;
 
-                // 🔹 Loading Alert
-                Swal.fire({
-                    title: "Please wait...",
-                    html: `
-                        <div style="text-align:center">
-                            <img src="/Images/GIF/OrderPlaced.gif"
-                                 class="success-gif mb-3"
-                                 alt="Order Success" />
-                            <div style="font-weight: 600;">Placing your order...</div>
-                        </div>
-                    `,
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    allowEnterKey: false,
-                    stopKeydownPropagation: true, // ✅ MOST IMPORTANT
-                    showConfirmButton: false,
-                    backdrop: true,
-                    didOpen: () => {
-                        // ✅ Force focus inside Swal
-                        Swal.getPopup().setAttribute('tabindex', '-1');
-                        Swal.getPopup().focus();
+                // Get the modal instance before showing the loading alert
+                const checkoutModal = bootstrap.Modal.getInstance(document.getElementById('checkoutModal'));
 
-                        // ✅ Remove focus from any background element
-                        document.activeElement.blur();
-                    }
-                });
+                // Hide the modal first
+                checkoutModal.hide();
 
+                // Add a small delay to ensure the modal is fully hidden
+                setTimeout(() => {
+                    // Show loading alert with proper focus management
+                    Swal.fire({
+                        title: "Please wait...",
+                        html: `
+                            <div style="text-align:center">
+                                <img src="/Images/GIF/OrderPlaced.gif"
+                                     class="success-gif mb-3"
+                                     alt="Order Success" />
+                                <div style="font-weight: 600;">Placing your order...</div>
+                            </div>
+                        `,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                        showConfirmButton: false,
+                        backdrop: 'rgba(0,0,0,0.7)',
+                        customClass: {
+                            popup: 'loading-swal-popup',
+                            container: 'loading-swal-container'
+                        },
+                        didOpen: () => {
+                            // Force focus to stay within the SweetAlert
+                            const swalContainer = document.querySelector('.swal2-container');
+                            swalContainer.setAttribute('tabindex', '-1');
+                            swalContainer.focus();
 
+                            // Add event listener to prevent tabbing out
+                            swalContainer.addEventListener('keydown', (e) => {
+                                if (e.key === 'Tab') {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                }
+                            });
 
-                const orderData = {
-                    ContactNo: contactNo,
-                    CustomerName: customerName,
-                    CustomerAddress: customerAddress,
-                    Street: street,
-                    Floor: floor,
-                    Description: description,
-                    Items: Object.values(cart),
-                    RestaurantId: @Model.RestaurantId
-                };
+                            // Disable all inputs in the checkout modal
+                            document.querySelectorAll('#checkoutModal input, #checkoutModal textarea').forEach(input => {
+                                input.disabled = true;
+                            });
+                        },
+                        willClose: () => {
+                            // Re-enable inputs when SweetAlert closes
+                            document.querySelectorAll('#checkoutModal input, #checkoutModal textarea').forEach(input => {
+                                input.disabled = false;
+                            });
+                        }
+                    });
 
-                $.ajax({
-                    url: "/RestaurantDetail/PlaceOrder",
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(orderData),
-                    success: function (res) {
+                    const orderData = {
+                        ContactNo: contactNo,
+                        CustomerName: customerName,
+                        CustomerAddress: customerAddress,
+                        Street: street,
+                        Floor: floor,
+                        Description: description,
+                        Items: Object.values(cart),
+                        RestaurantId: @Model.RestaurantId
+                    };
 
-                        Swal.close(); // 🔹 Close loading
+                    $.ajax({
+                        url: "/RestaurantDetail/PlaceOrder",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(orderData),
+                        success: function (res) {
+                            Swal.close();
+                            document.getElementById("orderSuccessMessage").innerHTML = res.message;
 
-                        toggleCart();
-                        bootstrap.Modal.getInstance(
-                            document.getElementById('checkoutModal')
-                        ).hide();
-
-                        document.getElementById("orderSuccessMessage").innerHTML = res.message;
-
-                        new bootstrap.Modal(
-                            document.getElementById('orderSuccessModal')
-                        ).show();
-
-                        cart = {};
-                        renderCart();
-                        resetAllProductQuantities();
-                    },
-                    error: function () {
-                        Swal.close(); // 🔹 Close loading
-
-                        Swal.fire(
-                            "Error",
-                            "Something went wrong while placing order.",
-                            "error"
-                        );
-                    }
-                });
+                            if (res.statusId === 0) {
+                                document.getElementById("orderStatusGif").src = "/Images/GIF/OrderFailed.gif";
+                            } else {
+                                document.getElementById("orderStatusGif").src = "/Images/GIF/OrderSuccess.gif";
+                                // toggleCart();
+                                cart = {};
+                                renderCart();
+                                resetAllProductQuantities();
+                                clearCheckoutModalFields();
+                            }
+                            // Modal show
+                            new bootstrap.Modal(document.getElementById('orderSuccessModal')).show();
+                        },
+                        error: function () {
+                            Swal.close();
+                            Swal.fire("Error", "Something went wrong while placing order.", "error");
+                        }
+                    });
+                }, 300); // Small delay to ensure modal is hidden
             });
         }
 
@@ -1045,10 +1360,10 @@
             });
         }
 
-        const checkoutModal = document.getElementById("checkoutModal");
-        checkoutModal.addEventListener("hidden.bs.modal", function () {
-            clearCheckoutModalFields();
-        });
+        // const checkoutModal = document.getElementById("checkoutModal");
+        // checkoutModal.addEventListener("hidden.bs.modal", function () {
+        //     clearCheckoutModalFields();
+        // });
 
         function clearCheckoutModalFields() {
             document.getElementById("ContactNo").value = "";
@@ -1062,11 +1377,13 @@
             this.value = this.value.replace(/\D/g, '');
         });
 
-
-    </script>
-    <script>
+        
         function toggleCart() {
-            document.getElementById('cartDrawer').classList.toggle('open');
+            const cartDrawer = document.getElementById('cartDrawer');
+            const cartBackdrop = document.getElementById('cartBackdrop');
+
+            cartDrawer.classList.toggle('open');
+            cartBackdrop.classList.toggle('show');
         }
 
         function updateCartCount() {
@@ -1101,8 +1418,6 @@
                 });
             });
         });
-
-
 
     </script>
 
