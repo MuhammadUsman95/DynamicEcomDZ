@@ -176,6 +176,52 @@ namespace DynamicEcomDZ.Controllers
             return Ok(response);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CustomerExsistOrNo([FromBody] OrderRequest model)
+        {
+            if (model == null)
+                return BadRequest(new { StatusId = 0, Message = "Invalid order data." });
+
+            string conStr = _config.GetConnectionString("Connection1");
+
+            using (SqlConnection con = new SqlConnection(conStr))
+            {
+                await con.OpenAsync();
+                using (SqlCommand cmd = new SqlCommand("Customer_SP", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@nType", SqlDbType.Int).Value = 0;
+                    cmd.Parameters.Add("@nsType", SqlDbType.Int).Value = 4;
+                    cmd.Parameters.Add("@ContactNo", SqlDbType.VarChar).Value = model.ContactNo;
+
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (reader.Read())
+                        {
+                            return Ok(new
+                            {
+                                StatusId = Convert.ToInt32(reader["StatusId"]),
+                                Message = reader["Message"].ToString(),
+
+                                CustomerName = reader["CustomerName"].ToString(),
+                                CustomerAddress = reader["CustomerAddress"].ToString(),
+                                Street = reader["Street"].ToString(),
+                                Floor = reader["Floor"].ToString(),
+                                Description = reader["Description"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+
+            // Agar customer exist nahi karta
+            return Ok(new
+            {
+                StatusId = 0,
+                Message = "Customer not found"
+            });
+        }
+
 
 
 

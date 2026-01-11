@@ -325,6 +325,62 @@
                 font-size: 22px;
             }
         }
+
+
+        .cart-total {
+            margin-top: 12px;
+            padding: 14px;
+            border-top: 1px solid #e5e5e5;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            font-size: 14px;
+        }
+
+            .cart-total .total-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+                color: #333;
+            }
+
+                .cart-total .total-row span {
+                    font-weight: 500;
+                }
+
+                .cart-total .total-row.discount {
+                    color: #dc3545;
+                }
+
+                .cart-total .total-row.net {
+                    margin-top: 10px;
+                    padding-top: 10px;
+                    border-top: 1px dashed #ccc;
+                    font-size: 16px;
+                }
+
+                    .cart-total .total-row.net strong:last-child {
+                        color: #198754; /* Bootstrap success */
+                    }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+
+        .cart-item-info {
+            flex: 1;
+            margin-left: 10px;
+        }
+
+        .cart-item-total {
+            font-weight: 600;
+            min-width: 60px;
+            text-align: right;
+        }
+
     </style>
 
     <style>
@@ -691,6 +747,24 @@
                 height: 100px;
             }
         }
+
+        .product-img {
+            position: relative;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 7px;
+            right: 6px;
+            background: #dc3545;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 2px 5px;
+            border-radius: 6px;
+            z-index: 2;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 
@@ -895,6 +969,13 @@
 
                         <div class="product-item">
                             <div class="product-img">
+                                @if (product.DiscountAmount > 0)
+                                {
+                                    <span class="discount-badge">
+                                        -@product.DiscountAmount
+                                    </span>
+                                }
+
                                 <img src="@("/images/Product/" + product.ProductImage)"
                                      alt="@product.ProductName"
                                      id="img-@product.ProductCode" />
@@ -1096,10 +1177,10 @@
 
                         <div class="cart-item-info">
                             <strong>${item.ProductName}</strong>
-                            <div>${item.Quantity} × ${item.Rate}</div>
+                            <div>${item.Quantity} × ${formatAmount(item.Rate)}</div>
                         </div>
 
-                        <div class="cart-item-total">${net}</div>
+                        <div class="cart-item-total">${formatAmount(net)}</div>
                     </div>
                 `;
             });
@@ -1108,22 +1189,32 @@
             totalDiv.innerHTML = `
                 <div class="total-row">
                     <span>Total Items</span>
-                    <span>${totalQty}</span>
+                    <span>${formatAmount(totalQty)}</span>
                 </div>
                 <div class="total-row">
                     <span>Gross</span>
-                    <span>${totalGross}</span>
+                    <span>${formatAmount(totalGross)}</span>
                 </div>
                 <div class="total-row discount">
                     <span>Discount</span>
-                    <span>- ${totalDiscount}</span>
+                    <span>- ${formatAmount(totalDiscount)}</span>
                 </div>
                 <div class="total-row net">
                     <strong>Payable</strong>
-                    <strong>${totalGross - totalDiscount}</strong>
+                    <strong>${formatAmount(totalGross - totalDiscount)}</strong>
                 </div>
             `;
+
         }
+
+        function formatAmount(value) {
+            return Number(value).toLocaleString('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+        }
+
+
         function filterProducts() {
 
             const filter = document
@@ -1365,17 +1456,67 @@
         //     clearCheckoutModalFields();
         // });
 
-        function clearCheckoutModalFields() {
-            document.getElementById("ContactNo").value = "";
+        function clearCheckoutModalFields(isclearcontactno = true) {
+            if(isclearcontactno)
+            {
+                document.getElementById("ContactNo").value = "";
+            }
             document.getElementById("CustomerName").value = "";
             document.getElementById("CustomerAddress").value = "";
             document.getElementById("Street").value = "";
             document.getElementById("Floor").value = "";
             document.getElementById("Description").value = "";
         }
+        
         document.getElementById("ContactNo").addEventListener("input", function () {
             this.value = this.value.replace(/\D/g, '');
         });
+
+        document.getElementById("ContactNo").addEventListener("blur", function () {
+            const contactNo = this.value.trim();
+            if (contactNo === "") return;
+            checkCustomerExist(contactNo);
+        });
+
+        function checkCustomerExist(contactNo) {
+
+            fetch('/RestaurantDetail/CustomerExsistOrNo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ContactNo: contactNo
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+
+                if (data.statusId === 1) {
+                    // ✅ Customer Exist — Fill Fields
+                    fillCustomerFields(data);
+                }
+                else {
+                    // ❌ New Customer — Clear Fields
+                    clearCheckoutModalFields(false);
+                }
+
+            })
+            .catch(err => {
+                console.error('Error:', err);
+            });
+        }
+        function fillCustomerFields(data) {
+
+            document.getElementById("CustomerName").value = data.customerName || "";
+            document.getElementById("CustomerAddress").value = data.customerAddress || "";
+            document.getElementById("Street").value = data.street || "";
+            document.getElementById("Floor").value = data.floor || "";
+            document.getElementById("Description").value = data.description || "";
+
+            // Optional UX feedback
+            // alert(data.Message);
+        }
 
         
         function toggleCart() {
