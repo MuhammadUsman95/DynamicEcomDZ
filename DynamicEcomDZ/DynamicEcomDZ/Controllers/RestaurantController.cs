@@ -65,7 +65,10 @@ namespace DynamicEcomDZ.Controllers
                                 ImagePath = dr["ImagePath"]?.ToString(),
                                 Rating = Convert.ToInt32(dr["Rating"]),
                                 Timing = dr["Timing"]?.ToString(),
-                                Type = dr["Type"]?.ToString()
+                                Type = dr["Type"]?.ToString(),
+                                DeliveryCharges = dr["DeliveryCharges"] == DBNull.Value
+                        ? 0
+                        : Convert.ToDecimal(dr["DeliveryCharges"])
                             });
                         }
                     }
