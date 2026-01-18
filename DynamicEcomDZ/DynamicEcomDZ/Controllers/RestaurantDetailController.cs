@@ -17,6 +17,7 @@ namespace DynamicEcomDZ.Controllers
     {
         private readonly IConfiguration _config;
         public int Restaurantid;
+        public string? subHeaderTitle = "";
 
         public RestaurantDetailController(IConfiguration config)
         {
@@ -54,6 +55,8 @@ namespace DynamicEcomDZ.Controllers
                                 HeadingSlider = dr["HeadingSlider"]?.ToString(),
                                 DescriptionSlider = dr["DescriptionSlider"]?.ToString()
                             });
+
+                            subHeaderTitle = dr["SubHeader"]?.ToString();
                         }
                     }
                 }
@@ -75,10 +78,12 @@ namespace DynamicEcomDZ.Controllers
                                 Category = dr["Category"]?.ToString(),
                                 ProductName = dr["Product"]?.ToString(),
                                 ProductCode = dr["ProductCode"]?.ToString(),
+                                ProductDescription = dr["ProductDescription"]?.ToString(),
                                 ProductImage = dr["ProductImage"]?.ToString(),
                                 Prices = dr["Prices"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["Prices"]),
                                 DiscountAmount = dr["DiscountAmount"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["DiscountAmount"]),
-                                CustomerName = dr["CustomerName"]?.ToString()
+                                CustomerName = dr["CustomerName"]?.ToString(),
+                                DeliveryCharges = dr["DeliveryCharges"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["DeliveryCharges"])
                             });
                         }
                     }
@@ -92,7 +97,8 @@ namespace DynamicEcomDZ.Controllers
                     .GroupBy(p => p.Category)
                     .ToDictionary(g => g.Key, g => g.ToList()),
                 RestaurantName = products.FirstOrDefault()?.CustomerName ?? "Restaurant",
-                RestaurantId = id
+                RestaurantId = id,
+                SubHeaderTitle = subHeaderTitle ?? ""
             };
 
             return View(viewModel);
@@ -107,7 +113,7 @@ namespace DynamicEcomDZ.Controllers
                 return BadRequest(new MessageResponse { StatusId = 0, Message = "Invalid order data." });
 
             // Optional: Remove this delay in production
-            await Task.Delay(5000); 
+            await Task.Delay(2000); 
 
             string conStr = _config.GetConnectionString("Connection1");
             string MasterXML = string.Empty;
@@ -122,7 +128,7 @@ namespace DynamicEcomDZ.Controllers
             foreach (var i in model.Items)
             {
                 string[] DetailXMLParameters = { "ProductCode", "Quantity", "Rate", "DiscountAmount" };
-                string[] DetailXMLValues = { i.ProductCode ?? "", i.Quantity.ToString(), i.Rate.ToString(), i.DiscountAmount.ToString() };
+                string[] DetailXMLValues = { i.ProductCode ?? "", i.Quantity.ToString() ?? "0", i.Rate.ToString() ?? "0", i.DiscountAmount.ToString() ?? "0" };
                 DetailXML += CreateXML(DetailXMLParameters, DetailXMLValues, "DetailXML");
             }
             DetailXML = $"<Insert1>{DetailXML}</Insert1>";
@@ -130,39 +136,38 @@ namespace DynamicEcomDZ.Controllers
             // 3. Create an instance of the response class
             var response = new MessageResponse();
 
-            // 4. Execute Database Command
             using (SqlConnection con = new SqlConnection(conStr))
             {
-                await con.OpenAsync();
-                using (SqlCommand cmd = new SqlCommand("EcomOrder_SP", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@nType", SqlDbType.Int).Value = 0;
-                    cmd.Parameters.Add("@nsType", SqlDbType.Int).Value = 0;
-                    cmd.Parameters.Add("@MasterXML", SqlDbType.Xml).Value = MasterXML;
-                    cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = DetailXML;
-                    cmd.Parameters.Add("@RestaurantId", SqlDbType.Int).Value = model.RestaurantId;
+                string executionLine = $@"
+                EXEC EcomOrder_SP
+                    @nType = 0,
+                    @nsType = 0,
+                    @MasterXML = '{MasterXML.Replace("'", "''")}',
+                    @DetailXML = '{DetailXML.Replace("'", "''")}',
+                    @DeliveryCharges = {model.Items[0].DeliveryCharges},
+                    @RestaurantId = {model.RestaurantId}
+                ";
 
-                    // Use ExecuteReader to get the result set
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand(executionLine, con))
+                {
+                    cmd.CommandType = CommandType.Text;   // 👈 EXEC string run hogi
+
                     using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                     {
-                        // Check if the SP returned a row
                         if (reader.Read())
                         {
-                            // Populate the response object from the database
-                            if (reader["StatusId"] != DBNull.Value)
-                            {
-                                response.StatusId = Convert.ToInt32(reader["StatusId"]);
-                            }
+                            response.StatusId = reader["StatusId"] != DBNull.Value
+                                ? Convert.ToInt32(reader["StatusId"])
+                                : 0;
 
-                            if (reader["Message"] != DBNull.Value)
-                            {
-                                response.Message = reader["Message"].ToString();
-                            }
+                            response.Message = reader["Message"] != DBNull.Value
+                                ? reader["Message"].ToString()
+                                : "";
                         }
                         else
                         {
-                            // Handle case where SP returns no rows
                             response.StatusId = 0;
                             response.Message = "Order could not be placed. No response from server.";
                         }
