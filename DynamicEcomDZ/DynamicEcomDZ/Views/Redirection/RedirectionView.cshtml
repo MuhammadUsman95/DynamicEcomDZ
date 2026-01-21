@@ -218,7 +218,7 @@
                     @foreach (var item in Model)
                     {
                         <div class="col-6">
-                            <a href="@(item.FormUrl == "ComingSoon" ? Url.Action("ComingSoonPage", "Redirection") : "/" + item.FormUrl)" class="card-tile" title="@item.Name">
+                            <a href="@(item.FormUrl == "ComingSoon" ? Url.Action("ComingSoonPage", "Redirection") : "/" + item.FormUrl + "/Index/" + item.Id)" onclick="{{ localStorage.setItem('SelectionId' , Model.) }}" class="card-tile" title="@item.Name">
                                 @if (!string.IsNullOrEmpty(item.TabIcon))
                                 {
                                     <img src="@("/images/Department/" + item.TabIcon)" alt="@item.Name" />

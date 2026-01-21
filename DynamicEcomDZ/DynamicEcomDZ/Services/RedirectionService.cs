@@ -44,6 +44,7 @@ namespace DynamicEcomDZ.Services
 
                         list.Add(new RedirectionTAB
                         {
+                            Id = Convert.ToInt16(dr["Id"]),
                             Name = dr["Name"].ToString(),
                             FormUrl = dr["FormURL"].ToString(),
                             TabIcon = dr["TabIcon"].ToString(),
