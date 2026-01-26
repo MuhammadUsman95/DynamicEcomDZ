@@ -15,7 +15,7 @@ namespace DynamicEcomDZ.Controllers
             _config = config;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
             string conStr = _config.GetConnectionString("Connection1");
             var model = new SliderViewModel();
@@ -30,6 +30,8 @@ namespace DynamicEcomDZ.Controllers
                     cmdSlider.CommandType = CommandType.StoredProcedure;
                     cmdSlider.Parameters.AddWithValue("@nType", 0);
                     cmdSlider.Parameters.AddWithValue("@nsType", 1);
+                    cmdSlider.Parameters.AddWithValue("@RestuId", id);
+
 
                     using (SqlDataReader dr = await cmdSlider.ExecuteReaderAsync())
                     {
@@ -53,6 +55,7 @@ namespace DynamicEcomDZ.Controllers
                     cmdCustomer.CommandType = CommandType.StoredProcedure;
                     cmdCustomer.Parameters.AddWithValue("@nType", 0);
                     cmdCustomer.Parameters.AddWithValue("@nsType", 2);
+                    cmdCustomer.Parameters.AddWithValue("@RestuId", id);
 
                     using (SqlDataReader dr = await cmdCustomer.ExecuteReaderAsync())
                     {
