@@ -22,8 +22,14 @@ namespace DynamicEcomDZ.Models
 
     public class SliderViewModel
     {
-        public List<SliderModel> Sliders { get; set; } = new();
-        public List<CustomerModel> Customers { get; set; } = new();
+        public List<SliderModel> Sliders { get; set; }
+        public List<CustomerModel> Customers { get; set; }
+
+        public SliderViewModel()
+        {
+            Sliders = new List<SliderModel>();
+            Customers = new List<CustomerModel>();
+        }
     }
 
     public class CategoryModel
