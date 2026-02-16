@@ -15,7 +15,7 @@ namespace DynamicEcomDZ.Models
     {
         public int? SliderId { get; set; }
         public string? SliderName { get; set; }
-        public int SliderMovingTimer { get; set; }
+        public int? SliderMovingTimer { get; set; }
         public string? HeadingSlider { get; set; }
         public string? DescriptionSlider { get; set; }
     }
