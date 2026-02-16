@@ -39,8 +39,8 @@ namespace DynamicEcomDZ.Controllers
                         {
                             model.Sliders.Add(new SliderModel
                             {
-                                SilderId = Convert.ToInt32(dr["SilderId"]),
-                                SilderName = dr["SilderName"]?.ToString(),
+                                SliderId = Convert.ToInt32(dr["SliderId"]),
+                                SliderName = dr["SliderName"]?.ToString(),
                                 SliderMovingTimer = dr["SliderMovingTimer"] == DBNull.Value ? 5 : Convert.ToInt32(dr["SliderMovingTimer"]),
                                 HeadingSlider = dr["HeadingSlider"]?.ToString(),
                                 DescriptionSlider = dr["DescriptionSlider"]?.ToString()

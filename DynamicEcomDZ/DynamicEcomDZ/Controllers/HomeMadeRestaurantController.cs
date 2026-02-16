@@ -38,8 +38,8 @@ namespace DynamicEcomDZ.Controllers
                         {
                             model.Sliders.Add(new SliderModel
                             {
-                                SilderId = drSlider["SilderId"] == DBNull.Value ? 0 : Convert.ToInt32(drSlider["SilderId"]),
-                                SilderName = drSlider["SilderName"]?.ToString(),
+                                SliderId = drSlider["SliderId"] == DBNull.Value ? 0 : Convert.ToInt32(drSlider["SliderId"]),
+                                SliderName = drSlider["SliderName"]?.ToString(),
                                 SliderMovingTimer = drSlider["SliderMovingTimer"] == DBNull.Value ? 5 : Convert.ToInt32(drSlider["SliderMovingTimer"]),
 
                                 // ✅ HEADING & DESCRIPTION FROM DB
