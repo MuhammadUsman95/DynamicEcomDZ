@@ -42,6 +42,7 @@ namespace DynamicEcomDZ.Controllers
                     cmdSlider.Parameters.AddWithValue("@nType", 0);
                     cmdSlider.Parameters.AddWithValue("@nsType", 4);
                     cmdSlider.Parameters.AddWithValue("@CustomerId", id);
+                    cmdSlider.Parameters.AddWithValue("@SliderType", "Customer");
 
                     using (SqlDataReader dr = await cmdSlider.ExecuteReaderAsync())
                     {
