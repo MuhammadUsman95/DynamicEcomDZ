@@ -18,9 +18,11 @@ namespace DynamicEcomDZ.Models
     {
         public List<DetailSliderModel> Sliders { get; set; } = new();
         public Dictionary<string, List<DetailModel>> Products { get; set; } = new();
-        public string RestaurantName { get; set; } = "Restaurant";
-        public int RestaurantId { get; set; }
-        public string SubHeaderTitle { get; set; }
+        public string? RestaurantName { get; set; } = "Restaurant";
+        public int? RestaurantId { get; set; }
+        public string? SubHeaderTitle { get; set; }
+        public string? RestaurantLogo { get; set; } = "";
+        public string? RestaurantAddress { get; set; } = "";
 
 
     }
