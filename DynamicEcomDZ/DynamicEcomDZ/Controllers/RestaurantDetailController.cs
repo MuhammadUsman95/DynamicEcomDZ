@@ -31,6 +31,12 @@ namespace DynamicEcomDZ.Controllers
             var sliders = new List<DetailSliderModel>();
             var products = new List<DetailModel>();
 
+            // ViewModel pehle banao
+            var viewModel = new RestaurantDetailViewModel
+            {
+                RestaurantId = id
+            };
+
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 await con.OpenAsync();
@@ -58,6 +64,25 @@ namespace DynamicEcomDZ.Controllers
                             });
 
                             subHeaderTitle = dr["SubHeader"]?.ToString();
+                        }
+                    }
+                }
+
+                // ================= CUSTOMER DETAIL (nsType=6) =================
+                using (SqlCommand cmdCustomer = new SqlCommand("Redirection_TAB_SP", con))
+                {
+                    cmdCustomer.CommandType = CommandType.StoredProcedure;
+                    cmdCustomer.Parameters.AddWithValue("@nType", 0);
+                    cmdCustomer.Parameters.AddWithValue("@nsType", 6);
+                    cmdCustomer.Parameters.AddWithValue("@CustomerId", id);
+
+                    using (SqlDataReader dr = await cmdCustomer.ExecuteReaderAsync())
+                    {
+                        if (await dr.ReadAsync())
+                        {
+                            viewModel.RestaurantName = dr["Customer"]?.ToString() ?? "Restaurant";
+                            viewModel.RestaurantAddress = dr["Address"]?.ToString() ?? "";
+                            viewModel.RestaurantLogo = dr["Logo"]?.ToString() ?? "";
                         }
                     }
                 }
@@ -91,16 +116,16 @@ namespace DynamicEcomDZ.Controllers
                 }
             }
 
-            var viewModel = new RestaurantDetailViewModel
-            {
-                Sliders = sliders,
-                Products = products
-                    .GroupBy(p => p.Category)
-                    .ToDictionary(g => g.Key, g => g.ToList()),
-                RestaurantName = products.FirstOrDefault()?.CustomerName ?? "Restaurant",
-                RestaurantId = id,
-                SubHeaderTitle = subHeaderTitle ?? ""
-            };
+            // ViewModel complete karo
+            viewModel.Sliders = sliders;
+            viewModel.Products = products
+                .GroupBy(p => p.Category)
+                .ToDictionary(g => g.Key, g => g.ToList());
+            viewModel.SubHeaderTitle = subHeaderTitle ?? "";
+
+            // Agar nsType=6 se name nahi mila to fallback
+            if (string.IsNullOrEmpty(viewModel.RestaurantName))
+                viewModel.RestaurantName = products.FirstOrDefault()?.CustomerName ?? "Restaurant";
 
             return View(viewModel);
         }
@@ -114,13 +139,13 @@ namespace DynamicEcomDZ.Controllers
                 return BadRequest(new MessageResponse { StatusId = 0, Message = "Invalid order data." });
 
             // Optional: Remove this delay in production
-            await Task.Delay(2000); 
+            await Task.Delay(2000);
 
             string conStr = _config.GetConnectionString("Connection1");
             string MasterXML = string.Empty;
             string DetailXML = string.Empty;
 
-            // 2. Build XML (This logic remains the same)
+            // 2. Build XML
             string[] MasterXMLParameters = { "ContactNo", "CustomerName", "CustomerAddress", "Street", "Floor", "Description" };
             string[] MasterXMLValues = { model.ContactNo ?? "", model.CustomerName ?? "", model.CustomerAddress ?? "", model.Street ?? "", model.Floor ?? "", model.Description ?? "" };
             MasterXML = CreateXML(MasterXMLParameters, MasterXMLValues, "MasterXML");
@@ -134,7 +159,6 @@ namespace DynamicEcomDZ.Controllers
             }
             DetailXML = $"<Insert1>{DetailXML}</Insert1>";
 
-            // 3. Create an instance of the response class
             var response = new MessageResponse();
 
             using (SqlConnection con = new SqlConnection(conStr))
@@ -153,7 +177,7 @@ namespace DynamicEcomDZ.Controllers
 
                 using (SqlCommand cmd = new SqlCommand(executionLine, con))
                 {
-                    cmd.CommandType = CommandType.Text;   // 👈 EXEC string run hogi
+                    cmd.CommandType = CommandType.Text;
 
                     using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                     {
@@ -176,9 +200,6 @@ namespace DynamicEcomDZ.Controllers
                 }
             }
 
-            // 5. Return the MessageResponse object
-            // The HTTP 200 OK status indicates the request was processed.
-            // The StatusId inside the payload indicates the business logic outcome.
             return Ok(response);
         }
 
@@ -220,15 +241,12 @@ namespace DynamicEcomDZ.Controllers
                 }
             }
 
-            // Agar customer exist nahi karta
             return Ok(new
             {
                 StatusId = 0,
                 Message = "Customer not found"
             });
         }
-
-
 
 
         string CreateXML(string[] Parameters, string[] Values, string XmlTAG)
@@ -249,6 +267,7 @@ namespace DynamicEcomDZ.Controllers
                 return "";
             }
         }
+
         string CreateDebugExecutionLine(SqlCommand cmd)
         {
             var sb = new StringBuilder();
