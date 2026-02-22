@@ -15,6 +15,11 @@ namespace DynamicEcomDZ.Controllers
             _config = config;
         }
 
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Index(int id)
         {
             string conStr = _config.GetConnectionString("Connection1");
