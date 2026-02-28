@@ -12,292 +12,403 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --red: #e84545;
+            --red-dark: #c0392b;
+            --dark: #1a1a2e;
+            --bg: #f6f7fb;
+            --white: #ffffff;
+            --accent: #ff6b35;
+            --shadow: 0 4px 24px rgba(0,0,0,.10);
+            --radius: 14px;
+            --tr: all .35s cubic-bezier(.4,0,.2,1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background: #f6f7fb;
+            background: var(--bg);
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
         }
 
         /* ===== HEADER ===== */
         header {
-            background: #1a1a2e;
-            box-shadow: 0 2px 12px rgba(0,0,0,.07);
+            background: var(--dark);
+            box-shadow: 0 2px 20px rgba(0,0,0,.35);
             position: sticky;
             top: 0;
             z-index: 999;
         }
 
         .header-inner {
+            width: 92%;
+            max-width: 1200px;
+            margin: auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 28px;
+            height: 68px;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            text-decoration: none;
+        .header-logo img {
+            height: 46px;
+            width: auto;
+            object-fit: contain;
+            transition: var(--tr);
         }
 
-        .logo-box {
-            width: 36px;
-            height: 36px;
-            background: #e84545;
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 18px;
-        }
-
-        .logo-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-            .logo-name span {
-                color: #e84545;
+            .header-logo img:hover {
+                transform: scale(1.04);
             }
 
-        .header-nav {
-            display: flex;
+        .btn-about {
+            display: inline-flex;
             align-items: center;
-            gap: 26px;
-            list-style: none;
-        }
-
-            .header-nav a {
-                text-decoration: none;
-                font-size: .88rem;
-                font-weight: 500;
-                color: rgba(255,255,255,.7);
-                transition: color .2s;
-            }
-
-                .header-nav a:hover {
-                    color: #e84545;
-                }
-
-        .btn-signin {
-            background: #e84545;
+            gap: 7px;
+            background: var(--red);
             color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 8px 20px;
-            font-size: .85rem;
             font-weight: 600;
-            cursor: pointer;
+            font-size: .88rem;
+            padding: 9px 22px;
+            border-radius: 9px;
             text-decoration: none;
-            transition: background .2s;
+            transition: var(--tr);
+            border: none;
         }
 
-            .btn-signin:hover {
-                background: #c0392b;
+            .btn-about:hover {
+                background: var(--red-dark);
                 color: #fff;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 18px rgba(232,69,69,.35);
             }
-
-        @@media (max-width: 768px) {
-            .header-nav {
-                display: none;
-            }
-
-            .header-inner {
-                padding: 12px 18px;
-            }
-        }
 
         /* ===== SLIDER ===== */
         #mainSlider {
+            width: 100%;
             overflow: hidden;
+            position: relative;
         }
 
-            #mainSlider img {
-                height: 480px;
+            #mainSlider .carousel-inner img {
                 width: 100%;
+                height: 500px;
                 object-fit: cover;
+                filter: brightness(50%);
+                transition: filter .5s ease, transform 6s ease;
             }
 
-            #mainSlider .carousel-item::before {
+            /* Ken Burns subtle zoom on active */
+            #mainSlider .carousel-item.active img {
+                transform: scale(1.05);
+            }
+
+            /* Gradient overlay */
+            #mainSlider .carousel-item::after {
                 content: '';
                 position: absolute;
                 inset: 0;
-                background: linear-gradient( to right, rgba(0,0,0,.75) 0%, rgba(0,0,0,.35) 55%, transparent 100% );
+                background: linear-gradient( 120deg, rgba(26,26,46,.80) 0%, rgba(26,26,46,.45) 45%, rgba(0,0,0,.10) 100% );
                 z-index: 1;
             }
 
+            #mainSlider:hover .carousel-inner img {
+                filter: brightness(60%);
+            }
+
+        /* ===== CAPTION ===== */
         .carousel-caption {
             position: absolute;
             top: 50%;
-            left: 70px;
+            left: 7%;
             right: auto;
             transform: translateY(-50%);
             text-align: left;
-            z-index: 2;
+            z-index: 10;
             padding: 0;
-            max-width: 480px;
+            max-width: 520px;
         }
 
-            .carousel-caption h2 {
-                font-size: 2.6rem;
-                font-weight: 700;
-                color: #fff;
-                line-height: 1.2;
-                margin-bottom: 12px;
-            }
-
-            .carousel-caption p {
-                font-size: .95rem;
-                color: rgba(255,255,255,.8);
-                margin-bottom: 24px;
-            }
-
-        .slide-cta {
-            display: inline-block;
-            background: #e84545;
+        /* Animated elements — hidden by default */
+        .cap-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--accent);
             color: #fff;
-            padding: 11px 28px;
-            border-radius: 9px;
-            font-weight: 600;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 16px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+            opacity: 0;
+        }
+
+        .cap-heading {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            text-shadow: 0 4px 24px rgba(0,0,0,.5);
+            opacity: 0;
+        }
+
+            .cap-heading em {
+                font-style: normal;
+                color: var(--accent);
+            }
+
+        .cap-desc {
+            font-size: .98rem;
+            color: rgba(255,255,255,.82);
+            line-height: 1.75;
+            margin-bottom: 28px;
+            text-shadow: 0 2px 8px rgba(0,0,0,.35);
+            opacity: 0;
+        }
+
+        .cap-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: var(--red);
+            color: #fff;
+            padding: 13px 30px;
+            border-radius: 50px;
+            font-weight: 700;
             font-size: .9rem;
             text-decoration: none;
-            transition: background .2s, transform .2s;
+            box-shadow: 0 8px 24px rgba(232,69,69,.4);
+            transition: var(--tr);
+            opacity: 0;
+            cursor: pointer;
         }
 
-            .slide-cta:hover {
-                background: #c0392b;
+            .cap-cta:hover {
+                background: var(--red-dark);
                 color: #fff;
-                transform: translateY(-2px);
+                transform: translateY(-3px);
+                box-shadow: 0 14px 32px rgba(232,69,69,.5);
             }
 
+        /* ===== ANIMATION KEYFRAMES ===== */
+        @@keyframes capBadgeIn {
+            from
+
+        {
+            opacity: 0;
+            transform: scale(.75);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        }
+        @@keyframes capHeadIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        }
+        @@keyframes capDescIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+        @@keyframes capCtaIn {
+            from
+
+        {
+            opacity: 0;
+            transform: scale(.8);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        }
+
+        /* Trigger animations on active slide */
+        #mainSlider .carousel-item.active .cap-eyebrow {
+            animation: capBadgeIn .6s ease .1s forwards;
+        }
+
+        #mainSlider .carousel-item.active .cap-heading {
+            animation: capHeadIn .7s ease .35s forwards;
+        }
+
+        #mainSlider .carousel-item.active .cap-desc {
+            animation: capDescIn .7s ease .62s forwards;
+        }
+
+        #mainSlider .carousel-item.active .cap-cta {
+            animation: capCtaIn .6s ease .92s forwards;
+        }
+
+        /* ===== SLIDER CONTROLS ===== */
         .carousel-control-prev,
         .carousel-control-next {
-            width: 44px;
-            height: 44px;
-            background: rgba(255,255,255,.15);
-            backdrop-filter: blur(4px);
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,.12);
+            backdrop-filter: blur(8px);
             border-radius: 50%;
             top: 50%;
             bottom: auto;
             transform: translateY(-50%);
-            margin: 0 18px;
-            opacity: 1;
-            border: 1.5px solid rgba(255,255,255,.25);
-            transition: background .2s;
+            margin: 0 22px;
+            opacity: 0;
+            border: 1.5px solid rgba(255,255,255,.22);
+            transition: var(--tr);
         }
 
-            .carousel-control-prev:hover,
-            .carousel-control-next:hover {
-                background: #e84545;
-                border-color: #e84545;
-            }
+        #mainSlider:hover .carousel-control-prev,
+        #mainSlider:hover .carousel-control-next {
+            opacity: 1;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            background: var(--red);
+            border-color: var(--red);
+        }
 
         .carousel-indicators {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            gap: 6px;
         }
 
             .carousel-indicators [data-bs-target] {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: rgba(255,255,255,.45);
+                width: 28px;
+                height: 4px;
+                border-radius: 4px;
+                background: rgba(255,255,255,.4);
                 border: none;
-                margin: 0 4px;
-                transition: .3s;
+                margin: 0 3px;
+                transition: var(--tr);
+                padding: 0;
             }
 
             .carousel-indicators .active {
-                width: 26px;
-                border-radius: 4px;
-                background: #e84545;
+                width: 48px;
+                background: var(--red);
             }
 
+        /* Mobile Slider */
         @@media (max-width: 768px) {
-            #mainSlider img {
+            #mainSlider .carousel-inner img {
                 height: 260px;
             }
 
             .carousel-caption {
-                left: 24px;
-                max-width: 75%;
+                left: 20px;
+                max-width: 80%;
             }
 
-                .carousel-caption h2 {
-                    font-size: 1.4rem;
-                }
+            .cap-heading {
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+            }
 
-                .carousel-caption p {
-                    display: none;
-                }
+            .cap-desc {
+                font-size: .8rem;
+                margin-bottom: 16px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
 
-            .slide-cta {
-                padding: 8px 18px;
+            .cap-eyebrow {
+                font-size: .62rem;
+                margin-bottom: 10px;
+            }
+
+            .cap-cta {
+                padding: 9px 20px;
                 font-size: .8rem;
             }
         }
 
-        /* ===== RESTAURANTS ===== */
-        .customer-card {
-            border-radius: 14px;
-            transition: .3s;
-            border: none;
-            box-shadow: 0 2px 12px rgba(0,0,0,.07);
-        }
-
-            .customer-card:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 10px 25px rgba(0,0,0,.2);
+        @@media (max-width: 576px) {
+            #mainSlider .carousel-inner img {
+                height: 210px;
             }
 
-        .star-filled {
-            color: #ffc107;
+            .cap-heading {
+                font-size: 1.25rem;
+            }
+
+            .cap-desc {
+                -webkit-line-clamp: 2;
+            }
         }
 
-        .star-empty {
-            color: #ddd;
-        }
-
-        .card-img, .card-img-bottom, .card-img-top {
-            width: 100%;
-            height: 16vh;
-            object-fit: cover;
-        }
-
-        .delivery-badge {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            font-size: 11px;
-            padding: 4px 7px;
-            border-radius: 4px;
+        /* ===== RESTAURANTS ===== */
+        .section-heading {
+            font-weight: 800;
+            font-size: 1.45rem;
+            color: var(--dark);
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 10px;
         }
 
+            .section-heading::after {
+                content: '';
+                flex: 1;
+                height: 2px;
+                background: linear-gradient(90deg, rgba(232,69,69,.3), transparent);
+                margin-left: 8px;
+            }
+
         .filter-input, .filter-select {
-            border: 1.5px solid #e8e8e8;
-            border-radius: 9px;
+            border: 1.5px solid #e0e7f3;
+            border-radius: 10px;
             font-size: .85rem;
+            font-family: 'Poppins', sans-serif;
             padding: 8px 14px;
-            transition: border-color .2s;
+            background: #f8faff;
+            transition: var(--tr);
         }
 
             .filter-input:focus, .filter-select:focus {
-                border-color: #e84545;
+                border-color: var(--red);
                 box-shadow: 0 0 0 3px rgba(232,69,69,.1);
                 outline: none;
+                background: #fff;
             }
 
         @@media (max-width: 768px) {
@@ -311,16 +422,77 @@
             }
         }
 
+        /* Restaurant Card */
+        .customer-card {
+            border-radius: var(--radius);
+            border: 1px solid rgba(0,0,0,.05);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease;
+            background: var(--white);
+        }
+
+            .customer-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 48px rgba(232,69,69,.15);
+            }
+
+        .card-img-top {
+            width: 100%;
+            height: 16vh;
+            object-fit: cover;
+            transition: transform .5s ease;
+        }
+
+        .customer-card:hover .card-img-top {
+            transform: scale(1.07);
+        }
+
+        .img-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .delivery-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 9px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            letter-spacing: .3px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.2);
+        }
+
+        .star-filled {
+            color: #ffc107;
+        }
+
+        .star-empty {
+            color: #ddd;
+        }
+
+        /* ===== MODAL ===== */
+        .modal-content {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 20px 60px rgba(0,0,0,.2);
+        }
+
         /* ===== FOOTER ===== */
         footer {
-            background: #1a1a2e;
-            color: rgba(255,255,255,.6);
+            background: var(--dark);
+            color: rgba(255,255,255,.55);
             margin-top: 60px;
         }
 
         .footer-body {
             display: grid;
-            grid-template-columns: 1.6fr 1fr 1fr;
+            grid-template-columns: 1.6fr 1fr;
             gap: 40px;
             padding: 48px 40px 36px;
             border-bottom: 1px solid rgba(255,255,255,.07);
@@ -338,7 +510,7 @@
             font-size: .84rem;
             line-height: 1.75;
             margin-top: 12px;
-            color: rgba(255,255,255,.45);
+            color: rgba(255,255,255,.4);
         }
 
         .footer-socials {
@@ -348,51 +520,47 @@
         }
 
             .footer-socials a {
-                width: 34px;
-                height: 34px;
-                border-radius: 8px;
+                width: 36px;
+                height: 36px;
+                border-radius: 9px;
                 background: rgba(255,255,255,.07);
                 color: rgba(255,255,255,.6);
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 text-decoration: none;
-                font-size: .95rem;
-                transition: .2s;
+                font-size: 1rem;
+                transition: var(--tr);
             }
 
                 .footer-socials a:hover {
-                    background: #e84545;
+                    background: var(--red);
                     color: #fff;
+                    transform: translateY(-2px);
                 }
 
         .footer-col h6 {
             font-size: .78rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: .1em;
+            letter-spacing: .12em;
             color: #fff;
             margin-bottom: 14px;
         }
 
-        .footer-col ul {
-            list-style: none;
+        .footer-col a {
+            color: rgba(255,255,255,.45);
+            text-decoration: none;
+            font-size: .84rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color .2s;
         }
 
-            .footer-col ul li {
-                margin-bottom: 9px;
+            .footer-col a:hover {
+                color: var(--red);
             }
-
-                .footer-col ul li a {
-                    color: rgba(255,255,255,.45);
-                    text-decoration: none;
-                    font-size: .84rem;
-                    transition: color .2s;
-                }
-
-                    .footer-col ul li a:hover {
-                        color: #e84545;
-                    }
 
         .footer-bottom {
             text-align: center;
@@ -400,40 +568,23 @@
             font-size: .78rem;
             color: rgba(255,255,255,.25);
         }
-
-            .footer-bottom a {
-                color: #e84545;
-                text-decoration: none;
-            }
     </style>
 </head>
 <body>
 
     <!-- ====== HEADER ====== -->
-    <!-- ====== HEADER ====== -->
-    <header style="background:#1a1a2e; padding:0; box-shadow:0 2px 12px rgba(0,0,0,0.3); position:sticky; top:0; z-index:999;">
-        <div style="width:92%; max-width:1200px; margin:auto; display:flex; align-items:center; justify-content:space-between; height:68px;">
-
-            <!-- Logo -->
-            <a asp-controller="Home" asp-action="Index" style="display:flex; align-items:center; text-decoration:none;">
-                <img src="@Url.Content("~/images/logo.png")"
-                     alt="Logo"
-                     style="height:48px; width:auto; object-fit:contain;" />
+    <header>
+        <div class="header-inner">
+            <a asp-controller="Home" asp-action="Index" class="header-logo">
+                <img src="@Url.Content("~/images/logo.png")" alt="Logo" />
             </a>
-
-            <!-- Nav Links -->
-            <nav style="display:flex; align-items:center; gap:10px;">
-                <a asp-controller="Restaurant" asp-action="AboutUs"
-                   style="font-weight:600; color:#fff; text-decoration:none; font-size:15px; padding:9px 22px; border-radius:9px; background:#e84545; transition:all .2s;"
-                   onmouseover="this.style.background='#c0392b';"
-                   onmouseout="this.style.background='#e84545';">
-                    <i class="bi bi-info-circle me-1"></i> About Us
+            <nav>
+                <a asp-controller="Restaurant" asp-action="AboutUs" class="btn-about">
+                    <i class="bi bi-info-circle"></i> About Us
                 </a>
             </nav>
-
         </div>
     </header>
-
 
     <!-- ====== SLIDER ====== -->
     <div id="mainSlider" class="carousel slide" data-bs-ride="carousel">
@@ -454,11 +605,18 @@
                 var s = Model.Sliders[i];
                 <div class="carousel-item @(i == 0 ? "active" : "")"
                      data-bs-interval="@(s.SliderMovingTimer * 1000)">
-                    <img src="@("/images/SliderRegistration/" + s.SliderName)" alt="@s.HeadingSlider">
+
+                    <img src="@("/images/SliderRegistration/" + s.SliderName)" alt="@s.HeadingSlider" />
+
                     <div class="carousel-caption">
-                        <h2>@s.HeadingSlider</h2>
-                        <p>@s.DescriptionSlider</p>
-                        @* <a href="#restaurants" class="slide-cta">Order Now &nbsp;<i class="bi bi-arrow-right"></i></a> *@
+                        <div class="cap-eyebrow">
+                            <i class="bi bi-stars"></i> @s.HeadingSlider
+                        </div>
+                        <h2 class="cap-heading">@s.DescriptionSlider</h2>
+                        @* <p class="cap-desc">@s.DescriptionSlider</p> *@
+                        @* <a href="#restaurants" class="cap-cta">
+                            <i class="bi bi-bag-heart-fill"></i> Order Now
+                        </a> *@
                     </div>
                 </div>
             }
@@ -475,12 +633,15 @@
 
     <!-- ====== RESTAURANTS ====== -->
     <div class="container mt-5" id="restaurants">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-2">
-            <h3 style="font-weight:700; font-size:1.45rem; color:#1a1a2e;">Our Restaurants</h3>
 
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
+            <h3 class="section-heading">
+                <i class="bi bi-shop" style="color:var(--red);"></i> Our Restaurants
+            </h3>
             <div class="d-flex gap-2 filter-wrap">
-                <input type="text" id="restaurantSearch" class="filter-input" placeholder="Search restaurant..." style="width:200px">
-                <select id="typeFilter" class="filter-select" style="width:140px">
+                <input type="text" id="restaurantSearch" class="filter-input"
+                       placeholder="🔍 Search restaurant..." style="width:210px">
+                <select id="typeFilter" class="filter-select" style="width:150px">
                     <option value="all">All Types</option>
                     @foreach (var type in Model.Customers.Select(x => x.Type).Distinct())
                     {
@@ -490,26 +651,27 @@
             </div>
         </div>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="restaurantGrid">
             @foreach (var c in Model.Customers)
             {
-                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-4">
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-4 rest-col">
                     <a href="javascript:void(0)" class="text-decoration-none restaurant-link" data-id="@c.CustomerId">
                         <div class="card customer-card h-100">
-                            <div class="position-relative">
-                                <img src="@("/images/VendorRegistration/" + c.ImagePath)" class="card-img-top" alt="@c.Customer">
+                            <div class="img-wrap">
+                                <img src="@("/images/VendorRegistration/" + c.ImagePath)"
+                                     class="card-img-top" alt="@c.Customer" />
                                 <span class="badge @(c.DeliveryCharges == 0 ? "bg-success" : "bg-warning text-dark") delivery-badge">
                                     <i class="bi bi-truck"></i>
                                     @(c.DeliveryCharges == 0 ? "Free Delivery" : $"Rs. {c.DeliveryCharges}")
                                 </span>
                             </div>
-                            <div class="card-body text-center" style="padding-bottom:5px;">
-                                <h6 class="fw-bold">@c.Customer</h6>
-                                <span class="badge bg-primary">@c.Type</span>
-                                <div class="small text-muted mt-1" style="font-size:11px;">
+                            <div class="card-body text-center" style="padding:12px 10px 10px;">
+                                <h6 class="fw-bold mb-1" style="font-size:.88rem;">@c.Customer</h6>
+                                <span class="badge" style="background:var(--dark);font-size:.72rem;">@c.Type</span>
+                                <div class="small text-muted mt-1" style="font-size:10.5px;">
                                     <i class="bi bi-clock"></i> @c.Timing
                                 </div>
-                                <div class="mt-2" style="font-size:22px;">
+                                <div class="mt-2" style="font-size:18px;">
                                     @for (int i = 1; i <= 5; i++)
                                     {
                                         <span class="@(i <= c.Rating ? "star-filled" : "star-empty")">★</span>
@@ -528,14 +690,14 @@
     <div class="modal fade" id="closedModal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content text-center">
-                <div class="modal-header bg-danger text-white border-0">
-                    <h5 class="modal-title">Restaurant Not Available</h5>
+                <div class="modal-header bg-danger text-white border-0" style="border-radius:16px 16px 0 0;">
+                    <h5 class="modal-title w-100">Restaurant Not Available</h5>
                 </div>
                 <div class="modal-body py-4" id="closedModalBody">
                     This restaurant is currently closed.
                 </div>
-                <div class="modal-footer justify-content-center border-0">
-                    <button class="btn btn-danger px-4" data-bs-dismiss="modal">OK</button>
+                <div class="modal-footer justify-content-center border-0 pb-4">
+                    <button class="btn btn-danger px-5" data-bs-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
@@ -546,42 +708,50 @@
     <footer>
         <div class="footer-body">
             <div>
-                <a href="/" class="logo" style="display:inline-flex; align-items:center;">
-                    <img src="@("/images/logo.png")"
-                         alt="FoodHub Logo"
-                         style="height: 48px; width: auto; object-fit: contain;" />
+                <a href="/" style="display:inline-flex;align-items:center;text-decoration:none;">
+                    <img src="@("/images/logo.png")" alt="Logo" style="height:46px;width:auto;object-fit:contain;" />
                 </a>
-                <p class="footer-brand-desc">Everything You Need In B17 - All In One Place</p>
+                <p class="footer-brand-desc">Everything You Need In B17 — All In One Place</p>
                 <div class="footer-socials">
                     <a href="https://www.facebook.com/share/1Buimi6joN/" target="_blank"><i class="bi bi-facebook"></i></a>
                     <a href="#"><i class="bi bi-instagram"></i></a>
-                    <a href="https://api.whatsapp.com/send?phone=923002222662" target="_blank">
-                        <i class="bi bi-whatsapp"></i>
-                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=923002222662" target="_blank"><i class="bi bi-whatsapp"></i></a>
                 </div>
             </div>
-
             <div class="footer-col">
-                <h6>Support</h6>
+                <h6>Contact</h6>
                 <a href="tel:+923002222662">
-                    <i class="bi bi-telephone-fill" style="color:#ffff"></i>
-                    &nbsp;+92-3002222662
+                    <i class="bi bi-telephone-fill" style="color:var(--red);"></i> +92-300-2222662
                 </a>
             </div>
         </div>
-
         <div class="footer-bottom">
-@*             &copy; @DateTime.Now.Year <strong style="color:rgba(255,255,255,.4)">FoodHub</strong>. All rights reserved &nbsp;&middot;&nbsp;
-            Made with <span style="color:#38BA38">&#9829;</span> in Pakistan &nbsp;&middot;&nbsp;
-            <a href="#">Privacy</a> &nbsp;&middot;&nbsp; <a href="#">Terms</a> *@
-            <p style="margin: 0;">Software Developed By : <span style="font-weight:600;">UT Designer</span></p>
-        </div>  
+            <p>Software Developed By: <span style="font-weight:700;color:rgba(255,255,255,.5);">UT Designer</span></p>
+        </div>
     </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        /* ===== SLIDER ANIMATION RESET ON SLIDE CHANGE ===== */
+        document.addEventListener("DOMContentLoaded", function () {
+            const slider = document.getElementById('mainSlider');
+
+            slider.addEventListener('slide.bs.carousel', function (e) {
+                const incoming = e.relatedTarget;
+                if (!incoming) return;
+                const els = incoming.querySelectorAll('.cap-eyebrow, .cap-heading, .cap-desc, .cap-cta');
+                els.forEach(el => {
+                    el.style.animation = 'none';
+                    el.style.opacity   = '0';
+                    void el.offsetWidth; // force reflow
+                    el.style.animation = '';
+                });
+            });
+        });
+
+        /* ===== RESTAURANT CLICK ===== */
         document.querySelectorAll('.restaurant-link').forEach(link => {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -603,22 +773,21 @@
             });
         });
 
+        /* ===== FILTER ===== */
         document.addEventListener("DOMContentLoaded", function () {
             const search = document.getElementById("restaurantSearch");
             const filter = document.getElementById("typeFilter");
-            const cards = document.querySelectorAll(".restaurant-link");
+            const cols   = document.querySelectorAll(".rest-col");
 
             function run() {
                 const q = search.value.toLowerCase();
                 const t = filter.value.toLowerCase();
-                cards.forEach(c => {
-                    const name = c.querySelector("h6").innerText.toLowerCase();
-                    const type = c.querySelector(".badge.bg-primary").innerText.toLowerCase();
-                    c.closest(".col-6").style.display =
-                        name.includes(q) && (t === "all" || type === t) ? "block" : "none";
+                cols.forEach(col => {
+                    const name = col.querySelector("h6").innerText.toLowerCase();
+                    const type = col.querySelector(".badge").innerText.toLowerCase();
+                    col.style.display = name.includes(q) && (t === "all" || type.includes(t)) ? "block" : "none";
                 });
             }
-
             search.addEventListener("keyup", run);
             filter.addEventListener("change", run);
         });
