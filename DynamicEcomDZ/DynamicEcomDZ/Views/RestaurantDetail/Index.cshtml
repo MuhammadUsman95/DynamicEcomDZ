@@ -47,7 +47,7 @@
 
         /* ===== MINI SUB-HEADER ===== */
         .mini-sub-header {
-            background: #1a1a2e;
+            background: var(--dark);
             color: #fff;
             font-size: .82rem;
             font-weight: 500;
@@ -771,11 +771,15 @@
         .cart-items-scroll {
             flex-grow: 1;
             overflow-y: auto;
-            padding: 12px 16px;
+            padding: 12px 14px 6px;
         }
 
             .cart-items-scroll::-webkit-scrollbar {
-                width: 5px;
+                width: 4px;
+            }
+
+            .cart-items-scroll::-webkit-scrollbar-track {
+                background: transparent;
             }
 
             .cart-items-scroll::-webkit-scrollbar-thumb {
@@ -783,45 +787,173 @@
                 border-radius: 10px;
             }
 
+        .cart-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .cart-empty-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #f4f6fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: rgba(26,26,46,.2);
+            margin-bottom: 14px;
+        }
+
+        .cart-empty-text {
+            font-size: .85rem;
+            font-weight: 600;
+            color: rgba(26,26,46,.35);
+        }
+
+        /* Cart Item — with qty controls */
         .cart-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: #fff;
+            border: 1px solid rgba(26,26,46,.06);
+            margin-bottom: 8px;
+            transition: box-shadow .25s ease;
         }
 
+            .cart-item:hover {
+                box-shadow: 0 4px 16px rgba(26,26,46,.08);
+            }
+
+            .cart-item:last-child {
+                margin-bottom: 0;
+            }
+
         .cart-item-img {
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             object-fit: cover;
             border-radius: 10px;
             flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,.12);
         }
 
         .cart-item-info {
             flex: 1;
+            min-width: 0;
         }
 
             .cart-item-info strong {
-                font-size: .85rem;
+                font-size: .82rem;
                 display: block;
                 color: var(--dark);
                 font-weight: 700;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
-            .cart-item-info div {
-                font-size: .78rem;
-                color: var(--muted);
-                margin-top: 2px;
+        .cart-item-price-unit {
+            font-size: .72rem;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        /* Qty controls inside cart */
+        .cart-qty-box {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f6f7fb;
+            border-radius: 20px;
+            padding: 3px 6px;
+            flex-shrink: 0;
+        }
+
+        .cart-qty-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: none;
+            background: var(--dark);
+            color: #fff;
+            font-size: .95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s, transform .15s;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+            .cart-qty-btn:hover {
+                background: var(--red);
+                transform: scale(1.1);
             }
+
+            .cart-qty-btn:active {
+                transform: scale(.9);
+            }
+
+            .cart-qty-btn.minus {
+                background: rgba(26,26,46,.15);
+                color: var(--dark);
+            }
+
+                .cart-qty-btn.minus:hover {
+                    background: var(--danger);
+                    color: #fff;
+                }
+
+        .cart-qty-num {
+            font-size: .85rem;
+            font-weight: 800;
+            min-width: 18px;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .cart-item-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            flex-shrink: 0;
+        }
 
         .cart-item-total {
             font-weight: 800;
-            font-size: .9rem;
+            font-size: .88rem;
             color: var(--success);
-            flex-shrink: 0;
+            white-space: nowrap;
         }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: rgba(220,53,69,.5);
+            font-size: .75rem;
+            padding: 0;
+            transition: color .2s;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+            .cart-item-remove:hover {
+                color: var(--danger);
+            }
 
         .cart-total {
             padding: 14px 16px;
@@ -830,20 +962,44 @@
             background: #f8f9fb;
         }
 
+        .cart-total-inner {
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px 14px;
+            border: 1px solid rgba(26,26,46,.06);
+        }
+
         .total-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
-            font-size: .84rem;
-            color: #444;
+            margin-bottom: 7px;
+            font-size: .82rem;
+            color: #555;
         }
 
-            .total-row span {
-                font-weight: 500;
+            .total-row:last-child {
+                margin-bottom: 0;
             }
 
-            .total-row.discount {
+            .total-row .lbl {
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+                .total-row .lbl i {
+                    font-size: .8rem;
+                    opacity: .6;
+                }
+
+            .total-row .val {
+                font-weight: 700;
+            }
+
+            .total-row.discount .lbl,
+            .total-row.discount .val {
                 color: var(--danger);
             }
 
@@ -851,19 +1007,32 @@
                 margin-top: 10px;
                 padding-top: 10px;
                 border-top: 1.5px dashed rgba(26,26,46,.12);
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
-                .total-row.net strong:last-child {
+                .total-row.net .lbl {
+                    font-size: 1rem;
+                    font-weight: 800;
+                    color: var(--dark);
+                }
+
+                .total-row.net .val {
+                    font-size: 1.15rem;
+                    font-weight: 900;
                     color: var(--success);
                 }
 
         .free-delivery {
             background: var(--success);
             color: #fff;
-            padding: 1px 8px;
-            border-radius: 4px;
-            font-size: .75rem;
+            padding: 1px 9px;
+            border-radius: 30px;
+            font-size: .72rem;
+            font-weight: 700;
+        }
+
+        .delivery-fee {
+            color: var(--dark);
             font-weight: 700;
         }
 
@@ -873,14 +1042,18 @@
         }
 
             .checkout-wrapper .btn {
-                border-radius: 10px;
+                border-radius: 12px;
                 font-weight: 700;
                 font-size: .95rem;
-                padding: 12px;
+                padding: 13px;
                 background: var(--red);
                 border-color: var(--red);
                 box-shadow: 0 6px 20px rgba(232,69,69,.3);
                 transition: var(--tr);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
             }
 
                 .checkout-wrapper .btn:hover {
@@ -1213,8 +1386,8 @@
                     <div class="carousel-caption">
                         <div class="caption-badge"><i class="bi bi-stars"></i> @s.HeadingSlider</div>
                         <h2 class="caption-heading">@s.DescriptionSlider</h2>
-                        @* <p class="caption-desc">@s.DescriptionSlider</p> *@
-                        @* <button class="caption-btn"
+@*                         <p class="caption-desc">@s.DescriptionSlider</p>
+                        <button class="caption-btn"
                                 onclick="document.getElementById('productsContainer').scrollIntoView({behavior:'smooth'})">
                             <i class="bi bi-bag-heart-fill"></i> Order Now
                         </button> *@
@@ -1307,19 +1480,23 @@
     <!-- CART DRAWER -->
     <div id="cartDrawer" class="cart-drawer">
         <div class="cart-header">
-            <h4><i class="bi bi-bag-heart-fill"></i> Your Cart</h4>
+            <h4>
+                <i class="bi bi-bag-heart-fill"></i> Your Cart
+                <span id="cartHeaderCount" style="background:var(--red);color:#fff;font-size:.65rem;font-weight:800;padding:2px 8px;border-radius:20px;margin-left:4px;display:none;"></span>
+            </h4>
             <button class="cart-close-btn" onclick="toggleCart()"><i class="bi bi-x-lg"></i></button>
         </div>
         <div id="cartItemsContainer" class="cart-items-scroll">
-            <p class="text-muted text-center mt-4 small">
-                <i class="bi bi-cart-x" style="font-size:2rem;display:block;margin-bottom:8px;opacity:.4;"></i>
-                Your cart is empty.
-            </p>
+            <div class="cart-empty-state">
+                <div class="cart-empty-icon"><i class="bi bi-cart-x"></i></div>
+                <div class="cart-empty-text">Your cart is empty</div>
+                <div style="font-size:.76rem;color:rgba(26,26,46,.25);margin-top:4px;">Add items to get started</div>
+            </div>
         </div>
         <div id="cartTotal" class="cart-total" style="display:none;"></div>
         <div class="checkout-wrapper">
             <button class="btn btn-danger w-100" onclick="openCheckoutModal()">
-                <i class="bi bi-lightning-charge-fill me-2"></i>Checkout
+                <i class="bi bi-lightning-charge-fill"></i> Checkout
             </button>
         </div>
     </div>
@@ -1342,7 +1519,7 @@
             <div class="footer-col">
                 <h6>Contact</h6>
                 <a href="tel:+923002222662">
-                    <i class="bi bi-telephone-fill" style="color:var(--red);"></i> +92-3002222662
+                    <i class="bi bi-telephone-fill" style="color:var(--red);"></i> +92-300-2222662
                 </a>
             </div>
         </div>
@@ -1447,41 +1624,82 @@
 
         function renderCart() {
             const container = document.getElementById("cartItemsContainer");
-            const totalDiv = document.getElementById("cartTotal");
+            const totalDiv  = document.getElementById("cartTotal");
             container.innerHTML = "";
             const items = Object.values(cart);
+
             if (items.length === 0) {
-                container.innerHTML = `<p class="text-muted text-center mt-4 small">
-                    <i class="bi bi-cart-x" style="font-size:2rem;display:block;margin-bottom:8px;opacity:.4;"></i>
-                    Your cart is empty.</p>`;
-                totalDiv.style.display = "none"; updateCartCount(); return;
+                container.innerHTML = `
+                    <div class="cart-empty-state">
+                        <div class="cart-empty-icon"><i class="bi bi-cart-x"></i></div>
+                        <div class="cart-empty-text">Your cart is empty</div>
+                        <div style="font-size:.76rem;color:rgba(26,26,46,.25);margin-top:4px;">Add items to get started</div>
+                    </div>`;
+                totalDiv.style.display = "none";
+                updateCartCount(); return;
             }
+
             let tg = 0, td = 0, tq = 0, dc = 0;
+
             items.forEach(item => {
                 if (dc === 0 && item.DeliveryCharges !== undefined) dc = Number(item.DeliveryCharges);
-                const r = item.Quantity * item.Rate, d = item.Quantity * item.DiscountAmount;
+                const r = item.Quantity * item.Rate;
+                const d = item.Quantity * item.DiscountAmount;
+                const net = r - d;
                 tg += r; td += d; tq += item.Quantity;
+
+                const unitDisplay = item.DiscountAmount > 0
+                    ? `<span style="color:var(--success);font-weight:700;">${fmt(item.Rate - item.DiscountAmount)}</span> <span style="text-decoration:line-through;color:var(--danger);opacity:.7;">${fmt(item.Rate)}</span>`
+                    : `<span>${fmt(item.Rate)}</span>`;
+
                 container.innerHTML += `
-                    <div class="cart-item">
+                    <div class="cart-item" id="cart-item-${item.ProductCode}">
                         <img src="/images/ProductRegistration/${item.image}" class="cart-item-img" />
                         <div class="cart-item-info">
-                            <strong>${item.ProductName}</strong>
-                            <div>${item.Quantity} × ${fmt(item.Rate)}</div>
+                            <strong title="${item.ProductName}">${item.ProductName}</strong>
+                            <div class="cart-item-price-unit">Unit: ${unitDisplay}</div>
                         </div>
-                        <div class="cart-item-total">${fmt(r-d)}</div>
+                        <div class="cart-item-right">
+                            <div class="cart-item-total">${fmt(net)}</div>
+                            <div class="cart-qty-box">
+                                <button class="cart-qty-btn minus"
+                                        onclick="changeQuantity('${item.ProductCode}','${item.ProductName}',-1)">−</button>
+                                <span class="cart-qty-num">${item.Quantity}</span>
+                                <button class="cart-qty-btn"
+                                        onclick="changeQuantity('${item.ProductCode}','${item.ProductName}',1)">+</button>
+                            </div>
+                        </div>
                     </div>`;
             });
+
             const np = (tg - td) + dc;
             totalDiv.style.display = "block";
             totalDiv.innerHTML = `
-                <div class="total-row"><span>Total Items</span><span>${tq}</span></div>
-                <div class="total-row"><span>Gross</span><span>${fmt(tg)}</span></div>
-                ${td > 0 ? `<div class="total-row discount"><span>Discount</span><span>− ${fmt(td)}</span></div>` : ''}
-                <div class="total-row">
-                    <span>Delivery</span>
-                    <span class="${dc===0?'free-delivery':''}">${dc===0?'Free':fmt(dc)}</span>
-                </div>
-                <div class="total-row net"><strong>Payable</strong><strong>${fmt(np)}</strong></div>`;
+                <div class="cart-total-inner">
+                    <div class="total-row">
+                        <span class="lbl"><i class="bi bi-bag"></i> Total Items</span>
+                        <span class="val">${tq}</span>
+                    </div>
+                    <div class="total-row">
+                        <span class="lbl"><i class="bi bi-receipt"></i> Gross</span>
+                        <span class="val">${fmt(tg)}</span>
+                    </div>
+                    ${td > 0 ? `
+                    <div class="total-row discount">
+                        <span class="lbl"><i class="bi bi-tag"></i> Discount</span>
+                        <span class="val">− ${fmt(td)}</span>
+                    </div>` : ''}
+                    <div class="total-row">
+                        <span class="lbl"><i class="bi bi-truck"></i> Delivery</span>
+                        <span class="val">${dc === 0
+                            ? `<span class="free-delivery">Free</span>`
+                            : `<span class="delivery-fee">${fmt(dc)}</span>`}</span>
+                    </div>
+                    <div class="total-row net">
+                        <span class="lbl">Payable</span>
+                        <span class="val">${fmt(np)}</span>
+                    </div>
+                </div>`;
             updateCartCount();
         }
 
@@ -1489,6 +1707,9 @@
         function updateCartCount() {
             let c = 0; Object.values(cart).forEach(x => c += x.Quantity);
             document.getElementById('cartCount').textContent = c;
+            const hBadge = document.getElementById('cartHeaderCount');
+            if (c > 0) { hBadge.textContent = c + ' items'; hBadge.style.display = 'inline'; }
+            else { hBadge.style.display = 'none'; }
         }
         function toggleCart() {
             document.getElementById('cartDrawer').classList.toggle('open');
