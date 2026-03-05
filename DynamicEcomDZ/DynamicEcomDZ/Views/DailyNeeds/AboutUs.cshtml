@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About Us</title>
+    <title>About Us – Daily Needs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -290,6 +290,41 @@
             margin: 0;
         }
 
+        /* ===== CATEGORIES STRIP ===== */
+        .categories-section {
+            background: #f6f7fb;
+        }
+
+        .cat-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            height: 100%;
+            transition: .3s;
+            border: 1.5px solid transparent;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+
+            .cat-card:hover {
+                transform: translateY(-6px);
+                border-color: rgba(232,69,69,0.2);
+                box-shadow: 0 14px 36px rgba(0,0,0,0.1);
+            }
+
+        .cat-icon {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .cat-card h5 {
+            font-size: .9rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin: 0;
+        }
+
         /* ===== MISSION ===== */
         .mission-section {
             background: #1a1a2e;
@@ -503,47 +538,6 @@
                     color: #fff;
                 }
 
-        /* ===== CTA ===== */
-        .cta-section {
-            background: linear-gradient(135deg, #e84545 0%, #c0392b 100%);
-            padding: 72px 20px;
-            text-align: center;
-        }
-
-            .cta-section h2 {
-                font-size: clamp(1.6rem, 4vw, 2.2rem);
-                font-weight: 800;
-                color: #fff;
-                margin-bottom: 14px;
-            }
-
-            .cta-section p {
-                color: rgba(255,255,255,0.75);
-                font-size: .95rem;
-                margin-bottom: 32px;
-            }
-
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #fff;
-            color: #e84545;
-            font-weight: 700;
-            font-size: .9rem;
-            padding: 13px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            transition: .2s;
-        }
-
-            .cta-btn:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 14px 36px rgba(0,0,0,0.2);
-                color: #e84545;
-            }
-
         /* ===== FOOTER ===== */
         footer {
             background: #1a1a2e;
@@ -558,15 +552,13 @@
             padding: 48px 40px 36px;
             border-bottom: 1px solid rgba(255,255,255,.07);
         }
+
         @@media (max-width: 768px) {
-            .footer-body
-
-        {
-            grid-template-columns: 1fr;
-            gap: 24px;
-            padding: 32px 24px;
-        }
-
+            .footer-body {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding: 32px 24px;
+            }
         }
 
         .footer-brand-desc {
@@ -658,7 +650,7 @@
                 <img src="@Url.Content("~/images/logo.png")" alt="Logo" />
             </a>
             <nav>
-                <a asp-controller="Restaurant" asp-action="Index" asp-route-id="1" class="btn-back">
+                <a asp-controller="DailyNeeds" asp-action="Index" class="btn-back">
                     <i class="bi bi-arrow-left"></i> Back to Home
                 </a>
             </nav>
@@ -669,26 +661,22 @@
     <!-- ====== HERO ====== -->
     <section class="hero-section">
         <div class="hero-badge">✦ Our Story</div>
-        <h1>We Are More Than Just<br><span>A Food Platform</span></h1>
-        <p>Your one-stop digital marketplace for Restaurants, Home Chefs, Daily Needs, Real Estate, Classifieds, and Health Services — all in one place.</p>
+        <h1>Your Everyday Essentials,<br><span>Delivered to Your Door</span></h1>
+        <p>From groceries and household items to personal care and fresh produce — we bring everything you need for daily life, right to your doorstep, fast and reliably.</p>
 
         <div class="hero-stats">
             <div class="stat-item">
-                <div class="num">50+</div>
-                <div class="label">Restaurants</div>
+                <div class="num">200+</div>
+                <div class="label">Products Listed</div>
             </div>
             <div class="stat-item">
-                <div class="num">30+</div>
-                <div class="label">Home Chefs</div>
+                <div class="num">20+</div>
+                <div class="label">Trusted Vendors</div>
             </div>
             <div class="stat-item">
-                <div class="num">100+</div>
+                <div class="num">500+</div>
                 <div class="label">Happy Customers</div>
             </div>
-@*             <div class="stat-item">
-                <div class="num">10+</div>
-                <div class="label">Cities</div>
-            </div> *@
         </div>
     </section>
 
@@ -699,8 +687,8 @@
             <div class="row align-items-center g-5 fade-up">
                 <div class="col-lg-6">
                     <div class="who-img-wrap">
-                        <img src="@Url.Content("~/images/about-team.jpg")" alt="Our Team"
-                             onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80'">
+                        <img src="@Url.Content("~/images/dailyneeds-about.jpg")" alt="Daily Needs"
+                             onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=700&q=80'">
                         <div class="who-img-badge">
                             <i class="bi bi-patch-check-fill me-2"></i> Trusted Since 2022
                         </div>
@@ -708,25 +696,77 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="section-label">Who We Are</div>
-                    <h2 class="section-title">A Modern Digital Marketplace Built for You</h2>
+                    <h2 class="section-title">Your Local Daily Needs Marketplace</h2>
                     <p class="section-text mb-4">
-                        We are a modern digital marketplace designed to connect customers with trusted local service providers.
-                        Our platform simplifies everyday life by bringing multiple services into one convenient place.
+                        We are a trusted digital platform connecting you with local vendors for all your daily essentials.
+                        Whether it's groceries, household supplies, personal care, or fresh produce — we make it simple and convenient.
                     </p>
                     <p class="section-text">
-                        Whether you're searching for delicious food from top restaurants, home-cooked meals from talented home chefs,
-                        property listings, healthcare services, or classified ads — we make the process easy, secure, and reliable.
+                        Our mission is to save you time by bringing your everyday necessities together in one easy-to-use platform,
+                        backed by verified local suppliers who care about quality and freshness.
                     </p>
                     <div class="d-flex gap-3 mt-4 flex-wrap">
                         <div class="d-flex align-items-center gap-2" style="font-size:.85rem; font-weight:600; color:#1a1a2e;">
-                            <i class="bi bi-shield-fill-check text-danger"></i> 100% Verified Vendors
+                            <i class="bi bi-shield-fill-check text-danger"></i> Verified Vendors
                         </div>
                         <div class="d-flex align-items-center gap-2" style="font-size:.85rem; font-weight:600; color:#1a1a2e;">
-                            <i class="bi bi-clock-fill text-danger"></i> Fast Delivery
+                            <i class="bi bi-clock-fill text-danger"></i> Same-Day Delivery
                         </div>
                         <div class="d-flex align-items-center gap-2" style="font-size:.85rem; font-weight:600; color:#1a1a2e;">
-                            <i class="bi bi-star-fill text-danger"></i> Top Rated
+                            <i class="bi bi-star-fill text-danger"></i> Fresh & Quality
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ====== PRODUCT CATEGORIES ====== -->
+    <div class="section-wrap categories-section">
+        <div class="container">
+            <div class="text-center mb-5 fade-up">
+                <div class="section-label">What We Offer</div>
+                <h2 class="section-title">Categories We Cover</h2>
+                <p style="color:#888; max-width:520px; margin:0 auto; font-size:.9rem; line-height:1.75;">
+                    Everything for your daily life, all under one roof.
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-lg-2 fade-up">
+                    <div class="cat-card">
+                        <span class="cat-icon">🛒</span>
+                        <h5>Groceries</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up">
+                    <div class="cat-card">
+                        <span class="cat-icon">🥦</span>
+                        <h5>Fresh Produce</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up">
+                    <div class="cat-card">
+                        <span class="cat-icon">🧴</span>
+                        <h5>Personal Care</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up">
+                    <div class="cat-card">
+                        <span class="cat-icon">🏠</span>
+                        <h5>Household</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up">
+                    <div class="cat-card">
+                        <span class="cat-icon">🧃</span>
+                        <h5>Beverages</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up">
+                    <div class="cat-card">
+                        <span class="cat-icon">👶</span>
+                        <h5>Baby & Kids</h5>
                     </div>
                 </div>
             </div>
@@ -745,22 +785,22 @@
                 <div class="col-6 col-md-4 col-lg-2 fade-up">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="bi bi-patch-check"></i></div>
-                        <h4>Trusted Listings</h4>
-                        <p>All listings are verified for safety and reliability.</p>
+                        <h4>Verified Vendors</h4>
+                        <p>All suppliers are carefully verified for quality and authenticity.</p>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2 fade-up">
                     <div class="feature-card">
-                        <div class="feature-icon"><i class="bi bi-compass"></i></div>
-                        <h4>Easy Navigation</h4>
-                        <p>User-friendly design for a smooth experience.</p>
+                        <div class="feature-icon"><i class="bi bi-bag-heart"></i></div>
+                        <h4>Fresh Products</h4>
+                        <p>Sourced fresh daily to ensure top quality for your family.</p>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2 fade-up">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="bi bi-grid-3x3-gap"></i></div>
-                        <h4>Multi Category</h4>
-                        <p>Restaurants, properties, daily needs & more.</p>
+                        <h4>Wide Selection</h4>
+                        <p>Hundreds of products across multiple categories.</p>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2 fade-up">
@@ -774,14 +814,14 @@
                     <div class="feature-card">
                         <div class="feature-icon"><i class="bi bi-truck"></i></div>
                         <h4>Fast Delivery</h4>
-                        <p>Quick and reliable delivery to your doorstep.</p>
+                        <p>Same-day and scheduled delivery options available.</p>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2 fade-up">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="bi bi-shield-lock"></i></div>
                         <h4>Secure Payments</h4>
-                        <p>100% safe & encrypted transactions.</p>
+                        <p>100% safe and encrypted transactions always.</p>
                     </div>
                 </div>
             </div>
@@ -796,7 +836,7 @@
                 <div class="section-label">Our Mission</div>
                 <h2 class="section-title">What We Stand For</h2>
                 <p style="color:rgba(255,255,255,0.5); max-width:560px; margin:0 auto; font-size:.9rem; line-height:1.75;">
-                    To provide a secure, user-friendly, and trusted environment where users can explore, connect, and grow.
+                    To make everyday shopping effortless, affordable, and reliable for every household.
                 </p>
             </div>
             <div class="row g-4">
@@ -804,28 +844,28 @@
                     <div class="mission-card">
                         <div class="icon">🎯</div>
                         <h5>Quality First</h5>
-                        <p>We prioritize delivering top-quality services and products to every customer.</p>
+                        <p>We partner only with vendors who meet our strict freshness and quality standards.</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3 fade-up">
                     <div class="mission-card">
                         <div class="icon">🤝</div>
-                        <h5>Community Growth</h5>
-                        <p>Empowering local businesses while offering customers the best value.</p>
+                        <h5>Support Local</h5>
+                        <p>Empowering local businesses while giving customers the best value for money.</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3 fade-up">
                     <div class="mission-card">
                         <div class="icon">🔒</div>
                         <h5>Trust & Safety</h5>
-                        <p>Your privacy and security are our top priorities, always.</p>
+                        <p>Your privacy and security are always our top priority.</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3 fade-up">
                     <div class="mission-card">
                         <div class="icon">🚀</div>
-                        <h5>Constant Innovation</h5>
-                        <p>We continuously improve to bring you the best digital experience.</p>
+                        <h5>Always Improving</h5>
+                        <p>Continuously adding new products and features for a better experience.</p>
                     </div>
                 </div>
             </div>
@@ -840,18 +880,18 @@
                 <div class="section-label">Get In Touch</div>
                 <h2 class="section-title">Contact Us</h2>
                 <p style="color:#888; max-width:500px; margin:0 auto; font-size:.9rem; line-height:1.75;">
-                    Have a question or want to partner with us? Reach out to our Restaurant or Home Chef team below.
+                    Have a question or want to list your products? Reach out to our Daily Needs team below.
                 </p>
             </div>
 
-            <div class="row g-4">
+            <div class="row g-4 justify-content-center">
 
-                <!-- Restaurant Contact -->
-                <div class="col-md-6 fade-up">
+                <!-- Daily Needs Contact -->
+                <div class="col-md-6 col-lg-5 fade-up">
                     <div class="contact-card">
-                        <div class="contact-type-badge"><i class="bi bi-shop me-1"></i> Restaurant</div>
-                        <h3>Restaurant Inquiries</h3>
-                        <p class="sub">Want to list your restaurant or have a query about restaurant orders and services?</p>
+                        <div class="contact-type-badge"><i class="bi bi-cart-heart me-1"></i> Daily Needs</div>
+                        <h3>Daily Needs Inquiries</h3>
+                        <p class="sub">Want to list your products or have a query about daily needs orders and delivery services?</p>
 
                         <div class="contact-info-row">
                             <div class="ci-icon"><i class="bi bi-telephone-fill"></i></div>
@@ -868,18 +908,10 @@
                             <div class="ci-content">
                                 <div class="ci-label">Email</div>
                                 <div class="ci-value">
-                                    <a href="mailto:restaurant@yourplatform.com">restaurant@yourplatform.com</a>
+                                    <a href="mailto:dailyneeds@yourplatform.com">dailyneeds@yourplatform.com</a>
                                 </div>
                             </div>
                         </div>
-
-@*                         <div class="contact-info-row">
-                            <div class="ci-icon"><i class="bi bi-clock-fill"></i></div>
-                            <div class="ci-content">
-                                <div class="ci-label">Working Hours</div>
-                                <div class="ci-value">Mon – Sat, 9:00 AM – 10:00 PM</div>
-                            </div>
-                        </div> *@
 
                         <hr class="contact-divider">
                         <div class="social-row">
@@ -890,12 +922,12 @@
                     </div>
                 </div>
 
-                <!-- Home Chef Contact -->
-                <div class="col-md-6 fade-up">
+                <!-- Vendor / Supplier Contact -->
+                <div class="col-md-6 col-lg-5 fade-up">
                     <div class="contact-card">
-                        <div class="contact-type-badge"><i class="bi bi-house-heart me-1"></i> Home Chef</div>
-                        <h3>Home Chef Inquiries</h3>
-                        <p class="sub">Are you a home chef wanting to join or have a query about home-cooked meals and orders?</p>
+                        <div class="contact-type-badge"><i class="bi bi-shop me-1"></i> Vendor / Supplier</div>
+                        <h3>Become a Vendor</h3>
+                        <p class="sub">Are you a supplier or shop owner wanting to join our Daily Needs marketplace and reach more customers?</p>
 
                         <div class="contact-info-row">
                             <div class="ci-icon"><i class="bi bi-telephone-fill"></i></div>
@@ -912,18 +944,10 @@
                             <div class="ci-content">
                                 <div class="ci-label">Email</div>
                                 <div class="ci-value">
-                                    <a href="mailto:homechef@yourplatform.com">homechef@yourplatform.com</a>
+                                    <a href="mailto:vendor@yourplatform.com">vendor@yourplatform.com</a>
                                 </div>
                             </div>
                         </div>
-
-@*                         <div class="contact-info-row">
-                            <div class="ci-icon"><i class="bi bi-clock-fill"></i></div>
-                            <div class="ci-content">
-                                <div class="ci-label">Working Hours</div>
-                                <div class="ci-value">Mon – Sun, 8:00 AM – 11:00 PM</div>
-                            </div>
-                        </div> *@
 
                         <hr class="contact-divider">
                         <div class="social-row">
@@ -938,18 +962,6 @@
         </div>
     </div>
 
-
-@*     <!-- ====== CTA ====== -->
-    <div class="cta-section fade-up">
-        <div class="container">
-            <h2>Ready to Explore?</h2>
-            <p>Join thousands of happy customers discovering amazing food and services near you.</p>
-            <a asp-controller="Restaurant" asp-action="Index" asp-route-id="1" class="cta-btn">
-                <i class="bi bi-arrow-right-circle-fill"></i> Start Ordering Now
-            </a>
-        </div>
-    </div>
- *@
 
     <!-- ====== FOOTER ====== -->
     <footer>
@@ -958,7 +970,7 @@
                 <a href="/" style="display:inline-flex; align-items:center; text-decoration:none;">
                     <img src="@Url.Content("~/images/logo.png")" alt="Logo" style="height:48px; width:auto; object-fit:contain;" />
                 </a>
-                <p class="footer-brand-desc">Delivering taste, quality, and trusted dining experiences every day.</p>
+                <p class="footer-brand-desc">Delivering freshness, quality, and trusted daily essentials every day.</p>
                 <div class="footer-socials">
                     <a href="https://www.facebook.com/share/1Buimi6joN/" target="_blank"><i class="bi bi-facebook"></i></a>
                     <a href="#"><i class="bi bi-instagram"></i></a>
@@ -969,7 +981,7 @@
                 <h6>Support</h6>
                 <ul>
                     <li>
-                        <a href="tel:+9230000012">
+                        <a href="tel:+923002222662">
                             <i class="bi bi-telephone-fill" style="color:#fff"></i> +92-300-2222662
                         </a>
                     </li>
@@ -978,8 +990,8 @@
             <div class="footer-col">
                 <h6>Quick Links</h6>
                 <ul>
-                    <li><a asp-controller="Restaurant" asp-action="Index" asp-route-id="1">Home</a></li>
-                    <li><a asp-controller="Restaurant" asp-action="AboutUs">About Us</a></li>
+                    <li><a asp-controller="DailyNeeds" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="DailyNeeds" asp-action="AboutUs">About Us</a></li>
                 </ul>
             </div>
         </div>
