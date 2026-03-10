@@ -13,6 +13,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --green: #54A60D;
+            --green-dark: #3d7a09;
+            --dark: #000000;
+            --bg: #f6f7fb;
+            --white: #ffffff;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -21,16 +29,16 @@
         }
 
         body {
-            background: #f6f7fb;
+            background: var(--bg);
             color: #333;
             overflow-x: hidden;
         }
 
-        /* ===== HEADER ===== */
+        /* ===== HEADER — White ===== */
         header {
-            background: #1a1a2e;
+            background: var(--white);
             padding: 0;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
             position: sticky;
             top: 0;
             z-index: 999;
@@ -50,6 +58,7 @@
                 height: 48px;
                 width: auto;
                 object-fit: contain;
+                filter: none;
             }
 
         .btn-back {
@@ -59,7 +68,7 @@
             font-size: 15px;
             padding: 9px 22px;
             border-radius: 9px;
-            background: #e84545;
+            background: var(--green);
             transition: all .2s;
             display: inline-flex;
             align-items: center;
@@ -67,13 +76,13 @@
         }
 
             .btn-back:hover {
-                background: #c0392b;
+                background: var(--dark);
                 color: #fff;
             }
 
         /* ===== HERO ===== */
         .hero-section {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #000000 0%, #111111 50%, #1a2a00 100%);
             padding: 90px 20px 80px;
             text-align: center;
             position: relative;
@@ -87,7 +96,7 @@
                 right: -60px;
                 width: 350px;
                 height: 350px;
-                background: radial-gradient(circle, rgba(232,69,69,0.18) 0%, transparent 70%);
+                background: radial-gradient(circle, rgba(84,166,13,0.2) 0%, transparent 70%);
                 border-radius: 50%;
             }
 
@@ -98,15 +107,15 @@
                 left: -40px;
                 width: 280px;
                 height: 280px;
-                background: radial-gradient(circle, rgba(232,69,69,0.12) 0%, transparent 70%);
+                background: radial-gradient(circle, rgba(84,166,13,0.13) 0%, transparent 70%);
                 border-radius: 50%;
             }
 
         .hero-badge {
             display: inline-block;
-            background: rgba(232,69,69,0.15);
-            border: 1px solid rgba(232,69,69,0.4);
-            color: #e84545;
+            background: rgba(84,166,13,0.15);
+            border: 1px solid rgba(84,166,13,0.4);
+            color: var(--green);
             font-size: 12px;
             font-weight: 600;
             letter-spacing: .12em;
@@ -125,7 +134,7 @@
         }
 
             .hero-section h1 span {
-                color: #e84545;
+                color: var(--green);
             }
 
         .hero-section p {
@@ -152,7 +161,7 @@
             .stat-item .num {
                 font-size: 2.2rem;
                 font-weight: 800;
-                color: #e84545;
+                color: var(--green);
                 line-height: 1;
             }
 
@@ -174,14 +183,14 @@
             font-weight: 700;
             letter-spacing: .15em;
             text-transform: uppercase;
-            color: #e84545;
+            color: var(--green);
             margin-bottom: 10px;
         }
 
         .section-title {
             font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 700;
-            color: #1a1a2e;
+            color: var(--dark);
             margin-bottom: 16px;
         }
 
@@ -215,13 +224,13 @@
             position: absolute;
             bottom: 24px;
             left: 24px;
-            background: #e84545;
+            background: var(--green);
             color: #fff;
             padding: 12px 20px;
             border-radius: 12px;
             font-weight: 700;
             font-size: .95rem;
-            box-shadow: 0 8px 24px rgba(232,69,69,0.4);
+            box-shadow: 0 8px 24px rgba(84,166,13,0.4);
         }
 
         /* ===== FEATURES ===== */
@@ -247,14 +256,14 @@
                 left: 0;
                 right: 0;
                 height: 3px;
-                background: #e84545;
+                background: var(--green);
                 transform: scaleX(0);
                 transition: transform .3s;
             }
 
             .feature-card:hover {
                 transform: translateY(-6px);
-                border-color: rgba(232,69,69,0.15);
+                border-color: rgba(84,166,13,0.18);
                 background: #fff;
                 box-shadow: 0 12px 32px rgba(0,0,0,0.08);
             }
@@ -266,20 +275,20 @@
         .feature-icon {
             width: 54px;
             height: 54px;
-            background: rgba(232,69,69,0.1);
+            background: rgba(84,166,13,0.1);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.4rem;
-            color: #e84545;
+            color: var(--green);
             margin-bottom: 18px;
         }
 
         .feature-card h4 {
             font-size: 1rem;
             font-weight: 700;
-            color: #1a1a2e;
+            color: var(--dark);
             margin-bottom: 10px;
         }
 
@@ -308,8 +317,8 @@
 
             .cat-card:hover {
                 transform: translateY(-6px);
-                border-color: rgba(232,69,69,0.2);
-                box-shadow: 0 14px 36px rgba(0,0,0,0.1);
+                border-color: rgba(84,166,13,0.22);
+                box-shadow: 0 14px 36px rgba(84,166,13,0.12);
             }
 
         .cat-icon {
@@ -321,13 +330,13 @@
         .cat-card h5 {
             font-size: .9rem;
             font-weight: 700;
-            color: #1a1a2e;
+            color: var(--dark);
             margin: 0;
         }
 
         /* ===== MISSION ===== */
         .mission-section {
-            background: #1a1a2e;
+            background: var(--dark);
         }
 
             .mission-section .section-title {
@@ -339,11 +348,11 @@
             }
 
             .mission-section .section-label {
-                color: #e84545;
+                color: var(--green);
             }
 
         .mission-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 16px;
             padding: 28px 24px;
@@ -352,8 +361,8 @@
         }
 
             .mission-card:hover {
-                background: rgba(232,69,69,0.1);
-                border-color: rgba(232,69,69,0.3);
+                background: rgba(84,166,13,0.1);
+                border-color: rgba(84,166,13,0.35);
                 transform: translateY(-4px);
             }
 
@@ -399,14 +408,14 @@
                 left: 0;
                 right: 0;
                 height: 4px;
-                background: linear-gradient(90deg, #e84545, #ff7b54);
+                background: linear-gradient(90deg, var(--green), #82cc2a);
                 transform: scaleX(0);
                 transition: .3s;
             }
 
             .contact-card:hover {
                 transform: translateY(-6px);
-                box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+                box-shadow: 0 16px 48px rgba(84,166,13,0.14);
             }
 
                 .contact-card:hover::after {
@@ -415,8 +424,8 @@
 
         .contact-type-badge {
             display: inline-block;
-            background: rgba(232,69,69,0.1);
-            color: #e84545;
+            background: rgba(84,166,13,0.1);
+            color: var(--green);
             font-size: .72rem;
             font-weight: 700;
             letter-spacing: .1em;
@@ -429,7 +438,7 @@
         .contact-card h3 {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #1a1a2e;
+            color: var(--dark);
             margin-bottom: 8px;
         }
 
@@ -451,12 +460,12 @@
             width: 40px;
             height: 40px;
             min-width: 40px;
-            background: rgba(232,69,69,0.08);
+            background: rgba(84,166,13,0.08);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #e84545;
+            color: var(--green);
             font-size: 1rem;
         }
 
@@ -471,18 +480,18 @@
         .ci-content .ci-value {
             font-size: .9rem;
             font-weight: 600;
-            color: #1a1a2e;
+            color: var(--dark);
             margin-top: 1px;
         }
 
             .ci-content .ci-value a {
-                color: #1a1a2e;
+                color: var(--dark);
                 text-decoration: none;
                 transition: color .2s;
             }
 
                 .ci-content .ci-value a:hover {
-                    color: #e84545;
+                    color: var(--green);
                 }
 
         .contact-divider {
@@ -538,10 +547,16 @@
                     color: #fff;
                 }
 
-        /* ===== FOOTER ===== */
+        /* "Who We Are" inline badges */
+        .who-badges i {
+            color: var(--green) !important;
+        }
+
+        /* ===== FOOTER — White ===== */
         footer {
-            background: #1a1a2e;
-            color: rgba(255,255,255,.6);
+            background: var(--white);
+            color: rgba(0,0,0,.5);
+            border-top: 1px solid rgba(0,0,0,.07);
             margin-top: 0;
         }
 
@@ -550,7 +565,7 @@
             grid-template-columns: 1.6fr 1fr 1fr;
             gap: 40px;
             padding: 48px 40px 36px;
-            border-bottom: 1px solid rgba(255,255,255,.07);
+            border-bottom: 1px solid rgba(0,0,0,.08);
         }
 
         @@media (max-width: 768px) {
@@ -565,7 +580,7 @@
             font-size: .84rem;
             line-height: 1.75;
             margin-top: 12px;
-            color: rgba(255,255,255,.45);
+            color: rgba(0,0,0,.45);
         }
 
         .footer-socials {
@@ -578,8 +593,8 @@
                 width: 34px;
                 height: 34px;
                 border-radius: 8px;
-                background: rgba(255,255,255,.07);
-                color: rgba(255,255,255,.6);
+                background: rgba(0,0,0,.07);
+                color: rgba(0,0,0,.6);
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -589,7 +604,7 @@
             }
 
                 .footer-socials a:hover {
-                    background: #e84545;
+                    background: var(--green);
                     color: #fff;
                 }
 
@@ -598,7 +613,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: .1em;
-            color: #fff;
+            color: var(--dark);
             margin-bottom: 14px;
         }
 
@@ -611,21 +626,22 @@
             }
 
                 .footer-col ul li a {
-                    color: rgba(255,255,255,.45);
+                    color: rgba(0,0,0,.5);
                     text-decoration: none;
                     font-size: .84rem;
                     transition: color .2s;
                 }
 
                     .footer-col ul li a:hover {
-                        color: #e84545;
+                        color: var(--green);
                     }
 
         .footer-bottom {
             text-align: center;
             padding: 16px 24px;
             font-size: .78rem;
-            color: rgba(255,255,255,.25);
+            color: rgba(0,0,0,.35);
+            background: #f0f0f0;
         }
 
         /* Animations */
@@ -690,7 +706,7 @@
                         <img src="@Url.Content("~/images/dailyneeds-about.jpg")" alt="Daily Needs"
                              onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=700&q=80'">
                         <div class="who-img-badge">
-                            <i class="bi bi-patch-check-fill me-2"></i> Trusted Since 2022
+                            <i class="bi bi-patch-check-fill me-2"></i> Trusted Since 2025
                         </div>
                     </div>
                 </div>
@@ -705,15 +721,15 @@
                         Our mission is to save you time by bringing your everyday necessities together in one easy-to-use platform,
                         backed by verified local suppliers who care about quality and freshness.
                     </p>
-                    <div class="d-flex gap-3 mt-4 flex-wrap">
-                        <div class="d-flex align-items-center gap-2" style="font-size:.85rem; font-weight:600; color:#1a1a2e;">
-                            <i class="bi bi-shield-fill-check text-danger"></i> Verified Vendors
+                    <div class="d-flex gap-3 mt-4 flex-wrap who-badges">
+                        <div class="d-flex align-items-center gap-2" style="font-size:.85rem; font-weight:600; color:#000;">
+                            <i class="bi bi-shield-fill-check" style="color:#54A60D;"></i> Verified Vendors
                         </div>
-                        <div class="d-flex align-items-center gap-2" style="font-size:.85rem; font-weight:600; color:#1a1a2e;">
-                            <i class="bi bi-clock-fill text-danger"></i> Same-Day Delivery
+                        <div class="d-flex align-items-center gap-2" style="font-size:.85rem; font-weight:600; color:#000;">
+                            <i class="bi bi-clock-fill" style="color:#54A60D;"></i> Same-Day Delivery
                         </div>
-                        <div class="d-flex align-items-center gap-2" style="font-size:.85rem; font-weight:600; color:#1a1a2e;">
-                            <i class="bi bi-star-fill text-danger"></i> Fresh & Quality
+                        <div class="d-flex align-items-center gap-2" style="font-size:.85rem; font-weight:600; color:#000;">
+                            <i class="bi bi-star-fill" style="color:#54A60D;"></i> Fresh & Quality
                         </div>
                     </div>
                 </div>
@@ -733,42 +749,12 @@
                 </p>
             </div>
             <div class="row g-4">
-                <div class="col-6 col-md-4 col-lg-2 fade-up">
-                    <div class="cat-card">
-                        <span class="cat-icon">🛒</span>
-                        <h5>Groceries</h5>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 fade-up">
-                    <div class="cat-card">
-                        <span class="cat-icon">🥦</span>
-                        <h5>Fresh Produce</h5>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 fade-up">
-                    <div class="cat-card">
-                        <span class="cat-icon">🧴</span>
-                        <h5>Personal Care</h5>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 fade-up">
-                    <div class="cat-card">
-                        <span class="cat-icon">🏠</span>
-                        <h5>Household</h5>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 fade-up">
-                    <div class="cat-card">
-                        <span class="cat-icon">🧃</span>
-                        <h5>Beverages</h5>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 fade-up">
-                    <div class="cat-card">
-                        <span class="cat-icon">👶</span>
-                        <h5>Baby & Kids</h5>
-                    </div>
-                </div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up"><div class="cat-card"><span class="cat-icon">🛒</span><h5>Groceries</h5></div></div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up"><div class="cat-card"><span class="cat-icon">🥦</span><h5>Fresh Produce</h5></div></div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up"><div class="cat-card"><span class="cat-icon">🧴</span><h5>Personal Care</h5></div></div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up"><div class="cat-card"><span class="cat-icon">🏠</span><h5>Household</h5></div></div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up"><div class="cat-card"><span class="cat-icon">🧃</span><h5>Beverages</h5></div></div>
+                <div class="col-6 col-md-4 col-lg-2 fade-up"><div class="cat-card"><span class="cat-icon">👶</span><h5>Baby & Kids</h5></div></div>
             </div>
         </div>
     </div>
@@ -841,32 +827,16 @@
             </div>
             <div class="row g-4">
                 <div class="col-sm-6 col-lg-3 fade-up">
-                    <div class="mission-card">
-                        <div class="icon">🎯</div>
-                        <h5>Quality First</h5>
-                        <p>We partner only with vendors who meet our strict freshness and quality standards.</p>
-                    </div>
+                    <div class="mission-card"><div class="icon">🎯</div><h5>Quality First</h5><p>We partner only with vendors who meet our strict freshness and quality standards.</p></div>
                 </div>
                 <div class="col-sm-6 col-lg-3 fade-up">
-                    <div class="mission-card">
-                        <div class="icon">🤝</div>
-                        <h5>Support Local</h5>
-                        <p>Empowering local businesses while giving customers the best value for money.</p>
-                    </div>
+                    <div class="mission-card"><div class="icon">🤝</div><h5>Support Local</h5><p>Empowering local businesses while giving customers the best value for money.</p></div>
                 </div>
                 <div class="col-sm-6 col-lg-3 fade-up">
-                    <div class="mission-card">
-                        <div class="icon">🔒</div>
-                        <h5>Trust & Safety</h5>
-                        <p>Your privacy and security are always our top priority.</p>
-                    </div>
+                    <div class="mission-card"><div class="icon">🔒</div><h5>Trust & Safety</h5><p>Your privacy and security are always our top priority.</p></div>
                 </div>
                 <div class="col-sm-6 col-lg-3 fade-up">
-                    <div class="mission-card">
-                        <div class="icon">🚀</div>
-                        <h5>Always Improving</h5>
-                        <p>Continuously adding new products and features for a better experience.</p>
-                    </div>
+                    <div class="mission-card"><div class="icon">🚀</div><h5>Always Improving</h5><p>Continuously adding new products and features for a better experience.</p></div>
                 </div>
             </div>
         </div>
@@ -892,27 +862,20 @@
                         <div class="contact-type-badge"><i class="bi bi-cart-heart me-1"></i> Daily Needs</div>
                         <h3>Daily Needs Inquiries</h3>
                         <p class="sub">Want to list your products or have a query about daily needs orders and delivery services?</p>
-
                         <div class="contact-info-row">
                             <div class="ci-icon"><i class="bi bi-telephone-fill"></i></div>
                             <div class="ci-content">
                                 <div class="ci-label">Phone / WhatsApp</div>
-                                <div class="ci-value">
-                                    <a href="tel:+923002222662">+92-300-2222662</a>
-                                </div>
+                                <div class="ci-value"><a href="tel:+923002222662">+92-300-2222662</a></div>
                             </div>
                         </div>
-
                         <div class="contact-info-row">
                             <div class="ci-icon"><i class="bi bi-envelope-fill"></i></div>
                             <div class="ci-content">
                                 <div class="ci-label">Email</div>
-                                <div class="ci-value">
-                                    <a href="mailto:dailyneeds@yourplatform.com">dailyneeds@yourplatform.com</a>
-                                </div>
+                                <div class="ci-value"><a href="mailto:dailyneeds@yourplatform.com">dailyneeds@yourplatform.com</a></div>
                             </div>
                         </div>
-
                         <hr class="contact-divider">
                         <div class="social-row">
                             <a href="https://www.facebook.com/share/1Buimi6joN/" target="_blank" class="social-btn fb"><i class="bi bi-facebook"></i></a>
@@ -928,27 +891,20 @@
                         <div class="contact-type-badge"><i class="bi bi-shop me-1"></i> Vendor / Supplier</div>
                         <h3>Become a Vendor</h3>
                         <p class="sub">Are you a supplier or shop owner wanting to join our Daily Needs marketplace and reach more customers?</p>
-
                         <div class="contact-info-row">
                             <div class="ci-icon"><i class="bi bi-telephone-fill"></i></div>
                             <div class="ci-content">
                                 <div class="ci-label">Phone / WhatsApp</div>
-                                <div class="ci-value">
-                                    <a href="tel:+923002222662">+92-300-2222662</a>
-                                </div>
+                                <div class="ci-value"><a href="tel:+923002222662">+92-300-2222662</a></div>
                             </div>
                         </div>
-
                         <div class="contact-info-row">
                             <div class="ci-icon"><i class="bi bi-envelope-fill"></i></div>
                             <div class="ci-content">
                                 <div class="ci-label">Email</div>
-                                <div class="ci-value">
-                                    <a href="mailto:vendor@yourplatform.com">vendor@yourplatform.com</a>
-                                </div>
+                                <div class="ci-value"><a href="mailto:vendor@yourplatform.com">vendor@yourplatform.com</a></div>
                             </div>
                         </div>
-
                         <hr class="contact-divider">
                         <div class="social-row">
                             <a href="https://www.facebook.com/share/1Buimi6joN/" target="_blank" class="social-btn fb"><i class="bi bi-facebook"></i></a>
@@ -963,12 +919,12 @@
     </div>
 
 
-    <!-- ====== FOOTER ====== -->
+    <!-- ====== FOOTER — White ====== -->
     <footer>
         <div class="footer-body">
             <div>
                 <a href="/" style="display:inline-flex; align-items:center; text-decoration:none;">
-                    <img src="@Url.Content("~/images/logo.png")" alt="Logo" style="height:48px; width:auto; object-fit:contain;" />
+                    <img src="@Url.Content("~/images/logo.png")" alt="Logo" style="height:48px; width:auto; object-fit:contain; filter:none;" />
                 </a>
                 <p class="footer-brand-desc">Delivering freshness, quality, and trusted daily essentials every day.</p>
                 <div class="footer-socials">
@@ -982,7 +938,7 @@
                 <ul>
                     <li>
                         <a href="tel:+923002222662">
-                            <i class="bi bi-telephone-fill" style="color:#fff"></i> +92-300-2222662
+                            <i class="bi bi-telephone-fill" style="color:#54A60D;"></i> +92-300-2222662
                         </a>
                     </li>
                 </ul>
@@ -996,18 +952,15 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p style="margin:0;">Software Developed By : <span style="font-weight:600;">UT Designer</span></p>
+            <p style="margin:0;">Software Developed By : <span style="font-weight:600; color:rgba(0,0,0,.55);">UT Designer</span></p>
         </div>
     </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Scroll fade-up animation
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) { e.target.classList.add('visible'); }
-            });
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.12 });
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     </script>
