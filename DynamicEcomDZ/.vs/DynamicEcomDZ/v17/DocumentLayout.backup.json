@@ -1,26 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\",
+  "WorkspaceRootPath": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\controllers\\homemaderestaurantdetailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\controllers\\homemaderestaurantdetailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\restaurant\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\restaurant\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\controllers\\homemaderestaurantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\controllers\\homemaderestaurantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\dailyneeds\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\dailyneeds\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\homemaderestaurantdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\homemaderestaurantdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\controllers\\restaurantdetailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\controllers\\restaurantdetailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|d:\\project\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\restaurantdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\restaurantdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\restaurantdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\dailyneedsdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\dailyneedsdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\dailyneeds\\aboutus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\dailyneeds\\aboutus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\restaurant\\aboutus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\restaurant\\aboutus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,75 +38,97 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HomeMadeRestaurantController.cs",
-              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\HomeMadeRestaurantController.cs",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Controllers\\HomeMadeRestaurantController.cs",
-              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\HomeMadeRestaurantController.cs",
-              "RelativeToolTip": "DynamicEcomDZ\\Controllers\\HomeMadeRestaurantController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:08:16.787Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RestaurantDetailController.cs",
-              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\RestaurantDetailController.cs",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Controllers\\RestaurantDetailController.cs",
-              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\RestaurantDetailController.cs",
-              "RelativeToolTip": "DynamicEcomDZ\\Controllers\\RestaurantDetailController.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAjwBIAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:05:51.339Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HomeMadeRestaurantDetailController.cs",
-              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\HomeMadeRestaurantDetailController.cs",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Controllers\\HomeMadeRestaurantDetailController.cs",
-              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\HomeMadeRestaurantDetailController.cs",
-              "RelativeToolTip": "DynamicEcomDZ\\Controllers\\HomeMadeRestaurantDetailController.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAWwBQAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:04:00.682Z",
+              "DocumentIndex": 2,
+              "Title": "bootstrap.css",
+              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+              "RelativeToolTip": "DynamicEcomDZ\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+              "ViewState": "AgIAAOQXAAAAAAAAAAAWwOoXAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-03-10T01:21:33.053Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
-              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
-              "RelativeToolTip": "DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
-              "ViewState": "AgIAAEEBAAAAAAAAAAAgwEkBAAAcAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\DailyNeedsDetail\\Index.cshtml",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\DailyNeedsDetail\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\DailyNeedsDetail\\Index.cshtml",
+              "RelativeToolTip": "DynamicEcomDZ\\Views\\DailyNeedsDetail\\Index.cshtml",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAuwLIAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-07T11:03:35.541Z",
+              "WhenOpened": "2026-03-10T01:21:15.896Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\HomeMadeRestaurantDetail\\Index.cshtml",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\HomeMadeRestaurantDetail\\Index.cshtml",
-              "ToolTip": "D:\\Project\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\HomeMadeRestaurantDetail\\Index.cshtml",
-              "RelativeToolTip": "DynamicEcomDZ\\Views\\HomeMadeRestaurantDetail\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA1AAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\DailyNeeds\\Index.cshtml",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\DailyNeeds\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\DailyNeeds\\Index.cshtml",
+              "RelativeToolTip": "DynamicEcomDZ\\Views\\DailyNeeds\\Index.cshtml",
+              "ViewState": "AgIAAGYAAAAAAAAAAADwv3MAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-07T11:02:34.124Z",
+              "WhenOpened": "2026-03-10T01:20:31.339Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AboutUs.cshtml",
+              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\DailyNeeds\\AboutUs.cshtml",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\DailyNeeds\\AboutUs.cshtml",
+              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\DailyNeeds\\AboutUs.cshtml",
+              "RelativeToolTip": "DynamicEcomDZ\\Views\\DailyNeeds\\AboutUs.cshtml",
+              "ViewState": "AgIAAL4CAAAAAAAAAAAAwMUCAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-10T01:18:56.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
+              "RelativeToolTip": "DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAuwLIAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-07T23:24:56.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml",
+              "RelativeToolTip": "DynamicEcomDZ\\Views\\Restaurant\\Index.cshtml",
+              "ViewState": "AgIAAGYAAAAAAAAAAADwv3MAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-07T23:21:00.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AboutUs.cshtml",
+              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\Restaurant\\AboutUs.cshtml",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\Restaurant\\AboutUs.cshtml",
+              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\Restaurant\\AboutUs.cshtml",
+              "RelativeToolTip": "DynamicEcomDZ\\Views\\Restaurant\\AboutUs.cshtml",
+              "ViewState": "AgIAAI0CAAAAAAAAAAAAwJMCAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-07T23:20:57.566Z",
               "EditorCaption": ""
             }
           ]

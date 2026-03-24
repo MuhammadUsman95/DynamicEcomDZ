@@ -115,3 +115,6 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\Images\GIF\OrderPlaced.gif
+wwwroot\Images\GIF\OrderSuccess.gif
+wwwroot\Images\Videos\short-bg.mp4

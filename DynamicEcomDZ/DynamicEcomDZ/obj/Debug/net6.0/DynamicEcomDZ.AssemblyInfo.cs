@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DynamicEcomDZ")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9451eac00a520c244996d8fb230f07e6ceed87cd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+165f6b7dc50284e57997c5dba7967b2113cd0841")]
 [assembly: System.Reflection.AssemblyProductAttribute("DynamicEcomDZ")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DynamicEcomDZ")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
