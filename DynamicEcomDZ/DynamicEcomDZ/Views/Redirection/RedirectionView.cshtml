@@ -20,7 +20,7 @@
         }
 
         :root {
-            --accent: #ff5722;
+            --accent: #6fbf36;
             --card-radius: 18px;
             --dialog-radius: 24px;
             --shadow-card: 0 8px 32px rgba(0,0,0,0.22);
@@ -92,7 +92,6 @@
             flex: 1;
         }
 
-            /* Custom Scrollbar */
             .dialog-body::-webkit-scrollbar {
                 width: 6px;
             }
@@ -114,25 +113,25 @@
         /* Responsive grid */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Mobile: 2 columns always */
+            grid-template-columns: repeat(2, 1fr);
             gap: clamp(10px, 2.5vw, 22px);
         }
 
-        /* Tablet: 3 columns */
         @@media (min-width: 640px) {
             .cards-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        /* Desktop: 3 columns with more spacing */
         @@media (min-width: 960px) {
             .cards-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        /* ── Card ── */
+        /* ══════════════════════════════════
+                   ── CARD — Improved Only ──
+                ══════════════════════════════════ */
         .card {
             position: relative;
             border-radius: var(--card-radius);
@@ -140,38 +139,63 @@
             text-decoration: none;
             display: block;
             aspect-ratio: 4/3;
-            background: #e0e0e0;
-            box-shadow: var(--shadow-card);
-            transition: transform var(--transition), box-shadow var(--transition);
+            background: #d8d8d8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10), 0 8px 28px rgba(0,0,0,0.16);
+            border: 1.5px solid rgba(255,255,255,0.55);
+            transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.32s ease, border-color 0.28s ease;
             will-change: transform;
+            animation: cardIn 0.45s ease both;
         }
 
             .card:hover {
-                transform: translateY(-7px) scale(1.04);
-                box-shadow: var(--shadow-hover);
+                transform: translateY(-8px) scale(1.04);
+                box-shadow: 0 0 0 2px var(--accent), 0 20px 52px rgba(0,0,0,0.28), 0 6px 20px rgba(255,87,34,0.18);
+                border-color: var(--accent);
                 z-index: 5;
             }
 
+        /* Image */
         .card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.52s ease, filter 0.35s ease;
         }
 
         .card:hover .card-img {
             transform: scale(1.08);
+            filter: brightness(1.05) saturate(1.08);
         }
 
-        /* Gradient overlay on card */
+        /* Gradient overlay */
         .card::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);
+            background: linear-gradient( to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.22) 42%, transparent 68% );
             border-radius: var(--card-radius);
             pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Orange bottom line that slides in on hover */
+        .card-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--accent), transparent);
+            border-radius: 0 0 var(--card-radius) var(--card-radius);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 3;
+        }
+
+        .card:hover .card-line {
+            transform: scaleX(1);
         }
 
         /* ── Badge ── */
@@ -182,7 +206,7 @@
             transform: translateX(-50%);
             z-index: 2;
             padding: 7px 20px;
-            background: var(--badge-bg);
+            background: rgba(10,10,10,0.68);
             color: #fff;
             font-size: clamp(12px, 1.4vw, 15px);
             font-weight: 800;
@@ -191,16 +215,19 @@
             max-width: 88%;
             overflow: hidden;
             text-overflow: ellipsis;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.12);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.35);
             letter-spacing: 0.3px;
-            transition: background 0.3s ease, transform 0.3s ease;
+            transition: background 0.28s ease, border-color 0.28s ease, transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease;
         }
 
         .card:hover .card-badge {
-            background: rgba(0,0,0,0.9);
-            transform: translateX(-50%) scale(1.06);
+            background: rgba(255,87,34,0.22);
+            border-color: #6fbf36;
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 6px 22px rgba(255,87,34,0.28), 0 2px 8px rgba(0,0,0,0.3);
         }
 
         /* ── Animations ── */
@@ -236,11 +263,6 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        /* Staggered card entrance */
-        .card {
-            animation: cardIn 0.45s ease both;
         }
 
         @@keyframes cardIn {
@@ -337,6 +359,7 @@
                                  loading="lazy" />
                         }
 
+                        <div class="card-line"></div>
                         <div class="card-badge">@item.Name</div>
                     </a>
                     i++;
