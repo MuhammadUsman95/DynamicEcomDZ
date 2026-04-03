@@ -1,0 +1,61 @@
+# ============================================================
+# DynamicEcomDZ — .gitignore
+# ============================================================
+
+# ── Build output ─────────────────────────────────────────────
+bin/
+obj/
+out/
+build/
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.exp
+*.lib
+
+# ── Visual Studio local folder (FULLY ignore) ────────────────
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+
+# ── VS Cache / Index / Layout files ──────────────────────────
+*.db
+*.db-shm
+*.db-wal
+*.dtbcache.v2
+*.futdcache.v2
+*.vsidx
+HierarchyCache.v1.txt
+DocumentLayout.json
+DocumentLayout.backup.json
+
+# ── Static web assets (generated) ────────────────────────────
+*.staticwebassets.endpoints.json
+*.staticwebassets.runtime.json
+
+# ── Packages ──────────────────────────────────────────────────
+packages/
+*.nupkg
+*.snupkg
+
+# ── Logs & temp ───────────────────────────────────────────────
+*.log
+*.tmp
+*.temp
+Thumbs.db
+.DS_Store
+
+# ── Zip archives (project backups) ───────────────────────────
+*.zip
+*.rar
+*.7z
+
+# ── Environment / secrets ─────────────────────────────────────
+.env
+.env.*
+appsettings.Development.json
+secrets.json

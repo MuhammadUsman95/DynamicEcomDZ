@@ -1448,10 +1448,12 @@
                                     <h6 class="product-name">@product.ProductName</h6>
                                     <span class="product-description">@product.ProductDescription</span>
                                     <div class="product-price">
-                                        <span class="current-price">@(product.Prices - product.DiscountAmount)</span>
+                                        @* <span class="current-price">@(product.Prices - product.DiscountAmount)</span> *@
+                                        <span class="current-price">Rs @(product.Prices - product.DiscountAmount)</span>
                                         @if (product.DiscountAmount > 0)
                                         {
-                                            <span class="old-price">@(product.Prices)</span>
+                                            @* <span class="old-price">@(product.Prices)</span> *@
+                                            <span class="old-price">Rs @(product.Prices)</span>
                                         }
                                     </div>
                                     <div class="qty-box">
@@ -1667,7 +1669,8 @@
             updateCartCount();
         }
 
-        function fmt(v) { return Number(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+        // function fmt(v) { return Number(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+        function fmt(v) { return 'Rs ' + Number(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); }
 
         function updateCartCount() {
             let c = 0; Object.values(cart).forEach(x => c += x.Quantity);

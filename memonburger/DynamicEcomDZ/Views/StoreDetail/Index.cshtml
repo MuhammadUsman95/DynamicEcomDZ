@@ -1,0 +1,3119 @@
+﻿@model DynamicEcomDZ.Models.RestaurantDetailViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.RestaurantName</title>
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        :root {
+            --accent: #f5c518;
+            --accent-dark: #d4a800;
+            --accent-soft: rgba(245,197,24,.1);
+            --bg: #f9f9f9;
+            --white: #ffffff;
+            --dark: #0d0d0d;
+            --dark2: #1a1a1a;
+            --muted: #666666;
+            --border: rgba(0,0,0,.1);
+            --footer: #0d0d0d;
+            --radius: 14px;
+            --tr: all .3s cubic-bezier(.4,0,.2,1);
+            --shadow: 0 8px 40px rgba(0,0,0,.12);
+            --display: 'Playfair Display', Georgia, serif;
+            --body: 'DM Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px
+        }
+
+        body {
+            background: var(--bg);
+            font-family: var(--body);
+            color: var(--dark);
+            overflow-x: hidden
+        }
+
+        /* ── PROMO BAR ── */
+        .promo-bar {
+            background: var(--dark);
+            color: var(--accent);
+            font-size: .74rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-align: center;
+            padding: 9px 12px;
+            position: sticky;
+            top: 0;
+            z-index: 1070;
+        }
+
+            .promo-bar span {
+                margin: 0 16px;
+                color: #fff
+            }
+
+                .promo-bar span i {
+                    color: var(--accent);
+                    margin-right: 5px
+                }
+
+        /* ── NAVBAR ── */
+        .main-nav {
+            background: #fff;
+            border-bottom: 2px solid var(--dark);
+            position: sticky;
+            top: 36px;
+            z-index: 1060;
+            box-shadow: 0 4px 20px rgba(0,0,0,.08);
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            height: 70px;
+        }
+
+        .nav-logo img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            transition: var(--tr)
+        }
+
+            .nav-logo img:hover {
+                transform: scale(1.04)
+            }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px
+        }
+
+        .nav-link-item {
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--dark);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: var(--tr);
+            position: relative;
+        }
+
+            .nav-link-item::after {
+                content: '';
+                position: absolute;
+                bottom: 4px;
+                left: 50%;
+                right: 50%;
+                height: 2px;
+                background: var(--accent);
+                border-radius: 2px;
+                transition: var(--tr);
+            }
+
+            .nav-link-item:hover {
+                color: var(--dark)
+            }
+
+                .nav-link-item:hover::after, .nav-link-item.active::after {
+                    left: 16px;
+                    right: 16px
+                }
+
+            .nav-link-item.active {
+                color: var(--dark)
+            }
+
+        .nav-shop-btn {
+            background: var(--dark);
+            color: var(--accent);
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            border: 2px solid var(--dark);
+            cursor: pointer;
+            transition: var(--tr);
+        }
+
+            .nav-shop-btn:hover {
+                background: var(--accent);
+                color: var(--dark);
+                border-color: var(--accent)
+            }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .cart-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--dark);
+            border-radius: 6px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: var(--tr);
+        }
+
+            .cart-pill:hover {
+                background: var(--accent)
+            }
+
+                .cart-pill:hover .cp-icon, .cart-pill:hover .cp-txt {
+                    color: var(--dark)
+                }
+
+        .cp-icon {
+            font-size: 1rem;
+            color: var(--accent);
+            transition: var(--tr)
+        }
+
+        .cp-txt {
+            font-size: .78rem;
+            font-weight: 700;
+            color: #fff;
+            transition: var(--tr)
+        }
+
+        .cp-badge {
+            background: var(--accent);
+            color: var(--dark);
+            font-size: .62rem;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 20px;
+            transition: var(--tr);
+        }
+
+        .cart-pill:hover .cp-badge {
+            background: var(--dark);
+            color: var(--accent)
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px
+        }
+
+            .nav-hamburger span {
+                display: block;
+                width: 22px;
+                height: 2px;
+                background: var(--dark);
+                border-radius: 2px;
+                transition: var(--tr)
+            }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--dark);
+            z-index: 9000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+        }
+
+            .mobile-menu.open {
+                display: flex
+            }
+
+            .mobile-menu .m-link {
+                font-family: var(--display);
+                font-size: 2rem;
+                font-weight: 700;
+                color: #fff;
+                text-decoration: none;
+                transition: var(--tr);
+            }
+
+                .mobile-menu .m-link:hover {
+                    color: var(--accent)
+                }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: #fff;
+            background: rgba(255,255,255,.1);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--tr);
+            border: none;
+        }
+
+            .mobile-menu-close:hover {
+                background: var(--accent);
+                color: var(--dark)
+            }
+
+        @@media(max-width:900px) {
+            .nav-links, .nav-shop-btn {
+                display: none
+            }
+
+            .nav-hamburger {
+                display: flex
+            }
+        }
+
+        @@media(max-width:576px) {
+            .nav-inner {
+                padding: 0 16px
+            }
+        }
+
+        /* ── HERO SLIDER ── */
+        .hero-slider {
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero-slide {
+            position: relative;
+            height: 620px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .hero-slide-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%);
+            transition: transform 8s ease;
+        }
+
+        .carousel-item.active .hero-slide-img {
+            transform: scale(1.06)
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.4) 60%,rgba(0,0,0,.1) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 60px 70px;
+            max-width: 640px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: var(--dark);
+            font-size: .68rem;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            padding: 5px 18px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+
+        .carousel-item.active .hero-tag {
+            animation: fadeUp .5s ease .2s forwards
+        }
+
+        .hero-title {
+            font-family: var(--display);
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.05;
+            color: #fff;
+            margin-bottom: 18px;
+            opacity: 0;
+        }
+
+        .carousel-item.active .hero-title {
+            animation: fadeUp .6s ease .4s forwards
+        }
+
+        .hero-sub {
+            font-size: .9rem;
+            color: rgba(255,255,255,.7);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            opacity: 0;
+        }
+
+        .carousel-item.active .hero-sub {
+            animation: fadeUp .6s ease .55s forwards
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            opacity: 0
+        }
+
+        .carousel-item.active .hero-btns {
+            animation: fadeUp .6s ease .7s forwards
+        }
+
+        .hero-btn-primary {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            font-size: .82rem;
+            font-weight: 800;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--tr);
+        }
+
+            .hero-btn-primary:hover {
+                background: #fff;
+                color: var(--dark);
+                transform: translateY(-3px)
+            }
+
+        .hero-btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,.5);
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--tr);
+        }
+
+            .hero-btn-outline:hover {
+                background: rgba(255,255,255,.12);
+                border-color: #fff;
+                color: #fff
+            }
+
+        .hero-stats {
+            position: absolute;
+            right: 48px;
+            bottom: 70px;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .hstat {
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 8px;
+            padding: 14px 20px;
+            text-align: center;
+        }
+
+        .hstat-num {
+            font-family: var(--display);
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1
+        }
+
+        .hstat-lbl {
+            font-size: .62rem;
+            color: rgba(255,255,255,.5);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-top: 2px
+        }
+
+        .hero-slider .carousel-control-prev, .hero-slider .carousel-control-next {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,.1);
+            backdrop-filter: blur(10px);
+            border-radius: 4px;
+            top: 50%;
+            bottom: auto;
+            transform: translateY(-50%);
+            margin: 0 20px;
+            opacity: 0;
+            border: 1px solid rgba(255,255,255,.2);
+            transition: var(--tr);
+        }
+
+        .hero-slider:hover .carousel-control-prev, .hero-slider:hover .carousel-control-next {
+            opacity: 1
+        }
+
+        .hero-slider .carousel-control-prev:hover, .hero-slider .carousel-control-next:hover {
+            background: var(--accent);
+            border-color: var(--accent)
+        }
+
+            .hero-slider .carousel-control-prev:hover .carousel-control-prev-icon, .hero-slider .carousel-control-next:hover .carousel-control-next-icon {
+                filter: invert(1) brightness(0)
+            }
+
+        .hero-slider .carousel-indicators {
+            margin-bottom: 28px;
+            gap: 8px
+        }
+
+            .hero-slider .carousel-indicators button {
+                width: 32px;
+                height: 3px;
+                border-radius: 0;
+                background: rgba(255,255,255,.25);
+                border: none;
+                padding: 0;
+                transition: var(--tr);
+            }
+
+            .hero-slider .carousel-indicators .active {
+                width: 52px;
+                background: var(--accent)
+            }
+
+        @@keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @@media(max-width:900px) {
+            .hero-slide {
+                height: 480px
+            }
+
+            .hero-content {
+                padding: 0 32px 56px;
+                max-width: 100%
+            }
+
+            .hero-title {
+                font-size: 2.8rem
+            }
+
+            .hero-stats {
+                display: none
+            }
+        }
+
+        @@media(max-width:576px) {
+            .hero-slide {
+                height: 360px
+            }
+
+            .hero-content {
+                padding: 0 20px 48px
+            }
+
+            .hero-title {
+                font-size: 2rem
+            }
+
+            .hero-sub {
+                display: none
+            }
+        }
+
+        /* ── FEATURES STRIP ── */
+        .features-strip {
+            background: var(--dark);
+            padding: 22px 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .features-inner {
+            max-width: 1280px;
+            margin: auto;
+            padding: 0 28px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .feat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .feat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 6px;
+            background: rgba(245,197,24,.15);
+            border: 1px solid rgba(245,197,24,.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .feat-title {
+            font-size: .8rem;
+            font-weight: 700;
+            color: #fff
+        }
+
+        .feat-sub {
+            font-size: .7rem;
+            color: rgba(255,255,255,.4)
+        }
+
+        /* ── SECTION HEADER ── */
+        .sec-hd {
+            text-align: center;
+            margin-bottom: 48px
+        }
+
+        .sec-hd-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .68rem;
+            font-weight: 800;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+            .sec-hd-tag::before, .sec-hd-tag::after {
+                content: '';
+                display: inline-block;
+                width: 30px;
+                height: 2px;
+                background: var(--accent);
+            }
+
+        .sec-title {
+            font-family: var(--display);
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+
+        .sec-sub {
+            font-size: .88rem;
+            color: var(--muted);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.7
+        }
+
+        /* ── ABOUT SECTION ── */
+        .about-section {
+            padding: 90px 0;
+            background: #fff;
+            border-top: 1px solid var(--border);
+        }
+
+        .about-wrap {
+            max-width: 1280px;
+            margin: auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 72px;
+            align-items: center;
+        }
+
+        @@media(max-width:900px) {
+            .about-wrap {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 0 24px
+            }
+        }
+
+        .about-img-col {
+            position: relative
+        }
+
+        .about-img-main {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 16px 16px 0 var(--accent), 0 24px 60px rgba(0,0,0,.12);
+        }
+
+        .about-badge-float {
+            position: absolute;
+            top: 28px;
+            left: -20px;
+            background: var(--dark);
+            color: #fff;
+            border-radius: 8px;
+            padding: 18px 22px;
+            box-shadow: 0 8px 28px rgba(0,0,0,.3);
+            text-align: center;
+            border-left: 4px solid var(--accent);
+        }
+
+        .about-badge-num {
+            font-family: var(--display);
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--accent)
+        }
+
+        .about-badge-txt {
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            opacity: .75
+        }
+
+        .about-tagline {
+            font-size: .7rem;
+            font-weight: 800;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--dark);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .about-tagline::before {
+                content: '';
+                width: 30px;
+                height: 2px;
+                background: var(--accent)
+            }
+
+        .about-heading {
+            font-family: var(--display);
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+            .about-heading em {
+                color: var(--accent);
+                font-style: italic
+            }
+
+        .about-body {
+            font-size: .88rem;
+            color: var(--muted);
+            line-height: 1.85;
+            margin-bottom: 24px
+        }
+
+        .about-menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .menu-highlight-card {
+            background: var(--bg);
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 16px;
+            transition: var(--tr);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .menu-highlight-card::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background: var(--accent);
+            }
+
+            .menu-highlight-card:hover {
+                border-color: var(--accent);
+                box-shadow: 0 6px 24px rgba(0,0,0,.08);
+                transform: translateY(-2px)
+            }
+
+        .mhc-name {
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 2px
+        }
+
+        .mhc-price {
+            font-size: .8rem;
+            font-weight: 800;
+            color: var(--accent)
+        }
+
+        .info-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 28px
+        }
+
+        .info-badge {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--dark);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: .75rem;
+            font-weight: 600;
+        }
+
+            .info-badge i {
+                color: var(--accent);
+                font-size: .85rem
+            }
+
+        .about-btns {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap
+        }
+
+        .btn-primary-fill {
+            background: var(--dark);
+            color: var(--accent);
+            border: 2px solid var(--dark);
+            padding: 13px 30px;
+            border-radius: 4px;
+            font-size: .82rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--tr);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+            .btn-primary-fill:hover {
+                background: var(--accent);
+                color: var(--dark);
+                border-color: var(--accent)
+            }
+
+        .btn-outline-dark {
+            background: transparent;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+            padding: 13px 30px;
+            border-radius: 4px;
+            font-size: .82rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--tr);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+            .btn-outline-dark:hover {
+                background: var(--dark);
+                color: #fff
+            }
+
+        /* ── MENU STATS ── */
+        .menu-stats-strip {
+            background: var(--accent);
+            padding: 36px 0;
+            border-top: 3px solid var(--dark);
+            border-bottom: 3px solid var(--dark);
+        }
+
+        .mst-inner {
+            max-width: 1280px;
+            margin: auto;
+            padding: 0 28px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .mst-item {
+            text-align: center
+        }
+
+        .mst-num {
+            font-family: var(--display);
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1
+        }
+
+        .mst-lbl {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(0,0,0,.55);
+            margin-top: 4px
+        }
+
+        /* ── DARK CONTENT STRIP ── */
+        .dark-strip {
+            background: var(--dark);
+            padding: 80px 0;
+        }
+
+        .dark-strip-inner {
+            max-width: 1280px;
+            margin: auto;
+            padding: 0 40px
+        }
+
+        .dark-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        @@media(max-width:900px) {
+            .dark-grid {
+                grid-template-columns: 1fr;
+                gap: 36px
+            }
+        }
+
+        .dark-text .dt-tag {
+            font-size: .68rem;
+            font-weight: 800;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .dark-text .dt-tag::before {
+                content: '';
+                width: 28px;
+                height: 2px;
+                background: var(--accent)
+            }
+
+        .dark-heading {
+            font-family: var(--display);
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+            .dark-heading em {
+                color: var(--accent);
+                font-style: italic
+            }
+
+        .dark-body {
+            font-size: .88rem;
+            color: rgba(255,255,255,.5);
+            line-height: 1.85;
+            margin-bottom: 32px
+        }
+
+        .menu-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 32px
+        }
+
+        .mpill {
+            background: rgba(255,255,255,.06);
+            border: 1.5px solid rgba(255,255,255,.12);
+            color: rgba(255,255,255,.7);
+            font-size: .75rem;
+            font-weight: 700;
+            padding: 7px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--tr);
+        }
+
+            .mpill:hover, .mpill.active {
+                background: var(--accent);
+                border-color: var(--accent);
+                color: var(--dark)
+            }
+
+        .dark-cta-btn {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 4px;
+            font-size: .82rem;
+            font-weight: 800;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--tr);
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+            .dark-cta-btn:hover {
+                background: #fff;
+                transform: translateY(-3px)
+            }
+
+        .dark-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 14px
+        }
+
+        .dcard {
+            background: rgba(255,255,255,.04);
+            border: 1.5px solid rgba(255,255,255,.08);
+            border-radius: 8px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: var(--tr);
+        }
+
+            .dcard:hover {
+                background: rgba(245,197,24,.08);
+                border-color: rgba(245,197,24,.3)
+            }
+
+        .dcard-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background: rgba(245,197,24,.1);
+            border: 1px solid rgba(245,197,24,.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .dcard-title {
+            font-size: .88rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 3px
+        }
+
+        .dcard-sub {
+            font-size: .74rem;
+            color: rgba(255,255,255,.4)
+        }
+
+        /* ── SHOP SECTION ── */
+        .shop-section {
+            padding: 90px 0;
+            background: #fff
+        }
+
+        .shop-wrap {
+            max-width: 1280px;
+            margin: auto;
+            padding: 0 28px
+        }
+
+        .shop-bar {
+            background: var(--dark);
+            border-radius: 8px;
+            padding: 18px 24px;
+            margin-bottom: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .shop-bar-name {
+            font-weight: 800;
+            color: var(--accent);
+            font-size: 1rem;
+            font-family: var(--display)
+        }
+
+        .shop-bar-addr {
+            font-size: .74rem;
+            color: rgba(255,255,255,.4);
+            display: flex;
+            align-items: center;
+            gap: 4px
+        }
+
+            .shop-bar-addr i {
+                color: var(--accent);
+                font-size: .75rem
+            }
+
+        .filter-row {
+            display: flex;
+            gap: 10px
+        }
+
+            .filter-row .form-control, .filter-row .form-select {
+                border: 2px solid rgba(0,0,0,.12);
+                border-radius: 6px;
+                font-size: .84rem;
+                font-family: var(--body);
+                background: #fff;
+                color: var(--dark);
+                transition: var(--tr);
+            }
+
+                .filter-row .form-control:focus, .filter-row .form-select:focus {
+                    border-color: var(--accent);
+                    box-shadow: 0 0 0 3px rgba(245,197,24,.18);
+                }
+
+        @@media(max-width:700px) {
+            .shop-bar {
+                flex-direction: column;
+                align-items: flex-start
+            }
+
+            .filter-row {
+                width: 100%
+            }
+
+                .filter-row .form-control, .filter-row .form-select {
+                    flex: 1
+                }
+        }
+
+        .cat-title-row {
+            margin: 44px 0 22px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+            .cat-title-row::before, .cat-title-row::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+                background: linear-gradient(90deg,transparent,rgba(0,0,0,.15),transparent);
+            }
+
+        .cat-title-badge {
+            background: var(--dark);
+            color: var(--accent);
+            padding: 8px 22px;
+            border-radius: 4px;
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .05em;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        /* Product Card */
+        .product-card-wrap {
+            height: 100%
+        }
+
+        .pcard {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1.5px solid var(--border);
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+            transition: transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
+            cursor: pointer;
+        }
+
+            .pcard:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 48px rgba(0,0,0,.14);
+                border-color: var(--accent)
+            }
+
+        .pcard-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background: #f5f5f5
+        }
+
+            .pcard-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform .55s ease
+            }
+
+        .pcard:hover .pcard-img img {
+            transform: scale(1.1)
+        }
+
+        .pcard-discount {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: var(--dark);
+            font-size: .6rem;
+            font-weight: 900;
+            padding: 3px 10px;
+            border-radius: 3px;
+            z-index: 2;
+        }
+
+        .pcard-zoom {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            pointer-events: none;
+            transition: background .3s;
+        }
+
+            .pcard-zoom i {
+                font-size: 1.8rem;
+                color: rgba(255,255,255,0);
+                transition: color .3s
+            }
+
+        .pcard:hover .pcard-zoom {
+            background: rgba(0,0,0,.4)
+        }
+
+            .pcard:hover .pcard-zoom i {
+                color: rgba(255,255,255,.9)
+            }
+
+        .pcard-wishlist {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            background: rgba(255,255,255,.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .9rem;
+            color: var(--muted);
+            z-index: 4;
+            transition: var(--tr);
+            cursor: pointer;
+            pointer-events: auto;
+            border: none;
+        }
+
+            .pcard-wishlist:hover {
+                background: var(--accent);
+                color: var(--dark)
+            }
+
+        .pcard-body {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-grow: 1
+        }
+
+        .pcard-name {
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.3;
+            margin: 0
+        }
+
+        .pcard-desc {
+            font-size: .72rem;
+            color: var(--muted);
+            line-height: 1.4
+        }
+
+        .pcard-price {
+            margin-top: auto;
+            padding-top: 8px;
+            display: flex;
+            align-items: baseline;
+            gap: 7px;
+        }
+
+        .pcard-cur {
+            font-weight: 800;
+            font-size: .95rem;
+            color: var(--dark)
+        }
+
+        .pcard-old {
+            font-size: .76rem;
+            color: #999;
+            text-decoration: line-through
+        }
+
+        .qty-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 10px;
+            background: var(--dark);
+            border-radius: 4px;
+            padding: 6px 10px;
+        }
+
+        .qty-b {
+            width: 28px;
+            height: 28px;
+            border-radius: 3px;
+            border: none;
+            background: var(--accent);
+            color: var(--dark);
+            font-size: .9rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: transform .2s,background .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+            .qty-b:hover {
+                transform: scale(1.12);
+                background: #fff
+            }
+
+            .qty-b:active {
+                transform: scale(.92)
+            }
+
+        .qty-n {
+            font-size: .9rem;
+            font-weight: 800;
+            min-width: 22px;
+            text-align: center;
+            color: #fff
+        }
+
+        .flying-img {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            transition: all .75s cubic-bezier(.4,0,.2,1);
+            border-radius: 4px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.3);
+        }
+
+        /* ── TESTIMONIALS ── */
+        .testimonial-section {
+            padding: 90px 0;
+            background: var(--bg)
+        }
+
+        .test-wrap {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 28px
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 24px;
+        }
+
+        @@media(max-width:900px) {
+            .test-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @@media(max-width:576px) {
+            .test-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .tcard {
+            background: #fff;
+            border-radius: 8px;
+            padding: 28px 24px;
+            border: 1.5px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,.06);
+            transition: var(--tr);
+        }
+
+            .tcard:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 40px rgba(0,0,0,.1);
+                border-color: var(--accent)
+            }
+
+        .tcard-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 14px
+        }
+
+            .tcard-stars i {
+                font-size: .8rem;
+                color: var(--accent)
+            }
+
+        .tcard-text {
+            font-size: .84rem;
+            color: var(--muted);
+            line-height: 1.75;
+            font-style: italic;
+            margin-bottom: 20px
+        }
+
+        .tcard-author {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .tcard-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 4px;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .8rem;
+            font-weight: 800;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .tcard-name {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--dark)
+        }
+
+        .tcard-loc {
+            font-size: .7rem;
+            color: var(--muted)
+        }
+
+        /* ── NEWSLETTER ── */
+        .newsletter-section {
+            background: var(--dark);
+            padding: 72px 0
+        }
+
+        .nl-inner {
+            max-width: 680px;
+            margin: auto;
+            text-align: center;
+            padding: 0 28px
+        }
+
+        .nl-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            background: rgba(245,197,24,.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin: 0 auto 20px;
+            border: 1px solid rgba(245,197,24,.25);
+        }
+
+        .nl-title {
+            font-family: var(--display);
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 10px
+        }
+
+        .nl-sub {
+            font-size: .88rem;
+            color: rgba(255,255,255,.5);
+            margin-bottom: 28px
+        }
+
+        /* ── FOOTER ── */
+        .site-footer {
+            background: var(--footer)
+        }
+
+        .footer-top {
+            max-width: 1280px;
+            margin: auto;
+            padding: 64px 40px 48px;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1fr 1fr;
+            gap: 48px;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        @@media(max-width:1100px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 36px;
+                padding: 48px 28px
+            }
+        }
+
+        @@media(max-width:600px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                padding: 36px 20px
+            }
+        }
+
+        .footer-brand p {
+            font-size: .82rem;
+            color: rgba(255,255,255,.35);
+            line-height: 1.85;
+            margin: 14px 0 22px;
+            max-width: 280px
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 8px
+        }
+
+        .fsoc {
+            width: 38px;
+            height: 38px;
+            border-radius: 6px;
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,.4);
+            font-size: .9rem;
+            text-decoration: none;
+            transition: var(--tr);
+        }
+
+            .fsoc:hover {
+                background: var(--accent);
+                border-color: var(--accent);
+                color: var(--dark);
+                transform: translateY(-2px)
+            }
+
+        .footer-col h5 {
+            font-size: .68rem;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 18px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+            .footer-col ul li a {
+                font-size: .8rem;
+                color: rgba(255,255,255,.35);
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 7px;
+                transition: color .2s;
+            }
+
+                .footer-col ul li a:hover {
+                    color: var(--accent)
+                }
+
+                .footer-col ul li a i {
+                    font-size: .7rem;
+                    opacity: .5
+                }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px
+        }
+
+        .fc-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 6px;
+            flex-shrink: 0;
+            background: rgba(245,197,24,.08);
+            border: 1px solid rgba(245,197,24,.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .82rem;
+            color: var(--accent);
+            margin-top: 1px;
+        }
+
+        .fc-label {
+            font-size: .66rem;
+            color: rgba(255,255,255,.3);
+            margin-bottom: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em
+        }
+
+        .fc-val {
+            font-size: .8rem;
+            color: rgba(255,255,255,.5);
+            text-decoration: none;
+            transition: var(--tr)
+        }
+
+            .fc-val:hover {
+                color: var(--accent)
+            }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 18px 24px;
+            font-size: .74rem;
+            color: rgba(255,255,255,.18);
+            background: rgba(0,0,0,.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+            .footer-bottom a {
+                color: rgba(255,255,255,.25);
+                text-decoration: none;
+                transition: var(--tr)
+            }
+
+                .footer-bottom a:hover {
+                    color: var(--accent)
+                }
+
+        /* ── PRODUCT MODAL ── */
+        #productModal .modal-dialog {
+            max-width: 720px
+        }
+
+        #productModal .modal-content {
+            border-radius: 12px;
+            border: none;
+            overflow: hidden;
+            background: transparent;
+            box-shadow: 0 30px 80px rgba(0,0,0,.35);
+        }
+
+        #productModal .modal-body {
+            padding: 0;
+            position: relative
+        }
+
+        .pmodal-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 400px
+        }
+
+        @@media(max-width:576px) {
+            .pmodal-layout {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .pmodal-img-wrap {
+            position: relative;
+            overflow: hidden;
+            background: #f5f5f5;
+            min-height: 340px
+        }
+
+            .pmodal-img-wrap img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform .6s ease
+            }
+
+            .pmodal-img-wrap:hover img {
+                transform: scale(1.06)
+            }
+
+        .pmodal-discount-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--accent);
+            color: var(--dark);
+            font-size: 11px;
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 3px;
+            z-index: 2;
+        }
+
+        .pmodal-close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 34px;
+            height: 34px;
+            border-radius: 4px;
+            background: rgba(0,0,0,.6);
+            border: 1px solid rgba(255,255,255,.2);
+            color: #fff;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--tr);
+            z-index: 10;
+        }
+
+            .pmodal-close-btn:hover {
+                background: var(--accent);
+                color: var(--dark);
+                border-color: var(--accent)
+            }
+
+        .pmodal-info {
+            background: #fff;
+            padding: 30px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px
+        }
+
+        .pmodal-cat-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--dark);
+            color: var(--accent);
+            font-size: .66rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 3px;
+            width: fit-content;
+        }
+
+        .pmodal-name {
+            font-family: var(--display);
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1.3;
+            margin: 0
+        }
+
+        .pmodal-desc {
+            font-size: .8rem;
+            color: var(--muted);
+            line-height: 1.75;
+            flex-grow: 1
+        }
+
+        .pmodal-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 10px
+        }
+
+        .pmodal-price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--dark)
+        }
+
+        .pmodal-old-price {
+            font-size: .88rem;
+            color: #999;
+            text-decoration: line-through
+        }
+
+        .pmodal-qty-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--dark);
+            border-radius: 6px;
+            padding: 9px 18px;
+        }
+
+        .pmodal-qty-label {
+            font-size: .74rem;
+            color: rgba(255,255,255,.5);
+            font-weight: 600
+        }
+
+        .pmodal-qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .pmodal-qty-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            border: none;
+            background: var(--accent);
+            color: var(--dark);
+            font-size: 1rem;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s,transform .15s;
+        }
+
+            .pmodal-qty-btn:hover {
+                background: #fff;
+                transform: scale(1.1)
+            }
+
+            .pmodal-qty-btn:active {
+                transform: scale(.9)
+            }
+
+            .pmodal-qty-btn.minus {
+                background: rgba(255,255,255,.15);
+                color: #fff
+            }
+
+                .pmodal-qty-btn.minus:hover {
+                    background: #dc3545;
+                    color: #fff
+                }
+
+        .pmodal-qty-num {
+            font-size: 1.1rem;
+            font-weight: 900;
+            min-width: 22px;
+            text-align: center;
+            color: #fff
+        }
+
+        .pmodal-add-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 6px;
+            border: none;
+            background: var(--dark);
+            color: var(--accent);
+            font-weight: 800;
+            font-size: .9rem;
+            cursor: pointer;
+            transition: var(--tr);
+            letter-spacing: .04em;
+            border-bottom: 3px solid var(--accent);
+        }
+
+            .pmodal-add-btn:hover {
+                background: var(--accent);
+                color: var(--dark);
+                border-bottom-color: var(--dark);
+                transform: translateY(-2px)
+            }
+
+        /* ── CART DRAWER ── */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 380px;
+            height: 100vh;
+            background: #fff;
+            z-index: 1300;
+            display: flex;
+            flex-direction: column;
+            transition: right .38s cubic-bezier(.4,0,.2,1);
+            box-shadow: -12px 0 48px rgba(0,0,0,.15);
+            border-left: 2px solid var(--border);
+        }
+
+            .cart-drawer.open {
+                right: 0
+            }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            flex-shrink: 0;
+            background: var(--dark);
+            border-bottom: 3px solid var(--accent);
+        }
+
+            .cart-header h4 {
+                font-weight: 800;
+                color: var(--accent);
+                font-size: 1.05rem;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin: 0
+            }
+
+        .cart-close-btn {
+            border: none;
+            background: rgba(255,255,255,.1);
+            width: 34px;
+            height: 34px;
+            border-radius: 4px;
+            font-size: 17px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--tr);
+            color: #fff;
+        }
+
+            .cart-close-btn:hover {
+                background: var(--accent);
+                color: var(--dark)
+            }
+
+        .cart-items-scroll {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 12px 14px 6px;
+            background: var(--bg)
+        }
+
+            .cart-items-scroll::-webkit-scrollbar {
+                width: 4px
+            }
+
+            .cart-items-scroll::-webkit-scrollbar-thumb {
+                background: rgba(0,0,0,.2);
+                border-radius: 10px
+            }
+
+        .cart-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 20px;
+            text-align: center
+        }
+
+        .cart-empty-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 8px;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+
+        .cart-empty-text {
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--muted)
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            margin-bottom: 8px;
+            transition: box-shadow .25s;
+        }
+
+            .cart-item:hover {
+                box-shadow: 0 4px 16px rgba(0,0,0,.08);
+                border-color: var(--accent)
+            }
+
+        .cart-item-img {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+            border: 1.5px solid var(--border)
+        }
+
+        .cart-item-info {
+            flex: 1;
+            min-width: 0
+        }
+
+            .cart-item-info strong {
+                font-size: .8rem;
+                display: block;
+                color: var(--dark);
+                font-weight: 700;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis
+            }
+
+        .cart-item-price-unit {
+            font-size: .7rem;
+            color: var(--muted);
+            margin-top: 2px
+        }
+
+        .cart-qty-box {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--dark);
+            border-radius: 4px;
+            padding: 4px 8px;
+            flex-shrink: 0;
+        }
+
+        .cart-qty-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 3px;
+            border: none;
+            background: var(--accent);
+            color: var(--dark);
+            font-size: .9rem;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s,transform .15s;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+            .cart-qty-btn:hover {
+                background: #fff;
+                transform: scale(1.1)
+            }
+
+            .cart-qty-btn.minus {
+                background: rgba(255,255,255,.1);
+                color: #fff
+            }
+
+                .cart-qty-btn.minus:hover {
+                    background: #dc3545;
+                    color: #fff
+                }
+
+        .cart-qty-num {
+            font-size: .82rem;
+            font-weight: 800;
+            min-width: 18px;
+            text-align: center;
+            color: #fff
+        }
+
+        .cart-item-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+            flex-shrink: 0
+        }
+
+        .cart-item-total {
+            font-weight: 800;
+            font-size: .86rem;
+            color: var(--dark);
+            white-space: nowrap
+        }
+
+        .cart-total {
+            padding: 14px 16px;
+            border-top: 1.5px solid var(--border);
+            flex-shrink: 0;
+            background: #fff
+        }
+
+        .cart-total-inner {
+            background: var(--dark);
+            border-radius: 6px;
+            padding: 12px 14px
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 7px;
+            font-size: .8rem;
+            color: rgba(255,255,255,.4)
+        }
+
+            .total-row:last-child {
+                margin-bottom: 0
+            }
+
+            .total-row .lbl {
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                gap: 5px
+            }
+
+                .total-row .lbl i {
+                    font-size: .75rem;
+                    opacity: .6
+                }
+
+            .total-row .val {
+                font-weight: 700;
+                color: rgba(255,255,255,.7)
+            }
+
+            .total-row.discount .val {
+                color: #dc3545
+            }
+
+            .total-row.net {
+                margin-top: 10px;
+                padding-top: 10px;
+                border-top: 1.5px dashed rgba(245,197,24,.3)
+            }
+
+                .total-row.net .lbl {
+                    font-size: .95rem;
+                    font-weight: 800;
+                    color: #fff
+                }
+
+                .total-row.net .val {
+                    font-size: 1.1rem;
+                    font-weight: 900;
+                    color: var(--accent)
+                }
+
+        .free-delivery {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 1px 9px;
+            border-radius: 3px;
+            font-size: .7rem;
+            font-weight: 800
+        }
+
+        .delivery-fee {
+            color: var(--accent);
+            font-weight: 700
+        }
+
+        .checkout-wrapper {
+            padding: 12px 16px 16px;
+            flex-shrink: 0;
+            background: #fff
+        }
+
+            .checkout-wrapper .btn {
+                border-radius: 6px;
+                font-weight: 800;
+                font-size: .9rem;
+                padding: 13px;
+                background: var(--dark);
+                border: none;
+                color: var(--accent);
+                border-bottom: 3px solid var(--accent);
+                transition: var(--tr);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+            }
+
+                .checkout-wrapper .btn:hover {
+                    background: var(--accent);
+                    color: var(--dark);
+                    border-bottom-color: var(--dark)
+                }
+
+        @@media(max-width:576px) {
+            .cart-drawer {
+                width: 100%;
+                right: -100%
+            }
+        }
+
+        .cart-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.6);
+            backdrop-filter: blur(4px);
+            z-index: 900;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s ease;
+        }
+
+            .cart-backdrop.show {
+                opacity: 1;
+                visibility: visible
+            }
+
+        /* ── MODALS ── */
+        .modal-content {
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            box-shadow: 0 24px 72px rgba(0,0,0,.2)
+        }
+
+        .modal-header {
+            background: var(--dark);
+            border-bottom: 3px solid var(--accent);
+            border-radius: 10px 10px 0 0;
+        }
+
+            .modal-header .modal-title {
+                color: var(--accent);
+                font-weight: 800;
+                font-family: var(--display);
+                font-size: 1.15rem
+            }
+
+            .modal-header .btn-close {
+                filter: brightness(0) invert(1)
+            }
+
+        .input-group-text {
+            background: #f5f5f5;
+            border-color: var(--border);
+            color: var(--dark)
+        }
+
+        .form-control, .form-select {
+            border-color: var(--border);
+            border-radius: 6px;
+            font-family: var(--body);
+            font-size: .86rem;
+            transition: var(--tr);
+        }
+
+            .form-control:focus, .form-select:focus {
+                border-color: var(--accent);
+                box-shadow: 0 0 0 3px rgba(245,197,24,.18)
+            }
+
+        #orderSuccessModal .modal-dialog {
+            transform: scale(.7);
+            transition: transform .35s cubic-bezier(.34,1.56,.64,1)
+        }
+
+        #orderSuccessModal.show .modal-dialog {
+            transform: scale(1)
+        }
+
+        .success-gif {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover
+        }
+
+        .loading-swal-container, .loading-swal-popup {
+            z-index: 99999 !important
+        }
+
+        .modal-backdrop {
+            z-index: 1040 !important
+        }
+
+        .modal {
+            z-index: 1050 !important
+        }
+
+        /* ── BACK TO TOP ── */
+        .back-top {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 800;
+            width: 44px;
+            height: 44px;
+            border-radius: 6px;
+            background: var(--dark);
+            color: var(--accent);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0,0,0,.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(16px);
+            transition: all .3s ease;
+            border-bottom: 2px solid var(--accent);
+        }
+
+            .back-top.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0)
+            }
+
+            .back-top:hover {
+                background: var(--accent);
+                color: var(--dark)
+            }
+    </style>
+</head>
+
+<!-- ══════════════ PRODUCT MODAL ══════════════ -->
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-0" style="position:relative;">
+                <button class="pmodal-close-btn" onclick="bootstrap.Modal.getInstance(document.getElementById('productModal')).hide()"><i class="bi bi-x-lg"></i></button>
+                <div class="pmodal-layout">
+                    <div class="pmodal-img-wrap">
+                        <span class="pmodal-discount-tag" id="pmodal-discount" style="display:none;"></span>
+                        <img id="pmodal-img" src="" alt="" />
+                    </div>
+                    <div class="pmodal-info">
+                        <span class="pmodal-cat-tag"><i class="bi bi-tag-fill"></i><span id="pmodal-category"></span></span>
+                        <h4 class="pmodal-name" id="pmodal-name"></h4>
+                        <p class="pmodal-desc" id="pmodal-desc"></p>
+                        <div class="pmodal-price-row">
+                            <span class="pmodal-price" id="pmodal-price"></span>
+                            <span class="pmodal-old-price" id="pmodal-old-price" style="display:none;"></span>
+                        </div>
+                        <div class="pmodal-qty-row">
+                            <span class="pmodal-qty-label"><i class="bi bi-basket2"></i> Quantity</span>
+                            <div class="pmodal-qty-controls">
+                                <button class="pmodal-qty-btn minus" onclick="pmodalQty(-1)">−</button>
+                                <span class="pmodal-qty-num" id="pmodal-qty">1</span>
+                                <button class="pmodal-qty-btn" onclick="pmodalQty(1)">+</button>
+                            </div>
+                        </div>
+                        <button class="pmodal-add-btn" onclick="pmodalAddToCart()"><i class="bi bi-bag-plus-fill me-2"></i>Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════ CLOSED MODAL ══════════════ -->
+<div class="modal fade" id="closedModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-header justify-content-center"><h5 class="modal-title">Store Notice</h5></div>
+            <div class="modal-body py-4"></div>
+            <div class="modal-footer justify-content-center border-0">
+                <button class="btn px-4" style="background:var(--dark);color:var(--accent);font-weight:700;border-radius:6px;border-bottom:2px solid var(--accent);" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════ CHECKOUT MODAL ══════════════ -->
+<div class="modal fade" id="checkoutModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-bag-heart-fill me-2"></i>Complete Your Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row g-3">
+                    <div class="col-6"><label class="form-label fw-bold small">Contact # *</label><div class="input-group"><span class="input-group-text"><i class="bi bi-telephone"></i></span><input type="text" id="ContactNo" class="form-control next-input" maxlength="15" placeholder="03XXXXXXXXX"></div></div>
+                    <div class="col-6"><label class="form-label fw-bold small">Name *</label><div class="input-group"><span class="input-group-text"><i class="bi bi-person"></i></span><input type="text" id="CustomerName" class="form-control next-input" placeholder="Your full name"></div></div>
+                    <div class="col-6"><label class="form-label fw-bold small">Street *</label><div class="input-group"><span class="input-group-text"><i class="bi bi-signpost"></i></span><input type="text" id="Street" class="form-control next-input" placeholder="Street no."></div></div>
+                    <div class="col-6"><label class="form-label fw-bold small">Block / Floor *</label><div class="input-group"><span class="input-group-text"><i class="bi bi-layers"></i></span><input type="text" id="Floor" class="form-control next-input" placeholder="Block / Floor / House"></div></div>
+                    <div class="col-12"><label class="form-label fw-bold small">Full Address *</label><div class="input-group"><span class="input-group-text"><i class="bi bi-house"></i></span><input type="text" id="CustomerAddress" class="form-control next-input" placeholder="Complete delivery address"></div></div>
+                    <div class="col-12"><label class="form-label fw-bold small">Special Instructions</label><textarea id="Description" class="form-control next-input" rows="2" placeholder="Any special requests or notes..."></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 px-4 pb-4">
+                <button class="btn btn-secondary px-4" style="border-radius:6px;" data-bs-dismiss="modal"><i class="bi bi-x-circle me-1"></i>Cancel</button>
+                <button class="btn px-5" style="background:var(--dark);color:var(--accent);font-weight:700;border-radius:6px;border:none;border-bottom:2px solid var(--accent);" onclick="placeOrder()"><i class="bi bi-check2-circle me-1"></i>Place Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════ SUCCESS MODAL ══════════════ -->
+<div class="modal fade" id="orderSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4">
+            <div class="modal-body">
+                <img id="orderStatusGif" src="/Images/GIF/OrderSuccess.gif" class="success-gif mb-3" alt="Order Status" />
+                <div id="orderSuccessMessage" class="mt-2 fw-bold"></div>
+            </div>
+            <div class="modal-footer justify-content-center border-0 pt-0">
+                <button type="button" class="btn px-5" style="background:var(--dark);color:var(--accent);font-weight:700;border-radius:6px;border:none;border-bottom:2px solid var(--accent);" data-bs-dismiss="modal">OK, Thank You!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════ ABOUT MODAL ══════════════ -->
+<div class="modal fade" id="aboutModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-info-circle-fill me-2"></i>About @Model.RestaurantName</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p style="font-size:.9rem;color:var(--muted);line-height:1.85;">
+                    <strong>Memon Burger</strong> is Karachi's favourite destination for freshly made burgers and crispy fry items. From our signature <strong>Memon's Special Burger</strong> to perfectly fried <strong>Chicken Wontons</strong>, every bite is crafted with love and quality ingredients. Home delivery available all over Karachi.
+                </p>
+                <div class="row g-2 mt-2">
+                    <div class="col-6 col-md-3"><div class="text-center p-3 rounded" style="background:var(--dark);border-bottom:3px solid var(--accent);"><div style="font-family:var(--display);font-size:1.8rem;font-weight:900;color:var(--accent);">Rs.30</div><div style="font-size:.72rem;font-weight:700;color:rgba(255,255,255,.6);margin-top:2px;">From</div></div></div>
+                    <div class="col-6 col-md-3"><div class="text-center p-3 rounded" style="background:var(--dark);border-bottom:3px solid var(--accent);"><div style="font-family:var(--display);font-size:1.8rem;font-weight:900;color:var(--accent);">30+</div><div style="font-size:.72rem;font-weight:700;color:rgba(255,255,255,.6);margin-top:2px;">Menu Items</div></div></div>
+                    <div class="col-6 col-md-3"><div class="text-center p-3 rounded" style="background:var(--dark);border-bottom:3px solid var(--accent);"><div style="font-family:var(--display);font-size:1.8rem;font-weight:900;color:var(--accent);">11AM</div><div style="font-size:.72rem;font-weight:700;color:rgba(255,255,255,.6);margin-top:2px;">Opens At</div></div></div>
+                    <div class="col-6 col-md-3"><div class="text-center p-3 rounded" style="background:var(--dark);border-bottom:3px solid var(--accent);"><div style="font-family:var(--display);font-size:1.8rem;font-weight:900;color:var(--accent);">9PM</div><div style="font-size:.72rem;font-weight:700;color:rgba(255,255,255,.6);margin-top:2px;">Closes At</div></div></div>
+                </div>
+                <div class="row g-3 mt-2">
+                    <div class="col-md-6"><div class="d-flex align-items-center gap-3 p-3 rounded-2" style="background:#f9f9f9;border:1.5px solid var(--border);"><i class="bi bi-fire fs-4" style="color:var(--accent)"></i><div><strong class="d-block" style="font-size:.85rem">Fresh Every Day</strong><span style="font-size:.75rem;color:var(--muted)">Made to order, never reheated</span></div></div></div>
+                    <div class="col-md-6"><div class="d-flex align-items-center gap-3 p-3 rounded-2" style="background:#f9f9f9;border:1.5px solid var(--border);"><i class="bi bi-truck fs-4" style="color:var(--accent)"></i><div><strong class="d-block" style="font-size:.85rem">All Karachi Delivery</strong><span style="font-size:.75rem;color:var(--muted)">Fast & hot delivery city-wide</span></div></div></div>
+                    <div class="col-md-6"><div class="d-flex align-items-center gap-3 p-3 rounded-2" style="background:#f9f9f9;border:1.5px solid var(--border);"><i class="bi bi-award fs-4" style="color:var(--accent)"></i><div><strong class="d-block" style="font-size:.85rem">Secret Recipes</strong><span style="font-size:.75rem;color:var(--muted)">Unique Memon-style flavours</span></div></div></div>
+                    <div class="col-md-6"><div class="d-flex align-items-center gap-3 p-3 rounded-2" style="background:#f9f9f9;border:1.5px solid var(--border);"><i class="bi bi-whatsapp fs-4" style="color:var(--accent)"></i><div><strong class="d-block" style="font-size:.85rem">WhatsApp Order</strong><span style="font-size:.75rem;color:var(--muted)">0309-1211282 / 0327-8228077</span></div></div></div>
+                </div>
+                <div class="mt-4 p-3 rounded-2 text-center" style="background:var(--dark);border-bottom:3px solid var(--accent);">
+                    <p class="mb-0" style="color:rgba(255,255,255,.7);font-size:.88rem;font-weight:600;">📍 @Model.RestaurantAddress &nbsp;|&nbsp; 🕐 11:00am – 9:00pm</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<body>
+    <!-- ══════════════ PROMO BAR ══════════════ -->
+    @if (!string.IsNullOrEmpty(Model.SubHeaderTitle))
+    {
+        <div class="promo-bar" id="promoBar">
+            <span><i class="bi bi-truck"></i>@Html.Raw(Model.SubHeaderTitle)</span>
+            <span><i class="bi bi-clock"></i>Order Timing: 11:00am – 9:00pm</span>
+            <span><i class="bi bi-whatsapp"></i>0309-1211282</span>
+        </div>
+    }
+
+    <!-- ══════════════ NAVBAR ══════════════ -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><img src="/images/logo.png" alt="@Model.RestaurantName" /></a>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link-item active">Home</a>
+                <a href="#shop" class="nav-link-item">Shop</a>
+                <a href="#about" class="nav-link-item">About</a>
+                <a href="#" class="nav-link-item" data-bs-toggle="modal" data-bs-target="#aboutModal">Contact</a>
+            </div>
+            <div class="nav-right">
+                <a href="#shop" class="nav-shop-btn"><i class="bi bi-bag-heart me-1"></i>Order Now</a>
+                <div class="cart-pill" id="cartIcon" onclick="toggleCart()">
+                    <i class="bi bi-cart3 cp-icon"></i>
+                    <span class="cp-txt">Cart</span>
+                    <span class="cp-badge" id="cartCount">0</span>
+                </div>
+                <div class="nav-hamburger" id="hamburger" onclick="openMenu()">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="closeMenu()"><i class="bi bi-x-lg"></i></button>
+        <a href="#hero" class="m-link" onclick="closeMenu()">Home</a>
+        <a href="#shop" class="m-link" onclick="closeMenu()">Shop</a>
+        <a href="#about" class="m-link" onclick="closeMenu()">About</a>
+        <a href="#" class="m-link" data-bs-toggle="modal" data-bs-target="#aboutModal" onclick="closeMenu()">Contact</a>
+        <div class="cart-pill" onclick="toggleCart();closeMenu()" style="margin-top:8px">
+            <i class="bi bi-cart3 cp-icon"></i>
+            <span class="cp-txt">Cart</span>
+            <span class="cp-badge" id="cartCountMobile">0</span>
+        </div>
+    </div>
+
+    <!-- ══════════════ HERO SLIDER ══════════════ -->
+    <section id="hero">
+        <div id="heroCarousel" class="hero-slider carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                @for (int i = 0; i < Model.Sliders.Count; i++)
+                {
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-label="Slide @(i + 1)"></button>
+                }
+            </div>
+            <div class="carousel-inner">
+                @for (int i = 0; i < Model.Sliders.Count; i++)
+                {
+                    var s = Model.Sliders[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")" data-bs-interval="@(s.SliderMovingTimer * 1000)">
+                        <div class="hero-slide">
+                            <img src="@("/images/SliderRegistration/" + s.SliderName)" class="hero-slide-img" alt="@s.HeadingSlider" />
+                            <div class="hero-overlay"></div>
+                            <div class="hero-content">
+                                <div class="hero-tag"><i class="bi bi-fire"></i>@s.HeadingSlider</div>
+                                <h1 class="hero-title">@s.DescriptionSlider</h1>
+                                <p class="hero-sub">Fresh burgers & crispy fry items — made to order, delivered hot across all Karachi.</p>
+                                <div class="hero-btns">
+                                    <a href="#shop" class="hero-btn-primary"><i class="bi bi-bag-heart"></i>Order Now</a>
+                                    <a href="#about" class="hero-btn-outline"><i class="bi bi-play-circle"></i>Our Story</a>
+                                </div>
+                            </div>
+                            <div class="hero-stats">
+                                <div class="hstat"><div class="hstat-num">30+</div><div class="hstat-lbl">Menu Items</div></div>
+                                <div class="hstat"><div class="hstat-num">Rs.30</div><div class="hstat-lbl">Starting From</div></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+        </div>
+    </section>
+
+    <!-- ══════════════ ABOUT PARTIAL ══════════════ -->
+    @await Html.PartialAsync("Abouts", Model)
+
+    <!-- ══════════════ FEATURES STRIP ══════════════ -->
+    <div class="features-strip">
+        <div class="features-inner">
+            <div class="feat-item"><div class="feat-icon"><i class="bi bi-truck"></i></div><div><div class="feat-title">All Karachi Delivery</div><div class="feat-sub">Home delivery available</div></div></div>
+            <div class="feat-item"><div class="feat-icon"><i class="bi bi-fire"></i></div><div><div class="feat-title">Fresh & Hot</div><div class="feat-sub">Made to order always</div></div></div>
+            <div class="feat-item"><div class="feat-icon"><i class="bi bi-currency-rupee"></i></div><div><div class="feat-title">Starting Rs.30</div><div class="feat-sub">Budget friendly menu</div></div></div>
+            <div class="feat-item"><div class="feat-icon"><i class="bi bi-clock"></i></div><div><div class="feat-title">11AM – 9PM</div><div class="feat-sub">Open every day</div></div></div>
+            <div class="feat-item"><div class="feat-icon"><i class="bi bi-whatsapp"></i></div><div><div class="feat-title">WhatsApp Order</div><div class="feat-sub">0309-1211282</div></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════ MENU STATS ══════════════ -->
+    <div class="menu-stats-strip">
+        <div class="mst-inner">
+            <div class="mst-item"><div class="mst-num">Rs.30</div><div class="mst-lbl">Starting Price</div></div>
+            <div class="mst-item"><div class="mst-num">30+</div><div class="mst-lbl">Menu Items</div></div>
+            <div class="mst-item"><div class="mst-num">10hrs</div><div class="mst-lbl">Daily Open</div></div>
+            <div class="mst-item"><div class="mst-num">100%</div><div class="mst-lbl">Fresh Daily</div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════ DARK CONTENT STRIP ══════════════ -->
+    <section class="dark-strip">
+        <div class="dark-strip-inner">
+            <div class="dark-grid">
+                <div class="dark-text">
+                    <div class="dt-tag">Our Menu</div>
+                    <h2 class="dark-heading">Bold Flavours,<br><em>Every Time</em></h2>
+                    <p class="dark-body">Explore our full range — from crispy fry items to stacked burgers. Quality ingredients, secret Memon recipes, and made fresh every single time.</p>
+                    <div class="menu-pills">
+                        <span class="mpill active">Fry Items</span>
+                        <span class="mpill">Burgers</span>
+                        <span class="mpill">Shami Kabab</span>
+                        <span class="mpill">Special Burgers</span>
+                        <span class="mpill">Jumbo Size</span>
+                        <span class="mpill">Triple Stack</span>
+                    </div>
+                    <button class="dark-cta-btn" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+                        <i class="bi bi-arrow-right-circle-fill"></i>View Full Menu
+                    </button>
+                </div>
+                <div class="dark-cards">
+                    <div class="dcard"><div class="dcard-icon"><i class="bi bi-fire"></i></div><div><div class="dcard-title">Made Fresh Daily</div><div class="dcard-sub">Never frozen, always hot and crispy</div></div></div>
+                    <div class="dcard"><div class="dcard-icon"><i class="bi bi-award"></i></div><div><div class="dcard-title">Secret Memon Recipe</div><div class="dcard-sub">Unique flavours you won't find elsewhere</div></div></div>
+                    <div class="dcard"><div class="dcard-icon"><i class="bi bi-truck"></i></div><div><div class="dcard-title">City-Wide Delivery</div><div class="dcard-sub">All areas in Karachi covered</div></div></div>
+                    <div class="dcard"><div class="dcard-icon"><i class="bi bi-currency-rupee"></i></div><div><div class="dcard-title">Affordable Pricing</div><div class="dcard-sub">Great taste starting from just Rs.30</div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════ SHOP SECTION ══════════════ -->
+    <section id="shop" class="shop-section">
+        <div class="shop-wrap">
+            <div class="sec-hd">
+                <div class="sec-hd-tag">Our Menu</div>
+                <h2 class="sec-title">Order From Our Menu</h2>
+                <p class="sec-sub">Fresh burgers & crispy fry items — add to cart and order in minutes</p>
+            </div>
+            <div class="shop-bar">
+                <div class="shop-bar-left">
+                    <div>
+                        <div class="shop-bar-name">@Model.RestaurantName</div>
+                        <div class="shop-bar-addr"><i class="bi bi-geo-alt-fill"></i>@Model.RestaurantAddress</div>
+                    </div>
+                </div>
+                <div class="filter-row">
+                    <input type="text" id="productSearch" class="form-control form-control-sm" placeholder="🔍 Search menu..." style="min-width:180px">
+                    <select id="categoryFilter" class="form-select form-select-sm">
+                        <option value="all">All Categories</option>
+                        @foreach (var category in Model.Products.Keys)
+                        {
+                            <option value="@category">@category</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            @foreach (var category in Model.Products)
+            {
+                <div class="cat-title-row">
+                    <span class="cat-title-badge"><i class="bi bi-grid-fill"></i>@category.Key</span>
+                </div>
+                <div class="row g-3">
+                    @foreach (var product in category.Value)
+                    {
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 product-card-item" data-product-name="@product.ProductName.ToLower()">
+                            <div class="product-card-wrap">
+                                <div class="pcard" onclick="openProductModal('@product.ProductCode')">
+                                    <div class="pcard-img">
+                                        @if (product.DiscountAmount > 0)
+                                        {
+                                            <span class="pcard-discount">−@product.DiscountAmount</span>
+                                        }
+                                        <img src="@("/images/ProductRegistration/" + product.ProductImage)" alt="@product.ProductName" id="img-@product.ProductCode" />
+                                        <div class="pcard-zoom"><i class="bi bi-zoom-in"></i></div>
+                                        <button class="pcard-wishlist" onclick="event.stopPropagation();this.innerHTML=this.innerHTML.includes('fill')?'<i class=\'bi bi-heart\'></i>':'<i class=\'bi bi-heart-fill\'></i>'"><i class="bi bi-heart"></i></button>
+                                    </div>
+                                    <div class="pcard-body">
+                                        <h6 class="pcard-name">@product.ProductName</h6>
+                                        <span class="pcard-desc">@product.ProductDescription</span>
+                                        <div class="pcard-price">
+                                            <span class="pcard-cur">Rs. @(product.Prices - product.DiscountAmount)</span>
+                                            @if (product.DiscountAmount > 0)
+                                            {
+                                                <span class="pcard-old">@product.Prices</span>
+                                            }
+                                        </div>
+                                        <div class="qty-strip" onclick="event.stopPropagation()">
+                                            <button class="qty-b" onclick="changeQuantity('@product.ProductCode','@product.ProductName',-1)">−</button>
+                                            <span class="qty-n" id="qty-@product.ProductCode">0</span>
+                                            <button class="qty-b" onclick="changeQuantity('@product.ProductCode','@product.ProductName',1)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- ══════════════ TESTIMONIALS ══════════════ -->
+    <section class="testimonial-section">
+        <div class="test-wrap">
+            <div class="sec-hd">
+                <div class="sec-hd-tag">Reviews</div>
+                <h2 class="sec-title">What Customers Say</h2>
+                <p class="sec-sub">Real feedback from our loyal customers across Karachi</p>
+            </div>
+            <div class="test-grid">
+                <div class="tcard"><div class="tcard-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="tcard-text">"The Memon's Special Burger is absolutely fire! Juicy, fresh, and perfectly made. Best burger in Karachi for the price. Delivered hot too!"</p><div class="tcard-author"><div class="tcard-avatar">AK</div><div><div class="tcard-name">Ahmed Khan</div><div class="tcard-loc">Gulshan-e-Iqbal, Karachi</div></div></div></div>
+                <div class="tcard"><div class="tcard-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="tcard-text">"Chicken Wontons are my weakness! Crispy outside, juicy inside. Order every week. Delivery is always on time and packaging is neat."</p><div class="tcard-author"><div class="tcard-avatar">SR</div><div><div class="tcard-name">Sana Rehman</div><div class="tcard-loc">North Nazimabad, Karachi</div></div></div></div>
+                <div class="tcard"><div class="tcard-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div><p class="tcard-text">"Triple Kabab Burger is massive and so filling. Great value for money. The shami kabab is also amazing. Will keep ordering!"</p><div class="tcard-author"><div class="tcard-avatar">MF</div><div><div class="tcard-name">Muhammad Farhan</div><div class="tcard-loc">Clifton, Karachi</div></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════ NEWSLETTER ══════════════ -->
+    <section class="newsletter-section">
+        <div class="nl-inner">
+            <div class="nl-icon"><i class="bi bi-whatsapp"></i></div>
+            <h2 class="nl-title">Order on WhatsApp</h2>
+            <p class="nl-sub">Send us your order directly on WhatsApp. Fast, easy, and delivered hot to your door anywhere in Karachi.</p>
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+                <a href="https://api.whatsapp.com/send?phone=923091211282" target="_blank" style="background:var(--accent);color:var(--dark);border:none;border-radius:4px;padding:13px 28px;font-weight:800;font-size:.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s;"><i class="bi bi-whatsapp"></i>0309-1211282</a>
+                <a href="https://api.whatsapp.com/send?phone=923278228077" target="_blank" style="background:rgba(255,255,255,.08);color:#fff;border:2px solid rgba(255,255,255,.2);border-radius:4px;padding:13px 28px;font-weight:700;font-size:.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;"><i class="bi bi-telephone"></i>0327-8228077</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════ CART DRAWER ══════════════ -->
+    <div id="cartDrawer" class="cart-drawer">
+        <div class="cart-header">
+            <h4><i class="bi bi-bag-heart-fill"></i>Your Order <span id="cartHeaderCount" style="background:rgba(245,197,24,.2);color:var(--accent);font-size:.62rem;font-weight:800;padding:2px 8px;border-radius:3px;margin-left:4px;display:none;"></span></h4>
+            <button class="cart-close-btn" onclick="toggleCart()"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div id="cartItemsContainer" class="cart-items-scroll">
+            <div class="cart-empty-state">
+                <div class="cart-empty-icon"><i class="bi bi-cart-x"></i></div>
+                <div class="cart-empty-text">Your cart is empty</div>
+                <div style="font-size:.74rem;color:var(--muted);margin-top:4px;">Add items from the menu above</div>
+            </div>
+        </div>
+        <div id="cartTotal" class="cart-total" style="display:none;"></div>
+        <div class="checkout-wrapper">
+            <button class="btn w-100" onclick="openCheckoutModal()"><i class="bi bi-lightning-charge-fill"></i>Proceed to Checkout</button>
+        </div>
+    </div>
+    <div id="cartBackdrop" class="cart-backdrop" onclick="toggleCart()"></div>
+
+    <!-- ══════════════ FOOTER ══════════════ -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="/"><img src="/images/logo.png" alt="Logo" style="height:50px;width:auto;object-fit:contain;filter:brightness(0) invert(1);" /></a>
+                <p>Karachi's favourite burger & fry spot. Fresh ingredients, bold Memon flavours, and speedy delivery all over the city.</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/share/1Buimi6joN/" target="_blank" class="fsoc"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="fsoc"><i class="bi bi-instagram"></i></a>
+                    <a href="https://api.whatsapp.com/send?phone=923091211282" target="_blank" class="fsoc"><i class="bi bi-whatsapp"></i></a>
+                    <a href="#" class="fsoc"><i class="bi bi-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>Menu</h5>
+                <ul>
+                    @foreach (var category in Model.Products.Keys)
+                    {
+                        <li><a href="#shop" onclick="document.getElementById('categoryFilter').value='@category';document.getElementById('categoryFilter').dispatchEvent(new Event('change'))"><i class="bi bi-chevron-right"></i>@category</a></li>
+                    }
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="#hero"><i class="bi bi-chevron-right"></i>Home</a></li>
+                    <li><a href="#shop"><i class="bi bi-chevron-right"></i>Menu</a></li>
+                    <li><a href="#about"><i class="bi bi-chevron-right"></i>About Us</a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal"><i class="bi bi-chevron-right"></i>Contact</a></li>
+                    <li><a href="#" onclick="toggleCart()"><i class="bi bi-chevron-right"></i>View Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Contact Us</h5>
+                <div class="footer-contact-item"><div class="fc-icon"><i class="bi bi-whatsapp"></i></div><div><div class="fc-label">WhatsApp</div><a href="https://api.whatsapp.com/send?phone=923091211282" target="_blank" class="fc-val">0309-1211282</a></div></div>
+                <div class="footer-contact-item"><div class="fc-icon"><i class="bi bi-telephone-fill"></i></div><div><div class="fc-label">Phone</div><a href="tel:+923278228077" class="fc-val">0327-8228077</a></div></div>
+                <div class="footer-contact-item"><div class="fc-icon"><i class="bi bi-geo-alt-fill"></i></div><div><div class="fc-label">Area</div><span class="fc-val">@Model.RestaurantAddress</span></div></div>
+                <div class="footer-contact-item"><div class="fc-icon"><i class="bi bi-clock-fill"></i></div><div><div class="fc-label">Hours</div><span class="fc-val">11:00am – 9:00pm</span></div></div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© @DateTime.Now.Year @Model.RestaurantName. All rights reserved.</span>
+            <span style="color:rgba(245,197,24,.4)">|</span>
+            <span>Developed by <strong style="color:rgba(245,197,24,.6)">UT Designer</strong></span>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-chevron-up"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const promo = document.getElementById("promoBar");
+            const nav = document.getElementById("mainNav");
+            if (promo && nav) nav.style.top = promo.offsetHeight + "px";
+        });
+
+        window.addEventListener("scroll", function () {
+            const bt = document.getElementById("backTop");
+            bt.classList.toggle("show", window.scrollY > 400);
+        });
+
+        function openMenu() { document.getElementById("mobileMenu").classList.add("open"); document.body.style.overflow = "hidden"; }
+        function closeMenu() { document.getElementById("mobileMenu").classList.remove("open"); document.body.style.overflow = ""; }
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener("click", function (e) {
+                const t = document.querySelector(this.getAttribute("href"));
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); }
+            });
+        });
+
+        window.addEventListener("scroll", function () {
+            const sections = ["hero", "about", "shop"];
+            sections.forEach(id => {
+                const sec = document.getElementById(id);
+                if (!sec) return;
+                const r = sec.getBoundingClientRect();
+                if (r.top <= 100 && r.bottom > 100) {
+                    document.querySelectorAll(".nav-link-item").forEach(l => l.classList.remove("active"));
+                    const al = document.querySelector(`.nav-link-item[href="#${id}"]`);
+                    if (al) al.classList.add("active");
+                }
+            });
+        });
+
+        document.getElementById('heroCarousel').addEventListener('slide.bs.carousel', function (e) {
+            const inc = e.relatedTarget; if (!inc) return;
+            inc.querySelectorAll('.hero-tag,.hero-title,.hero-sub,.hero-btns').forEach(el => {
+                el.style.animation = 'none'; el.style.opacity = '0'; void el.offsetWidth; el.style.animation = '';
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const si = document.getElementById("productSearch");
+            const cf = document.getElementById("categoryFilter");
+            function filter() {
+                const q = si.value.toLowerCase(), c = cf.value.toLowerCase();
+                document.querySelectorAll("#shop .row").forEach(row => {
+                    const prev = row.previousElementSibling; if (!prev) return;
+                    const badge = prev.querySelector(".cat-title-badge"); if (!badge) return;
+                    const cat = badge.innerText.toLowerCase().replace(/^\W+/, '').trim();
+                    const catOk = c === "all" || cat.includes(c);
+                    let vis = false;
+                    row.querySelectorAll(".product-card-item").forEach(card => {
+                        const ok = card.dataset.productName.includes(q) && catOk;
+                        card.style.display = ok ? "block" : "none"; if (ok) vis = true;
+                    });
+                    row.style.display = vis ? "flex" : "none";
+                    prev.style.display = vis ? "flex" : "none";
+                });
+            }
+            si.addEventListener("keyup", filter);
+            cf.addEventListener("change", filter);
+        });
+
+        document.querySelectorAll(".mpill").forEach(p => {
+            p.addEventListener("click", function () {
+                document.querySelectorAll(".mpill").forEach(x => x.classList.remove("active"));
+                this.classList.add("active");
+            });
+        });
+
+        const productMaster = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Products.SelectMany(x => x.Value)));
+        function getProductByCode(code) { return productMaster.find(p => p.ProductCode === code); }
+        let cart = {};
+
+        let pmodalCode = null;
+        function openProductModal(productCode) {
+            const p = getProductByCode(productCode); if (!p) return;
+            pmodalCode = productCode;
+            document.getElementById('pmodal-img').src = '/images/ProductRegistration/' + p.ProductImage;
+            document.getElementById('pmodal-img').alt = p.ProductName;
+            const discEl = document.getElementById('pmodal-discount');
+            if (p.DiscountAmount > 0) { discEl.textContent = '−Rs.' + fmt(p.DiscountAmount) + ' OFF'; discEl.style.display = 'inline-block'; }
+            else { discEl.style.display = 'none'; }
+            document.getElementById('pmodal-category').textContent = p.Category || '';
+            document.getElementById('pmodal-name').textContent = p.ProductName;
+            document.getElementById('pmodal-desc').textContent = p.ProductDescription || 'Fresh and delicious.';
+            const net = (p.Prices || 0) - (p.DiscountAmount || 0);
+            document.getElementById('pmodal-price').textContent = 'Rs. ' + fmt(net);
+            const oldEl = document.getElementById('pmodal-old-price');
+            if (p.DiscountAmount > 0) { oldEl.textContent = 'Rs. ' + fmt(p.Prices); oldEl.style.display = 'inline'; }
+            else { oldEl.style.display = 'none'; }
+            const cardQty = parseInt(document.getElementById('qty-' + productCode)?.textContent) || 0;
+            document.getElementById('pmodal-qty').textContent = Math.max(cardQty, 1);
+            new bootstrap.Modal(document.getElementById('productModal')).show();
+        }
+        function pmodalQty(d) {
+            const el = document.getElementById('pmodal-qty');
+            el.textContent = Math.max(1, parseInt(el.textContent) + d);
+        }
+        function pmodalAddToCart() {
+            if (!pmodalCode) return;
+            const qty = parseInt(document.getElementById('pmodal-qty').textContent) || 1;
+            const p = getProductByCode(pmodalCode); if (!p) return;
+            const cardQtyEl = document.getElementById('qty-' + pmodalCode);
+            if (cardQtyEl) cardQtyEl.textContent = qty;
+            cart[pmodalCode] = { ProductCode: pmodalCode, ProductName: p.ProductName, Quantity: qty, Rate: p.Prices, DiscountAmount: p.DiscountAmount, DeliveryCharges: p.DeliveryCharges, image: p.ProductImage };
+            renderCart();
+            bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();
+            const icon = document.getElementById('cartIcon');
+            icon.style.background = 'var(--accent)';
+            setTimeout(() => { icon.style.background = ''; }, 700);
+            Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Added to cart!', showConfirmButton: false, timer: 1800, timerProgressBar: true });
+        }
+
+        function changeQuantity(productCode, productName, delta) {
+            const qtySpan = document.getElementById('qty-' + productCode);
+            let newQty = Math.max(0, (parseInt(qtySpan.textContent) || 0) + delta);
+            qtySpan.textContent = newQty;
+            const product = getProductByCode(productCode); if (!product) return;
+            if (delta > 0) flyToCart(productCode);
+            if (newQty === 0) { delete cart[productCode]; }
+            else { cart[productCode] = { ProductCode: productCode, ProductName: product.ProductName, Quantity: newQty, Rate: product.Prices, DiscountAmount: product.DiscountAmount, DeliveryCharges: product.DeliveryCharges, image: product.ProductImage }; }
+            renderCart();
+        }
+        function flyToCart(productCode) {
+            const img = document.getElementById('img-' + productCode);
+            const cartIcon = document.getElementById('cartIcon');
+            if (!img || !cartIcon) return;
+            const ir = img.getBoundingClientRect(), cr = cartIcon.getBoundingClientRect();
+            const fi = img.cloneNode(true);
+            fi.style.cssText = `position:fixed;z-index:9999;pointer-events:none;border-radius:4px;transition:all .7s cubic-bezier(.4,0,.2,1);left:${ir.left}px;top:${ir.top}px;width:${ir.width}px;height:${ir.height}px;`;
+            document.body.appendChild(fi);
+            requestAnimationFrame(() => { Object.assign(fi.style, { left: cr.left + "px", top: cr.top + "px", width: "30px", height: "30px", opacity: "0" }); });
+            fi.addEventListener("transitionend", () => fi.remove());
+        }
+        function renderCart() {
+            const container = document.getElementById("cartItemsContainer");
+            const totalDiv = document.getElementById("cartTotal");
+            container.innerHTML = "";
+            const items = Object.values(cart);
+            if (items.length === 0) {
+                container.innerHTML = `<div class="cart-empty-state"><div class="cart-empty-icon"><i class="bi bi-cart-x"></i></div><div class="cart-empty-text">Your cart is empty</div><div style="font-size:.74rem;color:var(--muted);margin-top:4px;">Add items from the menu above</div></div>`;
+                totalDiv.style.display = "none"; updateCartCount(); return;
+            }
+            let tg = 0, td = 0, tq = 0, dc = 0;
+            items.forEach(item => {
+                if (dc === 0 && item.DeliveryCharges !== undefined) dc = Number(item.DeliveryCharges);
+                const r = item.Quantity * item.Rate, d = item.Quantity * item.DiscountAmount, net = r - d;
+                tg += r; td += d; tq += item.Quantity;
+                const unitDisplay = item.DiscountAmount > 0
+                    ? `<span style="color:var(--dark);font-weight:700;">${fmt(item.Rate - item.DiscountAmount)}</span> <span style="text-decoration:line-through;color:#999;">${fmt(item.Rate)}</span>`
+                    : `<span style="color:var(--muted);">${fmt(item.Rate)}</span>`;
+                container.innerHTML += `
+                  <div class="cart-item">
+                    <img src="/images/ProductRegistration/${item.image}" class="cart-item-img"/>
+                    <div class="cart-item-info"><strong>${item.ProductName}</strong><div class="cart-item-price-unit">Unit: ${unitDisplay}</div></div>
+                    <div class="cart-item-right">
+                      <div class="cart-item-total">Rs.${fmt(net)}</div>
+                      <div class="cart-qty-box">
+                        <button class="cart-qty-btn minus" onclick="changeQuantity('${item.ProductCode}','${item.ProductName}',-1)">−</button>
+                        <span class="cart-qty-num">${item.Quantity}</span>
+                        <button class="cart-qty-btn" onclick="changeQuantity('${item.ProductCode}','${item.ProductName}',1)">+</button>
+                      </div>
+                    </div>
+                  </div>`;
+            });
+            const np = (tg - td) + dc;
+            totalDiv.style.display = "block";
+            totalDiv.innerHTML = `<div class="cart-total-inner">
+              <div class="total-row"><span class="lbl"><i class="bi bi-bag"></i>Items</span><span class="val">${tq}</span></div>
+              <div class="total-row"><span class="lbl"><i class="bi bi-receipt"></i>Subtotal</span><span class="val">Rs.${fmt(tg)}</span></div>
+              ${td > 0 ? `<div class="total-row discount"><span class="lbl"><i class="bi bi-tag"></i>Discount</span><span class="val">−Rs.${fmt(td)}</span></div>` : ''}
+              <div class="total-row"><span class="lbl"><i class="bi bi-truck"></i>Delivery</span><span class="val">${dc === 0 ? `<span class="free-delivery">Free</span>` : `<span class="delivery-fee">Rs.${fmt(dc)}</span>`}</span></div>
+              <div class="total-row net"><span class="lbl">Total Payable</span><span class="val">Rs.${fmt(np)}</span></div>
+            </div>`;
+            updateCartCount();
+        }
+        function fmt(v) { return Number(v).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }); }
+        function updateCartCount() {
+            let c = 0; Object.values(cart).forEach(x => c += x.Quantity);
+            document.getElementById('cartCount').textContent = c;
+            const mb = document.getElementById('cartCountMobile');
+            if (mb) mb.textContent = c;
+            const hBadge = document.getElementById('cartHeaderCount');
+            if (c > 0) { hBadge.textContent = c + ' items'; hBadge.style.display = 'inline'; }
+            else { hBadge.style.display = 'none'; }
+        }
+        function toggleCart() {
+            document.getElementById('cartDrawer').classList.toggle('open');
+            document.getElementById('cartBackdrop').classList.toggle('show');
+        }
+
+        function openCheckoutModal() {
+            if (Object.values(cart).length === 0) { Swal.fire({ icon: 'warning', title: 'Cart Empty', text: 'Please add items first.', confirmButtonColor: '#f5c518', confirmButtonText: '<span style="color:#0d0d0d">OK</span>' }); return; }
+            document.getElementById('cartDrawer').classList.remove('open');
+            document.getElementById('cartBackdrop').classList.remove('show');
+            fetch('/StoreDetail/CheckRestaurantValidation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ RestaurantId: @Model.RestaurantId }) })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.statusId === 0) { document.querySelector('#closedModal .modal-title').innerText = 'Order Not Allowed'; document.querySelector('#closedModal .modal-body').innerHTML = data.message; new bootstrap.Modal(document.getElementById('closedModal')).show(); return; }
+                    new bootstrap.Modal(document.getElementById('checkoutModal')).show();
+                })
+                .catch(() => Swal.fire('Error', 'Server validation failed.', 'error'));
+        }
+        function placeOrder() {
+            const contactNo = document.getElementById("ContactNo").value.trim();
+            const customerName = document.getElementById("CustomerName").value.trim();
+            const customerAddress = document.getElementById("CustomerAddress").value.trim();
+            const street = document.getElementById("Street").value.trim();
+            const floor = document.getElementById("Floor").value.trim();
+            const description = document.getElementById("Description").value.trim();
+            if (!contactNo || contactNo.length < 9) { Swal.fire("Validation", "Contact No must be at least 9 digits.", "error"); return; }
+            if (!customerName || !customerAddress || !street || !floor) { Swal.fire("Validation", "All fields are mandatory except Description.", "error"); return; }
+            Swal.fire({ title: "Confirm Order", text: "Are you sure you want to place this order?", icon: "question", showCancelButton: true, confirmButtonText: "Yes, Place Order", cancelButtonText: "Cancel", confirmButtonColor: "#f5c518", cancelButtonColor: "#6c757d", reverseButtons: true, focusCancel: true })
+                .then(result => {
+                    if (!result.isConfirmed) return;
+                    bootstrap.Modal.getInstance(document.getElementById('checkoutModal')).hide();
+                    setTimeout(() => {
+                        Swal.fire({ title: "Processing...", html: `<div style="text-align:center"><img src="/Images/GIF/OrderPlaced.gif" style="width:120px;height:120px;border-radius:50%;margin-bottom:12px;"/><div style="font-weight:700;color:#333;">Placing your order...</div></div>`, allowOutsideClick: false, allowEscapeKey: false, showConfirmButton: false, backdrop: 'rgba(0,0,0,0.7)', customClass: { popup: 'loading-swal-popup', container: 'loading-swal-container' }, didOpen: () => { const c = document.querySelector('.swal2-container'); c.setAttribute('tabindex', '-1'); c.focus(); document.querySelectorAll('#checkoutModal input,#checkoutModal textarea').forEach(i => i.disabled = true); }, willClose: () => { document.querySelectorAll('#checkoutModal input,#checkoutModal textarea').forEach(i => i.disabled = false); } });
+                        $.ajax({
+                            url: "/StoreDetail/PlaceOrder", type: "POST", contentType: "application/json",
+                            data: JSON.stringify({ ContactNo: contactNo, CustomerName: customerName, CustomerAddress: customerAddress, Street: street, Floor: floor, Description: description, Items: Object.values(cart), RestaurantId: @Model.RestaurantId }),
+                            success: function (res) {
+                                Swal.close();
+                                document.getElementById("orderSuccessMessage").innerHTML = res.message;
+                                if (res.statusId === 0) { document.getElementById("orderStatusGif").src = "/Images/GIF/OrderFailed.gif"; }
+                                else { document.getElementById("orderStatusGif").src = "/Images/GIF/OrderSuccess.gif"; cart = {}; renderCart(); document.querySelectorAll('[id^="qty-"]').forEach(s => s.textContent = 0); clearCheckoutModalFields(); }
+                                new bootstrap.Modal(document.getElementById('orderSuccessModal')).show();
+                            },
+                            error: function () { Swal.close(); Swal.fire("Error", "Something went wrong.", "error"); }
+                        });
+                    }, 300);
+                });
+        }
+        function clearCheckoutModalFields(cc = true) {
+            if (cc) document.getElementById("ContactNo").value = "";
+            ["CustomerName", "CustomerAddress", "Street", "Floor", "Description"].forEach(id => document.getElementById(id).value = "");
+        }
+        document.getElementById("ContactNo").addEventListener("input", function () { this.value = this.value.replace(/\D/g, ''); });
+        document.getElementById("ContactNo").addEventListener("blur", function () {
+            if (!this.value.trim()) return;
+            fetch('/StoreDetail/CustomerExsistOrNo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ContactNo: this.value.trim() }) })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.statusId === 1) {
+                        document.getElementById("CustomerName").value = data.customerName || "";
+                        document.getElementById("CustomerAddress").value = data.customerAddress || "";
+                        document.getElementById("Street").value = data.street || "";
+                        document.getElementById("Floor").value = data.floor || "";
+                        document.getElementById("Description").value = data.description || "";
+                    } else { clearCheckoutModalFields(false); }
+                }).catch(err => console.error(err));
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputs = document.querySelectorAll(".next-input");
+            inputs.forEach((input, index) => {
+                input.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter") { e.preventDefault(); const next = inputs[index + 1]; next ? next.focus() : placeOrder(); }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
