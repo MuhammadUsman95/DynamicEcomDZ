@@ -1,14 +1,6 @@
-﻿@model DynamicEcomDZ.Models.RestaurantDetailViewModel
-<!-- ══════════════ ABOUT SECTION ══════════════ -->
-<section id="about" class="about-section">
-    <div class="about-wrap">
-        <div class="about-img-col">
-            <img src="/images/SliderRegistration/@(Model.Sliders.Count > 0 ? Model.Sliders[0].SliderName : "placeholder.jpg")" class="about-img-main" alt="About Us" />
-            <div class="about-badge-float">
-                <div class="about-badge-num">9PM</div>
-                <div class="about-badge-txt">Last Order<br>Time</div>
-            </div>
-        </div>
+﻿@{
+    Layout = null;
+}
         <div class="about-text-col">
             <div class="about-tagline">Our Story</div>
             <h2 class="about-heading">Karachi's Favourite<br><em>Burger Joint</em></h2>

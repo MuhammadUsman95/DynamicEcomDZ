@@ -14,6 +14,10 @@ namespace DynamicEcomDZ.Controllers
         {
             _config = config;
         }
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
 
         // =====================================================================
         //  INDEX  —  Single Store (default id = 1)

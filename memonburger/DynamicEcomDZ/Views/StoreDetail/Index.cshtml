@@ -2611,7 +2611,10 @@
             <div class="nav-links">
                 <a href="#hero" class="nav-link-item active">Home</a>
                 <a href="#shop" class="nav-link-item">Shop</a>
-                <a href="/About" class="nav-link-item">About</a>
+                @* <a href="/About" class="nav-link-item">About</a> *@
+                <a asp-controller="StoreDetail" asp-action="Abouts" class="btn-about">
+                    <i class="bi bi-info-circle"></i> Abouts
+                </a>
             </div>
             <div class="nav-right">
                 <div class="cart-pill" id="cartIcon" onclick="toggleCart()">
