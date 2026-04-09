@@ -2599,15 +2599,15 @@
     @if (!string.IsNullOrEmpty(Model.SubHeaderTitle))
     {
         <div class="promo-bar" id="promoBar">
-            <span><i class="bi bi-clock"></i>Order Timing: 11:00am – 9:00pm</span>
-            <span><i class="bi bi-whatsapp"></i>+92 301 2320012</span>
+            <span><i class="bi bi-clock"></i>Order Timing: @Model.ClosingTimeIn – @Model.ClosingTimeOut</span>
+            <span><i class="bi bi-whatsapp"></i>@Model.WhatsappNo</span>
         </div>
     }
 
     <!-- ══════════════ NAVBAR ══════════════ -->
     <nav class="main-nav" id="mainNav">
         <div class="nav-inner">
-            <a href="/" class="nav-logo"><img src="/images/logo.png" alt="@Model.RestaurantName" /></a>
+            <a href="/" class="nav-logo"><img src="/images/@Model.HeaderLogo" alt="@Model.CompanyName" /></a>
             <div class="nav-links">
                 <a href="#hero" class="nav-link-item active">Home</a>
                 <a href="#shop" class="nav-link-item">Shop</a>
@@ -2724,9 +2724,16 @@
         <div class="features-inner">
             <div class="feat-item"><div class="feat-icon"><i class="bi bi-truck"></i></div><div><div class="feat-title">All Karachi Delivery</div><div class="feat-sub">Home delivery available</div></div></div>
             <div class="feat-item"><div class="feat-icon"><i class="bi bi-fire"></i></div><div><div class="feat-title">Fresh & Hot</div><div class="feat-sub">Made to order always</div></div></div>
-            <div class="feat-item"><div class="feat-icon"><i class="bi bi-currency-rupee"></i></div><div><div class="feat-title">Starting Rs.30</div><div class="feat-sub">Budget friendly menu</div></div></div>
-            <div class="feat-item"><div class="feat-icon"><i class="bi bi-clock"></i></div><div><div class="feat-title">11AM – 9PM</div><div class="feat-sub">Open every day</div></div></div>
-            <div class="feat-item"><div class="feat-icon"><i class="bi bi-whatsapp"></i></div><div><div class="feat-title">WhatsApp Order</div><div class="feat-sub">0301-2320012</div></div></div>
+            <div class="feat-item"><div class="feat-icon"><i class="bi bi-currency-rupee"></i></div><div><div class="feat-title">Delivery Rs.@Model.DeliveryCharges</div></div></div>
+            <div class="feat-item"><div class="feat-icon"><i class="bi bi-clock"></i></div><div><div class="feat-title">@Model.ClosingTimeIn – @Model.ClosingTimeOut</div><div class="feat-sub">Open every day</div></div></div>
+            <div class="feat-item"><div class="feat-icon"><i class="bi bi-clock"></i></div><div><div class="feat-title">@Model.ClosingTimeIn – @Model.ClosingTimeOut</div><div class="feat-sub">Open every day</div></div></div>
+            <div class="feat-item">
+                <div class="feat-icon"><i class="bi bi-whatsapp"></i></div>
+                <div>
+                    <div class="feat-title">WhatsApp Order</div>
+                    <div class="feat-sub">@Model.WhatsappNo</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -2735,8 +2742,8 @@
         <div class="shop-wrap">
             <div class="shop-bar">
                 <div>
-                    <div class="shop-bar-name">Memon Burger</div>
-                    <div class="shop-bar-addr"><i class="bi bi-geo-alt-fill"></i>@Model.RestaurantAddress</div>
+                    <div class="shop-bar-name">@Model.CompanyName</div>
+                    <div class="shop-bar-addr"><i class="bi bi-geo-alt-fill"></i>@Model.Address</div>
                 </div>
                 <div class="filter-row">
                     <input type="text" id="productSearch" class="form-control form-control-sm" placeholder="🔍 Search menu..." style="min-width:170px">
@@ -2817,8 +2824,16 @@
             <h2 class="nl-title">Order on WhatsApp</h2>
             <p class="nl-sub">Send us your order directly on WhatsApp. Fast, easy, and delivered hot to your door anywhere in Karachi.</p>
             <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
-                <a href="https://api.whatsapp.com/send?phone=923012320012" target="_blank" style="background:var(--accent);color:var(--dark);border:none;border-radius:4px;padding:12px 26px;font-weight:800;font-size:.86rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s;"><i class="bi bi-whatsapp"></i>0301-2320012</a>
-                <a href="tel:+923012320012" style="background:rgba(255,252,252,.08);color:#fffcfc;border:2px solid rgba(255,252,252,.2);border-radius:4px;padding:12px 26px;font-weight:700;font-size:.86rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;"><i class="bi bi-telephone"></i>0301-2320012</a>
+                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+                    <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo" target="_blank"
+                       style="background:var(--accent);color:var(--dark);border:none;border-radius:4px;padding:12px 26px;font-weight:800;font-size:.86rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s;">
+                        <i class="bi bi-whatsapp"></i>@Model.WhatsappNo
+                    </a>
+                    <a href="tel:@Model.PhoneNo"
+                       style="background:rgba(255,252,252,.08);color:#fffcfc;border:2px solid rgba(255,252,252,.2);border-radius:4px;padding:12px 26px;font-weight:700;font-size:.86rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+                        <i class="bi bi-telephone"></i>@Model.PhoneNo
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -2847,12 +2862,14 @@
     <footer class="site-footer">
         <div class="footer-top">
             <div class="footer-brand">
-                <a href="/"><img src="/images/logo.png" alt="Logo" style="height:48px;width:auto;object-fit:contain;filter:brightness(0) invert(1);" /></a>
+                <a href="/"><img src="/images/@Model.FooterLogo" alt="@Model.CompanyName" style="height:48px;width:auto;object-fit:contain;filter:brightness(0) invert(1);" /></a>
                 <p>Karachi's favourite burger & fry spot. Fresh ingredients, bold Memon flavours, and speedy delivery all over the city.</p>
                 <div class="footer-socials">
                     <a href="https://www.facebook.com/share/1Buimi6joN/" target="_blank" class="fsoc"><i class="bi bi-facebook"></i></a>
                     <a href="#" class="fsoc"><i class="bi bi-instagram"></i></a>
-                    <a href="https://api.whatsapp.com/send?phone=923012320012" target="_blank" class="fsoc"><i class="bi bi-whatsapp"></i></a>
+                    <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo" target="_blank" class="fsoc">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
                     <a href="#" class="fsoc"><i class="bi bi-tiktok"></i></a>
                 </div>
             </div>
@@ -2876,10 +2893,35 @@
             </div>
             <div class="footer-col">
                 <h5>Contact Us</h5>
-                <div class="footer-contact-item"><div class="fc-icon"><i class="bi bi-whatsapp"></i></div><div><div class="fc-label">WhatsApp</div><a href="https://api.whatsapp.com/send?phone=923012320012" target="_blank" class="fc-val">0301-2320012</a></div></div>
-                <div class="footer-contact-item"><div class="fc-icon"><i class="bi bi-telephone-fill"></i></div><div><div class="fc-label">Phone</div><a href="tel:+923012320012" class="fc-val">0301-2320012</a></div></div>
-                <div class="footer-contact-item"><div class="fc-icon"><i class="bi bi-geo-alt-fill"></i></div><div><div class="fc-label">Area</div><span class="fc-val">@Model.RestaurantAddress</span></div></div>
-                <div class="footer-contact-item"><div class="fc-icon"><i class="bi bi-clock-fill"></i></div><div><div class="fc-label">Hours</div><span class="fc-val">11:00am – 9:00pm</span></div></div>
+                <div class="footer-contact-item">
+                    <div class="fc-icon"><i class="bi bi-whatsapp"></i></div>
+                    <div>
+                        <div class="fc-label">WhatsApp</div>
+                        <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo"
+                           target="_blank" class="fc-val">@Model.WhatsappNo</a>
+                    </div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="fc-icon"><i class="bi bi-telephone-fill"></i></div>
+                    <div>
+                        <div class="fc-label">Phone</div>
+                        <a href="tel:@Model.PhoneNo" class="fc-val">@Model.PhoneNo</a>
+                    </div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="fc-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                    <div>
+                        <div class="fc-label">Area</div>
+                        <span class="fc-val">@Model.Address</span>
+                    </div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="fc-icon"><i class="bi bi-clock-fill"></i></div>
+                    <div>
+                        <div class="fc-label">Hours</div>
+                        <span class="fc-val">@Model.ClosingTimeIn – @Model.ClosingTimeOut</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
@@ -2900,26 +2942,42 @@
                     <div class="wa-online-dot"></div>
                 </div>
                 <div class="wa-popup-info">
-                    <div class="wa-popup-name">Memon Burger</div>
+                    <!-- ✅ Dynamic Company Name -->
+                    <div class="wa-popup-name">@Model.CompanyName</div>
                     <div class="wa-popup-status"><span></span>Online — Ready to take orders</div>
                 </div>
-                <button class="wa-popup-close" onclick="toggleWaChat()"><i class="bi bi-x-lg"></i></button>
+                <button class="wa-popup-close" onclick="toggleWaChat()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
             </div>
             <div class="wa-popup-body">
                 <div class="wa-bubble">
                     👋 Assalam o Alaikum!<br>
                     Order karne ke liye hum tayyar hain.<br><br>
                     <strong>Menu, delivery ya price</strong> ke baare mein poochein — hum jawab denge! 🍔🍟
-                    <div class="wa-bubble-time" id="waChatTime"><i class="bi bi-check2-all"></i></div>
+                    <div class="wa-bubble-time" id="waChatTime">
+                        <i class="bi bi-check2-all"></i>
+                    </div>
                 </div>
             </div>
             <div class="wa-quick-replies">
-                <a href="https://api.whatsapp.com/send?phone=923012320012&text=Menu%20share%20karein%20please" target="_blank" class="wa-chip"><i class="bi bi-card-list"></i>Menu</a>
-                <a href="https://api.whatsapp.com/send?phone=923012320012&text=Order%20karna%20hai" target="_blank" class="wa-chip"><i class="bi bi-bag-heart"></i>Order Now</a>
-                <a href="https://api.whatsapp.com/send?phone=923012320012&text=Delivery%20charges%20kya%20hain?" target="_blank" class="wa-chip"><i class="bi bi-truck"></i>Delivery?</a>
+                <!-- ✅ Dynamic WhatsApp links -->
+                <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo&text=Menu%20share%20karein%20please"
+                   target="_blank" class="wa-chip">
+                    <i class="bi bi-card-list"></i>Menu
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo&text=Order%20karna%20hai"
+                   target="_blank" class="wa-chip">
+                    <i class="bi bi-bag-heart"></i>Order Now
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo&text=Delivery%20charges%20kya%20hain?"
+                   target="_blank" class="wa-chip">
+                    <i class="bi bi-truck"></i>Delivery?
+                </a>
             </div>
             <div class="wa-popup-footer">
-                <a href="https://api.whatsapp.com/send?phone=923012320012&text=Assalam%20o%20Alaikum!%20Mujhe%20order%20karna%20hai." target="_blank" class="wa-send-btn">
+                <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo&text=Assalam%20o%20Alaikum!%20Mujhe%20order%20karna%20hai."
+                   target="_blank" class="wa-send-btn">
                     <i class="bi bi-whatsapp"></i>Start Chat on WhatsApp
                 </a>
             </div>

@@ -14,6 +14,7 @@ namespace DynamicEcomDZ.Controllers
         {
             _config = config;
         }
+
         public IActionResult AboutUs()
         {
             return View();
@@ -87,6 +88,32 @@ namespace DynamicEcomDZ.Controllers
                     }
                 }
 
+                // ---------- USER / STORE INFO — User_SP (nsCategoryId = 3) ----------
+                using (SqlCommand cmd = new SqlCommand("User_SP", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@nCategoryId", 0);
+                    cmd.Parameters.AddWithValue("@nsCategoryId", 3);
+
+                    using (SqlDataReader dr = await cmd.ExecuteReaderAsync())
+                    {
+                        if (await dr.ReadAsync())
+                        {
+                            viewModel.CompanyName = dr["CompanyName"]?.ToString() ?? "";
+                            viewModel.Address = dr["Address"]?.ToString() ?? "";
+                            viewModel.HeaderLogo = dr["Headerlogo"]?.ToString() ?? "";
+                            viewModel.FooterLogo = dr["Footerlogo"]?.ToString() ?? "";
+                            viewModel.ClosingTimeIn = dr["ClosingTimeIn"]?.ToString() ?? "";
+                            viewModel.ClosingTimeOut = dr["ClosingTimeOut"]?.ToString() ?? "";
+                            viewModel.DeliveryCharges = dr["DeliveryCharges"] == DBNull.Value
+                                                        ? 0
+                                                        : Convert.ToDecimal(dr["DeliveryCharges"]);
+                            viewModel.PhoneNo = dr["PhoneNo"]?.ToString() ?? "";
+                            viewModel.WhatsappNo = dr["WhatsappNo"]?.ToString() ?? "";
+                        }
+                    }
+                }
+
                 // ---------- PRODUCT DATA (nsType = 3) ----------
                 using (SqlCommand cmd = new SqlCommand("Redirection_TAB_SP", con))
                 {
@@ -106,8 +133,10 @@ namespace DynamicEcomDZ.Controllers
                                 ProductCode = dr["ProductCode"]?.ToString(),
                                 ProductDescription = dr["ProductDescription"]?.ToString(),
                                 ProductImage = dr["ProductImage"]?.ToString(),
-                                Prices = dr["Prices"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["Prices"]),
-                                DiscountAmount = dr["DiscountAmount"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["DiscountAmount"]),
+                                Prices = dr["Prices"] == DBNull.Value
+                                                     ? 0 : Convert.ToDecimal(dr["Prices"]),
+                                DiscountAmount = dr["DiscountAmount"] == DBNull.Value
+                                                     ? 0 : Convert.ToDecimal(dr["DiscountAmount"]),
                                 CustomerName = dr["CustomerName"]?.ToString(),
                                 DeliveryCharges = dr["DeliveryCharges"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["DeliveryCharges"])
                             });
@@ -120,12 +149,16 @@ namespace DynamicEcomDZ.Controllers
             viewModel.Sliders = sliders;
             viewModel.SubHeaderTitle = subHeaderTitle;
             viewModel.Products = products
-                                        .GroupBy(p => p.Category)
-                                        .ToDictionary(g => g.Key, g => g.ToList());
+                                         .GroupBy(p => p.Category)
+                                         .ToDictionary(g => g.Key, g => g.ToList());
 
             // Fallback: agar nsType=6 se name nahi mila
             if (string.IsNullOrEmpty(viewModel.RestaurantName))
                 viewModel.RestaurantName = products.FirstOrDefault()?.CustomerName ?? "Store";
+
+            // Fallback: agar User_SP se CompanyName nahi mila
+            if (string.IsNullOrEmpty(viewModel.CompanyName))
+                viewModel.CompanyName = viewModel.RestaurantName;
 
             return View(viewModel);
         }
@@ -164,9 +197,9 @@ namespace DynamicEcomDZ.Controllers
                 string[] detailParams = { "ProductCode", "Quantity", "Rate", "DiscountAmount" };
                 string[] detailValues =
                 {
-                    item.ProductCode      ?? "",
-                    item.Quantity.ToString()      ?? "0",
-                    item.Rate.ToString()          ?? "0",
+                    item.ProductCode           ?? "",
+                    item.Quantity.ToString()   ?? "0",
+                    item.Rate.ToString()       ?? "0",
                     item.DiscountAmount.ToString() ?? "0"
                 };
                 DetailXML += CreateXML(detailParams, detailValues, "DetailXML");
@@ -197,8 +230,10 @@ namespace DynamicEcomDZ.Controllers
                     {
                         if (dr.Read())
                         {
-                            response.StatusId = dr["StatusId"] != DBNull.Value ? Convert.ToInt32(dr["StatusId"]) : 0;
-                            response.Message = dr["Message"] != DBNull.Value ? dr["Message"].ToString() : "";
+                            response.StatusId = dr["StatusId"] != DBNull.Value
+                                                ? Convert.ToInt32(dr["StatusId"]) : 0;
+                            response.Message = dr["Message"] != DBNull.Value
+                                                ? dr["Message"].ToString() : "";
                         }
                         else
                         {
@@ -314,7 +349,7 @@ namespace DynamicEcomDZ.Controllers
     }
 
     // =====================================================================
-    //  REQUEST MODEL (inline — sirf is controller ke liye)
+    //  REQUEST MODELS
     // =====================================================================
     public class CheckRequest
     {

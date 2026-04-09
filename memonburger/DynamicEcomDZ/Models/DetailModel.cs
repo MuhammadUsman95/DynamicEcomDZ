@@ -23,6 +23,15 @@ namespace DynamicEcomDZ.Models
         public string? SubHeaderTitle { get; set; }
         public string? RestaurantLogo { get; set; } = "";
         public string? RestaurantAddress { get; set; } = "";
+        public string CompanyName { get; set; }
+        public string Address { get; set; }
+        public string HeaderLogo { get; set; }
+        public string FooterLogo { get; set; }
+        public string ClosingTimeIn { get; set; }
+        public string ClosingTimeOut { get; set; }
+        public decimal DeliveryCharges { get; set; }
+        public string PhoneNo { get; set; }
+        public string WhatsappNo { get; set; }
 
 
     }
