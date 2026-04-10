@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using System.Net.Http;
 
 namespace DynamicEcomDZ.Controllers
 {
@@ -138,7 +139,8 @@ namespace DynamicEcomDZ.Controllers
                                 DiscountAmount = dr["DiscountAmount"] == DBNull.Value
                                                      ? 0 : Convert.ToDecimal(dr["DiscountAmount"]),
                                 CustomerName = dr["CustomerName"]?.ToString(),
-                                DeliveryCharges = dr["DeliveryCharges"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["DeliveryCharges"])
+                                DeliveryCharges = dr["DeliveryCharges"] == DBNull.Value
+                                                     ? 0 : Convert.ToDecimal(dr["DeliveryCharges"])
                             });
                         }
                     }
@@ -182,12 +184,12 @@ namespace DynamicEcomDZ.Controllers
             string[] masterParams = { "ContactNo", "CustomerName", "CustomerAddress", "Street", "Floor", "Description" };
             string[] masterValues =
             {
-                model.ContactNo        ?? "",
-                model.CustomerName     ?? "",
-                model.CustomerAddress  ?? "",
-                model.Street           ?? "",
-                model.Floor            ?? "",
-                model.Description      ?? ""
+                model.ContactNo       ?? "",
+                model.CustomerName    ?? "",
+                model.CustomerAddress ?? "",
+                model.Street          ?? "",
+                model.Floor           ?? "",
+                model.Description     ?? ""
             };
             MasterXML = $"<Insert1>{CreateXML(masterParams, masterValues, "MasterXML")}</Insert1>";
 
@@ -197,9 +199,9 @@ namespace DynamicEcomDZ.Controllers
                 string[] detailParams = { "ProductCode", "Quantity", "Rate", "DiscountAmount" };
                 string[] detailValues =
                 {
-                    item.ProductCode           ?? "",
-                    item.Quantity.ToString()   ?? "0",
-                    item.Rate.ToString()       ?? "0",
+                    item.ProductCode              ?? "",
+                    item.Quantity.ToString()      ?? "0",
+                    item.Rate.ToString()          ?? "0",
                     item.DiscountAmount.ToString() ?? "0"
                 };
                 DetailXML += CreateXML(detailParams, detailValues, "DetailXML");
@@ -207,6 +209,7 @@ namespace DynamicEcomDZ.Controllers
             DetailXML = $"<Insert1>{DetailXML}</Insert1>";
 
             var response = new MessageResponse();
+            string whatsappApiUrl = "";   // ← DB se return hone wala WhatsApp API URL
 
             using (SqlConnection con = new SqlConnection(conStr))
             {
@@ -234,6 +237,10 @@ namespace DynamicEcomDZ.Controllers
                                                 ? Convert.ToInt32(dr["StatusId"]) : 0;
                             response.Message = dr["Message"] != DBNull.Value
                                                 ? dr["Message"].ToString() : "";
+
+                            // ← WhatsApp API URL read karo
+                            whatsappApiUrl = dr["WhatsappApi"] != DBNull.Value
+                                                ? dr["WhatsappApi"].ToString() : "";
                         }
                         else
                         {
@@ -241,6 +248,24 @@ namespace DynamicEcomDZ.Controllers
                             response.Message = "Order could not be placed. No response from server.";
                         }
                     }
+                }
+            }
+
+            // ← Order success ho aur URL mile to WhatsApp API GET hit karo
+            if (response.StatusId == 1 && !string.IsNullOrWhiteSpace(whatsappApiUrl))
+            {
+                try
+                {
+                    using (HttpClient http = new HttpClient())
+                    {
+                        http.Timeout = TimeSpan.FromSeconds(10);
+                        await http.GetAsync(whatsappApiUrl);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // WhatsApp fail hone se order response affect na ho
+                    Console.WriteLine("WhatsApp API Error: " + ex.Message);
                 }
             }
 
