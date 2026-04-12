@@ -16,7 +16,7 @@ namespace DynamicEcomDZ.Controllers
             _config = config;
         }
 
-        public IActionResult AboutUs()
+        public IActionResult Abouts()
         {
             return View();
         }

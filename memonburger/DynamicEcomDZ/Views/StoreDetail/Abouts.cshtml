@@ -1,38 +1,1026 @@
 ﻿@{
     Layout = null;
 }
-        <div class="about-text-col">
-            <div class="about-tagline">Our Story</div>
-            <h2 class="about-heading">Karachi's Favourite<br><em>Burger Joint</em></h2>
-            <p class="about-body">Memon Burger has been serving the streets of Karachi with bold flavours and fresh ingredients. From crispy <strong>Chicken Wontons</strong> to our legendary <strong>Memon's Special Burger</strong> — every item is made fresh to order. Affordable prices, generous portions, and speedy delivery all over Karachi.</p>
-            <!-- Menu Highlights Grid -->
-            <div class="about-menu-grid">
-                <div class="menu-highlight-card">
-                    <div class="mhc-name">Memon's Special Burger</div>
-                    <div class="mhc-price">Rs. 250</div>
+
+<style>
+    /* ═══════════════════════════════════════════
+           ABOUT PAGE — PROFESSIONAL DARK EDITION
+           Matches main site: Playfair Display + DM Sans
+           Black/White palette with bold accents
+        ═══════════════════════════════════════════ */
+
+    :root {
+        --ab-dark: #1f1d1d;
+        --ab-dark2: #111010;
+        --ab-white: #fffcfc;
+        --ab-muted: #888;
+        --ab-border: rgba(31,29,29,.1);
+        --ab-tr: all .3s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ── HERO BANNER ── */
+    .ab-hero {
+        position: relative;
+        background: var(--ab-dark2);
+        overflow: hidden;
+        padding: 90px 0 80px;
+    }
+
+        .ab-hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -120px;
+            width: 420px;
+            height: 420px;
+            background: rgba(255,255,255,.03);
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+
+        .ab-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--ab-white);
+        }
+
+    .ab-hero-inner {
+        max-width: 1100px;
+        margin: auto;
+        padding: 0 32px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 56px;
+    }
+
+    .ab-hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: .64rem;
+        font-weight: 800;
+        letter-spacing: .28em;
+        text-transform: uppercase;
+        color: rgba(255,252,252,.4);
+        margin-bottom: 16px;
+    }
+
+        .ab-hero-tag::before, .ab-hero-tag::after {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 1.5px;
+            background: rgba(255,252,252,.2);
+        }
+
+    .ab-hero-title {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 3.4rem;
+        font-weight: 900;
+        color: var(--ab-white);
+        line-height: 1.08;
+        margin-bottom: 20px;
+        letter-spacing: -.03em;
+    }
+
+        .ab-hero-title em {
+            font-style: italic;
+            color: rgba(255,252,252,.38);
+        }
+
+    .ab-hero-body {
+        font-size: .9rem;
+        color: rgba(255,252,252,.42);
+        line-height: 1.85;
+        margin-bottom: 28px;
+        max-width: 460px;
+    }
+
+    .ab-hero-btns {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .ab-btn-solid {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--ab-white);
+        color: var(--ab-dark);
+        padding: 13px 26px;
+        border-radius: 4px;
+        font-size: .76rem;
+        font-weight: 800;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: var(--ab-tr);
+        border-bottom: 2px solid rgba(31,29,29,.35);
+    }
+
+        .ab-btn-solid:hover {
+            background: #e8e5e5;
+            color: var(--ab-dark);
+            transform: translateY(-2px);
+        }
+
+    .ab-btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: rgba(255,252,252,.55);
+        padding: 12px 22px;
+        border-radius: 4px;
+        font-size: .76rem;
+        font-weight: 700;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1.5px solid rgba(255,252,252,.18);
+        cursor: pointer;
+        transition: var(--ab-tr);
+    }
+
+        .ab-btn-ghost:hover {
+            background: rgba(255,252,252,.08);
+            color: var(--ab-white);
+            border-color: rgba(255,252,252,.45);
+        }
+
+    /* ── IMAGE SIDE ── */
+    .ab-image-block {
+        position: relative;
+    }
+
+    .ab-main-img {
+        width: 100%;
+        height: 440px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 8px;
+        display: block;
+        filter: brightness(.88) grayscale(8%);
+        border: 1.5px solid rgba(255,252,252,.08);
+    }
+
+    .ab-img-accent {
+        position: absolute;
+        top: -14px;
+        right: -14px;
+        width: 110px;
+        height: 110px;
+        border: 2px solid rgba(255,252,252,.12);
+        border-radius: 6px;
+        pointer-events: none;
+    }
+
+    .ab-img-badge {
+        position: absolute;
+        bottom: -18px;
+        left: 20px;
+        background: var(--ab-white);
+        color: var(--ab-dark);
+        padding: 16px 22px;
+        border-radius: 6px;
+        box-shadow: 0 14px 38px rgba(0,0,0,.28);
+        min-width: 220px;
+        border-bottom: 3px solid rgba(31,29,29,.18);
+    }
+
+    .ab-img-badge-label {
+        font-size: .6rem;
+        font-weight: 800;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: var(--ab-muted);
+        margin-bottom: 4px;
+    }
+
+    .ab-img-badge-value {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.12rem;
+        font-weight: 900;
+        color: var(--ab-dark);
+        line-height: 1.3;
+    }
+
+    /* ── STATS STRIP ── */
+    .ab-stats {
+        background: var(--ab-white);
+        border-bottom: 2px solid var(--ab-dark);
+    }
+
+    .ab-stats-inner {
+        max-width: 1100px;
+        margin: auto;
+        padding: 0 32px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-left: 1px solid var(--ab-border);
+    }
+
+    .ab-stat {
+        padding: 36px 28px;
+        border-right: 1px solid var(--ab-border);
+        position: relative;
+        transition: background .3s ease;
+    }
+
+        .ab-stat:hover {
+            background: #f8f5f5;
+        }
+
+        .ab-stat::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--ab-dark);
+            transition: height .4s cubic-bezier(.4,0,.2,1);
+        }
+
+        .ab-stat:hover::after {
+            height: 100%;
+        }
+
+    .ab-stat-num {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: var(--ab-dark);
+        line-height: 1;
+        margin-bottom: 4px;
+    }
+
+    .ab-stat-unit {
+        font-size: 1.2rem;
+        opacity: .35;
+    }
+
+    .ab-stat-lbl {
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--ab-muted);
+    }
+
+    /* ── STORY SECTION ── */
+    .ab-story {
+        padding: 90px 0;
+        background: var(--ab-white);
+    }
+
+    .ab-story-inner {
+        max-width: 1100px;
+        margin: auto;
+        padding: 0 32px;
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 72px;
+        align-items: start;
+    }
+
+    .ab-sec-eyebrow {
+        font-size: .62rem;
+        font-weight: 800;
+        letter-spacing: .28em;
+        text-transform: uppercase;
+        color: var(--ab-muted);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .ab-sec-eyebrow::after {
+            content: '';
+            flex: 1;
+            max-width: 44px;
+            height: 1.5px;
+            background: var(--ab-dark);
+        }
+
+    .ab-sec-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--ab-dark);
+        line-height: 1.15;
+        margin-bottom: 20px;
+        letter-spacing: -.025em;
+    }
+
+    .ab-sec-body {
+        font-size: .88rem;
+        color: #666;
+        line-height: 1.88;
+        margin-bottom: 14px;
+    }
+
+    /* ── FEATURE CHECKLIST ── */
+    .ab-checklist {
+        display: grid;
+        gap: 10px;
+        margin-top: 24px;
+    }
+
+    .ab-check-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 16px;
+        border: 1.5px solid var(--ab-border);
+        border-radius: 6px;
+        transition: var(--ab-tr);
+        cursor: default;
+    }
+
+        .ab-check-item:hover {
+            border-color: var(--ab-dark);
+            background: #faf8f8;
+            transform: translateX(4px);
+        }
+
+    .ab-check-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--ab-dark);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .82rem;
+        color: var(--ab-white);
+        flex-shrink: 0;
+    }
+
+    .ab-check-text {
+        font-size: .82rem;
+        font-weight: 600;
+        color: var(--ab-dark);
+        line-height: 1.5;
+    }
+
+    .ab-check-sub {
+        font-size: .72rem;
+        color: var(--ab-muted);
+        font-weight: 400;
+    }
+
+    /* ── MENU HIGHLIGHTS (right column) ── */
+    .ab-menu-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 28px;
+    }
+
+    .ab-menu-card {
+        background: var(--ab-dark);
+        border-radius: 8px;
+        padding: 20px 18px;
+        position: relative;
+        overflow: hidden;
+        transition: var(--ab-tr);
+        border-bottom: 2px solid #ffffff;
+    }
+
+        .ab-menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: rgba(255,252,252,.3);
+        }
+
+        .ab-menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(31,29,29,.22);
+        }
+
+    .ab-mc-name {
+        font-size: .82rem;
+        font-weight: 700;
+        color: rgba(255,252,252,.7);
+        margin-bottom: 8px;
+        line-height: 1.3;
+    }
+
+    .ab-mc-price {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--ab-white);
+        line-height: 1;
+    }
+
+    .ab-mc-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255,252,252,.1);
+        color: rgba(255,252,252,.5);
+        font-size: .56rem;
+        font-weight: 800;
+        letter-spacing: .1em;
+        padding: 3px 8px;
+        border-radius: 3px;
+        text-transform: uppercase;
+    }
+
+    /* ── INFO PILLS ── */
+    .ab-info-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .ab-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--ab-white);
+        border: 1.5px solid var(--ab-dark);
+        color: var(--ab-dark);
+        padding: 10px 16px;
+        border-radius: 4px;
+        font-size: .74rem;
+        font-weight: 700;
+        transition: var(--ab-tr);
+    }
+
+        .ab-pill:hover {
+            background: var(--ab-dark);
+            color: var(--ab-white);
+        }
+
+        .ab-pill i {
+            font-size: .82rem;
+        }
+
+    /* ── WHY CHOOSE US ── */
+    .ab-why {
+        padding: 80px 0;
+        background: var(--ab-dark);
+        position: relative;
+        overflow: hidden;
+    }
+
+        .ab-why::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 80% 20%, rgba(255,252,252,.04) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(255,252,252,.03) 0%, transparent 40%);
+        }
+
+        .ab-why::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--ab-white);
+        }
+
+    .ab-why-inner {
+        max-width: 1100px;
+        margin: auto;
+        padding: 0 32px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .ab-why-hd {
+        text-align: center;
+        margin-bottom: 52px;
+    }
+
+        .ab-why-hd .ab-sec-eyebrow {
+            justify-content: center;
+            color: rgba(255,252,252,.35);
+        }
+
+            .ab-why-hd .ab-sec-eyebrow::after {
+                display: none;
+            }
+
+            .ab-why-hd .ab-sec-eyebrow::before {
+                content: '';
+                max-width: 44px;
+                height: 1.5px;
+                background: rgba(255,252,252,.18);
+            }
+
+    .ab-why-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: var(--ab-white);
+        line-height: 1.15;
+        letter-spacing: -.025em;
+    }
+
+    .ab-why-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        background: rgba(255,252,252,.06);
+        border: 1.5px solid rgba(255,252,252,.06);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .ab-why-card {
+        background: rgba(255,252,252,.02);
+        padding: 36px 30px;
+        transition: var(--ab-tr);
+        position: relative;
+        overflow: hidden;
+    }
+
+        .ab-why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: rgba(255,252,252,.04);
+            transition: height .4s ease;
+        }
+
+        .ab-why-card:hover::before {
+            height: 100%;
+        }
+
+    .ab-why-num {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: rgba(255,252,252,.05);
+        line-height: 1;
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        letter-spacing: -.04em;
+    }
+
+    .ab-why-icon {
+        width: 46px;
+        height: 46px;
+        background: rgba(255,252,252,.08);
+        border: 1px solid rgba(255,252,252,.14);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        color: var(--ab-white);
+        margin-bottom: 16px;
+        transition: var(--ab-tr);
+    }
+
+    .ab-why-card:hover .ab-why-icon {
+        background: rgba(255,252,252,.18);
+        border-color: rgba(255,252,252,.4);
+    }
+
+    .ab-why-card-title {
+        font-size: .92rem;
+        font-weight: 800;
+        color: var(--ab-white);
+        margin-bottom: 8px;
+        letter-spacing: -.01em;
+    }
+
+    .ab-why-card-body {
+        font-size: .76rem;
+        color: rgba(255,252,252,.38);
+        line-height: 1.75;
+    }
+
+    /* ── CTA STRIP ── */
+    .ab-cta {
+        background: var(--ab-white);
+        border-top: 2px solid var(--ab-dark);
+        padding: 64px 0;
+    }
+
+    .ab-cta-inner {
+        max-width: 900px;
+        margin: auto;
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        flex-wrap: wrap;
+    }
+
+    .ab-cta-text {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--ab-dark);
+        line-height: 1.25;
+        letter-spacing: -.025em;
+    }
+
+        .ab-cta-text span {
+            font-style: italic;
+            color: var(--ab-muted);
+        }
+
+    .ab-cta-actions {
+        display: flex;
+        gap: 12px;
+        flex-shrink: 0;
+        flex-wrap: wrap;
+    }
+
+    /* ══ RESPONSIVE ══ */
+    @@media (max-width: 1024px) {
+        .ab-hero-title
+
+    {
+        font-size: 2.6rem;
+    }
+
+    .ab-stats-inner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ab-story-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .ab-why-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    }
+    @@media (max-width: 768px) {
+        .ab-hero-inner
+
+    {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .ab-hero-title {
+        font-size: 2.2rem;
+    }
+
+    .ab-image-block {
+        display: none;
+    }
+
+    .ab-stats-inner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ab-sec-title {
+        font-size: 2rem;
+    }
+
+    .ab-menu-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .ab-why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ab-cta-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .ab-cta-actions {
+        justify-content: center;
+    }
+
+    }
+    @@media (max-width: 576px) {
+        .ab-hero
+
+    {
+        padding: 60px 0 70px;
+    }
+
+    .ab-hero-title {
+        font-size: 1.9rem;
+    }
+
+    .ab-hero-body {
+        font-size: .82rem;
+    }
+
+    .ab-stats-inner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ab-stat {
+        padding: 24px 18px;
+    }
+
+    .ab-stat-num {
+        font-size: 2.2rem;
+    }
+
+    .ab-story {
+        padding: 60px 0;
+    }
+
+    .ab-story-inner {
+        padding: 0 18px;
+    }
+
+    .ab-sec-title {
+        font-size: 1.75rem;
+    }
+
+    .ab-menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ab-why {
+        padding: 60px 0;
+    }
+
+    .ab-why-title {
+        font-size: 1.9rem;
+    }
+
+    .ab-why-inner {
+        padding: 0 18px;
+    }
+
+    .ab-hero-inner {
+        padding: 0 18px;
+    }
+
+    .ab-info-pills .ab-pill {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .ab-cta-text {
+        font-size: 1.6rem;
+    }
+
+    .ab-btn-solid, .ab-btn-ghost {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .ab-hero-btns {
+        flex-direction: column;
+    }
+
+    .ab-cta-inner {
+        padding: 0 18px;
+    }
+
+    }
+</style>
+
+<!-- ══ HERO ══ -->
+<section class="ab-hero">
+    <div class="ab-hero-inner">
+        <div>
+            <div class="ab-hero-tag">Our Story</div>
+            <h1 class="ab-hero-title">
+                Karachi's Most<br>
+                Loved <em>Burger</em><br>
+                Destination
+            </h1>
+            <p class="ab-hero-body">
+                From humble beginnings to a city-wide favourite — Memon Burger
+                has been crafting bold, satisfying meals for Karachi families.
+                Every bite tells our story of freshness, passion, and pride.
+            </p>
+            <div class="ab-hero-btns">
+                <a href="#shop" class="ab-btn-solid">
+                    <i class="bi bi-bag-heart-fill"></i> Order Now
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=03091211282" target="_blank" class="ab-btn-ghost">
+                    <i class="bi bi-whatsapp"></i> WhatsApp Us
+                </a>
+            </div>
+        </div>
+        <div class="ab-image-block">
+            <img src="~/images/memon-about-banner.jpg"
+                 alt="Memon Burger About"
+                 class="ab-main-img" />
+            <div class="ab-img-accent"></div>
+            <div class="ab-img-badge">
+                <div class="ab-img-badge-label">Our Promise</div>
+                <div class="ab-img-badge-value">Fresh. Fast.<br>Flavourful.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<div class="ab-stats">
+    <div class="ab-stats-inner">
+        <div class="ab-stat">
+            <div class="ab-stat-num">5K<span class="ab-stat-unit">+</span></div>
+            <div class="ab-stat-lbl">Orders Delivered</div>
+        </div>
+        <div class="ab-stat">
+            <div class="ab-stat-num">20<span class="ab-stat-unit">+</span></div>
+            <div class="ab-stat-lbl">Menu Items</div>
+        </div>
+        <div class="ab-stat">
+            <div class="ab-stat-num">4.8<span class="ab-stat-unit">★</span></div>
+            <div class="ab-stat-lbl">Customer Rating</div>
+        </div>
+        <div class="ab-stat">
+            <div class="ab-stat-num">1<span class="ab-stat-unit">Day</span></div>
+            <div class="ab-stat-lbl">Since Day One</div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ STORY + MENU ══ -->
+<section class="ab-story">
+    <div class="ab-story-inner">
+
+        <!-- LEFT: Story text + checklist -->
+        <div>
+            <div class="ab-sec-eyebrow">Who We Are</div>
+            <h2 class="ab-sec-title">Built on Flavour,<br>Driven by Karachi</h2>
+            <p class="ab-sec-body">
+                Memon Burger was born from a simple belief — everyone deserves
+                a great burger at an honest price. We started small, perfecting
+                our recipes with fresh ingredients and bold Memon flavours.
+            </p>
+            <p class="ab-sec-body">
+                Today, every order from our kitchen carries that same dedication.
+                Whether it's our legendary <strong>Memon's Special Burger</strong>,
+                crispy <strong>Chicken Wonton</strong>, or juicy <strong>Triple Kabab Burger</strong>
+                — every item is made fresh, made with care.
+            </p>
+
+            <div class="ab-checklist">
+                <div class="ab-check-item">
+                    <div class="ab-check-icon"><i class="bi bi-fire"></i></div>
+                    <div>
+                        <div class="ab-check-text">Made Fresh on Every Order</div>
+                        <div class="ab-check-sub">No pre-cooked, no shortcuts — only fresh preparation</div>
+                    </div>
                 </div>
-                <div class="menu-highlight-card">
-                    <div class="mhc-name">Triple Kabab Burger</div>
-                    <div class="mhc-price">Rs. 280</div>
+                <div class="ab-check-item">
+                    <div class="ab-check-icon"><i class="bi bi-currency-rupee"></i></div>
+                    <div>
+                        <div class="ab-check-text">Budget-Friendly Prices</div>
+                        <div class="ab-check-sub">Quality food for every wallet — starting from Rs.30</div>
+                    </div>
                 </div>
-                <div class="menu-highlight-card">
-                    <div class="mhc-name">Crispy Chicken Fry</div>
-                    <div class="mhc-price">Rs. 100</div>
+                <div class="ab-check-item">
+                    <div class="ab-check-icon"><i class="bi bi-truck"></i></div>
+                    <div>
+                        <div class="ab-check-text">All Karachi Delivery</div>
+                        <div class="ab-check-sub">Fast, reliable delivery across the entire city</div>
+                    </div>
                 </div>
-                <div class="menu-highlight-card">
-                    <div class="mhc-name">Chicken Wonton</div>
-                    <div class="mhc-price">Rs. 30</div>
+                <div class="ab-check-item">
+                    <div class="ab-check-icon"><i class="bi bi-clock"></i></div>
+                    <div>
+                        <div class="ab-check-text">Open Every Day: 11AM – 9PM</div>
+                        <div class="ab-check-sub">Ready to serve whenever your craving hits</div>
+                    </div>
                 </div>
             </div>
-            <div class="info-badges">
-                <div class="info-badge"><i class="bi bi-clock-fill"></i>11AM – 9PM</div>
-                <div class="info-badge"><i class="bi bi-geo-alt-fill"></i>All Karachi</div>
-                <div class="info-badge"><i class="bi bi-whatsapp"></i>0309-1211282</div>
+        </div>
+
+        <!-- RIGHT: Menu highlights + info -->
+        <div>
+            <div class="ab-sec-eyebrow">Our Bestsellers</div>
+            <h2 class="ab-sec-title">Menu That<br>Karachi Loves</h2>
+
+            <div class="ab-menu-grid">
+                <div class="ab-menu-card">
+                    <div class="ab-mc-badge">Bestseller</div>
+                    <div class="ab-mc-name">Memon's Special Burger</div>
+                    <div class="ab-mc-price">Rs. 250</div>
+                </div>
+                <div class="ab-menu-card">
+                    <div class="ab-mc-badge">Popular</div>
+                    <div class="ab-mc-name">Triple Kabab Burger</div>
+                    <div class="ab-mc-price">Rs. 280</div>
+                </div>
+                <div class="ab-menu-card">
+                    <div class="ab-mc-badge">Crispy</div>
+                    <div class="ab-mc-name">Crispy Chicken Fry</div>
+                    <div class="ab-mc-price">Rs. 100</div>
+                </div>
+                <div class="ab-menu-card">
+                    <div class="ab-mc-badge">Snack</div>
+                    <div class="ab-mc-name">Chicken Wonton</div>
+                    <div class="ab-mc-price">Rs. 30</div>
+                </div>
             </div>
-            <div class="about-btns">
-                <a href="#shop" class="btn-primary-fill"><i class="bi bi-bag-heart"></i>Order Now</a>
-                <button class="btn-outline-dark" data-bs-toggle="modal" data-bs-target="#aboutModal"><i class="bi bi-info-circle"></i>More Info</button>
+
+            <div class="ab-info-pills">
+                <div class="ab-pill">
+                    <i class="bi bi-clock-fill"></i> 11AM – 9PM
+                </div>
+                <div class="ab-pill">
+                    <i class="bi bi-geo-alt-fill"></i> All Karachi
+                </div>
+                <div class="ab-pill">
+                    <i class="bi bi-whatsapp"></i> 0309-1211282
+                </div>
+                <div class="ab-pill">
+                    <i class="bi bi-truck"></i> Fast Delivery
+                </div>
             </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ══ WHY CHOOSE US ══ -->
+<section class="ab-why">
+    <div class="ab-why-inner">
+        <div class="ab-why-hd">
+            <div class="ab-sec-eyebrow">Why Choose Us</div>
+            <h2 class="ab-why-title">The Memon Burger<br>Difference</h2>
+        </div>
+        <div class="ab-why-grid">
+            <div class="ab-why-card">
+                <div class="ab-why-num">01</div>
+                <div class="ab-why-icon"><i class="bi bi-award-fill"></i></div>
+                <div class="ab-why-card-title">Authentic Memon Flavours</div>
+                <div class="ab-why-card-body">Recipes crafted with traditional Memon spices and techniques passed down with pride and love.</div>
+            </div>
+            <div class="ab-why-card">
+                <div class="ab-why-num">02</div>
+                <div class="ab-why-icon"><i class="bi bi-bag-check-fill"></i></div>
+                <div class="ab-why-card-title">Always Fresh Ingredients</div>
+                <div class="ab-why-card-body">We source fresh ingredients daily. Every patty, every bun — prepared on the day, no compromise.</div>
+            </div>
+            <div class="ab-why-card">
+                <div class="ab-why-num">03</div>
+                <div class="ab-why-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                <div class="ab-why-card-title">Fast & Reliable Delivery</div>
+                <div class="ab-why-card-body">Hot food at your door across all Karachi. We take delivery time seriously because cold burgers are a crime.</div>
+            </div>
+            <div class="ab-why-card">
+                <div class="ab-why-num">04</div>
+                <div class="ab-why-icon"><i class="bi bi-currency-rupee"></i></div>
+                <div class="ab-why-card-title">Real Value for Money</div>
+                <div class="ab-why-card-body">Premium taste at budget prices. Everyone deserves a satisfying meal without emptying their wallet.</div>
+            </div>
+            <div class="ab-why-card">
+                <div class="ab-why-num">05</div>
+                <div class="ab-why-icon"><i class="bi bi-people-fill"></i></div>
+                <div class="ab-why-card-title">Karachi's Community Pick</div>
+                <div class="ab-why-card-body">Thousands of repeat customers across the city. Our growth is word-of-mouth — earned through every order.</div>
+            </div>
+            <div class="ab-why-card">
+                <div class="ab-why-num">06</div>
+                <div class="ab-why-icon"><i class="bi bi-whatsapp"></i></div>
+                <div class="ab-why-card-title">Easy WhatsApp Ordering</div>
+                <div class="ab-why-card-body">No complicated apps. Just message us on WhatsApp and your order is on its way — simple and personal.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ CTA STRIP ══ -->
+<section class="ab-cta">
+    <div class="ab-cta-inner">
+        <div class="ab-cta-text">
+            Ready to Order?<br>
+            <span>Let's feed Karachi.</span>
+        </div>
+        <div class="ab-cta-actions">
+            <a href="#shop" class="ab-btn-solid">
+                <i class="bi bi-bag-heart-fill"></i> Browse Menu
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=03091211282&text=Assalam%20o%20Alaikum!%20Order%20karna%20hai." target="_blank" class="ab-btn-ghost" style="color:var(--ab-dark);border-color:var(--ab-dark);">
+                <i class="bi bi-whatsapp"></i> Chat on WhatsApp
+            </a>
         </div>
     </div>
 </section>
