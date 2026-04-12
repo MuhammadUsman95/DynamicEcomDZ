@@ -54,8 +54,11 @@
             letter-spacing: .1em;
             text-align: center;
             padding: 9px 12px;
-            position: sticky;
+            position: fixed; /* ✅ fixed */
             top: 0;
+            left: 0; /* ✅ add karo */
+            right: 0; /* ✅ add karo */
+            width: 100%; /* ✅ add karo */
             z-index: 1070;
         }
         .promo-bar span { margin: 0 16px; color: #fffcfc; }
@@ -65,10 +68,11 @@
         .main-nav {
             background: #fffcfc;
             border-bottom: 2px solid var(--dark);
-            position: sticky;
-            top: 36px;
+            position: fixed; /* sticky ki jagah */
+            top: 36px; /* JS override karega */
+            left: 0;
+            right: 0;
             z-index: 1060;
-            box-shadow: 0 4px 20px rgba(0,0,0,.07);
         }
         .nav-inner {
             max-width: 1280px;
@@ -1571,7 +1575,13 @@
         document.addEventListener("DOMContentLoaded", function () {
             const promo = document.getElementById("promoBar");
             const nav = document.getElementById("mainNav");
-            function setNavTop() { if (promo && nav) nav.style.top = promo.offsetHeight + "px"; }
+            function setNavTop() {
+                if (nav) {
+                    const promoH = promo ? promo.offsetHeight : 0;
+                    nav.style.top = promoH + "px";
+                    document.body.style.paddingTop = (promoH + nav.offsetHeight) + "px";
+                }
+            }
             setNavTop();
             window.addEventListener("resize", setNavTop);
             if (window.ResizeObserver && promo) new ResizeObserver(setNavTop).observe(promo);
