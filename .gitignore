@@ -53,6 +53,9 @@ Thumbs.db
 *.zip
 *.rar
 *.7z
+*.jpeg
+*.png
+*.jpg
 
 # ── Environment / secrets ─────────────────────────────────────
 .env
