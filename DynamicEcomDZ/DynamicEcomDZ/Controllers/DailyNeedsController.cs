@@ -30,7 +30,7 @@ namespace DynamicEcomDZ.Controllers
                 await con.OpenAsync();
 
                 // ================= SLIDER DATA =================
-                using (SqlCommand cmdSlider = new SqlCommand("Redirection_TAB_SP", con))
+                using (SqlCommand cmdSlider = new SqlCommand("Ecom_DZMasterSP", con))
                 {
                     cmdSlider.CommandType = CommandType.StoredProcedure;
                     cmdSlider.Parameters.AddWithValue("@nType", 0);
@@ -56,7 +56,7 @@ namespace DynamicEcomDZ.Controllers
                 }
 
                 // ================= CUSTOMER DATA =================
-                using (SqlCommand cmdCustomer = new SqlCommand("Redirection_TAB_SP", con))
+                using (SqlCommand cmdCustomer = new SqlCommand("Ecom_DZMasterSP", con))
                 {
                     cmdCustomer.CommandType = CommandType.StoredProcedure;
                     cmdCustomer.Parameters.AddWithValue("@nType", 0);
@@ -105,7 +105,7 @@ namespace DynamicEcomDZ.Controllers
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 await con.OpenAsync();
-                using (SqlCommand cmd = new SqlCommand("Redirection_TAB_SP", con))
+                using (SqlCommand cmd = new SqlCommand("Ecom_DZMasterSP", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@nType", SqlDbType.Int).Value = 0;

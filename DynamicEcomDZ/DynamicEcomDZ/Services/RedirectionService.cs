@@ -22,7 +22,7 @@ namespace DynamicEcomDZ.Services
 
             using (SqlConnection con = new SqlConnection(conStr))
             {
-                using (SqlCommand cmd = new SqlCommand("Redirection_TAB_SP", con))
+                using (SqlCommand cmd = new SqlCommand("Ecom_DZMasterSP", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@nType", 0);
