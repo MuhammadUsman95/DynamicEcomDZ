@@ -131,21 +131,89 @@ namespace DynamicEcomDZ.Controllers
         }
 
 
+        //[HttpPost]
+        //public async Task<IActionResult> PlaceOrder([FromBody] OrderRequest model)
+        //{
+        //    // 1. Initial Validation
+        //    if (model == null || model.Items == null || !model.Items.Any())
+        //        return BadRequest(new MessageResponse { StatusId = 0, Message = "Invalid order data." });
+
+        //    // Optional: Remove this delay in production
+        //    await Task.Delay(2000);
+
+        //    string conStr = _config.GetConnectionString("Connection1");
+        //    string MasterXML = string.Empty;
+        //    string DetailXML = string.Empty;
+
+        //    // 2. Build XML
+        //    string[] MasterXMLParameters = { "ContactNo", "CustomerName", "CustomerAddress", "Street", "Floor", "Description" };
+        //    string[] MasterXMLValues = { model.ContactNo ?? "", model.CustomerName ?? "", model.CustomerAddress ?? "", model.Street ?? "", model.Floor ?? "", model.Description ?? "" };
+        //    MasterXML = CreateXML(MasterXMLParameters, MasterXMLValues, "MasterXML");
+        //    MasterXML = $"<Insert1>{MasterXML}</Insert1>";
+
+        //    foreach (var i in model.Items)
+        //    {
+        //        string[] DetailXMLParameters = { "ProductCode", "Quantity", "Rate", "DiscountAmount" };
+        //        string[] DetailXMLValues = { i.ProductCode ?? "", i.Quantity.ToString() ?? "0", i.Rate.ToString() ?? "0", i.DiscountAmount.ToString() ?? "0" };
+        //        DetailXML += CreateXML(DetailXMLParameters, DetailXMLValues, "DetailXML");
+        //    }
+        //    DetailXML = $"<Insert1>{DetailXML}</Insert1>";
+
+        //    var response = new MessageResponse();
+
+        //    using (SqlConnection con = new SqlConnection(conStr))
+        //    {
+        //        string executionLine = $@"
+        //        EXEC EcomOrder_SP
+        //            @nType = 0,
+        //            @nsType = 0,
+        //            @MasterXML = '{MasterXML.Replace("'", "''")}',
+        //            @DetailXML = '{DetailXML.Replace("'", "''")}',
+        //            @DeliveryCharges = {model.Items[0].DeliveryCharges},
+        //            @RestaurantId = {model.RestaurantId}
+        //        ";
+
+        //        await con.OpenAsync();
+
+        //        using (SqlCommand cmd = new SqlCommand(executionLine, con))
+        //        {
+        //            cmd.CommandType = CommandType.Text;
+
+        //            using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    response.StatusId = reader["StatusId"] != DBNull.Value
+        //                        ? Convert.ToInt32(reader["StatusId"])
+        //                        : 0;
+
+        //                    response.Message = reader["Message"] != DBNull.Value
+        //                        ? reader["Message"].ToString()
+        //                        : "";
+        //                }
+        //                else
+        //                {
+        //                    response.StatusId = 0;
+        //                    response.Message = "Order could not be placed. No response from server.";
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    return Ok(response);
+        //}
         [HttpPost]
         public async Task<IActionResult> PlaceOrder([FromBody] OrderRequest model)
         {
-            // 1. Initial Validation
             if (model == null || model.Items == null || !model.Items.Any())
                 return BadRequest(new MessageResponse { StatusId = 0, Message = "Invalid order data." });
 
-            // Optional: Remove this delay in production
             await Task.Delay(2000);
 
             string conStr = _config.GetConnectionString("Connection1");
             string MasterXML = string.Empty;
             string DetailXML = string.Empty;
 
-            // 2. Build XML
             string[] MasterXMLParameters = { "ContactNo", "CustomerName", "CustomerAddress", "Street", "Floor", "Description" };
             string[] MasterXMLValues = { model.ContactNo ?? "", model.CustomerName ?? "", model.CustomerAddress ?? "", model.Street ?? "", model.Floor ?? "", model.Description ?? "" };
             MasterXML = CreateXML(MasterXMLParameters, MasterXMLValues, "MasterXML");
@@ -164,14 +232,14 @@ namespace DynamicEcomDZ.Controllers
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 string executionLine = $@"
-                EXEC EcomOrder_SP
-                    @nType = 0,
-                    @nsType = 0,
-                    @MasterXML = '{MasterXML.Replace("'", "''")}',
-                    @DetailXML = '{DetailXML.Replace("'", "''")}',
-                    @DeliveryCharges = {model.Items[0].DeliveryCharges},
-                    @RestaurantId = {model.RestaurantId}
-                ";
+            EXEC EcomOrder_SP
+                @nType = 0,
+                @nsType = 0,
+                @MasterXML = '{MasterXML.Replace("'", "''")}',
+                @DetailXML = '{DetailXML.Replace("'", "''")}',
+                @DeliveryCharges = {model.Items[0].DeliveryCharges},
+                @RestaurantId = {model.RestaurantId}
+        ";
 
                 await con.OpenAsync();
 
@@ -184,12 +252,17 @@ namespace DynamicEcomDZ.Controllers
                         if (reader.Read())
                         {
                             response.StatusId = reader["StatusId"] != DBNull.Value
-                                ? Convert.ToInt32(reader["StatusId"])
-                                : 0;
+                                ? Convert.ToInt32(reader["StatusId"]) : 0;
 
                             response.Message = reader["Message"] != DBNull.Value
-                                ? reader["Message"].ToString()
-                                : "";
+                                ? reader["Message"].ToString() : "";
+
+                            // ✅ WhatsApp URLs DB se read karo
+                            response.WhatsappApiUrl1 = reader["WhatsappApiUrl1"] != DBNull.Value
+                                ? reader["WhatsappApiUrl1"].ToString() : "";
+
+                            response.WhatsappApiUrl2 = reader["WhatsappApiUrl2"] != DBNull.Value
+                                ? reader["WhatsappApiUrl2"].ToString() : "";
                         }
                         else
                         {
@@ -200,9 +273,46 @@ namespace DynamicEcomDZ.Controllers
                 }
             }
 
+            // ✅ Order successful ho to dono WhatsApp GET Requests bhejo
+            //if (response.StatusId == 1)
+            //{
+            //    using (HttpClient httpClient = new HttpClient())
+            //    {
+            //        httpClient.Timeout = TimeSpan.FromSeconds(10);
+
+            //        var tasks = new List<Task>();
+
+            //        if (!string.IsNullOrWhiteSpace(response.WhatsappApiUrl1))
+            //        {
+            //            tasks.Add(httpClient.GetAsync(response.WhatsappApiUrl1)
+            //                .ContinueWith(t => { /* Silent fail - order already saved */ }));
+            //        }
+
+            //        if (!string.IsNullOrWhiteSpace(response.WhatsappApiUrl2))
+            //        {
+            //            tasks.Add(httpClient.GetAsync(response.WhatsappApiUrl2)
+            //                .ContinueWith(t => { /* Silent fail - order already saved */ }));
+            //        }
+
+            //        await Task.WhenAll(tasks); // ✅ Dono simultaneously bhejo
+            //    }
+            //}
+            if (response.StatusId == 1)
+            {
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    httpClient.Timeout = TimeSpan.FromSeconds(10);
+
+                    if (!string.IsNullOrWhiteSpace(response.WhatsappApiUrl1))
+                        await httpClient.GetAsync(response.WhatsappApiUrl1);
+
+                    if (!string.IsNullOrWhiteSpace(response.WhatsappApiUrl2))
+                        await httpClient.GetAsync(response.WhatsappApiUrl2);
+                }
+            }
+
             return Ok(response);
         }
-
         [HttpPost]
         public async Task<IActionResult> CustomerExsistOrNo([FromBody] OrderRequest model)
         {
