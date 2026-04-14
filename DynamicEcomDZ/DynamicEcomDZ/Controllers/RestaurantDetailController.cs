@@ -297,6 +297,20 @@ namespace DynamicEcomDZ.Controllers
             //        await Task.WhenAll(tasks); // ✅ Dono simultaneously bhejo
             //    }
             //}
+            //if (response.StatusId == 1)
+            //{
+            //    using (HttpClient httpClient = new HttpClient())
+            //    {
+            //        httpClient.Timeout = TimeSpan.FromSeconds(10);
+
+            //        if (!string.IsNullOrWhiteSpace(response.WhatsappApiUrl1))
+            //            await httpClient.GetAsync(response.WhatsappApiUrl1);
+
+            //        if (!string.IsNullOrWhiteSpace(response.WhatsappApiUrl2))
+            //            await httpClient.GetAsync(response.WhatsappApiUrl2);
+            //    }
+            //}
+
             if (response.StatusId == 1)
             {
                 using (HttpClient httpClient = new HttpClient())
@@ -304,13 +318,18 @@ namespace DynamicEcomDZ.Controllers
                     httpClient.Timeout = TimeSpan.FromSeconds(10);
 
                     if (!string.IsNullOrWhiteSpace(response.WhatsappApiUrl1))
+                    {
+                        Console.WriteLine($"[WhatsApp URL1]: {response.WhatsappApiUrl1}");
                         await httpClient.GetAsync(response.WhatsappApiUrl1);
+                    }
 
                     if (!string.IsNullOrWhiteSpace(response.WhatsappApiUrl2))
+                    {
+                        Console.WriteLine($"[WhatsApp URL2]: {response.WhatsappApiUrl2}");
                         await httpClient.GetAsync(response.WhatsappApiUrl2);
+                    }
                 }
             }
-
             return Ok(response);
         }
         [HttpPost]
