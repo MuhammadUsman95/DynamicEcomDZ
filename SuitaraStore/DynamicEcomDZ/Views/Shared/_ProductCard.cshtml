@@ -1,0 +1,70 @@
+﻿@* ═══════════════════════════════════════════════════
+   _ProductCard.cshtml  — Partial View
+   Usage: @await Html.PartialAsync("_ProductCard", product)
+   Place in: Views/Shared/_ProductCard.cshtml
+   ═══════════════════════════════════════════════════ *@
+
+@model DynamicEcomDZ.Models.DetailModel
+
+<div class="product-card-wrap">
+    <div class="pcard" onclick="openProductModal('@Model.ProductCode')">
+
+        <!-- IMAGE AREA -->
+        <div class="pcard-img">
+
+            @if (Model.DiscountAmount > 0)
+            {
+                <span class="pcard-discount">−@Model.DiscountAmount</span>
+            }
+
+            <img src="@("/images/ProductRegistration/" + Model.ProductImage)"
+                 alt="@Model.ProductName"
+                 id="img-@Model.ProductCode" />
+
+            <div class="pcard-zoom">
+                <i class="bi bi-zoom-in"></i>
+            </div>
+
+            <button class="pcard-wishlist"
+                    onclick="event.stopPropagation();
+                    this.innerHTML=this.innerHTML.includes('fill')
+                    ? '<i class=\' bi bi-heart\'>
+                </i>'
+                : '<i class=\'bi bi-heart-fill\'></i>'">
+                <i class="bi bi-heart"></i>
+            </button>
+
+        </div>
+
+        <!-- BODY -->
+        <div class="pcard-body">
+
+            <h6 class="pcard-name">@Model.ProductName</h6>
+
+            <span class="pcard-desc">@Model.ProductDescription</span>
+
+            <div class="pcard-price">
+                <span class="pcard-cur">Rs. @(Model.Prices - Model.DiscountAmount)</span>
+                @if (Model.DiscountAmount > 0)
+                {
+                    <span class="pcard-old">@Model.Prices</span>
+                }
+            </div>
+
+            <!-- QTY STRIP -->
+            <div class="qty-strip" onclick="event.stopPropagation()">
+                <button class="qty-b"
+                        onclick="changeQuantity('@Model.ProductCode','@Model.ProductName',-1)">
+                    −
+                </button>
+                <span class="qty-n" id="qty-@Model.ProductCode">0</span>
+                <button class="qty-b"
+                        onclick="changeQuantity('@Model.ProductCode','@Model.ProductName',1)">
+                    +
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
