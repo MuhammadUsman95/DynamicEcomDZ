@@ -1,6 +1,8 @@
 ﻿@model DynamicEcomDZ.Models.RestaurantDetailViewModel
 @{
     Layout = null;
+    var promotions = ViewBag.Promotions as List<DynamicEcomDZ.Controllers.PromotionModel>
+                     ?? new List<DynamicEcomDZ.Controllers.PromotionModel>();
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -131,6 +133,79 @@
         </div>
     </div>
 </div>
+
+
+<!-- ══════════════ PROMOTION POPUP MODAL ══════════════ -->
+@if (promotions.Any())
+{
+    <div class="modal fade promotion-popup-modal" id="promotionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg promotion-dialog">
+            <div class="modal-content promotion-content">
+
+                <button type="button"
+                        class="promotion-close-btn"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+
+                <div class="modal-body p-0">
+
+                    <div id="promotionCarousel"
+                         class="carousel slide"
+                         data-bs-ride="carousel"
+                         data-bs-interval="3500">
+
+                        <div class="carousel-inner">
+
+                            @for (int i = 0; i < promotions.Count; i++)
+                            {
+                                var promo = promotions[i];
+
+                                <div class="carousel-item @(i == 0 ? "active" : "")">
+
+                                    <img src="@("/images/SliderRegistration/" + promo.PromotionUrl)"
+                                         onerror="this.onerror=null;this.src='@("/images/Promotion/" + promo.PromotionUrl)'"
+                                         class="promotion-img"
+                                         alt="@promo.Promotion" />
+
+                                    @if (!string.IsNullOrWhiteSpace(promo.Promotion))
+                                    {
+                                        <div class="promotion-caption">
+                                            @promo.Promotion
+                                        </div>
+                                    }
+
+                                </div>
+                            }
+
+                        </div>
+
+                        @if (promotions.Count > 1)
+                        {
+                            <button class="carousel-control-prev promotion-control"
+                                    type="button"
+                                    data-bs-target="#promotionCarousel"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+
+                            <button class="carousel-control-next promotion-control"
+                                    type="button"
+                                    data-bs-target="#promotionCarousel"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 
 <body>
     <!-- ══════════════ PROMO BAR ══════════════ -->
@@ -317,6 +392,23 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
+        // ── PROMOTION POPUP ON WEBSITE LOAD ──
+        document.addEventListener("DOMContentLoaded", function () {
+            const promoModalEl = document.getElementById("promotionModal");
+
+            if (!promoModalEl) return;
+
+            setTimeout(function () {
+                const promotionModal = new bootstrap.Modal(promoModalEl, {
+                    backdrop: true,
+                    keyboard: true
+                });
+
+                promotionModal.show();
+            }, 800);
+        });
+
         // ── BACK TO TOP ──
         window.addEventListener("scroll",function(){
           const bt = document.getElementById("backTop");

@@ -739,3 +739,93 @@ a {
     .nav-link-item.active::after {
         display: none;
     }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* PROMOTION POPUP */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.promotion-popup-modal .modal-backdrop {
+    background: rgba(0, 0, 0, .65);
+}
+
+.promotion-dialog {
+    max-width: 780px;
+}
+
+.promotion-content {
+    border: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    background: transparent;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, .35);
+}
+
+.promotion-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    color: #111;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .18);
+}
+
+    .promotion-close-btn:hover {
+        background: #111;
+        color: #fff;
+    }
+
+.promotion-img {
+    width: 100%;
+    max-height: 80vh;
+    display: block;
+    object-fit: contain;
+    background: #fff;
+}
+
+.promotion-caption {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    background: rgba(0, 0, 0, .72);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.promotion-control {
+    width: 48px;
+}
+
+@media (max-width: 768px) {
+    .promotion-dialog {
+        max-width: calc(100% - 24px);
+        margin: 12px auto;
+    }
+
+    .promotion-close-btn {
+        width: 36px;
+        height: 36px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .promotion-caption {
+        font-size: 13px;
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+    }
+}
