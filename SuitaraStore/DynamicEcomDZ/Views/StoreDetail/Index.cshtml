@@ -15,37 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    
+
     <link rel="stylesheet" href="~/css/restaurantdetail.css" />
-
-    <style>
-        :root {
-            --dedo-dark: #1a1a1a;
-            --dedo-light-bg: #faf8f5;
-            --dedo-cream: #f5f1ed;
-            --dedo-gold: #c9a961;
-            --dedo-gold-dark: #a68556;
-            --dedo-grey: #666666;
-            --dedo-border: #e8e4df;
-            --pk: var(--dedo-gold);
-            --pk-dark: var(--dedo-gold-dark);
-            --pk-soft: #f9f5f0;
-            --muted: var(--dedo-grey);
-        }
-
-        * {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        body {
-            background: var(--dedo-light-bg);
-            color: var(--dedo-dark);
-        }
-    </style>
 </head>
 
 <!-- ══════════════ PRODUCT MODAL ══════════════ -->
@@ -179,21 +150,24 @@
         <div class="nav-inner" style="display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; max-width: 1400px; margin: 0 auto;">
             <a href="/" class="nav-logo"><img src="/images/logo.png" alt="@Model.RestaurantName" style="height: 50px; width: auto;" /></a>
             <div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
-                @* <a href="#hero" class="nav-link-item active" style="color: var(--dedo-dark); text-decoration: none; font-weight: 500; font-size: 0.95rem;">Home</a> *@
                 <div class="nav-links">
-                    <a href="#hero" class="nav-link-item active">Home</a>
+                    <a href="#hero" class="nav-link-item">Home</a>
+                    <a href="javascript:void(0)"
+                       class="nav-link-item category-filter active"
+                       data-category="all">
+                        All
+                    </a>
 
                     @foreach (var category in Model.Products.Keys)
                     {
-                        <a href="#cat-@category.Replace(" ", "-")"
-                           class="nav-link-item">
+                        <a href="javascript:void(0)"
+                           class="nav-link-item category-filter"
+                           data-category="@category">
                             @category
                         </a>
                     }
                 </div>
-@*                 <a href="#shop" class="nav-link-item" style="color: var(--dedo-dark); text-decoration: none; font-weight: 500; font-size: 0.95rem;">Shop</a>
-                <a href="#about" class="nav-link-item" style="color: var(--dedo-dark); text-decoration: none; font-weight: 500; font-size: 0.95rem;">About</a>
-                <a href="#" class="nav-link-item" data-bs-toggle="modal" data-bs-target="#aboutModal" style="color: var(--dedo-dark); text-decoration: none; font-weight: 500; font-size: 0.95rem;">Contact</a> *@
+
             </div>
             <div class="nav-right" style="display: flex; gap: 1.5rem; align-items: center;">
                 <div class="cart-pill" id="cartIcon" onclick="toggleCart()" style="background: var(--dedo-dark); color: white; padding: 8px 16px; border-radius: 25px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
@@ -226,7 +200,7 @@
                                 <div class="hero-tag" style="color: var(--dedo-gold); font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; margin-bottom: 1rem;"><i class="bi bi-stars"></i> @s.HeadingSlider</div>
                                 <h1 class="hero-title" style="color: var(--dedo-dark); font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem;">@s.DescriptionSlider</h1>
                                 <p class="hero-sub" style="color: var(--dedo-grey); font-size: 1rem; margin-bottom: 2rem; line-height: 1.6;">Discover timeless elegance — premium craftsmanship designed for sophistication.</p>
-@*                                 <div class="hero-btns" style="display: flex; gap: 1rem;">
+                                @*                                 <div class="hero-btns" style="display: flex; gap: 1rem;">
                                     <a href="#shop" style="background: var(--dedo-dark); color: white; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;"><i class="bi bi-bag-heart"></i>Shop Collection</a>
                                     <a href="#about" style="background: transparent; color: var(--dedo-dark); border: 2px solid var(--dedo-dark); padding: 10px 26px; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;"><i class="bi bi-play-circle"></i>Our Story</a>
                                 </div> *@
@@ -240,82 +214,34 @@
         </div>
     </section>
 
-    <!-- ══════════════ FEATURES STRIP ══════════════ -->
-    @* <div class="features-strip" style="background: white; padding: 3rem 2rem; border-bottom: 1px solid var(--dedo-border);">
-        <div class="features-inner" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto;">
-            <div class="feat-item" style="display: flex; gap: 1rem;">
-                <div class="feat-icon" style="font-size: 2rem; color: var(--dedo-gold);"><i class="bi bi-truck"></i></div>
-                <div><div class="feat-title" style="font-weight: 700; color: var(--dedo-dark);">Free Delivery</div><div class="feat-sub" style="font-size: 0.85rem; color: var(--dedo-grey);">On orders above Rs.3,000</div></div>
-            </div>
-            <div class="feat-item" style="display: flex; gap: 1rem;">
-                <div class="feat-icon" style="font-size: 2rem; color: var(--dedo-gold);"><i class="bi bi-patch-check"></i></div>
-                <div><div class="feat-title" style="font-weight: 700; color: var(--dedo-dark);">100% Authentic</div><div class="feat-sub" style="font-size: 0.85rem; color: var(--dedo-grey);">Verified quality products</div></div>
-            </div>
-            <div class="feat-item" style="display: flex; gap: 1rem;">
-                <div class="feat-icon" style="font-size: 2rem; color: var(--dedo-gold);"><i class="bi bi-arrow-counterclockwise"></i></div>
-                <div><div class="feat-title" style="font-weight: 700; color: var(--dedo-dark);">Easy Returns</div><div class="feat-sub" style="font-size: 0.85rem; color: var(--dedo-grey);">30-day hassle-free returns</div></div>
-            </div>
-            <div class="feat-item" style="display: flex; gap: 1rem;">
-                <div class="feat-icon" style="font-size: 2rem; color: var(--dedo-gold);"><i class="bi bi-shield-check"></i></div>
-                <div><div class="feat-title" style="font-weight: 700; color: var(--dedo-dark);">Secure Payment</div><div class="feat-sub" style="font-size: 0.85rem; color: var(--dedo-grey);">100% safe transactions</div></div>
-            </div>
-            <div class="feat-item" style="display: flex; gap: 1rem;">
-                <div class="feat-icon" style="font-size: 2rem; color: var(--dedo-gold);"><i class="bi bi-headset"></i></div>
-                <div><div class="feat-title" style="font-weight: 700; color: var(--dedo-dark);">24/7 Support</div><div class="feat-sub" style="font-size: 0.85rem; color: var(--dedo-grey);">Always here for you</div></div>
-            </div>
-        </div>
-    </div> *@
 
     <!-- ══════════════ SHOP SECTION ══════════════ -->
     <section id="shop" class="shop-section" style="background: white; padding: 4rem 2rem;">
         <div class="shop-wrap" style="max-width: 1400px; margin: 0 auto;">
-            @* <div class="sec-hd" style="text-align: center; margin-bottom: 3rem;">
-                <div class="sec-hd-tag" style="color: var(--dedo-gold); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 0.5rem;">SHOP</div>
-                <h2 class="sec-title" style="font-size: 2.5rem; color: var(--dedo-dark); font-weight: 800; margin-bottom: 1rem;">Explore Our Collections</h2>
-                <p class="sec-sub" style="color: var(--dedo-grey); font-size: 1rem; max-width: 500px; margin: 0 auto;">Discover our curated selection of premium products crafted for the discerning taste.</p>
-            </div> *@
 
-         @*    <div class="shop-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem;">
-                <div class="shop-bar-left">
-                    <div class="shop-bar-name" style="font-weight: 700; font-size: 1.1rem; color: var(--dedo-dark);">@Model.RestaurantName</div>
-                    <div class="shop-bar-addr" style="color: var(--dedo-grey); font-size: 0.9rem;"><i class="bi bi-geo-alt-fill"></i> @Model.RestaurantAddress</div>
-                </div>
-                <div class="filter-row" style="display: flex; gap: 1rem;">
-                    <input type="text" id="productSearch" class="form-control form-control-sm" placeholder="🔍 Search products..." style="min-width:180px; border: 1px solid var(--dedo-border); border-radius: 6px;">
-                    <select id="categoryFilter" class="form-select form-select-sm" style="border: 1px solid var(--dedo-border); border-radius: 6px; min-width: 150px;">
-                        <option value="all">All Categories</option>
-                        @foreach (var category in Model.Products.Keys)
-                        {
-                            <option value="@category">@category</option>
-                        }
-                    </select>
-                </div>
-            </div> *@
 
-            
+
             @foreach (var category in Model.Products)
             {
+                <div class="category-section" data-category="@category.Key">
 
-                <div id="cat-@category.Key.Replace(" ", "-")"
-                     class="cat-title-row">
+                    <div id="cat-@category.Key.Replace(" ", "-")"
+                         class="cat-title-row">
+                        <span class="cat-title-badge">
+                            <i class="bi bi-grid-fill"></i>
+                            @category.Key
+                        </span>
+                    </div>
 
-                    <span class="cat-title-badge">
-                        <i class="bi bi-grid-fill"></i>
-                        @category.Key
-                    </span>
+                    <div class="row g-4">
+                        @foreach (var product in category.Value)
+                        {
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 product-card-item">
+                                @await Html.PartialAsync("_ProductCard", product)
+                            </div>
+                        }
+                    </div>
 
-                </div>
-
-                @* <div class="cat-title-row" style="margin: 2.5rem 0 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--dedo-border);">
-                    <span class="cat-title-badge" style="color: var(--dedo-dark); font-weight: 700; font-size: 1.1rem;"><i class="bi bi-grid-fill"></i> @category.Key</span>
-                </div> *@
-                <div class="row g-3" style="margin-bottom: 2rem;">
-                    @foreach (var product in category.Value)
-                    {
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 product-card-item" data-product-name="@product.ProductName.ToLower()">
-                            @await Html.PartialAsync("_ProductCard", product)
-                        </div>
-                    }
                 </div>
             }
         </div>
@@ -344,7 +270,7 @@
     <div id="cartBackdrop" class="cart-backdrop" onclick="toggleCart()" style="position: fixed; inset: 0; background: rgba(0,0,0,0); z-index: 999; transition: background 0.3s; display: none;"></div>
 
     <!-- ══════════════ FOOTER ══════════════ -->
-  @*   <footer class="site-footer" style="background: var(--dedo-dark); color: white; padding: 3rem 2rem 1rem;">
+    @*   <footer class="site-footer" style="background: var(--dedo-dark); color: white; padding: 3rem 2rem 1rem;">
         <div class="footer-top" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
             <div class="footer-brand">
                 <a href="/"><img src="/images/logo.png" alt="Logo" style="height: 50px; width: auto; object-fit: contain; filter: brightness(0) invert(1); margin-bottom: 1rem;" /></a>
@@ -405,29 +331,84 @@
           });
         });
 
-        // ── FILTER ──
-        document.addEventListener("DOMContentLoaded",function(){
-          const si=document.getElementById("productSearch");
-          const cf=document.getElementById("categoryFilter");
-          function filter(){
-            const q=si.value.toLowerCase(), c=cf.value.toLowerCase();
-            document.querySelectorAll("#shop .row").forEach(row=>{
-              const prev=row.previousElementSibling; if(!prev) return;
-              const badge=prev.querySelector(".cat-title-badge"); if(!badge) return;
-              const cat=badge.innerText.toLowerCase().replace(/^\W+/,'').trim();
-              const catOk=c==="all"||cat.includes(c);
-              let vis=false;
-              row.querySelectorAll(".product-card-item").forEach(card=>{
-                const ok=card.dataset.productName.includes(q)&&catOk;
-                card.style.display=ok?"block":"none"; if(ok) vis=true;
-              });
-              row.style.display=vis?"flex":"none";
-              prev.style.display=vis?"flex":"none";
+        // ── CATEGORY FILTER ──
+        document.addEventListener("DOMContentLoaded", function () {
+
+            function normalizeCategory(value) {
+                return (value || "")
+                    .toString()
+                    .trim()
+                    .toLowerCase()
+                    .replace(/\s+/g, " ");
+            }
+
+            document.querySelectorAll(".category-filter").forEach(btn => {
+
+                btn.addEventListener("click", function () {
+
+                    const category = normalizeCategory(this.dataset.category);
+
+                    document.querySelectorAll(".category-filter")
+                        .forEach(x => x.classList.remove("active"));
+
+                    this.classList.add("active");
+
+                    document.querySelectorAll(".category-section")
+                        .forEach(section => {
+
+                            const sectionCategory = normalizeCategory(section.dataset.category);
+
+                            if (category === "all" || sectionCategory === category) {
+                                section.style.display = "block";
+                            }
+                            else {
+                                section.style.display = "none";
+                            }
+                        });
+
+                    const shop = document.getElementById("shop");
+                    if (shop) {
+                        shop.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                });
+
             });
-          }
-          si.addEventListener("keyup",filter);
-          cf.addEventListener("change",filter);
+
         });
+
+        // ── DIRECT ADD TO CART FROM CARD ──
+        function addToCartDirect(productCode) {
+
+            const product = getProductByCode(productCode);
+            if (!product) return;
+
+            if (cart[productCode]) {
+                cart[productCode].Quantity += 1;
+            }
+            else {
+                cart[productCode] = {
+                    ProductCode: productCode,
+                    ProductName: product.ProductName,
+                    Quantity: 1,
+                    Rate: product.Prices,
+                    DiscountAmount: product.DiscountAmount || 0,
+                    DeliveryCharges: product.DeliveryCharges || 0,
+                    image: product.ProductImage
+                };
+            }
+
+            renderCart();
+
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Added to cart',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+        }
 
         // ── PRODUCT DATA ──
         const productMaster = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Products.SelectMany(x => x.Value)));
@@ -464,8 +445,6 @@
           if(!pmodalCode) return;
           const qty=parseInt(document.getElementById('pmodal-qty').textContent)||1;
           const p=getProductByCode(pmodalCode); if(!p) return;
-          const cardQtyEl=document.getElementById('qty-'+pmodalCode);
-          if(cardQtyEl) cardQtyEl.textContent=qty;
           cart[pmodalCode]={ProductCode:pmodalCode,ProductName:p.ProductName,Quantity:qty,Rate:p.Prices,DiscountAmount:p.DiscountAmount,DeliveryCharges:p.DeliveryCharges,image:p.ProductImage};
           renderCart();
           bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();
