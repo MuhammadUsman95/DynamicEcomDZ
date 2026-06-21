@@ -24,6 +24,7 @@ namespace DynamicEcomDZ.Controllers
 
             var sliders = new List<DetailSliderModel>();
             var products = new List<DetailModel>();
+            var promotions = new List<PromotionModel>();
             string subHeaderTitle = "";
 
             var viewModel = new RestaurantDetailViewModel
@@ -110,6 +111,26 @@ namespace DynamicEcomDZ.Controllers
                         }
                     }
                 }
+
+                // ---------- PROMOTION POPUP DATA (nsType = 7) ----------
+                using (SqlCommand cmd = new SqlCommand("Redirection_TAB_SP", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@nType", 0);
+                    cmd.Parameters.AddWithValue("@nsType", 7);
+
+                    using (SqlDataReader dr = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await dr.ReadAsync())
+                        {
+                            promotions.Add(new PromotionModel
+                            {
+                                PromotionUrl = dr["PromotionUrl"]?.ToString() ?? "",
+                                Promotion = dr["Promotion"]?.ToString() ?? ""
+                            });
+                        }
+                    }
+                }
             }
 
             // ---------- VIEWMODEL COMPLETE ----------
@@ -122,6 +143,8 @@ namespace DynamicEcomDZ.Controllers
             // Fallback: agar nsType=6 se name nahi mila
             if (string.IsNullOrEmpty(viewModel.RestaurantName))
                 viewModel.RestaurantName = products.FirstOrDefault()?.CustomerName ?? "Store";
+
+            ViewBag.Promotions = promotions;
 
             return View(viewModel);
         }
@@ -312,6 +335,12 @@ namespace DynamicEcomDZ.Controllers
     // =====================================================================
     //  REQUEST MODEL (inline — sirf is controller ke liye)
     // =====================================================================
+    public class PromotionModel
+    {
+        public string PromotionUrl { get; set; } = "";
+        public string Promotion { get; set; } = "";
+    }
+
     public class CheckRequest
     {
         public int RestaurantId { get; set; }

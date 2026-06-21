@@ -1,0 +1,43 @@
+﻿@model DynamicEcomDZ.Models.DetailModel
+
+@{
+    var netPrice = Model.Prices - Model.DiscountAmount;
+}
+
+<div class="product-card" onclick="openProductModal('@Model.ProductCode')">
+
+    <div class="product-card-img-wrap">
+        <img src="/images/ProductRegistration/@Model.ProductImage"
+             alt="@Model.ProductName" />
+    </div>
+
+    <div class="product-card-info">
+
+        <h5 class="product-card-title">@Model.ProductName</h5>
+
+        <p class="product-card-desc">
+            @(string.IsNullOrEmpty(Model.ProductDescription)
+                        ? "Premium quality product."
+                        : Model.ProductDescription)
+        </p>
+
+        <div class="product-card-price">    
+            Rs. @Convert.ToDecimal(Model.Prices).ToString("N0")
+
+            @if (Model.DiscountAmount > 0)
+            {
+                <span class="product-card-old-price">
+                    Rs. @Convert.ToDecimal(Model.Prices).ToString("N0")
+                </span>
+            }
+        </div>
+
+        <button type="button"
+                class="product-card-btn"
+                onclick="event.stopPropagation(); addToCartDirect('@Model.ProductCode')">
+            <i class="bi bi-cart-plus"></i>
+            Add To Cart
+        </button>
+
+    </div>
+</div>

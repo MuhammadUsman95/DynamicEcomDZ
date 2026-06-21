@@ -26,5 +26,9 @@ namespace DynamicEcomDZ.Models
 
 
     }
-
+    public class PromotionModel
+    {
+        public string PromotionUrl { get; set; }
+        public string Promotion { get; set; }
+    }
 }
