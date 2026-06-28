@@ -29,9 +29,12 @@
             <div class="modal-body p-0" style="position:relative;">
                 <button class="pmodal-close-btn" onclick="bootstrap.Modal.getInstance(document.getElementById('productModal')).hide()"><i class="bi bi-x-lg"></i></button>
                 <div class="pmodal-layout">
-                    <div class="pmodal-img-wrap">
-                        <span class="pmodal-discount-tag" id="pmodal-discount" style="display:none; background: var(--dedo-gold); color: var(--dedo-dark);"></span>
-                        <img id="pmodal-img" src="" alt="" style="width: 100%; height: auto;" />
+                    <div class="pmodal-img-box">
+                        <div class="pmodal-img-wrap">
+                            <span class="pmodal-discount-tag" id="pmodal-discount" style="display:none; background: var(--dedo-gold); color: var(--dedo-dark);"></span>
+                            <img id="pmodal-img" src="" alt="" style="width: 100%; height: auto;" />
+                        </div>
+                        <div class="pmodal-thumbs" id="pmodal-thumbs"></div>
                     </div>
                     <div class="pmodal-info">
                         <span class="pmodal-cat-tag" style="color: var(--dedo-gold); font-weight: 600;"><i class="bi bi-tag-fill"></i> <span id="pmodal-category"></span></span>
@@ -573,7 +576,7 @@
                     Rate: product.Prices,
                     DiscountAmount: product.DiscountAmount || 0,
                     DeliveryCharges: product.DeliveryCharges || 0,
-                    image: product.ProductImage
+                    image: firstProductImage(product.ProductImage)
                 };
             }
 
@@ -595,23 +598,89 @@
         function getProductByCode(code){ return productMaster.find(p=>p.ProductCode===code); }
         let cart={};
 
+        // ── PRODUCT IMAGE / DISCOUNT HELPERS ──
+        function splitProductImages(productImage) {
+          return (productImage || '')
+            .toString()
+            .split(',')
+            .map(x => x.trim())
+            .filter(x => x.length > 0);
+        }
+
+        function firstProductImage(productImage) {
+          const imgs = splitProductImages(productImage);
+          return imgs.length ? imgs[0] : '';
+        }
+
+        function productImageUrl(imageName) {
+          imageName = (imageName || '').toString().trim();
+          return imageName ? '/images/ProductRegistration/' + imageName : '/images/no-image.png';
+        }
+
+        function calcDiscountPercent(product) {
+          const price = Number(product?.Prices || 0);
+          const discountAmount = Number(product?.DiscountAmount || 0);
+          if (price <= 0 || discountAmount <= 0) return 0;
+          return Math.round((discountAmount / price) * 100);
+        }
+
+        function netProductPrice(product) {
+          return Math.max(0, Number(product?.Prices || 0) - Number(product?.DiscountAmount || 0));
+        }
+
+        // Agar ProductImage me comma-separated multiple images hon to card/list par first image show karo
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelectorAll('img').forEach(img => {
+            const src = img.getAttribute('src') || '';
+            if (src.includes(',') && src.includes('/images/ProductRegistration/')) {
+              const prefix = '/images/ProductRegistration/';
+              const filePart = src.substring(src.indexOf(prefix) + prefix.length);
+              img.setAttribute('src', prefix + firstProductImage(filePart));
+            }
+          });
+        });
+
         // ── PRODUCT MODAL ──
         let pmodalCode=null;
         function openProductModal(productCode){
           const p=getProductByCode(productCode); if(!p) return;
           pmodalCode=productCode;
-          document.getElementById('pmodal-img').src='/images/ProductRegistration/'+p.ProductImage;
-          document.getElementById('pmodal-img').alt=p.ProductName;
+
+          const images = splitProductImages(p.ProductImage);
+          const mainImage = firstProductImage(p.ProductImage);
+          const mainImgEl = document.getElementById('pmodal-img');
+          mainImgEl.src = productImageUrl(mainImage);
+          mainImgEl.alt = p.ProductName;
+
+          const thumbsEl = document.getElementById('pmodal-thumbs');
+          thumbsEl.innerHTML = '';
+          images.forEach((imgName, index) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'pmodal-thumb' + (index === 0 ? ' active' : '');
+            btn.innerHTML = `<img src="${productImageUrl(imgName)}" alt="${p.ProductName}">`;
+            btn.onclick = function () {
+              mainImgEl.src = productImageUrl(imgName);
+              document.querySelectorAll('.pmodal-thumb').forEach(x => x.classList.remove('active'));
+              btn.classList.add('active');
+            };
+            thumbsEl.appendChild(btn);
+          });
+          thumbsEl.style.display = images.length > 1 ? 'flex' : 'none';
+
           const discEl=document.getElementById('pmodal-discount');
-          if(p.DiscountAmount>0){discEl.textContent='−Rs.'+fmt(p.DiscountAmount)+' OFF';discEl.style.display='inline-block';}
+          const discountPercent = calcDiscountPercent(p);
+          if(discountPercent>0){discEl.textContent=discountPercent+'% OFF';discEl.style.display='inline-block';}
           else{discEl.style.display='none';}
+
           document.getElementById('pmodal-category').textContent=p.Category||'';
           document.getElementById('pmodal-name').textContent=p.ProductName;
           document.getElementById('pmodal-desc').textContent=p.ProductDescription||'Premium quality product.';
-          const net=(p.Prices||0)-(p.DiscountAmount||0);
+
+          const net=netProductPrice(p);
           document.getElementById('pmodal-price').textContent='Rs. '+fmt(net);
           const oldEl=document.getElementById('pmodal-old-price');
-          if(p.DiscountAmount>0){oldEl.textContent='Rs. '+fmt(p.Prices);oldEl.style.display='inline';}
+          if(Number(p.DiscountAmount||0)>0){oldEl.textContent='Rs. '+fmt(p.Prices);oldEl.style.display='inline';}
           else{oldEl.style.display='none';}
           const cardQty=parseInt(document.getElementById('qty-'+productCode)?.textContent)||0;
           document.getElementById('pmodal-qty').textContent=Math.max(cardQty,1);
@@ -625,7 +694,7 @@
           if(!pmodalCode) return;
           const qty=parseInt(document.getElementById('pmodal-qty').textContent)||1;
           const p=getProductByCode(pmodalCode); if(!p) return;
-          cart[pmodalCode]={ProductCode:pmodalCode,ProductName:p.ProductName,Quantity:qty,Rate:p.Prices,DiscountAmount:p.DiscountAmount,DeliveryCharges:p.DeliveryCharges,image:p.ProductImage};
+          cart[pmodalCode]={ProductCode:pmodalCode,ProductName:p.ProductName,Quantity:qty,Rate:p.Prices,DiscountAmount:p.DiscountAmount,DeliveryCharges:p.DeliveryCharges,image:firstProductImage(p.ProductImage)};
           renderCart();
           bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();
           Swal.fire({toast:true,position:'top-end',icon:'success',title:'Added to cart!',showConfirmButton:false,timer:1800,timerProgressBar:true,customClass:{popup:'swal2-toast'}});
@@ -638,7 +707,7 @@
           qtySpan.textContent=newQty;
           const product=getProductByCode(productCode); if(!product) return;
           if(newQty===0){delete cart[productCode];}
-          else{cart[productCode]={ProductCode:productCode,ProductName:product.ProductName,Quantity:newQty,Rate:product.Prices,DiscountAmount:product.DiscountAmount,DeliveryCharges:product.DeliveryCharges,image:product.ProductImage};}
+          else{cart[productCode]={ProductCode:productCode,ProductName:product.ProductName,Quantity:newQty,Rate:product.Prices,DiscountAmount:product.DiscountAmount,DeliveryCharges:product.DeliveryCharges,image:firstProductImage(product.ProductImage)};}
           renderCart();
         }
         function renderCart(){
@@ -657,7 +726,7 @@
             tg+=r;td+=d;tq+=item.Quantity;
             container.innerHTML+=`
               <div style="display: flex; gap: 1rem; padding: 1rem; border-bottom: 1px solid var(--dedo-border); margin-bottom: 1rem;">
-                <img src="/images/ProductRegistration/${item.image}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 6px;"/>
+                <img src="${productImageUrl(item.image)}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 6px;"/>
                 <div style="flex: 1;">
                   <strong style="color: var(--dedo-dark); display: block; margin-bottom: 0.3rem;">${item.ProductName}</strong>
                   <div style="color: var(--dedo-grey); font-size: 0.85rem; margin-bottom: 0.5rem;">Unit: ${item.DiscountAmount>0 ? `<span style="color: var(--dedo-gold); font-weight: 700;">Rs.${fmt(item.Rate-item.DiscountAmount)}</span>` : `Rs.${fmt(item.Rate)}`}</div>

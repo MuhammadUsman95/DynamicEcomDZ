@@ -1,19 +1,47 @@
 ﻿@model DynamicEcomDZ.Models.DetailModel
 
 @{
-    var netPrice = Model.Prices - Model.DiscountAmount;
+    decimal originalPrice = Convert.ToDecimal(Model.Prices ?? 0);
+    decimal discountAmount = Convert.ToDecimal(Model.DiscountAmount ?? 0);
+    decimal netPrice = originalPrice - discountAmount;
+
+    int discountPercent = 0;
+
+    if (originalPrice > 0 && discountAmount > 0)
+    {
+        discountPercent = (int)Math.Round((discountAmount / originalPrice) * 100);
+    }
+
+    string firstImage = "";
+
+    if (!string.IsNullOrWhiteSpace(Model.ProductImage))
+    {
+        firstImage = Model.ProductImage.Split(',')[0].Trim();
+    }
 }
 
 <div class="product-card" onclick="openProductModal('@Model.ProductCode')">
 
     <div class="product-card-img-wrap">
-        <img src="/images/ProductRegistration/@Model.ProductImage"
+
+        @if (discountPercent > 0)
+        {
+            <div class="sale-badge">
+                <span class="sale-text">SALE</span>
+                <span class="sale-off">@discountPercent% OFF</span>
+            </div>
+        }
+
+        <img src="/images/ProductRegistration/@firstImage"
              alt="@Model.ProductName" />
+
     </div>
 
     <div class="product-card-info">
 
-        <h5 class="product-card-title">@Model.ProductName</h5>
+        <h5 class="product-card-title">
+            @Model.ProductName
+        </h5>
 
         <p class="product-card-desc">
             @(string.IsNullOrEmpty(Model.ProductDescription)
@@ -21,23 +49,30 @@
                         : Model.ProductDescription)
         </p>
 
-        <div class="product-card-price">    
-            Rs. @Convert.ToDecimal(Model.Prices).ToString("N0")
+        <div class="product-card-price">
 
-            @if (Model.DiscountAmount > 0)
+            <span class="sale-price">
+                Rs. @netPrice.ToString("N0")
+            </span>
+
+            @if (discountAmount > 0)
             {
                 <span class="product-card-old-price">
-                    Rs. @Convert.ToDecimal(Model.Prices).ToString("N0")
+                    Rs. @originalPrice.ToString("N0")
                 </span>
             }
+
         </div>
 
         <button type="button"
                 class="product-card-btn"
                 onclick="event.stopPropagation(); addToCartDirect('@Model.ProductCode')">
+
             <i class="bi bi-cart-plus"></i>
             Add To Cart
+
         </button>
 
     </div>
+
 </div>

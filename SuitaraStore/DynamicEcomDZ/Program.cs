@@ -10,7 +10,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();   // <-- Test ke liye is line ko comment kar do
+
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
