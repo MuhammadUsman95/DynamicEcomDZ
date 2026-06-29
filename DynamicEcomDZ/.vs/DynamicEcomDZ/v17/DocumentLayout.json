@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\views\\restaurantdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\views\\restaurantdetail\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\controllers\\restaurantdetailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\controllers\\restaurantdetailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|c:\\users\\usman vayani\\documents\\github\\dynamicecomdz\\dynamicecomdz\\dynamicecomdz\\controllers\\dailyneedscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66884EF-1580-4BFC-962A-279D01E00101}|DynamicEcomDZ\\DynamicEcomDZ.csproj|solutionrelative:dynamicecomdz\\controllers\\dailyneedscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +18,31 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DailyNeedsController.cs",
+              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\DailyNeedsController.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Controllers\\DailyNeedsController.cs",
+              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\DailyNeedsController.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Controllers\\DailyNeedsController.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAHgAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T22:33:53.744Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
-              "RelativeDocumentMoniker": "DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
-              "RelativeToolTip": "DynamicEcomDZ\\Views\\RestaurantDetail\\Index.cshtml",
-              "ViewState": "AgIAAHoGAAAAAAAAAAAYwIkGAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-03T18:54:09.445Z",
+              "Title": "RestaurantDetailController.cs",
+              "DocumentMoniker": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\RestaurantDetailController.cs",
+              "RelativeDocumentMoniker": "DynamicEcomDZ\\Controllers\\RestaurantDetailController.cs",
+              "ToolTip": "C:\\Users\\Usman Vayani\\Documents\\GitHub\\DynamicEcomDZ\\DynamicEcomDZ\\DynamicEcomDZ\\Controllers\\RestaurantDetailController.cs",
+              "RelativeToolTip": "DynamicEcomDZ\\Controllers\\RestaurantDetailController.cs",
+              "ViewState": "AgIAAGcBAAAAAAAAAAAYwEsBAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T22:15:22.513Z",
               "EditorCaption": ""
             }
           ]

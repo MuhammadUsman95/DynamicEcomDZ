@@ -1,0 +1,167 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Campaign Management Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        .dashboard {
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f172a, #2563eb);
+            color: white;
+            padding: 28px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+        }
+
+            .header h1 {
+                margin: 0;
+                font-size: 30px;
+            }
+
+            .header p {
+                margin-top: 8px;
+                opacity: .85;
+            }
+
+        .card-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .dash-card {
+            background: white;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, .08);
+            transition: .2s;
+        }
+
+            .dash-card:hover {
+                transform: translateY(-4px);
+            }
+
+        .icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 18px;
+        }
+
+        .green {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .purple {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .dash-card h3 {
+            margin: 0 0 8px;
+            color: #0f172a;
+        }
+
+        .dash-card p {
+            color: #64748b;
+            margin-bottom: 22px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .btn-green {
+            background: #16a34a;
+        }
+
+        .btn-blue {
+            background: #2563eb;
+        }
+
+        .btn-purple {
+            background: #7c3aed;
+        }
+
+        @@media (max-width: 900px) {
+            .card-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <div class="header">
+            <h1>Campaign Management Dashboard</h1>
+            <p>Manage WhatsApp templates, WhatsApp numbers and WhatsApp logs.</p>
+        </div>
+
+        <div class="card-row">
+
+            <div class="dash-card">
+                <div class="icon green">💬</div>
+                <h3>WhatsApp Template</h3>
+                <p>Create and manage your WhatsApp message templates.</p>
+                <a asp-controller="WhatsApp" asp-action="Template" class="btn btn-green">
+                    Open Template
+                </a>
+            </div>
+
+            <div class="dash-card">
+                <div class="icon blue">📱</div>
+                <h3>WhatsApp No</h3>
+                <p>Add and manage WhatsApp numbers for campaigns.</p>
+                <a asp-controller="WhatsApp" asp-action="Number" class="btn btn-blue">
+                    Open Numbers
+                </a>
+            </div>
+
+            <div class="dash-card">
+                <div class="icon purple">📋</div>
+                <h3>WhatsApp Log</h3>
+                <p>View WhatsApp campaign message logs and delivery status.</p>
+                <a asp-controller="WhatsApp" asp-action="Log" class="btn btn-purple">
+                    Open Log
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
