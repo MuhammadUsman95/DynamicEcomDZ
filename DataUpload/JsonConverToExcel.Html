@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ToteWears Export - Excel / CSV</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #111827;
+      padding: 24px;
+    }
+    .card {
+      max-width: 1200px;
+      margin: auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, .12);
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+    .header {
+      padding: 22px 24px;
+      background: linear-gradient(135deg, #111827, #374151);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    h1 { margin: 0; font-size: 24px; }
+    .sub { margin-top: 6px; color: #d1d5db; font-size: 14px; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    button {
+      border: 0;
+      padding: 12px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 6px 14px rgba(0,0,0,.16);
+    }
+    .excel { background: #16a34a; }
+    .csv { background: #2563eb; }
+    .json { background: #9333ea; }
+    .body { padding: 20px 24px; }
+    .stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+    .stat { background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:12px 16px; }
+    .stat b { display:block; font-size:20px; margin-bottom:4px; }
+    .table-wrap { overflow:auto; border:1px solid #e5e7eb; border-radius:14px; max-height: 70vh; }
+    table { border-collapse: collapse; width: 100%; min-width: 1100px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; vertical-align: top; font-size: 13px; }
+    th { background: #f3f4f6; position: sticky; top: 0; z-index: 2; }
+    tr:hover td { background: #f9fafb; }
+    .small { color:#6b7280; font-size:12px; margin-top:12px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div>
+        <h1>ToteWears Product Export</h1>
+        <div class="sub">Select JSON then Download Excel / CSV</div>
+      </div>
+      <div class="actions">
+        <label for="jsonFile" style="background:#f59e0b;color:#fff;padding:12px 16px;border-radius:12px;cursor:pointer;font-weight:700;box-shadow:0 6px 14px rgba(0,0,0,.16)">Select JSON</label>
+<input type="file" id="jsonFile" accept=".json" style="display:none" onchange="loadJsonFile(event)">
+<button class="excel" onclick="downloadExcel()">Download Excel</button>
+<button class="csv" onclick="downloadCSV()">Download CSV</button>
+      </div>
+    </div>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><b id="totalProducts">0</b>Total Products</div>
+        <div class="stat"><b id="totalImages">0</b>Total Product Images</div>
+      </div>
+      <div class="table-wrap">
+        <table id="productTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="small">Note: Excel download browser-friendly .xls format me hai, Microsoft Excel me open ho jayega.</div>
+    </div>
+  </div>
+
+<script>
+let products = [];
+
+
+const columns = [
+  'SNo', 'name', 'originalPrice', 'salePrice', 'discount', 'afterDiscount',
+  'productUrl', 'description', 'specifications', 'thumbnailImage', 'productImages'
+];
+
+function cleanValue(value) {
+  if (value === null || value === undefined) return '';
+  if (Array.isArray(value)) return value.join(', ');
+  return String(value).replace(/
+?
+|
+/g, ' ').trim();
+}
+
+function htmlEscape(value) {
+  return cleanValue(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function getRows() {
+  return products.map((p, index) => ({
+    SNo: index + 1,
+    name: p.name,
+    originalPrice: p.originalPrice,
+    salePrice: p.salePrice,
+    discount: p.discount,
+    afterDiscount: p.afterDiscount,
+    productUrl: p.productUrl,
+    description: p.description,
+    specifications: Array.isArray(p.specifications) ? p.specifications.join(' | ') : p.specifications,
+    thumbnailImage: p.thumbnailImage,
+    productImages: Array.isArray(p.productImages) ? p.productImages.join(' | ') : p.productImages
+  }));
+}
+
+
+function loadJsonFile(e){
+ const f=e.target.files[0];
+ if(!f)return;
+ const r=new FileReader();
+ r.onload=function(ev){
+   const j=JSON.parse(ev.target.result);
+   products = j.products || j;
+   renderTable();
+ };
+ r.readAsText(f);
+}
+function renderTable() {
+  const rows = getRows();
+  document.getElementById('totalProducts').textContent = rows.length;
+  document.getElementById('totalImages').textContent = products.reduce((sum, p) => sum + (Array.isArray(p.productImages) ? p.productImages.length : 0), 0);
+
+  document.querySelector('#productTable thead').innerHTML = '<tr>' + columns.map(c => `<th>${htmlEscape(c)}</th>`).join('') + '</tr>';
+  document.querySelector('#productTable tbody').innerHTML = rows.map(row =>
+    '<tr>' + columns.map(c => `<td>${htmlEscape(row[c])}</td>`).join('') + '</tr>'
+  ).join('');
+}
+
+function downloadFile(filename, content, mimeType) {
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function downloadCSV() {
+  const rows = getRows();
+  const csv = [
+    columns.join(','),
+    ...rows.map(row => columns.map(c => '"' + cleanValue(row[c]).replaceAll('"', '""') + '"').join(','))
+  ].join('
+');
+  downloadFile('totewears_products.csv', '﻿' + csv, 'text/csv;charset=utf-8;');
+}
+
+function downloadExcel() {
+  const rows = getRows();
+  const table = `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+    <head><meta charset="UTF-8"></head>
+    <body>
+      <table border="1">
+        <tr>${columns.map(c => `<th style="background:#d9ead3;font-weight:bold;">${htmlEscape(c)}</th>`).join('')}</tr>
+        ${rows.map(row => `<tr>${columns.map(c => `<td>${htmlEscape(row[c])}</td>`).join('')}</tr>`).join('')}
+      </table>
+    </body></html>`;
+  downloadFile('totewears_products.xls', table, 'application/vnd.ms-excel;charset=utf-8;');
+}
+
+function  {
+  downloadFile('totewears_products.json', JSON.stringify(products, null, 2), 'application/json;charset=utf-8;');
+}
+
+renderTable();
+</script>
+</body>
+</html>

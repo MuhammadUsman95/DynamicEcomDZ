@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON Convert To Excel / CSV</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4f7fb; color: #111827; padding: 24px; }
+    .card { max-width: 1200px; margin: auto; background: #fff; border-radius: 18px; box-shadow: 0 10px 30px rgba(15, 23, 42, .12); overflow: hidden; border: 1px solid #e5e7eb; }
+    .header { padding: 22px 24px; background: linear-gradient(135deg, #111827, #374151); color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    h1 { margin: 0; font-size: 24px; }
+    .sub { margin-top: 6px; color: #d1d5db; font-size: 14px; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items:center; }
+    button, .file-btn { border: 0; padding: 12px 16px; border-radius: 12px; cursor: pointer; font-weight: 700; color: #fff; box-shadow: 0 6px 14px rgba(0,0,0,.16); font-size: 14px; }
+    button:disabled { opacity:.45; cursor:not-allowed; }
+    .select { background: #f59e0b; }
+    .excel { background: #16a34a; }
+    .csv { background: #2563eb; }
+    .body { padding: 20px 24px; }
+    .stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+    .stat { background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:12px 16px; min-width:135px; }
+    .stat b { display:block; font-size:20px; margin-bottom:4px; }
+    .file-name { margin: 0 0 14px 0; color:#374151; font-size:13px; }
+    .table-wrap { overflow:auto; border:1px solid #e5e7eb; border-radius:14px; max-height: 70vh; }
+    table { border-collapse: collapse; width: 100%; min-width: 1100px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; vertical-align: top; font-size: 13px; white-space: pre-wrap; }
+    th { background: #f3f4f6; position: sticky; top: 0; z-index: 2; white-space: nowrap; }
+    tr:hover td { background: #f9fafb; }
+    .small { color:#6b7280; font-size:12px; margin-top:12px; }
+    .error { display:none; background:#fee2e2; color:#991b1b; border:1px solid #fecaca; padding:10px 12px; border-radius:10px; margin-bottom:12px; font-size:13px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div>
+        <h1>JSON Product Export</h1>
+        <div class="sub">Select JSON file, then download Excel / CSV</div>
+      </div>
+      <div class="actions">
+        <label for="jsonFile" class="file-btn select">Select JSON</label>
+        <input type="file" id="jsonFile" accept=".json,application/json" style="display:none" onchange="loadJsonFile(event)">
+        <button id="btnExcel" class="excel" onclick="downloadExcel()" disabled>Download Excel</button>
+        <button id="btnCSV" class="csv" onclick="downloadCSV()" disabled>Download CSV</button>
+      </div>
+    </div>
+
+    <div class="body">
+      <div id="errBox" class="error"></div>
+      <div id="fileName" class="file-name">No JSON selected.</div>
+
+      <div class="stats">
+        <div class="stat"><b id="totalProducts">0</b>Total Products</div>
+        <div class="stat"><b id="totalImages">0</b>Total Product Images</div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="productTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="small">Note: Excel download browser-friendly .xls format me hai, Microsoft Excel me open ho jayega.</div>
+    </div>
+  </div>
+
+<script>
+let products = [];
+let columns = [];
+
+function showError(msg) {
+  const box = document.getElementById('errBox');
+  box.textContent = msg;
+  box.style.display = 'block';
+}
+
+function clearError() {
+  const box = document.getElementById('errBox');
+  box.textContent = '';
+  box.style.display = 'none';
+}
+
+function normalizeProducts(json) {
+  if (Array.isArray(json)) return json;
+  if (json && Array.isArray(json.products)) return json.products;
+  if (json && Array.isArray(json.data)) return json.data;
+  if (json && Array.isArray(json.items)) return json.items;
+  return [];
+}
+
+function cleanValue(value) {
+  if (value === null || value === undefined) return '';
+  if (Array.isArray(value)) return value.map(x => typeof x === 'object' ? JSON.stringify(x) : String(x)).join(' | ');
+  if (typeof value === 'object') return JSON.stringify(value);
+  return String(value).replace(/\r?\n|\r/g, ' ').trim();
+}
+
+function htmlEscape(value) {
+  return cleanValue(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function buildColumns() {
+  const preferred = ['SNo', 'name', 'originalPrice', 'salePrice', 'discount', 'afterDiscount', 'productUrl', 'description', 'specifications', 'thumbnailImage', 'productImages'];
+  const keys = new Set();
+
+  products.forEach(p => {
+    if (p && typeof p === 'object') Object.keys(p).forEach(k => keys.add(k));
+  });
+
+  const finalCols = ['SNo'];
+  preferred.forEach(c => {
+    if (c !== 'SNo' && keys.has(c)) finalCols.push(c);
+  });
+  keys.forEach(k => {
+    if (!finalCols.includes(k)) finalCols.push(k);
+  });
+
+  columns = finalCols;
+}
+
+function getRows() {
+  return products.map((p, index) => {
+    const row = { SNo: index + 1 };
+    columns.forEach(c => {
+      if (c !== 'SNo') row[c] = p ? p[c] : '';
+    });
+    return row;
+  });
+}
+
+function loadJsonFile(e) {
+  clearError();
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (ev) {
+    try {
+      const json = JSON.parse(ev.target.result);
+      products = normalizeProducts(json);
+
+      if (!products.length) {
+        showError('JSON load hua, lekin products/data/items array nahi mila.');
+      }
+
+      document.getElementById('fileName').textContent = 'Selected File: ' + file.name;
+      buildColumns();
+      renderTable();
+    } catch (err) {
+      products = [];
+      columns = [];
+      renderTable();
+      showError('Invalid JSON file: ' + err.message);
+    }
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function renderTable() {
+  const rows = getRows();
+  document.getElementById('totalProducts').textContent = rows.length;
+  document.getElementById('totalImages').textContent = products.reduce((sum, p) => sum + (Array.isArray(p && p.productImages) ? p.productImages.length : 0), 0);
+
+  document.getElementById('btnExcel').disabled = rows.length === 0;
+  document.getElementById('btnCSV').disabled = rows.length === 0;
+
+  const thead = document.querySelector('#productTable thead');
+  const tbody = document.querySelector('#productTable tbody');
+
+  if (!rows.length) {
+    thead.innerHTML = '';
+    tbody.innerHTML = '';
+    return;
+  }
+
+  thead.innerHTML = '<tr>' + columns.map(c => '<th>' + htmlEscape(c) + '</th>').join('') + '</tr>';
+  tbody.innerHTML = rows.map(row =>
+    '<tr>' + columns.map(c => '<td>' + htmlEscape(row[c]) + '</td>').join('') + '</tr>'
+  ).join('');
+}
+
+function downloadFile(filename, content, mimeType) {
+  if (!products.length) {
+    showError('Pehle JSON file select karo.');
+    return;
+  }
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function downloadCSV() {
+  const rows = getRows();
+  if (!rows.length) return showError('Pehle JSON file select karo.');
+
+  const csv = [
+    columns.map(c => '"' + c.replace(/"/g, '""') + '"').join(','),
+    ...rows.map(row => columns.map(c => '"' + cleanValue(row[c]).replace(/"/g, '""') + '"').join(','))
+  ].join('\r\n');
+
+  downloadFile('json_products.csv', '\uFEFF' + csv, 'text/csv;charset=utf-8;');
+}
+
+function downloadExcel() {
+  const rows = getRows();
+  if (!rows.length) return showError('Pehle JSON file select karo.');
+
+  const table = `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+    <head><meta charset="UTF-8"></head>
+    <body>
+      <table border="1">
+        <tr>${columns.map(c => `<th style="background:#d9ead3;font-weight:bold;">${htmlEscape(c)}</th>`).join('')}</tr>
+        ${rows.map(row => `<tr>${columns.map(c => `<td>${htmlEscape(row[c])}</td>`).join('')}</tr>`).join('')}
+      </table>
+    </body></html>`;
+
+  downloadFile('json_products.xls', table, 'application/vnd.ms-excel;charset=utf-8;');
+}
+
+renderTable();
+</script>
+</body>
+</html>
