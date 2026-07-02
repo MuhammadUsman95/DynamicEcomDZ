@@ -251,14 +251,14 @@
                 }
             </div>
 
-            <!-- Mobile Category Button -->
-            <button type="button"
-                    class="mobile-category-btn"
-                    id="mobileCategoryBtn"
-                    onclick="openCategorySheet()">
-                <span><i class="bi bi-grid-3x3-gap-fill"></i> Categories</span>
-                <i class="bi bi-chevron-down"></i>
-            </button>
+            <!-- Mobile Category Dropdown -->
+            <select id="mobileCategoryDropdown" class="mobile-category-dropdown" aria-label="Select Category">
+                <option value="all">📂 All Categories</option>
+                @foreach (var category in Model.Products.Keys)
+                {
+                    <option value="@category">@category</option>
+                }
+            </select>
 
             <div class="nav-right" style="display: flex; gap: 1.5rem; align-items: center;">
                 <div class="cart-pill" id="cartIcon" onclick="toggleCart()" style="background: var(--dedo-dark); color: white; padding: 8px 16px; border-radius: 25px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
@@ -269,44 +269,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Mobile Category Bottom Sheet -->
-    <div class="category-sheet-backdrop" id="categorySheetBackdrop" onclick="closeCategorySheet()"></div>
-
-    <div class="category-sheet" id="categorySheet">
-        <div class="category-sheet-handle"></div>
-
-        <div class="category-sheet-header">
-            <div>
-                <h5>Categories</h5>
-                <span>Select your collection</span>
-            </div>
-            <button type="button" class="category-sheet-close" onclick="closeCategorySheet()">
-                <i class="bi bi-x-lg"></i>
-            </button>
-        </div>
-
-        <div class="category-sheet-list">
-            <button type="button"
-                    class="category-sheet-item active"
-                    data-category="all"
-                    onclick="selectCategoryFromSheet(this)">
-                <span><i class="bi bi-check-circle-fill"></i> All</span>
-                <i class="bi bi-chevron-right"></i>
-            </button>
-
-            @foreach (var category in Model.Products.Keys)
-            {
-                <button type="button"
-                        class="category-sheet-item"
-                        data-category="@category"
-                        onclick="selectCategoryFromSheet(this)">
-                    <span><i class="bi bi-circle"></i> @category</span>
-                    <i class="bi bi-chevron-right"></i>
-                </button>
-            }
-        </div>
-    </div>
 
     <!-- ══════════════ HERO SLIDER ══════════════ -->
     <section id="hero">
@@ -537,6 +499,13 @@
                 x.classList.toggle("active", normalizeCategory(x.dataset.category) === category);
             });
 
+            const mobileCategoryDropdown = document.getElementById("mobileCategoryDropdown");
+            if (mobileCategoryDropdown) {
+                const matchedOption = Array.from(mobileCategoryDropdown.options)
+                    .find(opt => normalizeCategory(opt.value) === category);
+                if (matchedOption) mobileCategoryDropdown.value = matchedOption.value;
+            }
+
             document.querySelectorAll(".category-sheet-item").forEach(x => {
                 const isActive = normalizeCategory(x.dataset.category) === category;
                 x.classList.toggle("active", isActive);
@@ -593,6 +562,13 @@
                     applyCategoryFilter(this.dataset.category, true);
                 });
             });
+
+            const mobileCategoryDropdown = document.getElementById("mobileCategoryDropdown");
+            if (mobileCategoryDropdown) {
+                mobileCategoryDropdown.addEventListener("change", function () {
+                    applyCategoryFilter(this.value, true);
+                });
+            }
         });
 
         // ── DIRECT ADD TO CART FROM CARD ──
