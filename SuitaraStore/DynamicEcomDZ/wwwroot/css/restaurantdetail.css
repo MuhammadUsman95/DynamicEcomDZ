@@ -77,7 +77,7 @@ a {
     padding: 1.25rem 1.25rem 1.5rem;
 }
 
-@@media (min-width: 700px) {
+@media (min-width: 700px) {
     .pmodal-layout {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
@@ -95,6 +95,9 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* FIX: reserve top space for the discount tag so it never collides
+       with the close button that sits above the whole modal. */
+    margin-top: 0.5rem;
 }
 
     /* !important needed to beat the inline style="width:100%;height:auto"
@@ -108,10 +111,11 @@ a {
         display: block;
     }
 
-@@media (min-width: 700px) {
+@media (min-width: 700px) {
     .pmodal-img-wrap {
         min-height: 360px;
         max-height: 70vh;
+        margin-top: 0;
     }
 }
 
@@ -156,17 +160,25 @@ a {
         border-color: var(--dedo-gold);
     }
 
+/* FIX: elegant gold "ribbon" style instead of a plain flat rectangle,
+   and pulled slightly further from the corner so it never sits under
+   the close button on small screens. */
 .pmodal-discount-tag {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: var(--dedo-gold);
-    color: var(--dedo-dark);
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.75rem;
+    top: 14px;
+    left: 14px;
+    right: auto;
+    background: linear-gradient(135deg, var(--dedo-gold), var(--dedo-gold-dark));
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 0.72rem;
     font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
     z-index: 10;
+    box-shadow: 0 6px 16px rgba(166,133,86,.35);
+    border: 1px solid rgba(255,255,255,.4);
 }
 
 .pmodal-info {
@@ -198,7 +210,7 @@ a {
     word-break: break-word;
 }
 
-@@media (min-width: 700px) {
+@media (min-width: 700px) {
     .pmodal-cat-tag {
         font-size: 0.85rem;
         padding-right: 1rem;
@@ -244,7 +256,7 @@ a {
     border-radius: 6px;
 }
 
-@@media (min-width: 700px) {
+@media (min-width: 700px) {
     .pmodal-desc {
         font-size: 0.9rem;
         margin-bottom: 1.5rem;
@@ -345,7 +357,7 @@ a {
     box-shadow: 0 4px 14px rgba(0,0,0,.12);
 }
 
-@@media (min-width: 700px) {
+@media (min-width: 700px) {
     .pmodal-close-btn {
         top: 1rem;
         right: 1rem;
@@ -438,6 +450,12 @@ a {
     flex: 1;
 }
 
+/* FIX: price + old price were set to white-space:nowrap on the flex
+   container while also flex-wrap:wrap on the children — on narrow
+   cards (2-per-row on mobile) a long "Rs. X,XXX" + old price combo
+   had nowhere to go and got clipped by .product-card's overflow:hidden,
+   which is what made the card look "broken" on phones. Now it wraps
+   cleanly and nowrap only applies to each individual price value. */
 .product-card-price {
     display: flex;
     flex-wrap: wrap;
@@ -449,8 +467,11 @@ a {
     padding-top: 12px;
     margin-bottom: 14px;
     border-top: 1px solid #eee;
-    white-space: nowrap;
 }
+
+    .product-card-price > * {
+        white-space: nowrap;
+    }
 
 .product-card-old-price {
     color: #999;
@@ -458,7 +479,6 @@ a {
     font-size: 13px;
     font-weight: 500;
     margin-left: 0;
-    white-space: nowrap;
 }
 
 .product-card-btn,
@@ -489,44 +509,52 @@ a {
     margin-bottom: 42px;
 }
 
-/* ── SALE / DISCOUNT BADGE (moved out of the mobile-only media query so it
-     shows correctly on every screen size, not just <768px) ── */
+/* ── SALE / DISCOUNT BADGE ──────────────────────────────────────────────
+   FIX: replaced the generic red "clearance sale" gradient with a
+   luxury gold ribbon that matches the Dedo brand (dark + gold), plus a
+   Playfair Display number for a more premium look. Kept out of the
+   mobile-only media query so it shows correctly on every screen size. */
 .sale-badge {
     position: absolute;
     top: 12px;
     left: 12px;
     z-index: 20;
-    background: linear-gradient(135deg,#ff4d4f,#d90429);
-    color: #fff;
+    background: linear-gradient(135deg, var(--dedo-dark), #2b2b2b);
+    color: var(--dedo-gold);
     min-width: 78px;
-    padding: 8px 10px;
-    border-radius: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
     text-align: center;
-    box-shadow: 0 8px 20px rgba(217,4,41,.35);
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    border: 1px solid rgba(201,169,97,.55);
 }
 
     .sale-badge::after {
         content: "";
         position: absolute;
         inset: 0;
-        border-radius: 12px;
-        border: 1px solid rgba(255,255,255,.25);
+        border-radius: 8px;
+        border: 1px solid rgba(201,169,97,.25);
+        pointer-events: none;
     }
 
 .sale-text {
     display: block;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     line-height: 1;
+    color: rgba(255,255,255,.75);
 }
 
 .sale-off {
     display: block;
     margin-top: 4px;
-    font-size: 13px;
-    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 800;
     line-height: 1;
+    color: var(--dedo-gold);
 }
 
 .sale-price {
@@ -535,7 +563,7 @@ a {
     color: #111;
 }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
     .product-card-img-wrap {
         height: 180px;
     }
@@ -557,9 +585,75 @@ a {
     }
 
     .sale-off {
-        font-size: 11px;
+        font-size: 12px;
+    }
+
+    /* FIX: shop section had a hard-coded inline padding of 4rem 2rem
+       that never shrank on mobile, eating ~64px of horizontal space
+       and leaving barely any room for 2-up cards + gutter — this was
+       the main reason cards looked squeezed/broken on phones. */
+    .shop-section {
+        padding: 2.5rem 1rem !important;
+    }
+
+        .shop-section .row.g-4 {
+            --bs-gutter-x: 0.85rem;
+            --bs-gutter-y: 1.25rem;
+        }
+}
+
+@media (max-width: 480px) {
+    .hero-slide {
+        height: 320px !important;
+    }
+
+    .hero-title {
+        font-size: 1.6rem !important;
+    }
+
+    .product-card-img-wrap {
+        height: 150px;
+    }
+
+    .product-card-info {
+        padding: 12px;
+    }
+
+    .product-card-title {
+        font-size: 13px;
+        min-height: 36px;
+    }
+
+    .product-card-price {
+        font-size: 16px;
+    }
+
+    .product-card-old-price {
+        font-size: 12px;
+    }
+
+    .product-card-btn,
+    .product-btn {
+        height: 40px;
+        font-size: 0.85rem;
+    }
+
+    .shop-section {
+        padding: 2rem 0.65rem !important;
+    }
+
+        .shop-section .row.g-4 {
+            --bs-gutter-x: 0.6rem;
+            --bs-gutter-y: 1rem;
+        }
+
+    .promo-bar span:nth-child(3),
+    .promo-bar span:nth-child(4),
+    .promo-bar span:nth-child(5) {
+        display: none !important;
     }
 }
+
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
 /* CART STYLES */
@@ -798,10 +892,10 @@ a {
 /* RESPONSIVE */
 /* ═══════════════════════════════════════════════════════════════════════════ */
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
     .cart-drawer {
         width: 100%;
-        right: -100% !important;
+        right: -100% !important; /* ← ye HAMESHA jeetega inline style se */
     }
 
         .cart-drawer.open {
@@ -840,6 +934,19 @@ a {
     .hero-sub {
         font-size: 0.9rem !important;
         margin-bottom: 1.25rem !important;
+    }
+
+    /* FIX: prev/next arrows were 60px wide (desktop inline style) and
+       sat right on top of the hero text/badges on narrow phones. */
+    .hero-slider .carousel-control-prev,
+    .hero-slider .carousel-control-next {
+        width: 34px !important;
+    }
+
+    .hero-slider .carousel-control-prev-icon,
+    .hero-slider .carousel-control-next-icon {
+        width: 1.4rem;
+        height: 1.4rem;
     }
 
     .features-inner {
@@ -895,51 +1002,11 @@ a {
         .promo-bar span {
             display: inline-block;
         }
-}
 
-@@media (max-width: 480px) {
-    .hero-slide {
-        height: 320px !important;
-    }
-
-    .hero-title {
-        font-size: 1.6rem !important;
-    }
-
-    .product-card-img-wrap {
-        height: 150px;
-    }
-
-    .product-card-info {
-        padding: 12px;
-    }
-
-    .product-card-title {
-        font-size: 13px;
-        min-height: 36px;
-    }
-
-    .product-card-price {
-        font-size: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
-    }
-
-    .product-card-old-price {
-        font-size: 12px;
-    }
-
-    .product-card-btn,
-    .product-btn {
-        height: 40px;
-        font-size: 0.85rem;
-    }
-
-    .promo-bar span:nth-child(3),
-    .promo-bar span:nth-child(4),
-    .promo-bar span:nth-child(5) {
-        display: none !important;
+    /* FIX: promotion popup carousel controls were full desktop width
+       (48px, inline style) and overlapped the caption text on phones. */
+    .promotion-control {
+        width: 34px !important;
     }
 }
 
@@ -948,7 +1015,7 @@ a {
 /* ANIMATIONS */
 /* ═══════════════════════════════════════════════════════════════════════════ */
 
-@@keyframes fadeInUp {
+@keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -974,7 +1041,7 @@ a {
     animation: heroFade 1.2s ease;
 }
 
-@@keyframes heroFade {
+@keyframes heroFade {
     from {
         opacity: 0;
         transform: translateY(50px);
@@ -990,7 +1057,7 @@ a {
     animation: textGlow 3s infinite alternate;
 }
 
-@@keyframes textGlow {
+@keyframes textGlow {
     from {
         letter-spacing: 1px;
     }
@@ -1001,7 +1068,7 @@ a {
 }
 
 
-@@keyframes slideInRight {
+@keyframes slideInRight {
     from {
         opacity: 0;
         transform: translateX(20px);
@@ -1127,10 +1194,23 @@ a {
     width: 48px;
 }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
     .promotion-dialog {
         max-width: calc(100% - 24px);
         margin: 12px auto;
+    }
+
+    /* FIX: on short mobile screens the 80vh image + caption could
+       push the popup taller than the viewport with no scroll, hiding
+       the close button entirely. Cap it and allow internal scroll. */
+    .promotion-content {
+        max-height: 92vh;
+        overflow-y: auto;
+        border-radius: 16px;
+    }
+
+    .promotion-img {
+        max-height: 65vh;
     }
 
     .promotion-close-btn {
@@ -1202,7 +1282,7 @@ body {
         animation: waSlideUp .25s ease !important;
     }
 
-@@keyframes waSlideUp {
+@keyframes waSlideUp {
     from {
         opacity: 0;
         transform: translateY(18px);
@@ -1356,7 +1436,7 @@ body.modal-open .wa-chat-widget {
     display: none !important;
 }
 
-@@media(max-width:768px) {
+@media(max-width:768px) {
     body {
         padding-top: var(--header-total-height, 100px) !important;
     }

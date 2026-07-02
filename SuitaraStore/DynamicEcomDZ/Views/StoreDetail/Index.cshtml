@@ -304,13 +304,13 @@
             {
                 <div class="category-section" data-category="@category.Key">
 
-                    <div id="cat-@category.Key.Replace(" ", "-")"
+@*                     <div id="cat-@category.Key.Replace(" ", "-")"
                          class="cat-title-row">
                         <span class="cat-title-badge">
                             <i class="bi bi-grid-fill"></i>
                             @category.Key
                         </span>
-                    </div>
+                    </div> *@
 
                     <div class="row g-4">
                         @foreach (var product in category.Value)
@@ -723,18 +723,24 @@
           if(c>0){hBadge.textContent=c+' items';hBadge.style.display='inline';}
           else{hBadge.style.display='none';}
         }
-        function toggleCart(){
+                function toggleCart(){
           const drawer = document.getElementById('cartDrawer');
           const backdrop = document.getElementById('cartBackdrop');
-          drawer.style.right = drawer.style.right === '-400px' || drawer.style.right === '' ? '0' : '-400px';
-          backdrop.style.display = drawer.style.right === '0' ? 'block' : 'none';
+          const isOpen = drawer.classList.contains('open');
+          if (isOpen) {
+            drawer.classList.remove('open');
+            backdrop.classList.remove('show');
+          } else {
+            drawer.classList.add('open');
+            backdrop.classList.add('show');
+          }
         }
 
         // ── CHECKOUT ──
         function openCheckoutModal(){
           if(Object.values(cart).length===0){Swal.fire({icon:'warning',title:'Cart Empty',text:'Please add items first.',confirmButtonColor:'var(--dedo-gold)'});return;}
-          document.getElementById('cartDrawer').style.right = '-400px';
-          document.getElementById('cartBackdrop').style.display = 'none';
+        document.getElementById('cartDrawer').classList.remove('open');
+        document.getElementById('cartBackdrop').classList.remove('show');
           fetch('/StoreDetail/CheckRestaurantValidation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({RestaurantId:@Model.RestaurantId})})
             .then(r=>r.json())
             .then(data=>{
