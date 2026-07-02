@@ -24,7 +24,7 @@
 
 <!-- ══════════════ PRODUCT MODAL ══════════════ -->
 <div class="modal fade" id="productModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg pmodal-dialog">
         <div class="modal-content" style="border: 1px solid var(--dedo-border); box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
             <div class="modal-body p-0" style="position:relative;">
                 <button class="pmodal-close-btn" onclick="bootstrap.Modal.getInstance(document.getElementById('productModal')).hide()"><i class="bi bi-x-lg"></i></button>
@@ -347,49 +347,6 @@
         </div>
     </div>
     <div id="cartBackdrop" class="cart-backdrop" onclick="toggleCart()" style="position: fixed; inset: 0; background: rgba(0,0,0,0); z-index: 999; transition: background 0.3s; display: none;"></div>
-
-    <!-- ══════════════ FOOTER ══════════════ -->
-    @*   <footer class="site-footer" style="background: var(--dedo-dark); color: white; padding: 3rem 2rem 1rem;">
-        <div class="footer-top" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
-            <div class="footer-brand">
-                <a href="/"><img src="/images/logo.png" alt="Logo" style="height: 50px; width: auto; object-fit: contain; filter: brightness(0) invert(1); margin-bottom: 1rem;" /></a>
-                <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6;">Premium luxury destination where timeless elegance meets exceptional craftsmanship. Discover your perfect piece today.</p>
-                <div class="footer-socials" style="display: flex; gap: 1rem; margin-top: 1rem;">
-                    <a href="https://www.facebook.com/" target="_blank" class="fsoc" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none;"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="fsoc" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none;"><i class="bi bi-instagram"></i></a>
-                    <a href="#" target="_blank" class="fsoc" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none;"><i class="bi bi-whatsapp"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h5 style="font-weight: 700; margin-bottom: 1.5rem;">Collections</h5>
-                <ul style="list-style: none; padding: 0;">
-                    @foreach (var category in Model.Products.Keys)
-                    {
-                        <li style="margin-bottom: 0.8rem;"><a href="#shop" style="color: rgba(255,255,255,0.7); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;"><i class="bi bi-chevron-right"></i>@category</a></li>
-                    }
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5 style="font-weight: 700; margin-bottom: 1.5rem;">Quick Links</h5>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 0.8rem;"><a href="#hero" style="color: rgba(255,255,255,0.7); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;"><i class="bi bi-chevron-right"></i>Home</a></li>
-                    
-                    <li><a href="#" onclick="toggleCart()" style="color: rgba(255,255,255,0.7); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;"><i class="bi bi-chevron-right"></i>View Cart</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5 style="font-weight: 700; margin-bottom: 1.5rem;">Get in Touch</h5>
-                <div style="margin-bottom: 1rem;"><div style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 0.3rem;">📞 Phone</div><a href="tel:+923002222662" style="color: var(--dedo-gold); text-decoration: none; font-weight: 600;">+92-300-2222662</a></div>
-                <div style="margin-bottom: 1rem;"><div style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 0.3rem;">📍 Address</div><span style="color: white;">@Model.RestaurantAddress</span></div>
-                <div><div style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 0.3rem;">🕐 Hours</div><span style="color: white;">Mon–Sat: 10am–8pm</span></div>
-            </div>
-        </div>
-        <div class="footer-bottom" style="text-align: center; color: rgba(255,255,255,0.6); font-size: 0.85rem; padding-top: 1rem;">
-            <span>© @DateTime.Now.Year @Model.RestaurantName. All rights reserved.</span>
-            <span style="margin: 0 1rem;">|</span>
-            <span>Developed by <strong style="color: var(--dedo-gold);">UT Designer</strong></span>
-        </div>
-    </footer> *@
 
     <!-- Back to Top -->
     <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; border-radius: 50%; background: var(--dedo-dark); color: white; border: none; cursor: pointer; display: none; align-items: center; justify-content: center; z-index: 100; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"><i class="bi bi-chevron-up"></i></button>

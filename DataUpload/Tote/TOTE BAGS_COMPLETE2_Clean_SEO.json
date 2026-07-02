@@ -1,0 +1,214 @@
+{
+  "totalProducts": 15,
+  "totalPages": 1,
+  "scrapedAt": "2026-06-29 20:51:48",
+  "thumbnailFolder": "thumbnails/",
+  "imagesFolder": "images/",
+  "products": [
+    {
+      "name": "INDIRA ENCHANTED",
+      "originalPrice": "5,180.00",
+      "salePrice": "2,550.00",
+      "discount": "51",
+      "description": "Tote Bag in canvas fabric with zip closure. Single compartment, two hand carry Leather handles",
+      "specifications": [],
+      "productImages": "Tote-001-001-00001.webp, Tote-001-001-00002.webp, Tote-001-001-00003.webp, Tote-001-001-00004.webp, Tote-001-001-00005.webp, Tote-001-001-00006.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Indira Enchanted"
+    },
+    {
+      "name": "BAGH-E-NOOR",
+      "originalPrice": "4,980.00",
+      "salePrice": "2,490.00",
+      "discount": "50",
+      "description": "Tote Bag in canvas fabric with zip closure. Single compartment, two hand carry handles",
+      "specifications": [],
+      "productImages": "Tote-001-002-00001.webp, Tote-001-002-00002.webp, Tote-001-002-00003.webp, Tote-001-002-00004.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Bagh-E-Noor"
+    },
+    {
+      "name": "EMBROCHARM VINTAGE BLACK",
+      "originalPrice": "5,200.00",
+      "salePrice": "2,600.00",
+      "discount": "50",
+      "description": "This elegant tote bag features a sophisticated black-and-white floral pattern, making it a timeless and versatile accessory. The bag is designed with sturdy black faux leather handles and trim, adding a touch of luxury and durability. Its structured silhouette ensures ample space for daily essentials, making it ideal for work, shopping, or casual outings. Gold-tone hardware accents provide a refined finish, while the side strap detail enhances its stylish appeal. Perfect for those who love a blend of classic charm and modern functionality, this bag is a statement piece for any wardrobe.",
+      "specifications": [],
+      "productImages": "Tote-001-003-00001.webp, Tote-001-003-00002.webp, Tote-001-003-00003.webp, Tote-001-003-00004.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Embrocharm Vintage Black"
+    },
+    {
+      "name": "SUNSHINE TOTE BROWN",
+      "originalPrice": "3,400.00",
+      "salePrice": "1,890.00",
+      "discount": "44",
+      "description": "Elegance meets versatility in our beautiful Scrunchie Bag that effortlessly transition from work to friends and family gatherings. It has single compartment with double inner pockets and an outside zip pocket making this sophisticated ensemble spacious. Crafted from good quality material, our affordable bag is built to withstand the test of time, ensuring you'll always look fashionable.",
+      "specifications": [],
+      "productImages": "Tote-001-004-00001.webp, Tote-001-004-00002.webp, Tote-001-004-00003.webp, Tote-001-004-00004.webp, Tote-001-004-00005.webp, Tote-001-004-00006.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Sunshine Tote Brown"
+    },
+    {
+      "name": "TOTES (PINE GREEN)",
+      "originalPrice": "4,800.00",
+      "salePrice": "2,699.00",
+      "discount": "44",
+      "description": "🌲 PINE GREEN ELEGANCE TOTE BAG Elevate your everyday look with this stunning Pine Green Tote Bag — a perfect blend of sophistication and practicality. Designed for modern women who love timeless style with functionality. ✨ Color: Pine Green 📏 Size (Approx): Height Width Depth 10.5 inches 14 inches 4.8 inches 👜 Features: ✔ Single spacious zipper compartment ✔ Inside zipper pocket for essentials ✔ Strong, durable handles ✔ Structured & elegant finish Perfect for daily use, office, university, travel, and casual outings. Spacious enough to carry a 1L bottle, small tiffin, diary, pair of clothes, makeup pouch, and more — without compromising on style. A classy everyday companion that keeps you organized while making a statement. 💚",
+      "specifications": [],
+      "productImages": "Tote-001-005-00001.webp, Tote-001-005-00002.webp, Tote-001-005-00003.webp, Tote-001-005-00004.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Totes (Pine Green)"
+    },
+    {
+      "name": "CAMELLIA GRACE",
+      "originalPrice": "4,600.00",
+      "salePrice": "2,600.00",
+      "discount": "43",
+      "description": "Tote Bag in canvas fabric with zip closure. Single compartment, two hand carry handles",
+      "specifications": [],
+      "productImages": "Tote-001-006-00001.webp, Tote-001-006-00002.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Camellia Grace"
+    },
+    {
+      "name": "SUNSHINE TOTE GREEN",
+      "originalPrice": "3,400.00",
+      "salePrice": "1,890.00",
+      "discount": "44",
+      "description": "Elegance meets versatility in our beautiful Scrunchie Bag that effortlessly transition from work to friends and family gatherings. It has single compartment with double inner pockets and an outside zip pocket making this sophisticated ensemble spacious. Crafted from good quality material, our affordable bag is built to withstand the test of time, ensuring you'll always look fashionable.",
+      "specifications": [],
+      "productImages": "Tote-001-007-00001.webp, Tote-001-007-00002.webp, Tote-001-007-00003.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Sunshine Tote Green"
+    },
+    {
+      "name": "SUNSHINE TOTE BLACK",
+      "originalPrice": "3,400.00",
+      "salePrice": "1,890.00",
+      "discount": "44",
+      "description": "Elegance meets versatility in our beautiful Scrunchie Bag that effortlessly transition from work to friends and family gatherings. It has single compartment with double inner pockets and an outside zip pocket making this sophisticated ensemble spacious. Crafted from good quality material, our affordable bag is built to withstand the test of time, ensuring you'll always look fashionable.",
+      "specifications": [],
+      "productImages": "Tote-001-008-00001.webp, Tote-001-008-00002.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Sunshine Tote Black"
+    },
+    {
+      "name": "TOTES (BROWN)",
+      "originalPrice": "4,800.00",
+      "salePrice": "2,699.00",
+      "discount": "44",
+      "description": "🌲 TOTES (BROWN) ELEGANCE TOTE BAG Elevate your everyday look with this stunning Totes (Brown) Tote Bag — a perfect blend of sophistication and practicality. Designed for modern women who love timeless style with functionality. ✨ Color: Totes (Brown) 📏 Size (Approx): Height Width Depth 10.5 inches 14 inches 4.8 inches 👜 Features: ✔ Single spacious zipper compartment ✔ Inside zipper pocket for essentials ✔ Strong, durable handles ✔ Structured & elegant finish Perfect for daily use, office, university, travel, and casual outings. Spacious enough to carry a 1L bottle, small tiffin, diary, pair of clothes, makeup pouch, and more — without compromising on style. A classy everyday companion that keeps you organized while making a statement. 💚",
+      "specifications": [],
+      "productImages": "Tote-001-009-00001.webp, Tote-001-009-00002.webp, Tote-001-009-00003.webp, Tote-001-009-00004.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Totes (Brown)"
+    },
+    {
+      "name": "K-VYBE",
+      "originalPrice": "1,999.00",
+      "salePrice": "999.00",
+      "discount": "50",
+      "description": "Material: Made of canvas or cotton fabric, providing durability and eco-friendliness. Color: Off-white or natural beige base. Design: Features a vibrant, hand-drawn-style print with Hawaiian-inspired elements. Illustrations: Includes a bus, flowers, a boba drink, a bottle, and a food bowl. Text: \"IT'S KAU KAU TIME!\" – a fun phrase associated with food and eating in Hawaiian culture. Style: Casual and playful, suitable for daily use or travel. Handles: Two sturdy fabric handles for easy carrying. Purpose: Ideal for shopping, beach trips, or as a stylish reusable bag. Each canvas tote bag measures 15 x 16 inches or 38 x 40 cm. It’s large enough for you when you go to office, market, the beach, travel and go shopping, camping, hiking etc. NOTE: washing bags in cold water is better than machine-washing.",
+      "specifications": [
+        "Material: Made of canvas or cotton fabric, providing durability and eco-friendliness.",
+        "Color: Off-white or natural beige base.",
+        "Design: Features a vibrant, hand-drawn-style print with Hawaiian-inspired elements.",
+        "Illustrations: Includes a bus, flowers, a boba drink, a bottle, and a food bowl.",
+        "Text: \"IT'S KAU KAU TIME!\" – a fun phrase associated with food and eating in Hawaiian culture.",
+        "Style: Casual and playful, suitable for daily use or travel.",
+        "Handles: Two sturdy fabric handles for easy carrying.",
+        "Purpose: Ideal for shopping, beach trips, or as a stylish reusable bag."
+      ],
+      "productImages": "Tote-001-010-00001.webp, Tote-001-010-00002.webp, Tote-001-010-00003.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - K-Vybe"
+    },
+    {
+      "name": "RETRO WOMEN",
+      "originalPrice": "1,999.00",
+      "salePrice": "999.00",
+      "discount": "50",
+      "description": "Material: Canvas or cotton fabric, eco-friendly and lightweight. Color: Natural beige or off-white base. Design: Features a stylish illustration of a woman with short black hair, sunglasses, red lips, and a blue-and-white striped shirt. Text: Includes an uplifting quote in handwritten-style font: \"It's not always easy, but that's life. Be strong because there are better days ahead.\" Style: Artistic, modern, and motivational—aesthetic and trendy. Handles: Short and sturdy fabric handles for comfortable carrying. Purpose: Ideal for daily use, shopping, casual outings, or as a statement accessory Each canvas tote bag measures 15 x 16 inches or 38 x 40 cm. It’s large enough for you when you go to office, market, the beach, travel and go shopping, camping, hiking etc. NOTE: washing bags in cold water is better than machine-washing.",
+      "specifications": [
+        "Material: Canvas or cotton fabric, eco-friendly and lightweight.",
+        "Color: Natural beige or off-white base.",
+        "Design: Features a stylish illustration of a woman with short black hair, sunglasses, red lips, and a blue-and-white striped shirt.",
+        "Text: Includes an uplifting quote in handwritten-style font:\n\"It's not always easy, but that's life. Be strong because there are better days ahead.\"",
+        "Style: Artistic, modern, and motivational—aesthetic and trendy.",
+        "Handles: Short and sturdy fabric handles for comfortable carrying.",
+        "Purpose: Ideal for daily use, shopping, casual outings, or as a statement accessory"
+      ],
+      "productImages": "Tote-001-011-00001.webp, Tote-001-011-00002.webp, Tote-001-011-00003.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Retro Women"
+    },
+    {
+      "name": "LYLAH",
+      "originalPrice": "1,999.00",
+      "salePrice": "999.00",
+      "discount": "50",
+      "description": "Material: Made from natural canvas or cotton fabric, eco-friendly and durable. Color: Beige/off-white base with a soft brown-toned abstract background. Design: Features a modern, minimalist line-art drawing of two abstract female faces intertwined, creating an artistic and sophisticated look. Art Style: Continuous line art with a contemporary aesthetic, emphasizing simplicity and elegance. Handles: Sturdy and comfortable fabric handles for easy carrying. Purpose: Ideal for everyday use, shopping, casual outings, or as a trendy fashion statement. Branding: Features a subtle watermark or logo (\"art ati\"), indicating an artist or brand identity. Each canvas tote bag measures 15 x 16 inches or 38 x 40 cm. It’s large enough for you when you go to office, market, the beach, travel and go shopping, camping, hiking etc. NOTE: washing bags in cold water is better than machine-washing.",
+      "specifications": [
+        "Material: Made from natural canvas or cotton fabric, eco-friendly and durable.",
+        "Color: Beige/off-white base with a soft brown-toned abstract background.",
+        "Design: Features a modern, minimalist line-art drawing of two abstract female faces intertwined, creating an artistic and sophisticated look.",
+        "Art Style: Continuous line art with a contemporary aesthetic, emphasizing simplicity and elegance.",
+        "Handles: Sturdy and comfortable fabric handles for easy carrying.",
+        "Purpose: Ideal for everyday use, shopping, casual outings, or as a trendy fashion statement.",
+        "Branding: Features a subtle watermark or logo (\"art ati\"), indicating an artist or brand identity."
+      ],
+      "productImages": "Tote-001-012-00001.webp, Tote-001-012-00002.webp, Tote-001-012-00003.webp, Tote-001-012-00004.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Lylah"
+    },
+    {
+      "name": "PETALPOP",
+      "originalPrice": "2,899.00",
+      "salePrice": "1,699.00",
+      "discount": "41",
+      "description": "🌸 PRODUCT DESCRIPTION: Add a pop of floral flair to your everyday look with the PetalPop™ Floral Handbag – where fashion meets functionality in full bloom! Featuring a bold pink flower print on a sleek black canvas, this eye-catching tote bag is perfect for modern women who love to make a style statement. Whether you're heading to brunch, work, or shopping, PetalPop™ brings color, charm, and convenience to your day. Crafted with durable materials and soft leather-style handles, it’s lightweight yet spacious – ideal for carrying your daily essentials in style. ✅ WHY YOU’LL LOVE IT: 🌺 Unique floral design that stands out 👜 Spacious interior – fits phone, wallet, makeup & more 🔐 Front zipper pocket for quick-access items 💼 Comfortable double handles – carry it all day with ease 🎁 Great gift for birthdays, holidays, or just because! 📏 SPECIFICATIONS: Material: Durable canvas with PU leather handles Closure: Zipper Straps: Dual shoulder handles Size: Medium – ideal for everyday use Colors: Black base with pink floral print 🔍 PERFECT FOR: Daily errands & outings College & office use Travel & weekend trips Fashion-forward women & teens Bring your outfit to life – grab your PetalPop™ today and bloom in style!",
+      "specifications": [
+        "🌺 Unique floral design that stands out",
+        "👜 Spacious interior – fits phone, wallet, makeup & more",
+        "🔐 Front zipper pocket for quick-access items",
+        "💼 Comfortable double handles – carry it all day with ease",
+        "🎁 Great gift for birthdays, holidays, or just because!",
+        "Material: Durable canvas with PU leather handles",
+        "Closure: Zipper",
+        "Straps: Dual shoulder handles",
+        "Size: Medium – ideal for everyday use",
+        "Colors: Black base with pink floral print",
+        "Daily errands & outings",
+        "College & office use",
+        "Travel & weekend trips",
+        "Fashion-forward women & teens"
+      ],
+      "productImages": "Tote-001-013-00001.webp, Tote-001-013-00002.webp, Tote-001-013-00003.webp, Tote-001-013-00004.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Petalpop"
+    },
+    {
+      "name": "SELF LOVE DIVINE",
+      "originalPrice": "1,999.00",
+      "salePrice": "999.00",
+      "discount": "50",
+      "description": "Material: Made of natural canvas or cotton fabric, eco-friendly and reusable. Color: Neutral beige base with a printed illustration. Design: Features a minimalist, modern portrait of a woman with long black hair, closed eyes, and a relaxed expression. She wears a light-colored outfit, and the background of the artwork is soft blue. Art Style: Abstract and aesthetic, focusing on simplicity and elegance. Handles: Long, durable fabric handles for easy carrying. Purpose: Perfect for daily use, casual outings, shopping, or as a stylish statement piece. Each canvas tote bag measures 15 x 16 inches or 38 x 40 cm. It’s large enough for you when you go to office, market, the beach, travel and go shopping, camping, hiking etc. NOTE: washing bags in cold water is better than machine-washing.",
+      "specifications": [
+        "Material: Made of natural canvas or cotton fabric, eco-friendly and reusable.",
+        "Color: Neutral beige base with a printed illustration.",
+        "Design: Features a minimalist, modern portrait of a woman with long black hair, closed eyes, and a relaxed expression. She wears a light-colored outfit, and the background of the artwork is soft blue.",
+        "Art Style: Abstract and aesthetic, focusing on simplicity and elegance.",
+        "Handles: Long, durable fabric handles for easy carrying.",
+        "Purpose: Perfect for daily use, casual outings, shopping, or as a stylish statement piece."
+      ],
+      "productImages": "Tote-001-014-00001.webp, Tote-001-014-00002.webp, Tote-001-014-00003.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - Self Love Divine"
+    },
+    {
+      "name": "THE GRACEFUL MUSE",
+      "originalPrice": "1,999.00",
+      "salePrice": "999.00",
+      "discount": "50",
+      "description": "Material: Made of canvas or cotton fabric, durable and eco-friendly. Color: Natural beige or off-white base. Design: Features a minimalist, artistic illustration of a faceless woman with black hair wearing a white turtleneck. Background: Light brown/beige-toned square with subtle star-like accents and an arched pattern. Style: Modern, aesthetic, and chic—ideal for casual or artistic looks. Handles: Two sturdy fabric handles for easy carrying. Purpose: Perfect for daily use, shopping, or as a trendy statement bag. Each canvas tote bag measures 15 x 16 inches or 38 x 40 cm. It’s large enough for you when you go to office, market, the beach, travel and go shopping, camping, hiking etc. NOTE: washing bags in cold water is better than machine-washing.",
+      "specifications": [
+        "Material: Made of canvas or cotton fabric, durable and eco-friendly.",
+        "Color: Natural beige or off-white base.",
+        "Design: Features a minimalist, artistic illustration of a faceless woman with black hair wearing a white turtleneck.",
+        "Background: Light brown/beige-toned square with subtle star-like accents and an arched pattern.",
+        "Style: Modern, aesthetic, and chic—ideal for casual or artistic looks.",
+        "Handles: Two sturdy fabric handles for easy carrying.",
+        "Purpose: Perfect for daily use, shopping, or as a trendy statement bag."
+      ],
+      "productImages": "Tote-001-015-00001.webp, Tote-001-015-00002.webp",
+      "ProductName": "Premium Canvas Tote Bag for Women - The Graceful Muse"
+    }
+  ]
+}
