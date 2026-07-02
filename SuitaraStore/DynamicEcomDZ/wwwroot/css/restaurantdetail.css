@@ -892,11 +892,11 @@ a {
 /* RESPONSIVE */
 /* ═══════════════════════════════════════════════════════════════════════════ */
 
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     .cart-drawer {
         width: 100%;
-        right: -100% !important; /* ← ye HAMESHA jeetega inline style se */
-    }
+        right: -100% !important;*/ /* ← ye HAMESHA jeetega inline style se */
+/*}
 
         .cart-drawer.open {
             right: 0 !important;
@@ -934,11 +934,11 @@ a {
     .hero-sub {
         font-size: 0.9rem !important;
         margin-bottom: 1.25rem !important;
-    }
+    }*/
 
-    /* FIX: prev/next arrows were 60px wide (desktop inline style) and
+/* FIX: prev/next arrows were 60px wide (desktop inline style) and
        sat right on top of the hero text/badges on narrow phones. */
-    .hero-slider .carousel-control-prev,
+/*.hero-slider .carousel-control-prev,
     .hero-slider .carousel-control-next {
         width: 34px !important;
     }
@@ -955,9 +955,9 @@ a {
 
     .sec-title {
         font-size: 1.8rem !important;
-    }
-    /* Navbar: brand + horizontally scrollable category pills, no wrap/overlap */
-    .nav-inner {
+    }*/
+/* Navbar: brand + horizontally scrollable category pills, no wrap/overlap */
+/*.nav-inner {
         padding: 0 1rem !important;
         flex-wrap: wrap !important;
         row-gap: 0.6rem !important;
@@ -983,9 +983,9 @@ a {
     .nav-link-item {
         white-space: nowrap;
         font-size: 0.85rem;
-    }
-    /* Checkout / product-modal forms: two-column rows collapse to one */
-    #checkoutModal .row.g-3 > [class*="col-"] {
+    }*/
+/* Checkout / product-modal forms: two-column rows collapse to one */
+/*#checkoutModal .row.g-3 > [class*="col-"] {
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
@@ -1001,14 +1001,15 @@ a {
 
         .promo-bar span {
             display: inline-block;
-        }
+        }*/
 
-    /* FIX: promotion popup carousel controls were full desktop width
+/* FIX: promotion popup carousel controls were full desktop width
        (48px, inline style) and overlapped the caption text on phones. */
-    .promotion-control {
+/*.promotion-control {
         width: 34px !important;
-    }
-}
+    }*/
+
+
 
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
@@ -1455,5 +1456,346 @@ body.modal-open .wa-chat-widget {
     .wa-floating-btn {
         right: 18px !important;
         bottom: 22px !important;
+    }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* MOBILE CATEGORY BOTTOM SHEET */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.mobile-category-btn {
+    display: none;
+    border: 1px solid var(--dedo-border);
+    background: #fff;
+    color: var(--dedo-dark);
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-weight: 700;
+    font-size: 14px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.06);
+}
+
+    .mobile-category-btn i {
+        color: var(--dedo-gold);
+    }
+
+.category-sheet-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.42);
+    z-index: 1100;
+    display: none;
+    opacity: 0;
+    transition: .25s ease;
+}
+
+    .category-sheet-backdrop.show {
+        display: block;
+        opacity: 1;
+    }
+
+.category-sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: -100%;
+    z-index: 1101;
+    background: #fff;
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 -12px 40px rgba(0,0,0,.18);
+    padding: 10px 16px 18px;
+    max-height: 78vh;
+    overflow-y: auto;
+    transition: bottom .3s ease;
+}
+
+    .category-sheet.show {
+        bottom: 0;
+    }
+
+.category-sheet-handle {
+    width: 48px;
+    height: 5px;
+    border-radius: 999px;
+    background: #ddd;
+    margin: 6px auto 14px;
+}
+
+.category-sheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2px 14px;
+    border-bottom: 1px solid var(--dedo-border);
+}
+
+    .category-sheet-header h5 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--dedo-dark);
+    }
+
+    .category-sheet-header span {
+        font-size: 12px;
+        color: var(--dedo-grey);
+    }
+
+.category-sheet-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: var(--dedo-cream);
+    color: var(--dedo-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-sheet-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 14px;
+}
+
+.category-sheet-item {
+    width: 100%;
+    border: 1px solid var(--dedo-border);
+    background: #fff;
+    color: var(--dedo-dark);
+    border-radius: 14px;
+    padding: 13px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+    .category-sheet-item span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .category-sheet-item span i {
+            color: var(--dedo-gold);
+            font-size: 16px;
+        }
+
+    .category-sheet-item.active {
+        background: var(--dedo-dark);
+        color: #fff;
+        border-color: var(--dedo-dark);
+    }
+
+        .category-sheet-item.active span i,
+        .category-sheet-item.active > i {
+            color: var(--dedo-gold);
+        }
+
+.category-sheet-open {
+    overflow: hidden;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* PRODUCT DETAIL MODAL - MOBILE RESPONSIVE FINAL FIX */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.modal-backdrop {
+    z-index: 100000 !important;
+}
+
+.modal {
+    z-index: 100001 !important;
+}
+
+#productModal {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+    #productModal .modal-dialog.pmodal-dialog {
+        width: min(900px, calc(100% - 24px));
+        max-width: 900px;
+    }
+
+    #productModal .modal-content {
+        position: relative;
+        z-index: 100002 !important;
+    }
+
+body.modal-open .wa-floating-btn,
+body.modal-open .wa-chat-widget,
+body.modal-open .back-top {
+    display: none !important;
+}
+
+body.modal-open .product-card-btn,
+body.modal-open .product-btn {
+    pointer-events: none !important;
+}
+
+@media (max-width: 768px) {
+    #productModal .modal-dialog.pmodal-dialog {
+        width: calc(100% - 20px) !important;
+        max-width: calc(100% - 20px) !important;
+        margin: 10px auto !important;
+    }
+
+    #productModal .modal-content {
+        border-radius: 18px !important;
+        max-height: calc(100dvh - 20px) !important;
+        overflow: hidden !important;
+    }
+
+    #productModal .modal-body {
+        max-height: calc(100dvh - 20px) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 0 !important;
+    }
+
+    .pmodal-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        padding: 14px !important;
+    }
+
+    .pmodal-img-box,
+    .pmodal-info {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .pmodal-img-wrap {
+        width: 100% !important;
+        height: 265px !important;
+        min-height: 265px !important;
+        max-height: 265px !important;
+        margin-top: 0 !important;
+        border-radius: 14px !important;
+        overflow: hidden !important;
+    }
+
+        .pmodal-img-wrap img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+        }
+
+    .pmodal-thumbs {
+        display: flex !important;
+        gap: 8px !important;
+        overflow-x: auto !important;
+        padding: 2px 2px 8px !important;
+        margin-top: 8px !important;
+        scrollbar-width: thin !important;
+    }
+
+    .pmodal-thumb {
+        width: 58px !important;
+        height: 58px !important;
+        min-width: 58px !important;
+        border-radius: 10px !important;
+        padding: 3px !important;
+    }
+
+    .pmodal-info {
+        padding: 0 0 4px !important;
+    }
+
+    .pmodal-cat-tag {
+        font-size: 13px !important;
+        margin-bottom: 8px !important;
+        padding-right: 0 !important;
+        white-space: normal !important;
+    }
+
+    .pmodal-name {
+        font-size: 1.38rem !important;
+        line-height: 1.28 !important;
+        margin: 0 0 10px !important;
+        word-break: normal !important;
+    }
+
+    .pmodal-desc {
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+        margin-bottom: 12px !important;
+    }
+
+    .pmodal-price-row {
+        margin-bottom: 12px !important;
+    }
+
+    .pmodal-price {
+        font-size: 1.25rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .pmodal-old-price {
+        font-size: 14px !important;
+    }
+
+    .pmodal-qty-row {
+        padding: 12px !important;
+        margin: 14px 0 !important;
+        border-radius: 10px !important;
+    }
+
+    .pmodal-qty-label {
+        font-size: 14px !important;
+    }
+
+    .pmodal-qty-btn {
+        width: 34px !important;
+        height: 34px !important;
+    }
+
+    .pmodal-add-btn {
+        width: 100% !important;
+        height: 52px !important;
+        position: static !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        margin: 8px 0 0 !important;
+        border-radius: 12px !important;
+        z-index: auto !important;
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .pmodal-close-btn {
+        top: 10px !important;
+        right: 10px !important;
+        width: 38px !important;
+        height: 38px !important;
+        z-index: 100003 !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .pmodal-img-wrap {
+        height: 245px !important;
+        min-height: 245px !important;
+        max-height: 245px !important;
+    }
+
+    .pmodal-name {
+        font-size: 1.25rem !important;
     }
 }

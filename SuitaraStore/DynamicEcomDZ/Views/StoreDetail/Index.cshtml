@@ -227,27 +227,39 @@
     <!-- ══════════════ NAVBAR ══════════════ -->
     <nav class="main-nav" id="mainNav" style="background: white; padding: 0.8rem 0; border-bottom: 1px solid var(--dedo-border);">
         <div class="nav-inner" style="display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; max-width: 1400px; margin: 0 auto;">
-            <a href="/" class="nav-logo"><img src="/images/logo.png" alt="@Model.RestaurantName" style="height: 50px; width: auto;" /></a>
-            <div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
-                <div class="nav-links">
-                    <a href="#hero" class="nav-link-item">Home</a>
+            <a href="/" class="nav-logo">
+                <img src="/images/logo.png" alt="@Model.RestaurantName" style="height: 50px; width: auto;" />
+            </a>
+
+            <!-- Desktop Category Menu -->
+            <div class="nav-links desktop-category-links" style="display: flex; gap: 2rem; align-items: center;">
+                <a href="#hero" class="nav-link-item">Home</a>
+
+                <a href="javascript:void(0)"
+                   class="nav-link-item category-filter active"
+                   data-category="all">
+                    All
+                </a>
+
+                @foreach (var category in Model.Products.Keys)
+                {
                     <a href="javascript:void(0)"
-                       class="nav-link-item category-filter active"
-                       data-category="all">
-                        All
+                       class="nav-link-item category-filter"
+                       data-category="@category">
+                        @category
                     </a>
-
-                    @foreach (var category in Model.Products.Keys)
-                    {
-                        <a href="javascript:void(0)"
-                           class="nav-link-item category-filter"
-                           data-category="@category">
-                            @category
-                        </a>
-                    }
-                </div>
-
+                }
             </div>
+
+            <!-- Mobile Category Button -->
+            <button type="button"
+                    class="mobile-category-btn"
+                    id="mobileCategoryBtn"
+                    onclick="openCategorySheet()">
+                <span><i class="bi bi-grid-3x3-gap-fill"></i> Categories</span>
+                <i class="bi bi-chevron-down"></i>
+            </button>
+
             <div class="nav-right" style="display: flex; gap: 1.5rem; align-items: center;">
                 <div class="cart-pill" id="cartIcon" onclick="toggleCart()" style="background: var(--dedo-dark); color: white; padding: 8px 16px; border-radius: 25px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
                     <i class="bi bi-cart3"></i>
@@ -257,6 +269,44 @@
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Category Bottom Sheet -->
+    <div class="category-sheet-backdrop" id="categorySheetBackdrop" onclick="closeCategorySheet()"></div>
+
+    <div class="category-sheet" id="categorySheet">
+        <div class="category-sheet-handle"></div>
+
+        <div class="category-sheet-header">
+            <div>
+                <h5>Categories</h5>
+                <span>Select your collection</span>
+            </div>
+            <button type="button" class="category-sheet-close" onclick="closeCategorySheet()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <div class="category-sheet-list">
+            <button type="button"
+                    class="category-sheet-item active"
+                    data-category="all"
+                    onclick="selectCategoryFromSheet(this)">
+                <span><i class="bi bi-check-circle-fill"></i> All</span>
+                <i class="bi bi-chevron-right"></i>
+            </button>
+
+            @foreach (var category in Model.Products.Keys)
+            {
+                <button type="button"
+                        class="category-sheet-item"
+                        data-category="@category"
+                        onclick="selectCategoryFromSheet(this)">
+                    <span><i class="bi bi-circle"></i> @category</span>
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            }
+        </div>
+    </div>
 
     <!-- ══════════════ HERO SLIDER ══════════════ -->
     <section id="hero">
@@ -304,7 +354,7 @@
             {
                 <div class="category-section" data-category="@category.Key">
 
-@*                     <div id="cat-@category.Key.Replace(" ", "-")"
+                    @*                     <div id="cat-@category.Key.Replace(" ", "-")"
                          class="cat-title-row">
                         <span class="cat-title-badge">
                             <i class="bi bi-grid-fill"></i>
@@ -472,48 +522,77 @@
         });
 
         // ── CATEGORY FILTER ──
-        document.addEventListener("DOMContentLoaded", function () {
+        function normalizeCategory(value) {
+            return (value || "")
+                .toString()
+                .trim()
+                .toLowerCase()
+                .replace(/\s+/g, " ");
+        }
 
-            function normalizeCategory(value) {
-                return (value || "")
-                    .toString()
-                    .trim()
-                    .toLowerCase()
-                    .replace(/\s+/g, " ");
-            }
+        function applyCategoryFilter(categoryValue, shouldScroll = true) {
+            const category = normalizeCategory(categoryValue);
 
-            document.querySelectorAll(".category-filter").forEach(btn => {
-
-                btn.addEventListener("click", function () {
-
-                    const category = normalizeCategory(this.dataset.category);
-
-                    document.querySelectorAll(".category-filter")
-                        .forEach(x => x.classList.remove("active"));
-
-                    this.classList.add("active");
-
-                    document.querySelectorAll(".category-section")
-                        .forEach(section => {
-
-                            const sectionCategory = normalizeCategory(section.dataset.category);
-
-                            if (category === "all" || sectionCategory === category) {
-                                section.style.display = "block";
-                            }
-                            else {
-                                section.style.display = "none";
-                            }
-                        });
-
-                    const shop = document.getElementById("shop");
-                    if (shop) {
-                        shop.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }
-                });
-
+            document.querySelectorAll(".category-filter").forEach(x => {
+                x.classList.toggle("active", normalizeCategory(x.dataset.category) === category);
             });
 
+            document.querySelectorAll(".category-sheet-item").forEach(x => {
+                const isActive = normalizeCategory(x.dataset.category) === category;
+                x.classList.toggle("active", isActive);
+
+                const icon = x.querySelector("span i");
+                if (icon) {
+                    icon.className = isActive ? "bi bi-check-circle-fill" : "bi bi-circle";
+                }
+            });
+
+            document.querySelectorAll(".category-section").forEach(section => {
+                const sectionCategory = normalizeCategory(section.dataset.category);
+                section.style.display = (category === "all" || sectionCategory === category) ? "block" : "none";
+            });
+
+            if (shouldScroll) {
+                const shop = document.getElementById("shop");
+                if (shop) {
+                    shop.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            }
+        }
+
+        function openCategorySheet() {
+            const sheet = document.getElementById("categorySheet");
+            const backdrop = document.getElementById("categorySheetBackdrop");
+
+            if (sheet) sheet.classList.add("show");
+            if (backdrop) backdrop.classList.add("show");
+
+            document.body.classList.add("category-sheet-open");
+        }
+
+        function closeCategorySheet() {
+            const sheet = document.getElementById("categorySheet");
+            const backdrop = document.getElementById("categorySheetBackdrop");
+
+            if (sheet) sheet.classList.remove("show");
+            if (backdrop) backdrop.classList.remove("show");
+
+            document.body.classList.remove("category-sheet-open");
+        }
+
+        function selectCategoryFromSheet(btn) {
+            if (!btn) return;
+
+            applyCategoryFilter(btn.dataset.category, true);
+            closeCategorySheet();
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".category-filter").forEach(btn => {
+                btn.addEventListener("click", function () {
+                    applyCategoryFilter(this.dataset.category, true);
+                });
+            });
         });
 
         // ── DIRECT ADD TO CART FROM CARD ──
