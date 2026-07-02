@@ -55,7 +55,9 @@ a {
 }
 
     .pmodal-dialog .modal-content {
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-height: 90vh;
         border-radius: 14px;
     }
 
@@ -88,22 +90,29 @@ a {
     background: var(--dedo-cream);
     border-radius: 8px;
     overflow: hidden;
-    min-height: 260px;
+    min-height: 220px;
+    max-height: 42vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+    /* !important needed to beat the inline style="width:100%;height:auto"
+       on the <img> tag itself, which was letting tall source photos
+       render at full natural height and blow the modal past the
+       viewport (no close button / info panel visible at all). */
+    .pmodal-img-wrap img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block;
+    }
+
 @@media (min-width: 700px) {
     .pmodal-img-wrap {
-        min-height: 400px;
+        min-height: 360px;
+        max-height: 70vh;
     }
-}
-
-.pmodal-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 
@@ -431,14 +440,16 @@ a {
 
 .product-card-price {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
-    gap: 8px;
+    gap: 4px 10px;
     font-size: 18px;
     font-weight: 800;
     color: #111;
     padding-top: 12px;
     margin-bottom: 14px;
     border-top: 1px solid #eee;
+    white-space: nowrap;
 }
 
 .product-card-old-price {
@@ -447,6 +458,7 @@ a {
     font-size: 13px;
     font-weight: 500;
     margin-left: 0;
+    white-space: nowrap;
 }
 
 .product-card-btn,
@@ -801,12 +813,24 @@ a {
     }
 
     .hero-content {
-        padding: 1.5rem !important;
-        max-width: 100% !important;
+        padding: 1.1rem 1.25rem !important;
+        max-width: calc(100% - 2rem) !important;
+        margin: 0 1rem;
+        background: rgba(255,255,255,.82) !important;
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+        border-radius: 14px !important;
+        box-shadow: 0 8px 30px rgba(0,0,0,.12);
+    }
+
+    .hero-overlay {
+        background: rgba(255,255,255,0.1) !important;
     }
 
     .hero-title {
-        font-size: 2rem !important;
+        font-size: 1.7rem !important;
+        letter-spacing: 0 !important;
+        animation: none !important;
     }
 
     .hero-tag {
@@ -825,7 +849,6 @@ a {
     .sec-title {
         font-size: 1.8rem !important;
     }
-
     /* Navbar: brand + horizontally scrollable category pills, no wrap/overlap */
     .nav-inner {
         padding: 0 1rem !important;
@@ -842,6 +865,8 @@ a {
         padding-bottom: 4px;
         -ms-overflow-style: none;
         scrollbar-width: none;
+        mask-image: linear-gradient(to right, #000 92%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, #000 92%, transparent 100%);
     }
 
         .nav-links::-webkit-scrollbar {
@@ -852,7 +877,6 @@ a {
         white-space: nowrap;
         font-size: 0.85rem;
     }
-
     /* Checkout / product-modal forms: two-column rows collapse to one */
     #checkoutModal .row.g-3 > [class*="col-"] {
         flex: 0 0 100% !important;
@@ -897,6 +921,13 @@ a {
 
     .product-card-price {
         font-size: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .product-card-old-price {
+        font-size: 12px;
     }
 
     .product-card-btn,
@@ -1318,6 +1349,12 @@ body {
         background: #13a85e !important;
         transform: translateY(-2px) !important;
     }
+
+/* WhatsApp launcher must never float on top of an open modal */
+body.modal-open .wa-floating-btn,
+body.modal-open .wa-chat-widget {
+    display: none !important;
+}
 
 @@media(max-width:768px) {
     body {
