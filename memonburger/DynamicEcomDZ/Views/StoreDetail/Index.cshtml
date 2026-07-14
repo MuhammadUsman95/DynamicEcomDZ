@@ -1,6 +1,31 @@
 ﻿@model DynamicEcomDZ.Models.RestaurantDetailViewModel
 @{
     Layout = null;
+
+    // Safe display values
+    var rawWhatsapp = new string((Model.WhatsappNo ?? "").Where(char.IsDigit).ToArray());
+    if (rawWhatsapp.StartsWith("0")) rawWhatsapp = "92" + rawWhatsapp.Substring(1);
+    if (!rawWhatsapp.StartsWith("92") && rawWhatsapp.Length == 10) rawWhatsapp = "92" + rawWhatsapp;
+
+    var whatsappDisplay = rawWhatsapp.Length >= 12
+        ? $"+{rawWhatsapp.Substring(0, 2)} {rawWhatsapp.Substring(2, 3)} {rawWhatsapp.Substring(5)}"
+        : (Model.WhatsappNo ?? "");
+
+    var restaurantAddress = string.IsNullOrWhiteSpace(Model.Address) || Model.Address.Trim() == "---"
+        ? "Hussainabad Food Street, Karachi"
+        : Model.Address;
+
+    var deliveryTitle = Model.DeliveryCharges <= 0
+        ? "Free Delivery"
+        : $"Delivery from Rs.{Model.DeliveryCharges}";
+
+    var deliverySubTitle = Model.DeliveryCharges <= 0
+        ? "Selected areas only"
+        : "Final charges depend on your area";
+
+    var bunKabab = Model.Products
+        .SelectMany(category => category.Value)
+        .FirstOrDefault(product => (product.ProductName ?? "").ToLower().Contains("bun kabab"));
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -16,30 +41,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         :root {
-            --accent: #c8a96e;
-            --accent-light: #dfc9a0;
-            --accent-dark: #a8884e;
-            --primary: #231f20;
-            --primary-light: #3a3536;
-            --bg: #ffffff;
-            --bg-warm: #f9f7f7;
-            --bg-card: #ffffff;
+            --accent: #f5b800;
+            --accent-light: #ffd45c;
+            --accent-dark: #c99200;
+            --primary: #0b0b0b;
+            --primary-light: #1b1b1b;
+            --bg: #0b0b0b;
+            --bg-warm: #111111;
+            --bg-card: #171717;
             --white: #ffffff;
-            --dark: #231f20;
-            --dark2: #1a1718;
-            --muted: #6b5f62;
-            --muted-light: #9a8d90;
-            --border: rgba(35,31,32,.08);
-            --border-accent: rgba(200,169,110,.25);
+            --dark: #f5f5f5;
+            --dark2: #050505;
+            --muted: #c9c9c9;
+            --muted-light: #8f8f8f;
+            --border: rgba(255,255,255,.10);
+            --border-accent: rgba(245,184,0,.30);
             --radius: 12px;
             --radius-sm: 6px;
             --tr: all .35s cubic-bezier(.4,0,.2,1);
-            --shadow-sm: 0 2px 8px rgba(35,31,32,.06);
-            --shadow: 0 8px 32px rgba(35,31,32,.1);
-            --shadow-lg: 0 20px 60px rgba(35,31,32,.14);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,.30);
+            --shadow: 0 8px 32px rgba(0,0,0,.40);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,.55);
             --display: 'Playfair Display', Georgia, serif;
             --body: 'DM Sans', sans-serif;
-            --gold-gradient: linear-gradient(135deg, #c8a96e 0%, #e0c48a 50%, #c8a96e 100%);
+            --gold-gradient: linear-gradient(135deg, #f5b800 0%, #ffd45c 50%, #f5b800 100%);
         }
 
         * {
@@ -58,7 +83,7 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #f5f5f5
+            background: #101010
         }
 
         ::-webkit-scrollbar-thumb {
@@ -77,8 +102,8 @@
 
         /* ── NAVBAR ── */
         .main-nav {
-            background: #ffffff;
-            border-bottom: 1px solid rgba(35,31,32,.06);
+            background: #0b0b0b;
+            border-bottom: 1px solid rgba(245,184,0,.18);
             position: fixed;
             top: 0;
             left: 0;
@@ -87,8 +112,8 @@
             z-index: 1060;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            background: rgba(255,255,255,.95);
-            box-shadow: 0 2px 16px rgba(35,31,32,.06);
+            background: rgba(11,11,11,.96);
+            box-shadow: 0 2px 18px rgba(0,0,0,.45);
         }
 
         .nav-inner {
@@ -263,7 +288,7 @@
             font-size: 1.4rem;
             cursor: pointer;
             color: var(--bg);
-            background: rgba(250,242,244,.08);
+            background: rgba(255,255,255,.08);
             width: 48px;
             height: 48px;
             border-radius: 50%;
@@ -271,11 +296,11 @@
             align-items: center;
             justify-content: center;
             transition: var(--tr);
-            border: 1px solid rgba(250,242,244,.12);
+            border: 1px solid rgba(255,255,255,.12);
         }
 
             .mobile-menu-close:hover {
-                background: rgba(250,242,244,.18);
+                background: rgba(255,255,255,.18);
                 color: var(--accent)
             }
 
@@ -311,7 +336,7 @@
             max-width: 1320px;
             margin: 0 auto;
             border-radius: var(--radius);
-            box-shadow: 0 4px 24px rgba(35,31,32,.1);
+            box-shadow: 0 4px 24px rgba(0,0,0,.40);
         }
 
         .hero-slide {
@@ -325,7 +350,6 @@
             inset: 0;
             width: 100%;
             height: 100%;
-           
             object-position: center center;
             transform-origin: center center;
             transition: none;
@@ -351,7 +375,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(0deg, rgba(35,31,32,.35) 0%, transparent 15%);
+            background: linear-gradient(0deg, rgba(0,0,0,.72) 0%, transparent 15%);
             z-index: 1;
             pointer-events: none;
         }
@@ -387,12 +411,12 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            background: rgba(35,31,32,.5);
+            background: rgba(0,0,0,.72);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 6px 14px;
             border-radius: 50px;
-            border: 1px solid rgba(200,169,110,.2);
+            border: 1px solid rgba(245,184,0,.24);
         }
 
         .hero-counter-cur {
@@ -404,7 +428,7 @@
         }
 
         .hero-counter span:last-child {
-            color: rgba(250,242,244,.3);
+            color: rgba(255,255,255,.30);
             font-size: .68rem;
             font-weight: 600;
         }
@@ -414,7 +438,7 @@
         .hero-slider .carousel-control-next {
             width: 46px;
             height: 46px;
-            background: rgba(255,255,255,.75);
+            background: rgba(11,11,11,.78);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 50%;
@@ -423,9 +447,9 @@
             transform: translateY(-50%);
             margin: 0 16px;
             opacity: 0;
-            border: 1px solid rgba(35,31,32,.08);
+            border: 1px solid rgba(255,255,255,.10);
             transition: var(--tr);
-            box-shadow: 0 2px 12px rgba(35,31,32,.12);
+            box-shadow: 0 2px 12px rgba(0,0,0,.45);
         }
 
         .hero-slider:hover .carousel-control-prev,
@@ -444,13 +468,13 @@
         .hero-slider .carousel-control-next-icon {
             width: 14px;
             height: 14px;
-            filter: brightness(0);
+            filter: brightness(0) invert(1);
             opacity: .7;
         }
 
         .hero-slider .carousel-control-prev:hover .carousel-control-prev-icon,
         .hero-slider .carousel-control-next:hover .carousel-control-next-icon {
-            filter: brightness(0);
+            filter: brightness(0) invert(1);
             opacity: 1;
         }
 
@@ -463,23 +487,23 @@
             justify-content: center;
             gap: 6px;
             padding: 6px 16px;
-            background: rgba(255,255,255,.7);
+            background: rgba(11,11,11,.76);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border-radius: 50px;
-            border: 1px solid rgba(35,31,32,.06);
+            border: 1px solid rgba(255,255,255,.08);
             width: fit-content;
             margin-left: 0;
             margin-right: 0;
             position: absolute;
-            box-shadow: 0 2px 10px rgba(35,31,32,.08);
+            box-shadow: 0 2px 10px rgba(255,255,255,.10);
         }
 
             .hero-slider .carousel-indicators button {
                 width: 8px;
                 height: 8px;
                 border-radius: 50%;
-                background: rgba(35,31,32,.18);
+                background: rgba(0,0,0,.55);
                 border: none;
                 padding: 0;
                 transition: all .4s cubic-bezier(.4,0,.2,1);
@@ -490,7 +514,7 @@
                 width: 26px;
                 border-radius: 10px;
                 background: var(--accent);
-                box-shadow: 0 0 8px rgba(200,169,110,.35);
+                box-shadow: 0 0 8px rgba(245,184,0,.40);
             }
 
         @@media(max-width:900px) {
@@ -564,8 +588,8 @@
             gap: 12px;
             background: var(--bg-card);
             border-radius: var(--radius);
-            border: 1px solid rgba(35,31,32,.06);
-            box-shadow: 0 4px 20px rgba(35,31,32,.08);
+            border: 1px solid rgba(255,255,255,.08);
+            box-shadow: 0 4px 20px rgba(255,255,255,.10);
         }
 
         .feat-item {
@@ -614,7 +638,7 @@
 
             .feat-item {
                 background: var(--bg);
-                border: 1px solid rgba(35,31,32,.05);
+                border: 1px solid rgba(255,255,255,.07);
                 border-radius: 10px;
                 padding: 10px 12px;
             }
@@ -658,8 +682,8 @@
             justify-content: space-between;
             gap: 16px;
             flex-wrap: wrap;
-            border: 1px solid rgba(35,31,32,.06);
-            box-shadow: 0 4px 20px rgba(35,31,32,.08);
+            border: 1px solid rgba(255,255,255,.08);
+            box-shadow: 0 4px 20px rgba(255,255,255,.10);
         }
 
         .shop-bar-name {
@@ -689,7 +713,7 @@
         }
 
             .filter-row .form-control, .filter-row .form-select {
-                border: 1.5px solid rgba(35,31,32,.08);
+                border: 1.5px solid rgba(255,255,255,.10);
                 border-radius: 8px;
                 font-size: .82rem;
                 font-family: var(--body);
@@ -700,7 +724,7 @@
 
                 .filter-row .form-control:focus, .filter-row .form-select:focus {
                     border-color: var(--accent);
-                    box-shadow: 0 0 0 3px rgba(200,169,110,.12);
+                    box-shadow: 0 0 0 3px rgba(245,184,0,.15);
                 }
 
         @@media(max-width:700px) {
@@ -729,7 +753,7 @@
                 content: '';
                 flex: 1;
                 height: 1px;
-                background: linear-gradient(90deg, transparent, rgba(200,169,110,.2), transparent);
+                background: linear-gradient(90deg, transparent, rgba(245,184,0,.24), transparent);
             }
 
         .cat-title-badge {
@@ -744,7 +768,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            border: 1px solid rgba(200,169,110,.15);
+            border: 1px solid rgba(245,184,0,.18);
         }
 
         /* ── PRODUCT CARD ── */
@@ -755,8 +779,8 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(35,31,32,.05);
-            box-shadow: 0 4px 20px rgba(35,31,32,.08);
+            border: 1px solid rgba(255,255,255,.07);
+            box-shadow: 0 4px 20px rgba(255,255,255,.10);
             transition: transform .45s cubic-bezier(.34,1.36,.64,1), box-shadow .4s ease, border-color .3s ease;
             cursor: pointer;
             position: relative;
@@ -767,7 +791,7 @@
                 position: absolute;
                 inset: 0;
                 border-radius: var(--radius);
-                background: linear-gradient(135deg, rgba(200,169,110,.05) 0%, transparent 60%);
+                background: linear-gradient(135deg, rgba(245,184,0,.06) 0%, transparent 60%);
                 opacity: 0;
                 transition: opacity .3s ease;
                 pointer-events: none;
@@ -777,7 +801,7 @@
             .pcard:hover {
                 transform: translateY(-8px) scale(1.01);
                 box-shadow: var(--shadow-lg);
-                border-color: rgba(200,169,110,.3);
+                border-color: rgba(245,184,0,.35);
             }
 
                 .pcard:hover::before {
@@ -813,7 +837,7 @@
             left: 0;
             right: 0;
             height: 50%;
-            background: linear-gradient(to top, rgba(35,31,32,.45) 0%, transparent 100%);
+            background: linear-gradient(to top, rgba(0,0,0,.72) 0%, transparent 100%);
             z-index: 1;
             pointer-events: none;
         }
@@ -864,11 +888,11 @@
             border: none;
             cursor: pointer;
             pointer-events: none;
-            box-shadow: 0 4px 16px rgba(200,169,110,.35);
+            box-shadow: 0 4px 16px rgba(245,184,0,.40);
         }
 
         .pcard:hover .pcard-view-overlay {
-            background: rgba(35,31,32,.5)
+            background: rgba(0,0,0,.72)
         }
 
         .pcard:hover .pcard-view-btn {
@@ -942,7 +966,7 @@
         }
 
         .pcard:hover .qty-strip {
-            border-color: rgba(200,169,110,.25)
+            border-color: rgba(245,184,0,.30)
         }
 
         .qty-b {
@@ -955,7 +979,7 @@
             font-size: 18px;
             font-weight: 700;
             line-height: 1;
-            background-color: rgba(200,169,110,.15);
+            background-color: rgba(245,184,0,.18);
             color: var(--accent);
             border: none;
             cursor: pointer;
@@ -968,12 +992,12 @@
         }
 
             .qty-b:hover {
-                background-color: rgba(200,169,110,.3);
+                background-color: rgba(245,184,0,.35);
             }
 
             .qty-b:active {
                 transform: scale(.88);
-                background-color: rgba(200,169,110,.45);
+                background-color: rgba(245,184,0,.55);
             }
 
         .qty-n {
@@ -1003,7 +1027,7 @@
             .pcard:hover {
                 transform: none !important;
                 box-shadow: var(--shadow-sm) !important;
-                border-color: rgba(35,31,32,.05) !important;
+                border-color: rgba(255,255,255,.07) !important;
             }
 
                 .pcard:hover::before {
@@ -1039,7 +1063,7 @@
             border: none;
             overflow: hidden;
             background: transparent;
-            box-shadow: 0 32px 80px rgba(35,31,32,.3);
+            box-shadow: 0 32px 80px rgba(0,0,0,.75);
         }
 
         #productModal .modal-body {
@@ -1098,8 +1122,8 @@
             width: 34px;
             height: 34px;
             border-radius: 6px;
-            background: rgba(35,31,32,.6);
-            border: 1px solid rgba(200,169,110,.2);
+            background: rgba(0,0,0,.78);
+            border: 1px solid rgba(245,184,0,.24);
             color: var(--bg);
             font-size: 13px;
             display: flex;
@@ -1186,7 +1210,7 @@
 
         .pmodal-qty-label {
             font-size: .72rem;
-            color: rgba(250,242,244,.4);
+            color: rgba(255,255,255,.60);
             font-weight: 600;
         }
 
@@ -1224,7 +1248,7 @@
             }
 
             .pmodal-qty-btn.minus {
-                background: rgba(250,242,244,.1);
+                background: rgba(255,255,255,.10);
                 color: var(--bg);
             }
 
@@ -1353,8 +1377,8 @@
             background: var(--bg-card);
             border-radius: 10px;
             padding: 22px 20px;
-            border: 1px solid rgba(35,31,32,.05);
-            box-shadow: 0 4px 20px rgba(35,31,32,.08);
+            border: 1px solid rgba(255,255,255,.07);
+            box-shadow: 0 4px 20px rgba(255,255,255,.10);
             transition: var(--tr);
             position: relative;
         }
@@ -1374,8 +1398,8 @@
 
             .tcard:hover {
                 transform: translateY(-3px);
-                box-shadow: 0 8px 28px rgba(35,31,32,.08);
-                border-color: rgba(200,169,110,.2);
+                box-shadow: 0 8px 28px rgba(255,255,255,.10);
+                border-color: rgba(245,184,0,.24);
             }
 
         .tcard-stars {
@@ -1456,14 +1480,14 @@
             width: 64px;
             height: 64px;
             border-radius: 10px;
-            background: rgba(200,169,110,.1);
+            background: rgba(245,184,0,.12);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.7rem;
             color: var(--accent);
             margin: 0 auto 20px;
-            border: 1px solid rgba(200,169,110,.2);
+            border: 1px solid rgba(245,184,0,.24);
         }
 
         .nl-title {
@@ -1476,7 +1500,7 @@
 
         .nl-sub {
             font-size: .86rem;
-            color: rgba(250,242,244,.35);
+            color: rgba(255,255,255,.55);
             margin-bottom: 24px;
         }
 
@@ -1492,7 +1516,7 @@
             display: flex;
             flex-direction: column;
             transition: right .4s cubic-bezier(.4,0,.2,1);
-            box-shadow: -12px 0 50px rgba(35,31,32,.16);
+            box-shadow: -12px 0 50px rgba(0,0,0,.55);
             border-left: 1px solid var(--border);
         }
 
@@ -1532,7 +1556,7 @@
 
         .cart-close-btn {
             border: none;
-            background: rgba(200,169,110,.1);
+            background: rgba(245,184,0,.12);
             width: 34px;
             height: 34px;
             border-radius: 6px;
@@ -1548,7 +1572,7 @@
         }
 
             .cart-close-btn:hover {
-                background: rgba(200,169,110,.25);
+                background: rgba(245,184,0,.30);
                 color: var(--accent-light)
             }
 
@@ -1564,7 +1588,7 @@
             }
 
             .cart-items-scroll::-webkit-scrollbar-thumb {
-                background: rgba(35,31,32,.15);
+                background: rgba(255,255,255,.15);
                 border-radius: 10px
             }
 
@@ -1610,7 +1634,7 @@
 
             .cart-item:hover {
                 box-shadow: 0 4px 16px rgba(35,31,32,.07);
-                border-color: rgba(200,169,110,.2);
+                border-color: rgba(245,184,0,.24);
             }
 
         .cart-item-img {
@@ -1679,7 +1703,7 @@
             }
 
             .cart-qty-btn.minus {
-                background: rgba(250,242,244,.08);
+                background: rgba(255,255,255,.08);
                 color: var(--bg)
             }
 
@@ -1742,7 +1766,7 @@
             align-items: center;
             margin-bottom: 7px;
             font-size: .78rem;
-            color: rgba(250,242,244,.35);
+            color: rgba(255,255,255,.55);
         }
 
             .total-row:last-child {
@@ -1763,7 +1787,7 @@
 
             .total-row .val {
                 font-weight: 700;
-                color: rgba(250,242,244,.6)
+                color: rgba(255,255,255,.72)
             }
 
             .total-row.discount .val {
@@ -1773,7 +1797,7 @@
             .total-row.net {
                 margin-top: 10px;
                 padding-top: 10px;
-                border-top: 1px dashed rgba(200,169,110,.25);
+                border-top: 1px dashed rgba(245,184,0,.30);
             }
 
                 .total-row.net .lbl {
@@ -1852,7 +1876,7 @@
         .cart-backdrop {
             position: fixed;
             inset: 0;
-            background: rgba(35,31,32,.6);
+            background: rgba(0,0,0,.78);
             backdrop-filter: blur(6px);
             z-index: 900;
             opacity: 0;
@@ -1869,7 +1893,7 @@
         .modal-content {
             border-radius: var(--radius);
             border: 1px solid var(--border);
-            box-shadow: 0 24px 70px rgba(35,31,32,.22);
+            box-shadow: 0 24px 70px rgba(0,0,0,.65);
         }
 
         .modal-header {
@@ -1917,7 +1941,7 @@
 
             .form-control:focus, .form-select:focus {
                 border-color: var(--accent);
-                box-shadow: 0 0 0 3px rgba(200,169,110,.12);
+                box-shadow: 0 0 0 3px rgba(245,184,0,.15);
             }
 
         #orderSuccessModal .modal-dialog {
@@ -1971,10 +1995,10 @@
             width: 325px;
             background: var(--bg-card);
             border-radius: 18px;
-            box-shadow: 0 20px 60px rgba(35,31,32,.2), 0 4px 16px rgba(35,31,32,.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,.60), 0 4px 16px rgba(255,255,255,.10);
             overflow: hidden;
             display: none;
-            border: 1px solid rgba(35,31,32,.05);
+            border: 1px solid rgba(255,255,255,.07);
         }
 
             .wa-popup.open {
@@ -2070,7 +2094,7 @@
 
         .wa-popup-body {
             padding: 14px 12px;
-            background: #e5ddd5;
+            background: #efeae2;
             min-height: 90px;
         }
 
@@ -2079,7 +2103,7 @@
             border-radius: 0 12px 12px 12px;
             padding: 12px 14px 9px;
             font-size: .8rem;
-            color: #303030;
+            color: #202020;
             line-height: 1.65;
             max-width: 92%;
             box-shadow: 0 1px 5px rgba(0,0,0,.08);
@@ -2117,7 +2141,7 @@
             flex-wrap: wrap;
             gap: 6px;
             padding: 8px 12px 12px;
-            background: #e5ddd5;
+            background: #efeae2;
         }
 
         .wa-chip {
@@ -2146,7 +2170,7 @@
         .wa-popup-footer {
             padding: 10px 12px 14px;
             background: var(--bg-warm);
-            border-top: 1px solid rgba(35,31,32,.05);
+            border-top: 1px solid rgba(255,255,255,.07);
         }
 
         .wa-send-btn {
@@ -2254,7 +2278,7 @@
             opacity: 0;
             transform: translateX(8px);
             transition: all .25s ease;
-            box-shadow: 0 4px 16px rgba(35,31,32,.2);
+            box-shadow: 0 4px 16px rgba(0,0,0,.60);
         }
 
             .wa-tooltip::after {
@@ -2316,13 +2340,13 @@
             border-radius: 8px;
             background: var(--dark);
             color: var(--accent);
-            border: 1px solid rgba(200,169,110,.15);
+            border: 1px solid rgba(245,184,0,.18);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.05rem;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(35,31,32,.18);
+            box-shadow: 0 5px 20px rgba(0,0,0,.55);
             opacity: 0;
             visibility: hidden;
             transform: translateY(14px);
@@ -2354,7 +2378,7 @@
             display: grid;
             grid-template-columns: 1.8fr 1fr 1fr 1fr;
             gap: 48px;
-            border-bottom: 1px solid rgba(200,169,110,.08);
+            border-bottom: 1px solid rgba(245,184,0,.10);
         }
 
         @@media(max-width:1100px) {
@@ -2390,7 +2414,7 @@
 
         .footer-brand p {
             font-size: .8rem;
-            color: rgba(250,242,244,.28);
+            color: rgba(255,255,255,.45);
             line-height: 1.9;
             margin: 14px 0 22px;
             max-width: 280px;
@@ -2405,20 +2429,20 @@
             width: 38px;
             height: 38px;
             border-radius: 8px;
-            background: rgba(200,169,110,.06);
-            border: 1px solid rgba(200,169,110,.12);
+            background: rgba(245,184,0,.08);
+            border: 1px solid rgba(245,184,0,.15);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(200,169,110,.4);
+            color: rgba(245,184,0,.48);
             font-size: .88rem;
             text-decoration: none;
             transition: var(--tr);
         }
 
             .fsoc:hover {
-                background: rgba(200,169,110,.15);
-                border-color: rgba(200,169,110,.35);
+                background: rgba(245,184,0,.18);
+                border-color: rgba(245,184,0,.40);
                 color: var(--accent);
                 transform: translateY(-2px);
             }
@@ -2441,7 +2465,7 @@
 
             .footer-col ul li a {
                 font-size: .78rem;
-                color: rgba(250,242,244,.28);
+                color: rgba(255,255,255,.45);
                 text-decoration: none;
                 display: flex;
                 align-items: center;
@@ -2470,8 +2494,8 @@
             height: 34px;
             border-radius: 6px;
             flex-shrink: 0;
-            background: rgba(200,169,110,.06);
-            border: 1px solid rgba(200,169,110,.12);
+            background: rgba(245,184,0,.08);
+            border: 1px solid rgba(245,184,0,.15);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2482,7 +2506,7 @@
 
         .fc-label {
             font-size: .62rem;
-            color: rgba(200,169,110,.35);
+            color: rgba(245,184,0,.40);
             margin-bottom: 2px;
             font-weight: 700;
             text-transform: uppercase;
@@ -2491,7 +2515,7 @@
 
         .fc-val {
             font-size: .78rem;
-            color: rgba(250,242,244,.4);
+            color: rgba(255,255,255,.60);
             text-decoration: none;
             transition: var(--tr);
         }
@@ -2504,7 +2528,7 @@
             text-align: center;
             padding: 18px 24px;
             font-size: .72rem;
-            color: rgba(250,242,244,.12);
+            color: rgba(255,255,255,.12);
             background: rgba(0,0,0,.15);
             display: flex;
             align-items: center;
@@ -2514,7 +2538,7 @@
         }
 
             .footer-bottom a {
-                color: rgba(200,169,110,.25);
+                color: rgba(245,184,0,.30);
                 text-decoration: none;
                 transition: var(--tr);
             }
@@ -2529,7 +2553,300 @@
             pointer-events: none;
             transition: all .75s cubic-bezier(.4,0,.2,1);
             border-radius: 6px;
-            box-shadow: 0 8px 24px rgba(35,31,32,.25);
+            box-shadow: 0 8px 24px rgba(0,0,0,.70);
+        }
+
+        /* ===== MEMON BURGER BLACK & YELLOW THEME OVERRIDES ===== */
+        body, .hero-section, .features-strip, .shop-section, .testimonial-section {
+            background: #0b0b0b;
+        }
+
+        .main-nav {
+            background: rgba(8,8,8,.97);
+            border-bottom: 1px solid rgba(245,184,0,.30);
+        }
+
+        .nav-link-item {
+            color: #e8e8e8;
+        }
+
+            .nav-link-item:hover, .nav-link-item.active {
+                color: #f5b800;
+            }
+
+        .nav-hamburger span {
+            background: #f5b800;
+        }
+
+        .features-inner, .shop-bar, .pcard, .tcard,
+        .pmodal-info, .cart-drawer, .cart-total, .checkout-wrapper,
+        .modal-content, .wa-popup-footer {
+            background: #151515;
+            border-color: rgba(245,184,0,.18);
+        }
+
+        .features-inner, .shop-bar, .pcard, .tcard {
+            box-shadow: 0 8px 28px rgba(0,0,0,.42);
+        }
+
+        .feat-title, .shop-bar-name, .pcard-name, .pcard-cur,
+        .pmodal-name, .pmodal-price, .sec-title, .tcard-name,
+        .cart-item-info strong, .cart-item-total {
+            color: #ffffff;
+        }
+
+        .feat-sub, .shop-bar-addr, .pcard-desc, .sec-sub,
+        .tcard-text, .tcard-loc, .pmodal-desc {
+            color: #a9a9a9;
+        }
+
+        .filter-row .form-control, .filter-row .form-select,
+        .form-control, .form-select, .input-group-text {
+            background: #0f0f0f;
+            color: #ffffff;
+            border-color: rgba(245,184,0,.22);
+        }
+
+            .form-control::placeholder {
+                color: #777;
+            }
+
+            .form-select option {
+                background: #111;
+                color: #fff;
+            }
+
+        .cart-pill, .qty-strip, .pmodal-qty-row, .cart-header,
+        .cart-qty-box, .cart-total-inner, .modal-header, .site-footer,
+        .newsletter-section, .cat-title-badge, .pmodal-cat-tag {
+            background: #050505;
+        }
+
+        .cart-pill {
+            border-color: rgba(245,184,0,.55);
+        }
+
+            .cart-pill:hover {
+                background: #f5b800;
+            }
+
+                .cart-pill:hover .cp-icon, .cart-pill:hover .cp-txt {
+                    color: #080808;
+                }
+
+        .cp-badge, .pmodal-qty-btn, .cart-qty-btn, .pcard-view-btn,
+        .free-delivery {
+            background: #f5b800;
+            color: #080808;
+        }
+
+        .hero-slider, .features-inner, .shop-bar {
+            border: 1px solid rgba(245,184,0,.48);
+        }
+
+            .hero-slider .carousel-control-prev,
+            .hero-slider .carousel-control-next,
+            .hero-slider .carousel-indicators {
+                background: rgba(5,5,5,.78);
+                border-color: rgba(245,184,0,.35);
+            }
+
+            .hero-slider .carousel-control-prev-icon,
+            .hero-slider .carousel-control-next-icon {
+                filter: brightness(0) invert(1);
+            }
+
+        .pcard:hover, .tcard:hover {
+            border-color: rgba(245,184,0,.60);
+            box-shadow: 0 16px 44px rgba(0,0,0,.60);
+        }
+
+        .cart-items-scroll {
+            background: #0e0e0e;
+        }
+
+        .cart-item {
+            background: #171717;
+            border-color: rgba(245,184,0,.14);
+        }
+
+        .footer-bottom {
+            background: #030303;
+        }
+
+        .back-top, .wa-tooltip {
+            background: #050505;
+            color: #f5b800;
+        }
+
+        ::selection {
+            background: #f5b800;
+            color: #080808;
+        }
+
+        /* ===== READABILITY + FEATURED ORDER CARD ===== */
+        .cart-pill {
+            background: #050505;
+            border: 1px solid rgba(245,184,0,.65);
+        }
+
+            .cart-pill .cp-icon,
+            .cart-pill .cp-txt {
+                color: #ffffff;
+            }
+
+            .cart-pill .cp-badge {
+                background: #f5b800;
+                color: #080808;
+            }
+
+        .qty-strip, .pmodal-qty-row, .cart-qty-box {
+            background: #070707;
+        }
+
+        .qty-n, .pmodal-qty-num, .cart-qty-num {
+            color: #ffffff;
+        }
+
+        .pmodal-qty-label {
+            color: #d9d9d9;
+        }
+
+        .hero-slide-img {
+            object-fit: cover;
+            image-rendering: auto;
+            filter: none !important;
+        }
+
+        .order-highlight-wrap {
+            max-width: 1320px;
+            margin: 16px auto 0;
+            padding: 0 36px;
+        }
+
+        .order-highlight-card {
+            min-height: 170px;
+            display: grid;
+            grid-template-columns: 1.35fr .65fr;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid rgba(245,184,0,.65);
+            background: linear-gradient(120deg,#151515 0%,#090909 65%,#241b00 100%);
+            box-shadow: 0 14px 40px rgba(0,0,0,.5);
+        }
+
+        .order-highlight-content {
+            padding: 28px 32px;
+        }
+
+        .order-highlight-kicker {
+            color: #f5b800;
+            font-size: .7rem;
+            font-weight: 900;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .order-highlight-title {
+            color: #fff;
+            font-size: clamp(1.55rem,3vw,2.6rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 9px;
+        }
+
+        .order-highlight-text {
+            color: #bdbdbd;
+            font-size: .84rem;
+            margin-bottom: 18px;
+        }
+
+        .order-now-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 13px 24px;
+            border-radius: 9px;
+            border: 0;
+            background: #f5b800;
+            color: #090909;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: .86rem;
+            box-shadow: 0 8px 24px rgba(245,184,0,.24);
+            transition: transform .2s ease, background .2s ease;
+        }
+
+            .order-now-btn:hover {
+                background: #ffd45c;
+                color: #090909;
+                transform: translateY(-2px);
+            }
+
+        .order-highlight-image {
+            height: 100%;
+            min-height: 170px;
+            position: relative;
+        }
+
+            .order-highlight-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .order-highlight-image::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(90deg,#090909 0%,transparent 45%);
+                pointer-events: none;
+            }
+
+        .pcard.main-product-card {
+            border: 2px solid #f5b800;
+            box-shadow: 0 14px 38px rgba(245,184,0,.18);
+        }
+
+        .main-product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 5;
+            background: #f5b800;
+            color: #080808;
+            padding: 5px 9px;
+            border-radius: 6px;
+            font-size: .55rem;
+            font-weight: 900;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        @@media(max-width:700px) {
+            .order-highlight-wrap {
+                padding: 0 12px;
+            }
+
+            .order-highlight-card {
+                grid-template-columns: 1fr;
+            }
+
+            .order-highlight-content {
+                padding: 22px 20px;
+            }
+
+            .order-highlight-image {
+                min-height: 190px;
+                order: -1;
+            }
+
+                .order-highlight-image::after {
+                    background: linear-gradient(0deg,#111 0%,transparent 45%);
+                }
         }
     </style>
 </head>
@@ -2637,6 +2954,7 @@
                 <a href="#hero" class="nav-link-item active">Home</a>
                 <a href="#shop" class="nav-link-item">Shop</a>
                 <a href="/StoreDetail/Abouts" class="nav-link-item">About</a>
+                <a href="#shop" class="nav-link-item" style="color:#f5b800;">Order Now</a>
             </div>
             <div class="nav-right">
                 <div class="cart-pill" id="cartIcon" onclick="toggleCart()">
@@ -2657,6 +2975,7 @@
         <a href="#hero" class="m-link" onclick="closeMenu()">Home</a>
         <a href="#shop" class="m-link" onclick="closeMenu()">Shop</a>
         <a href="/StoreDetail/Abouts" class="m-link" onclick="closeMenu()">About</a>
+        <a href="#shop" class="m-link" onclick="closeMenu()" style="color:#f5b800;">Order Now</a>
         <div class="cart-pill" onclick="toggleCart();closeMenu()" style="margin-top:8px">
             <i class="bi bi-cart3 cp-icon"></i>
             <span class="cp-txt">Cart</span>
@@ -2698,14 +3017,16 @@
         </div>
     </section>
 
+  
+
     <!-- FEATURES STRIP -->
     <div class="features-strip">
         <div class="features-inner">
             <div class="feat-item"><div class="feat-icon"><i class="bi bi-truck"></i></div><div><div class="feat-title">All Karachi Delivery</div><div class="feat-sub">Home delivery available</div></div></div>
             <div class="feat-item"><div class="feat-icon"><i class="bi bi-fire"></i></div><div><div class="feat-title">Fresh &amp; Hot</div><div class="feat-sub">Made to order always</div></div></div>
-            <div class="feat-item"><div class="feat-icon"><i class="bi bi-currency-rupee"></i></div><div><div class="feat-title">Delivery Rs.@Model.DeliveryCharges</div></div></div>
+            <div class="feat-item"><div class="feat-icon"><i class="bi bi-currency-rupee"></i></div><div><div class="feat-title">@deliveryTitle</div><div class="feat-sub">@deliverySubTitle</div></div></div>
             <div class="feat-item"><div class="feat-icon"><i class="bi bi-clock"></i></div><div><div class="feat-title">@Model.ClosingTimeIn – @Model.ClosingTimeOut</div><div class="feat-sub">Open every day</div></div></div>
-            <div class="feat-item" style="grid-column: span 2;"><div class="feat-icon"><i class="bi bi-whatsapp"></i></div><div><div class="feat-title">WhatsApp Order</div><div class="feat-sub">@Model.WhatsappNo</div></div></div>
+            <div class="feat-item" style="grid-column: span 2;"><div class="feat-icon"><i class="bi bi-whatsapp"></i></div><div><div class="feat-title">WhatsApp Order</div><div class="feat-sub">@whatsappDisplay</div></div></div>
         </div>
     </div>
 
@@ -2715,7 +3036,7 @@
             <div class="shop-bar">
                 <div>
                     <div class="shop-bar-name">@Model.CompanyName</div>
-                    <div class="shop-bar-addr"><i class="bi bi-geo-alt-fill"></i>@Model.Address</div>
+                    <div class="shop-bar-addr"><i class="bi bi-geo-alt-fill"></i>@restaurantAddress</div>
                 </div>
                 <div class="filter-row">
                     <input type="text" id="productSearch" class="form-control form-control-sm" placeholder="Search menu..." style="min-width:170px">
@@ -2739,8 +3060,15 @@
                     {
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 product-card-item"
                              data-product-name="@product.ProductName.ToLower()">
-                            <div class="pcard">
+                            @{
+                                var isMainProduct = (product.ProductName ?? "").ToLower().Contains("bun kabab");
+                            }
+                            <div class="pcard @(isMainProduct ? "main-product-card" : "")">
                                 <div class="pcard-img" onclick="openProductModal('@product.ProductCode')" style="cursor:pointer;">
+                                    @if (isMainProduct)
+                                    {
+                                        <span class="main-product-badge">Signature</span>
+                                    }
                                     @if (product.DiscountAmount > 0)
                                     {
                                         <span class="pcard-discount">−@product.DiscountAmount</span>
@@ -2801,7 +3129,7 @@
     <!-- CART DRAWER -->
     <div id="cartDrawer" class="cart-drawer">
         <div class="cart-header">
-            <h4><i class="bi bi-bag-heart-fill"></i>Your Order <span id="cartHeaderCount" style="background:rgba(200,169,110,.15);color:var(--accent);font-size:.6rem;font-weight:800;padding:2px 8px;border-radius:3px;margin-left:4px;display:none;"></span></h4>
+            <h4><i class="bi bi-bag-heart-fill"></i>Your Order <span id="cartHeaderCount" style="background:rgba(245,184,0,.18);color:var(--accent);font-size:.6rem;font-weight:800;padding:2px 8px;border-radius:3px;margin-left:4px;display:none;"></span></h4>
             <button class="cart-close-btn" onclick="toggleCart()"><i class="bi bi-x-lg"></i></button>
         </div>
         <div id="cartItemsContainer" class="cart-items-scroll">
@@ -2829,7 +3157,7 @@
                 <div class="footer-socials">
                     <a href="https://www.facebook.com/share/1Buimi6joN/" target="_blank" class="fsoc fsoc-facebook"><i class="bi bi-facebook"></i></a>
                     <a href="#" class="fsoc fsoc-instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo" target="_blank" class="fsoc fsoc-whatsapp"><i class="bi bi-whatsapp"></i></a>
+                    <a href="https://api.whatsapp.com/send?phone=@rawWhatsapp" target="_blank" class="fsoc fsoc-whatsapp"><i class="bi bi-whatsapp"></i></a>
                     <a href="#" class="fsoc fsoc-tiktok"><i class="bi bi-tiktok"></i></a>
                 </div>
             </div>
@@ -2855,7 +3183,7 @@
                 <h5 class="footer-col-title">Contact Us</h5>
                 <div class="footer-contact-item">
                     <div class="fc-icon"><i class="bi bi-whatsapp"></i></div>
-                    <div><div class="fc-label">WhatsApp</div><a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo" target="_blank" class="fc-val">@Model.WhatsappNo</a></div>
+                    <div><div class="fc-label">WhatsApp</div><a href="https://api.whatsapp.com/send?phone=@rawWhatsapp" target="_blank" class="fc-val">@whatsappDisplay</a></div>
                 </div>
                 <div class="footer-contact-item">
                     <div class="fc-icon"><i class="bi bi-telephone-fill"></i></div>
@@ -2863,7 +3191,7 @@
                 </div>
                 <div class="footer-contact-item">
                     <div class="fc-icon"><i class="bi bi-geo-alt-fill"></i></div>
-                    <div><div class="fc-label">Area</div><span class="fc-val">@Model.Address</span></div>
+                    <div><div class="fc-label">Area</div><span class="fc-val">@restaurantAddress</span></div>
                 </div>
                 <div class="footer-contact-item">
                     <div class="fc-icon"><i class="bi bi-clock-fill"></i></div>
@@ -2899,12 +3227,12 @@
                 </div>
             </div>
             <div class="wa-quick-replies">
-                <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo&text=Menu%20share%20karein%20please" target="_blank" class="wa-chip"><i class="bi bi-card-list"></i>Menu</a>
-                <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo&text=Order%20karna%20hai" target="_blank" class="wa-chip"><i class="bi bi-bag-heart"></i>Order Now</a>
-                <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo&text=Delivery%20charges%20kya%20hain?" target="_blank" class="wa-chip"><i class="bi bi-truck"></i>Delivery?</a>
+                <a href="https://api.whatsapp.com/send?phone=@rawWhatsapp&text=Menu%20share%20karein%20please" target="_blank" class="wa-chip"><i class="bi bi-card-list"></i>Menu</a>
+                <a href="https://api.whatsapp.com/send?phone=@rawWhatsapp&text=Order%20karna%20hai" target="_blank" class="wa-chip"><i class="bi bi-bag-heart"></i>Order Now</a>
+                <a href="https://api.whatsapp.com/send?phone=@rawWhatsapp&text=Delivery%20charges%20kya%20hain?" target="_blank" class="wa-chip"><i class="bi bi-truck"></i>Delivery?</a>
             </div>
             <div class="wa-popup-footer">
-                <a href="https://api.whatsapp.com/send?phone=@Model.WhatsappNo&text=Assalam%20o%20Alaikum!%20Mujhe%20order%20karna%20hai." target="_blank" class="wa-send-btn">
+                <a href="https://api.whatsapp.com/send?phone=@rawWhatsapp&text=Assalam%20o%20Alaikum!%20Mujhe%20order%20karna%20hai." target="_blank" class="wa-send-btn">
                     <i class="bi bi-whatsapp"></i>Start Chat on WhatsApp
                 </a>
             </div>
